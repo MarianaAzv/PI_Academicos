@@ -5,8 +5,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: ECECEC;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: ECECEC;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane layoutX="317.0" layoutY="54.0" prefHeight="319.0" prefWidth="250.0" style="-fx-background-color: DBA6A6; -fx-background-radius: 12;">
          <children>
@@ -19,7 +18,7 @@
       </Pane>
       <Text layoutX="67.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ACADÊMICOS" wrappingWidth="157.540283203125">
          <font>
-            <Font name="Bell MT" size="22.0" />
+            <Font name="Caladea" size="22.0" />
          </font>
       </Text>
       <Text fill="#840d0b" layoutX="363.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Faça seu login:" wrappingWidth="157.540283203125">
