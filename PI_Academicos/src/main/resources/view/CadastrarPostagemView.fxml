@@ -1,11 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1">
-    
+
+<AnchorPane id="AnchorPane" prefHeight="481.0" prefWidth="780.0" style="-fx-background-color: ECECEC;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1">
+   <children>
+      <GridPane layoutX="20.0" layoutY="25.0" prefHeight="477.0" prefWidth="726.0" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="25.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="23.0" prefWidth="68.0" style="-fx-background-color: #840d0b;" text="POSTAR" textFill="WHITE" GridPane.columnIndex="5" GridPane.rowIndex="6">
+               <font>
+                  <Font name="Courier New Bold" size="12.0" />
+               </font>
+            </Button>
+            <Pane layoutX="136.0" layoutY="157.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <Text layoutX="16.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="+imagem">
+                     <font>
+                        <Font name="Courier New" size="22.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Pane layoutX="136.0" layoutY="84.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Pane layoutX="136.0" layoutY="230.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Pane layoutX="136.0" layoutY="303.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Pane layoutX="136.0" layoutY="376.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Pane layoutX="262.0" layoutY="84.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Pane layoutX="262.0" layoutY="303.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Pane layoutX="262.0" layoutY="157.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Pane layoutX="262.0" layoutY="230.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Pane layoutX="136.0" layoutY="84.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" GridPane.rowIndex="1" />
+            <Pane layoutX="10.0" layoutY="84.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" />
+            <Pane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" GridPane.rowIndex="2" />
+            <Pane layoutX="262.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" GridPane.columnIndex="2" />
+            <Pane layoutX="136.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" GridPane.rowIndex="3" />
+            <Pane layoutX="10.0" layoutY="230.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" GridPane.rowIndex="4" />
+            <Pane layoutX="10.0" layoutY="303.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" GridPane.rowIndex="5" />
+            <Pane layoutX="10.0" layoutY="376.0" prefHeight="62.0" prefWidth="103.0" style="-fx-background-color: FFFFFF;" GridPane.rowIndex="6">
+               <children>
+                  <ImageView fitHeight="17.0" fitWidth="19.0" layoutX="14.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../Component%207.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane layoutX="10.0" layoutY="449.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Pane layoutX="136.0" layoutY="449.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" GridPane.columnIndex="2" GridPane.rowIndex="6">
+               <children>
+                  <ImageView fitHeight="25.0" fitWidth="37.0" layoutX="85.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../Component%204.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: FFFFFF;" GridPane.columnIndex="1" />
+            <ImageView fitHeight="127.0" fitWidth="178.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <Pane prefHeight="191.0" prefWidth="327.0" style="-fx-background-color: FFFFFF; -fx-background-radius: 12;" GridPane.columnIndex="4" GridPane.rowIndex="4">
+               <children>
+                  <TextArea layoutX="-88.0" layoutY="-137.0" prefHeight="211.0" prefWidth="260.0" style="-fx-background-color: FFFFFF; -fx-region-background: FFFFFF;" />
+               </children>
+            </Pane>
+            <Text fill="#840d0b" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome do projeto" textAlignment="CENTER" wrappingWidth="236.30859375" GridPane.columnIndex="3">
+               <font>
+                  <Font name="Courier New Bold" size="19.0" />
+               </font>
+            </Text>
+            <Text fill="#840d0b" strokeType="OUTSIDE" strokeWidth="0.0" text="Legenda:" textAlignment="CENTER" wrappingWidth="161.30859375" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Courier New" size="19.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+   </children>
 </AnchorPane>
