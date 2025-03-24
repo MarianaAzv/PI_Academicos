@@ -2,6 +2,6 @@ module com.mycompany.telasacademicosanne {
     requires javafx.controls;
     requires javafx.fxml;
 
-    opens controllers to javafx.fxml;
-    exports controllers;
+    opens controller to javafx.fxml;
+    exports principal;
 }
