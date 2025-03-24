@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane alignment="CENTER" minHeight="920.0" minWidth="1290.0" style="-fx-background-color: ECECEC;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1">
+  <columnConstraints>
+    <ColumnConstraints hgrow="NEVER" maxWidth="599.0" minWidth="10.0" prefWidth="512.0" />
+    <ColumnConstraints hgrow="ALWAYS" maxWidth="1200.0" minWidth="10.0" prefWidth="698.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="80.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS">
+         <children>
+            <Text fill="#840d0b" strokeType="OUTSIDE" strokeWidth="0.0" text="Faça seu login:" wrappingWidth="315.05126953125">
+               <font>
+                  <Font name="Courier New Bold" size="35.0" />
+               </font>
+            </Text>
+            <Text fill="#b20000" strokeType="OUTSIDE" strokeWidth="0.0" text="Recuperar senha">
+               <font>
+                  <Font name="Courier New Bold" size="20.0" />
+               </font>
+            </Text>
+            <GridPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="113.0" prefWidth="604.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="224.0" />
+                <ColumnConstraints hgrow="ALWAYS" maxWidth="381.0" minWidth="10.0" prefWidth="381.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" text="Usuário: " textFill="#840d0b" GridPane.halignment="RIGHT">
+                     <font>
+                        <Font name="Courier New Bold" size="26.0" />
+                     </font>
+                  </Label>
+                  <TextField prefHeight="37.0" prefWidth="335.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
+                  <Label alignment="CENTER_RIGHT" contentDisplay="TOP" layoutX="136.0" layoutY="27.0" text="Senha: " textFill="#840d0b" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Courier New Bold" size="26.0" />
+                     </font>
+                  </Label>
+                  <PasswordField prefHeight="37.0" prefWidth="381.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+            <Button mnemonicParsing="false" style="-fx-background-color: #840d0b;" text="Entrar" textFill="WHITE">
+               <font>
+                  <Font name="Courier New" size="18.0" />
+               </font>
+            </Button>
+            <GridPane prefHeight="41.0" prefWidth="594.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="109.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="496.0" minWidth="10.0" prefWidth="496.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Novo no sistema?" textFill="#840d0b" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="Courier New Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="Cadastro" textFill="#b20000" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Courier New" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+            <GridPane prefHeight="185.0" prefWidth="605.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <ImageView fitHeight="80.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                     <image>
+                        <Image url="@../../../../../../../Downloads/Variant3.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <VBox.margin>
+                  <Insets right="40.0" />
+               </VBox.margin>
+            </GridPane>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <ImageView fitHeight="303.0" fitWidth="498.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../Downloads/Component%2013.png" />
+               </image>
+               <VBox.margin>
+                  <Insets top="90.0" />
+               </VBox.margin>
+            </ImageView>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+   </padding>
+</GridPane>
