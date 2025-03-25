@@ -26,6 +26,12 @@
             <version>25-ea+8</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>org.sellcom</groupId>
+            <artifactId>sellcom-javafx</artifactId>
+            <version>1.0.1</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
