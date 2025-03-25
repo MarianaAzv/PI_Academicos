@@ -1,4 +1,4 @@
-module com.mycompany.telasacademicosanne {
+module principal {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.base;
