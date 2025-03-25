@@ -1,5 +1,9 @@
-com\mycompany\telasacademicosanne\SecondaryController.class
+controller\CadastroCoordenadorController.class
+controller\TelaPincipalCoordenadorController.class
+dal\ConexaoBD.class
+controller\TelaLoginController.class
+controller\TelaPrincipalBolsistaController.class
 module-info.class
-com\mycompany\telasacademicosanne\PrimaryController.class
-com\mycompany\telasacademicosanne\TelaLoginController.class
-com\mycompany\telasacademicosanne\App.class
+controller\CadastrarPostagemController.class
+controller\TelaPrincipalAdministradorController.class
+principal\App.class
