@@ -28,19 +28,28 @@
         </dependency>
         <dependency>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             <groupId>org.sellcom</groupId>
             <artifactId>sellcom-javafx</artifactId>
             <version>1.0.1</version>
 =======
+=======
+>>>>>>> Stashed changes
             <groupId>xyz.gianlu.librespot</groupId>
             <artifactId>librespot-api-client</artifactId>
             <version>0.6.2</version>
             <type>jar</type>
         </dependency>
         <dependency>
+<<<<<<< Updated upstream
             <groupId>org.jolokia</groupId>
             <artifactId>jolokia-example-spring-boot-actuator</artifactId>
             <version>2.2.7</version>
+>>>>>>> Stashed changes
+=======
+            <groupId>org.xtce</groupId>
+            <artifactId>xtcetools</artifactId>
+            <version>1.1.6</version>
 >>>>>>> Stashed changes
             <type>jar</type>
         </dependency>

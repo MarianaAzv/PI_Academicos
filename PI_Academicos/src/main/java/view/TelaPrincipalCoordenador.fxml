@@ -1,31 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<GridPane minHeight="920.0" minWidth="1290.0" style="-fx-background-color: ECECEC;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1">
+<GridPane minHeight="920.0" minWidth="1290.0" style="-fx-background-color: ECECEC;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TelaPrincipalCoordenadorController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="424.0" minWidth="10.0" prefWidth="124.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="904.0" minWidth="10.0" prefWidth="851.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="10.0" prefWidth="315.0" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints maxHeight="542.0" minHeight="10.0" prefHeight="464.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="377.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="414.0" minHeight="10.0" prefHeight="391.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="542.0" minHeight="10.0" prefHeight="443.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="377.0" minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="506.0" minHeight="10.0" prefHeight="462.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <ImageView fitHeight="128.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
          <GridPane.margin>
-            <Insets bottom="350.0" />
+            <Insets bottom="350.0" top="100.0" />
          </GridPane.margin>
-         <image>
-            <Image url="@../../../../../../Variant3.png" />
-         </image>
       </ImageView>
+      <GridPane prefHeight="467.0" prefWidth="851.0" style="-fx-background-color: ECECEC;" GridPane.columnIndex="1" GridPane.rowIndex="2">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="271.0" minHeight="10.0" prefHeight="258.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="289.0" minHeight="10.0" prefHeight="248.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="266.0" style="-fx-background-color: #840d0b;" GridPane.halignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="266.0" style="-fx-background-color: #840d0b;" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="266.0" style="-fx-background-color: #840d0b;" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="266.0" style="-fx-background-color: #840d0b;" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="266.0" style="-fx-background-color: #840d0b;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="266.0" style="-fx-background-color: #840d0b;" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </children>
+      </GridPane>
+      <Label text="Publicações - Artigos" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BASELINE">
+         <font>
+            <Font name="Courier New Bold" size="12.0" />
+         </font>
+      </Label>
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: DBA5A5; -fx-background-radius: 12;" GridPane.columnIndex="1" />
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: DBA5A5;" GridPane.columnIndex="2" />
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: DBA5A5;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
    </children>
 </GridPane>
