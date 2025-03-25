@@ -20,7 +20,7 @@
             <artifactId>javafx-fxml</artifactId>
             <version>13</version>
         </dependency>
-        <dependency>
+      <!--  <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
             <version>25-ea+8</version>
@@ -52,8 +52,8 @@
             <version>1.1.6</version>
 >>>>>>> Stashed changes
             <type>jar</type>
-        </dependency>
-    </dependencies>
+       </dependency>
+   --> </dependencies>
     <build>
         <plugins>
             <plugin>
