@@ -23,7 +23,7 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
-            <version>17.0.7</version>
+            <version>25-ea+8</version>
             <type>jar</type>
         </dependency>
     </dependencies>
