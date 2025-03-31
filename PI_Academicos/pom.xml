@@ -60,6 +60,12 @@
             <version>18-ea+1</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>ru.aslcraft.bell.oauth.discord</groupId>
+            <artifactId>OAuth2Discord</artifactId>
+            <version>1.0</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

@@ -1,4 +1,6 @@
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\principal\App.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\GenericDAO.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\LoginDAO.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\TelaPrincipalBolsistaController.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\TelaLoginController.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\dal\ConexaoBD.java
@@ -6,4 +8,5 @@ C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\Cada
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\module-info.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\TelaPincipalCoordenadorController.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\TelaPrincipalAdministradorController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Usuario.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CadastroCoordenadorController.java

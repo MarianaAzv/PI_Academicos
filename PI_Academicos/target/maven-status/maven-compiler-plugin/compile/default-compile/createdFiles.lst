@@ -1,9 +1,12 @@
 controller\CadastroCoordenadorController.class
+model\Usuario.class
+principal\App.class
 controller\TelaPincipalCoordenadorController.class
 dal\ConexaoBD.class
+model\GenericDAO.class
 controller\TelaLoginController.class
+model\LoginDAO.class
 controller\TelaPrincipalBolsistaController.class
 module-info.class
 controller\CadastrarPostagemController.class
 controller\TelaPrincipalAdministradorController.class
-principal\App.class
