@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="920.0" prefWidth="1290.0" style="-fx-background-color: ECECEC;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TelaPrincipalCoordenadorController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="920.0" prefWidth="1290.0" style="-fx-background-color: ECECEC;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TelaPrincipalBolsistaController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="421.0" minWidth="10.0" prefWidth="145.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="997.0" minWidth="10.0" prefWidth="840.0" />
@@ -39,11 +39,12 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
+                <RowConstraints />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <GridPane layoutX="577.0" layoutY="285.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="278.0" style="-fx-background-color: #840d0b;" GridPane.halignment="CENTER">
+                  <GridPane layoutX="577.0" layoutY="285.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="278.0" style="-fx-background-color: #840d0b;" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
@@ -51,7 +52,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <GridPane layoutX="11.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="278.0" style="-fx-background-color: #840d0b;" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                  <GridPane layoutX="11.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="278.0" style="-fx-background-color: #840d0b;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
@@ -59,7 +60,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <GridPane layoutX="290.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="278.0" style="-fx-background-color: #840d0b;" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                  <GridPane layoutX="290.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="278.0" style="-fx-background-color: #840d0b;" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
@@ -67,7 +68,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <GridPane layoutX="11.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="278.0" style="-fx-background-color: #840d0b;" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                  <GridPane layoutX="11.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="278.0" style="-fx-background-color: #840d0b;" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
@@ -75,7 +76,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <GridPane layoutX="291.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="278.0" style="-fx-background-color: #840d0b;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                  <GridPane layoutX="291.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="278.0" style="-fx-background-color: #840d0b;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
@@ -83,7 +84,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <GridPane layoutX="571.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="278.0" style="-fx-background-color: #840d0b;" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                  <GridPane layoutX="571.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="278.0" style="-fx-background-color: #840d0b;" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
@@ -115,7 +116,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <ImageView fx:id="imgPerfil" fitHeight="136.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                        <ImageView fx:id="imgPerfilProjeto" fitHeight="136.0" fitWidth="119.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets left="10.0" top="10.0" />
                            </GridPane.margin>
@@ -131,26 +132,62 @@
                             <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label fx:id="lblNomeCoordenador" text="Coordenador:" textFill="#840d0b" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="Courier New Bold" size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="lblNomeBolsista" text="Bolsistas:" textFill="#840d0b" GridPane.rowIndex="2">
-                                 <font>
-                                    <Font name="Courier New Bold" size="18.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="lblNomeCocoordenador" text="Cocoordenador:" textFill="#840d0b" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                                 <font>
-                                    <Font name="Courier New Bold" size="18.0" />
-                                 </font>
-                              </Label>
                               <Text fx:id="textNomeProjeto" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome do projeto" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                                  <font>
                                     <Font name="Courier New Bold" size="20.0" />
                                  </font>
                               </Text>
+                              <GridPane GridPane.rowIndex="1">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="135.0" minWidth="10.0" prefWidth="135.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="585.0" minWidth="10.0" prefWidth="576.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label fx:id="lblNomeCoordenador" text="Coordenador:" textFill="#840d0b">
+                                       <font>
+                                          <Font name="Courier New Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Text fx:id="txtNomeCoordenador" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
+                                 </children>
+                              </GridPane>
+                              <GridPane GridPane.rowIndex="2">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="113.0" minWidth="10.0" prefWidth="113.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="604.0" minWidth="10.0" prefWidth="598.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label fx:id="lblNomeBolsista" text="Bolsistas:" textFill="#840d0b">
+                                       <font>
+                                          <Font name="Courier New Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Text fx:id="txtNomeBolsitas" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
+                                 </children>
+                              </GridPane>
+                              <GridPane GridPane.rowIndex="3">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="155.0" minWidth="10.0" prefWidth="155.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="563.0" minWidth="10.0" prefWidth="550.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label fx:id="lblNomeCocoordenador" prefHeight="23.0" prefWidth="164.0" text="Cocoordenador:" textFill="#840d0b" GridPane.valignment="CENTER">
+                                       <font>
+                                          <Font name="Courier New Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Text fx:id="txtNomeCocoordenador" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
+                                 </children>
+                              </GridPane>
                            </children>
                         </GridPane>
                      </children>
@@ -168,47 +205,110 @@
                         <RowConstraints maxHeight="137.66668701171875" minHeight="10.0" prefHeight="59.666656494140625" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Fim:" textFill="#840d0b" GridPane.halignment="LEFT" GridPane.rowIndex="1">
-                           <font>
-                              <Font name="Courier New Bold" size="18.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets left="30.0" />
-                           </GridPane.margin>
-                        </Label>
-                        <Label text="Início:" textFill="#840d0b" GridPane.halignment="LEFT">
-                           <font>
-                              <Font name="Courier New Bold" size="18.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets left="30.0" />
-                           </GridPane.margin>
-                        </Label>
-                        <Label text="Prorrogação:" textFill="#840d0b" GridPane.halignment="LEFT" GridPane.rowIndex="2">
-                           <font>
-                              <Font name="Courier New Bold" size="18.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets left="30.0" />
-                           </GridPane.margin>
-                        </Label>
-                        <Label text="Resumo:" textFill="#840d0b" GridPane.halignment="LEFT" GridPane.rowIndex="3">
-                           <font>
-                              <Font name="Courier New Bold" size="18.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets left="30.0" />
-                           </GridPane.margin>
-                        </Label>
-                        <Label fx:id="lblResumo" textFill="#840d0b" GridPane.rowIndex="4" GridPane.valignment="TOP">
+                        <Label fx:id="lblResumo" prefHeight="26.0" prefWidth="124.0" textFill="#840d0b" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                            <font>
                               <Font name="Courier New" size="12.0" />
                            </font></Label>
-                        <Label text="Câmpus:" textFill="#840d0b" GridPane.columnIndex="1">
-                           <font>
-                              <Font name="Courier New Bold" size="18.0" />
-                           </font>
-                        </Label>
+                        <GridPane>
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="110.0" minWidth="10.0" prefWidth="110.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="340.0" minWidth="10.0" prefWidth="311.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Início:" textFill="#840d0b">
+                                 <font>
+                                    <Font name="Courier New Bold" size="18.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets left="30.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Text fx:id="txtInicio" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="46.13671875" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
+                           </children>
+                        </GridPane>
+                        <GridPane GridPane.rowIndex="1">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="75.0" minWidth="10.0" prefWidth="75.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="345.0" minWidth="10.0" prefWidth="345.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Fim:" textFill="#840d0b">
+                                 <font>
+                                    <Font name="Courier New Bold" size="18.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets left="30.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Text fx:id="txtFim" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="70.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
+                           </children>
+                        </GridPane>
+                        <GridPane GridPane.rowIndex="2">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="10.0" prefWidth="173.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="261.0" minWidth="10.0" prefWidth="247.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Prorrogação:" textFill="#840d0b">
+                                 <font>
+                                    <Font name="Courier New Bold" size="18.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets left="30.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Text fx:id="txtProrrogacao" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="47.13671875" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
+                           </children>
+                        </GridPane>
+                        <GridPane prefHeight="28.0" prefWidth="244.0" GridPane.rowIndex="4">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="203.0" minWidth="10.0" prefWidth="108.0" />
+                          </columnConstraints>
+                        </GridPane>
+                        <GridPane GridPane.rowIndex="3">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Resumo:" textFill="#840d0b">
+                                 <font>
+                                    <Font name="Courier New Bold" size="18.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets left="30.0" />
+                                 </GridPane.margin>
+                              </Label>
+                           </children>
+                        </GridPane>
+                        <GridPane GridPane.columnIndex="1">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0" prefWidth="80.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="347.0" minWidth="10.0" prefWidth="331.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Câmpus:" textFill="#840d0b">
+                                 <font>
+                                    <Font name="Courier New Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Text fx:id="txtCampus" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="65.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="CENTER" />
+                           </children>
+                        </GridPane>
                      </children>
                   </GridPane>
                </children>
@@ -254,7 +354,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <ImageView fx:id="imgUsuario" fitHeight="122.0" fitWidth="148.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+                        <ImageView fx:id="imgUsuarioBolsista" fitHeight="122.0" fitWidth="148.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
                         <Text fx:id="TxtNomeUsuario" fill="#840d0b" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.halignment="CENTER">
                            <font>
                               <Font name="Courier New Bold" size="18.0" />
@@ -270,22 +370,17 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Ver perfil" textFill="#840d0b" GridPane.halignment="CENTER">
+                        <Button fx:id="btnVerperfil" mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Ver perfil" textFill="#840d0b" GridPane.halignment="CENTER">
                            <font>
                               <Font name="Courier New" size="18.0" />
                            </font></Button>
-                        <Button mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Criar perfil" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                        <Button fx:id="btnAtualizarPerfil" mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Atualizar perfil" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <font>
                               <Font name="Courier New" size="18.0" />
                            </font></Button>
-                        <Button mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Atualizar perfil" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                           <font>
-                              <Font name="Courier New" size="18.0" />
-                           </font></Button>
-                        <Button mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Sair" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                        <Button fx:id="btnSair" mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Sair" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                            <font>
                               <Font name="Courier New" size="18.0" />
                            </font></Button>
@@ -318,27 +413,22 @@
                 <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="90.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="99.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="102.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="158.0" minHeight="10.0" prefHeight="77.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="+ Publicação" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                  <Button fx:id="btnPublicacao" mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="+ Publicação" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                      <font>
                         <Font name="Courier New" size="18.0" />
                      </font></Button>
-                  <Button mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="+ Artigo" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                  <Button fx:id="btnArtigo" mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="+ Artigo" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <font>
                         <Font name="Courier New" size="18.0" />
                      </font></Button>
-                  <Button mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Ver projeto" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                  <Button fx:id="btnVerProjeto" mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Ver projeto" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
                      <font>
                         <Font name="Courier New" size="18.0" />
                      </font></Button>
-                  <Button mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Atualizar projeto" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
-                     <font>
-                        <Font name="Courier New" size="18.0" />
-                     </font></Button>
-                  <Button mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Outros projetos" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP">
+                  <Button fx:id="btnOutrosProjetos" mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Outros projetos" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
                      <font>
                         <Font name="Courier New" size="18.0" />
                      </font></Button>
