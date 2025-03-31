@@ -20,40 +20,6 @@
             <artifactId>javafx-fxml</artifactId>
             <version>13</version>
         </dependency>
-      <!--  <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-graphics</artifactId>
-            <version>25-ea+8</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-            <groupId>org.sellcom</groupId>
-            <artifactId>sellcom-javafx</artifactId>
-            <version>1.0.1</version>
-=======
-=======
->>>>>>> Stashed changes
-            <groupId>xyz.gianlu.librespot</groupId>
-            <artifactId>librespot-api-client</artifactId>
-            <version>0.6.2</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-<<<<<<< Updated upstream
-            <groupId>org.jolokia</groupId>
-            <artifactId>jolokia-example-spring-boot-actuator</artifactId>
-            <version>2.2.7</version>
->>>>>>> Stashed changes
-=======
-            <groupId>org.xtce</groupId>
-            <artifactId>xtcetools</artifactId>
-            <version>1.1.6</version>
->>>>>>> Stashed changes
-            <type>jar</type>
-       </dependency>
-   -->
         <dependency>
             <groupId>org.jfxcore</groupId>
             <artifactId>javafx-controls</artifactId>
@@ -65,6 +31,11 @@
             <artifactId>OAuth2Discord</artifactId>
             <version>1.0</version>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.23</version>
         </dependency>
     </dependencies>
     <build>

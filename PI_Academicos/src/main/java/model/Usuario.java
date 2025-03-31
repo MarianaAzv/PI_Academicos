@@ -29,7 +29,13 @@ public class Usuario {
         this.senha = senha;
         this.ativa = ativa;
     }
- 
+
+    //metodo construtor para login
+     public Usuario(String apelido, String senha) {
+        this.apelido = apelido;
+        this.senha = senha;
+    }
+     
     // metodo sem parametros
     public Usuario() {
     }

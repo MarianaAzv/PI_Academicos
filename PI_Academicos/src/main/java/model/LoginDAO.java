@@ -20,14 +20,14 @@ public class LoginDAO extends GenericDAO {
 			return false;
 	}
         //Método para autenticar usuários
-	public Usuario autenticar(String login, String senha) throws SQLException {
-		String sql = "SELECT * FROM USUARIOS WHERE login=? AND senha=?";
+	public Usuario autenticar(String apelido, String senha) throws SQLException {
+		String sql = "SELECT * FROM USUARIOS WHERE apelido=? AND senha=?";
 		Usuario usuario = null;
 		Connection con = conectarDAO();
 		if (con != null) {
 			PreparedStatement stmt = con.prepareStatement(sql);
 
-			stmt.setString(1, login);
+			stmt.setString(1, apelido);
 			stmt.setString(2, senha);
 			ResultSet rs = stmt.executeQuery();
 
