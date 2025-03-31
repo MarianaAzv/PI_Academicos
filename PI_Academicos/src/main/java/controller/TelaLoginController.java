@@ -56,7 +56,19 @@ public class TelaLoginController {
 
     @FXML
     void onClickEntrar(ActionEvent event) throws IOException {
-
+        URL url = new File("src/main/java/view/TelaPrincipalCoordenador_2.fxml").toURI().toURL();       
+        FXMLLoader loader = new FXMLLoader(url);
+        
+        Parent root = loader.load();
+        
+        Stage stage = new Stage();
+        
+        CadastroCoordenadorController tpc = loader.getController();
+        
+        Scene cena = new Scene(root);
+        stage.setTitle("Tela Principal Coordenador");
+        stage.setScene(cena);
+        stage.show();
     }
 
     @FXML
