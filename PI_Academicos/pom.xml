@@ -53,6 +53,7 @@
 >>>>>>> Stashed changes
             <type>jar</type>
        </dependency>
+   -->
         <dependency>
             <groupId>org.jfxcore</groupId>
             <artifactId>javafx-controls</artifactId>
