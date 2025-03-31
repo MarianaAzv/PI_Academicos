@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="920.0" prefWidth="1290.0" style="-fx-background-color: ECECEC;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="920.0" prefWidth="1290.0" style="-fx-background-color: ECECEC;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.TelaPrincipalCoordenadorController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="421.0" minWidth="10.0" prefWidth="145.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="997.0" minWidth="10.0" prefWidth="840.0" />
@@ -273,10 +273,22 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button mnemonicParsing="false" text="- Ver perfil" textFill="#840d0b" GridPane.halignment="CENTER" />
-                        <Button mnemonicParsing="false" text="- Criar perfil" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                        <Button mnemonicParsing="false" text="- Atualizar perfil" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                        <Button mnemonicParsing="false" text="- Sair" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                        <Button mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Ver perfil" textFill="#840d0b" GridPane.halignment="CENTER">
+                           <font>
+                              <Font name="Courier New" size="18.0" />
+                           </font></Button>
+                        <Button mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Criar perfil" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Courier New" size="18.0" />
+                           </font></Button>
+                        <Button mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Atualizar perfil" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Courier New" size="18.0" />
+                           </font></Button>
+                        <Button mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Sair" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="Courier New" size="18.0" />
+                           </font></Button>
                      </children>
                   </GridPane>
                </children>
@@ -303,32 +315,32 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="90.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="99.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="102.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="158.0" minHeight="10.0" prefHeight="119.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="90.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="99.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="102.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="158.0" minHeight="10.0" prefHeight="77.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" text="+ Publicação" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                  <Button mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="+ Publicação" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="Courier New" size="18.0" />
                      </font></Button>
-                  <Button mnemonicParsing="false" text="+ Artigo" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                  <Button mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="+ Artigo" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="Courier New" size="18.0" />
                      </font></Button>
-                  <Button mnemonicParsing="false" text="- Ver projeto" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                  <Button mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Ver projeto" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="Courier New" size="18.0" />
                      </font></Button>
-                  <Button mnemonicParsing="false" text="- Atualizar projeto" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+                  <Button mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Atualizar projeto" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="Courier New" size="18.0" />
                      </font></Button>
-                  <Button mnemonicParsing="false" text="- Outros projetos" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP">
+                  <Button mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Outros projetos" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="Courier New" size="18.0" />
                      </font></Button>
                </children>
             </GridPane>
