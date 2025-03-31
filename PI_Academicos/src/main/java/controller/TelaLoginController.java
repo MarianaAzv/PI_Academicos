@@ -63,7 +63,7 @@ public class TelaLoginController {
         
         Stage stage = new Stage();
         
-        CadastroCoordenadorController tpc = loader.getController();
+        CadastroCoordenadorController tpc = loader.getController();  
         
         Scene cena = new Scene(root);
         stage.setTitle("Tela Principal Coordenador");

@@ -1,141 +1,480 @@
-create database db_academicos;
- 
-use db_academicos;
+-- MySQL dump 10.13  Distrib 8.0.15, for Win64 (x86_64)
+--
+-- Host: localhost    Database: db_academicos
+-- ------------------------------------------------------
+-- Server version	8.0.15
 
-CREATE TABLE Usuarios(
-idUsuario INT NOT NULL AUTO_INCREMENT,
-cpf BIGINT(11) NOT NULL,
-nome VARCHAR(50),
-apelido INT,
-senha VARCHAR(50) NOT NULL,
-email VARCHAR(50),
-ativa TINYINT(1) NOT NULL,
-PRIMARY KEY (idUsuario));
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+ SET NAMES utf8 ;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-CREATE TABLE Coordenadores(
-idUsuario INT NOT NULL AUTO_INCREMENT,
-siape INT NOT NULL,
-formacao VARCHAR(200),
-PRIMARY KEY (idUsuario),
-FOREIGN KEY (idUsuario) REFERENCES Usuarios (idUsuario));
+--
+-- Table structure for table `administradores`
+--
 
-CREATE TABLE Administradores(
-idUsuario INT NOT NULL AUTO_INCREMENT,
-PRIMARY KEY (idUsuario),
-FOREIGN KEY (idUsuario) REFERENCES Usuarios(idUsuario));
+DROP TABLE IF EXISTS `administradores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `administradores` (
+  `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`idUsuario`),
+  CONSTRAINT `administradores_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-CREATE TABLE IF NOT EXISTS Bolsistas(
-idUsuario INT NOT NULL AUTO_INCREMENT,
-matricula BIGINT NOT NULL,
-curso VARCHAR(50),
-acessoPostagens TINYINT(1) NOT NULL,
-acessoArtigos TINYINT(1) NOT NULL,
-PRIMARY KEY (idUsuario),
-FOREIGN KEY (idUsuario) REFERENCES Usuarios(idUsuario));
+--
+-- Dumping data for table `administradores`
+--
 
-CREATE TABLE NoticiasGerais(
-idNoticia INT NOT NULL AUTO_INCREMENT,
-titulo VARCHAR(100) NOT NULL,
-texto VARCHAR(1000),
-imagem BLOB,
-dataPublicacao DATE NOT NULL,
-idAdministrador INT NOT NULL,
-PRIMARY KEY (idNoticia),
-FOREIGN KEY (idAdministrador) REFERENCES Administradores(idUsuario));
+LOCK TABLES `administradores` WRITE;
+/*!40000 ALTER TABLE `administradores` DISABLE KEYS */;
+/*!40000 ALTER TABLE `administradores` ENABLE KEYS */;
+UNLOCK TABLES;
 
-CREATE TABLE Solicitacoes(
-idSolicitacao INT NOT NULL AUTO_INCREMENT,
-idUsuario INT NOT NULL,
-data DATE,
-descricao VARCHAR(500),
-aceitacao TINYINT(1),
-anexo BLOB,
-PRIMARY KEY (idSolicitacao),
-FOREIGN KEY (idUsuario) REFERENCES Usuarios(idUsuario));
+--
+-- Table structure for table `areas_projetos`
+--
 
-CREATE TABLE IF NOT EXISTS Campus(
-idCampus INT NOT NULL AUTO_INCREMENT,
-nomeCampus VARCHAR(50) NOT NULL,
-localCampus VARCHAR(100),
-PRIMARY KEY (idCampus));
+DROP TABLE IF EXISTS `areas_projetos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `areas_projetos` (
+  `idArea` int(11) NOT NULL,
+  `idProjeto` int(11) NOT NULL,
+  PRIMARY KEY (`idArea`,`idProjeto`),
+  KEY `idProjeto` (`idProjeto`),
+  CONSTRAINT `areas_projetos_ibfk_1` FOREIGN KEY (`idArea`) REFERENCES `areasdeconhecimento` (`idArea`),
+  CONSTRAINT `areas_projetos_ibfk_2` FOREIGN KEY (`idProjeto`) REFERENCES `projetos` (`idProjeto`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-CREATE TABLE Projetos(
-idProjeto INT NOT NULL AUTO_INCREMENT,
-tituloProjeto VARCHAR(100) NOT NULL,
-resumo VARCHAR(2000),
-idCampus INT NOT NULL,
-edital VARCHAR(50),
-dataInicio DATE,
-dataFim DATE,
-prorrogacao DATE,
-emAndamento TINYINT(1),
-PRIMARY KEY (idProjeto),
-FOREIGN KEY (idCampus) REFERENCES Campus(idCampus));
+--
+-- Dumping data for table `areas_projetos`
+--
 
-CREATE TABLE Coordenadores_Projetos(
-idUsuario INT NOT NULL,
-idProjeto INT NOT NULL,
-dataInicio DATE,
-dataFim DATE,
-PRIMARY KEY (idUsuario, idProjeto),
-FOREIGN KEY (idUsuario) REFERENCES Coordenadores(idUsuario),
-FOREIGN KEY (idProjeto) REFERENCES Projetos(idProjeto));
+LOCK TABLES `areas_projetos` WRITE;
+/*!40000 ALTER TABLE `areas_projetos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `areas_projetos` ENABLE KEYS */;
+UNLOCK TABLES;
 
-CREATE TABLE Bolsistas_Projetos(
-idUsuario INT NOT NULL,
-idProjeto INT NOT NULL,
-dataInicio DATE,
-dataFim DATE,
-PRIMARY KEY (idUsuario, idProjeto),
-FOREIGN KEY (idUsuario) REFERENCES Bolsistas(idUsuario),
-FOREIGN KEY (idProjeto) REFERENCES Projetos(idProjeto));
+--
+-- Table structure for table `areasdeconhecimento`
+--
 
-CREATE TABLE AreasDeConhecimento(
-idArea INT NOT NULL AUTO_INCREMENT,
-nomeArea VARCHAR(100) NOT NULL,
-PRIMARY KEY(idArea));
+DROP TABLE IF EXISTS `areasdeconhecimento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `areasdeconhecimento` (
+  `idArea` int(11) NOT NULL AUTO_INCREMENT,
+  `nomeArea` varchar(100) NOT NULL,
+  PRIMARY KEY (`idArea`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-CREATE TABLE Areas_Projetos(
-idArea INT NOT NULL,
-idProjeto INT NOT NULL,
-PRIMARY KEY (idArea, idProjeto),
-FOREIGN KEY (idArea) REFERENCES AreasDeConhecimento(idArea),
-FOREIGN KEY (idProjeto) REFERENCES Projetos(idProjeto));
+--
+-- Dumping data for table `areasdeconhecimento`
+--
 
-CREATE TABLE Postagens(
-idPostagem INT NOT NULL AUTO_INCREMENT,
-idProjeto INT NOT NULL,
-legenda VARCHAR(200),
-data DATE,
-PRIMARY KEY (idPostagem),
-FOREIGN KEY (idProjeto) REFERENCES Projetos(idProjeto));
+LOCK TABLES `areasdeconhecimento` WRITE;
+/*!40000 ALTER TABLE `areasdeconhecimento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `areasdeconhecimento` ENABLE KEYS */;
+UNLOCK TABLES;
 
-CREATE TABLE Fotos(
-idFoto INT NOT NULL AUTO_INCREMENT,
-arquivoFoto BLOB NOT NULL,
-idPostagem INT NOT NULL,
-PRIMARY KEY (idFoto),
-FOREIGN KEY (idPostagem) REFERENCES Postagens(idPostagem));
+--
+-- Table structure for table `artigos`
+--
 
-CREATE TABLE Artigos(
-idArtigo INT NOT NULL AUTO_INCREMENT,
-titulo VARCHAR(50) NOT NULL,
-resumo VARCHAR(2500),
-autores VARCHAR(500),
-arquivo BLOB NOT NULL,
-idProjeto INT NOT NULL,
-PRIMARY KEY (idArtigo),
-FOREIGN KEY (idProjeto)
-REFERENCES Projetos(idProjeto));
+DROP TABLE IF EXISTS `artigos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `artigos` (
+  `idArtigo` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(50) NOT NULL,
+  `resumo` varchar(2500) DEFAULT NULL,
+  `autores` varchar(500) DEFAULT NULL,
+  `arquivo` blob NOT NULL,
+  `idProjeto` int(11) NOT NULL,
+  PRIMARY KEY (`idArtigo`),
+  KEY `idProjeto` (`idProjeto`),
+  CONSTRAINT `artigos_ibfk_1` FOREIGN KEY (`idProjeto`) REFERENCES `projetos` (`idProjeto`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-CREATE TABLE PalavrasChave(
-idPalavra INT NOT NULL AUTO_INCREMENT,
-palavra VARCHAR(30) NOT NULL,
-PRIMARY KEY (idPalavra));
+--
+-- Dumping data for table `artigos`
+--
 
-CREATE TABLE Artigos_PalavrasChave(
-idArtigo INT NOT NULL,
-idPalavra  INT NOT NULL,
-PRIMARY KEY (idArtigo, idPalavra),
-FOREIGN KEY (idArtigo) REFERENCES Artigos(idArtigo),
-FOREIGN KEY (idPalavra) REFERENCES PalavrasChave(idPalavra));
+LOCK TABLES `artigos` WRITE;
+/*!40000 ALTER TABLE `artigos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `artigos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `artigos_palavraschave`
+--
+
+DROP TABLE IF EXISTS `artigos_palavraschave`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `artigos_palavraschave` (
+  `idArtigo` int(11) NOT NULL,
+  `idPalavra` int(11) NOT NULL,
+  PRIMARY KEY (`idArtigo`,`idPalavra`),
+  KEY `idPalavra` (`idPalavra`),
+  CONSTRAINT `artigos_palavraschave_ibfk_1` FOREIGN KEY (`idArtigo`) REFERENCES `artigos` (`idArtigo`),
+  CONSTRAINT `artigos_palavraschave_ibfk_2` FOREIGN KEY (`idPalavra`) REFERENCES `palavraschave` (`idPalavra`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `artigos_palavraschave`
+--
+
+LOCK TABLES `artigos_palavraschave` WRITE;
+/*!40000 ALTER TABLE `artigos_palavraschave` DISABLE KEYS */;
+/*!40000 ALTER TABLE `artigos_palavraschave` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bolsistas`
+--
+
+DROP TABLE IF EXISTS `bolsistas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `bolsistas` (
+  `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
+  `matricula` bigint(20) NOT NULL,
+  `curso` varchar(50) DEFAULT NULL,
+  `acessoPostagens` tinyint(1) NOT NULL,
+  `acessoArtigos` tinyint(1) NOT NULL,
+  PRIMARY KEY (`idUsuario`),
+  CONSTRAINT `bolsistas_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bolsistas`
+--
+
+LOCK TABLES `bolsistas` WRITE;
+/*!40000 ALTER TABLE `bolsistas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bolsistas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `bolsistas_projetos`
+--
+
+DROP TABLE IF EXISTS `bolsistas_projetos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `bolsistas_projetos` (
+  `idUsuario` int(11) NOT NULL,
+  `idProjeto` int(11) NOT NULL,
+  `dataInicio` date DEFAULT NULL,
+  `dataFim` date DEFAULT NULL,
+  PRIMARY KEY (`idUsuario`,`idProjeto`),
+  KEY `idProjeto` (`idProjeto`),
+  CONSTRAINT `bolsistas_projetos_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `bolsistas` (`idUsuario`),
+  CONSTRAINT `bolsistas_projetos_ibfk_2` FOREIGN KEY (`idProjeto`) REFERENCES `projetos` (`idProjeto`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bolsistas_projetos`
+--
+
+LOCK TABLES `bolsistas_projetos` WRITE;
+/*!40000 ALTER TABLE `bolsistas_projetos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bolsistas_projetos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `campus`
+--
+
+DROP TABLE IF EXISTS `campus`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `campus` (
+  `idCampus` int(11) NOT NULL AUTO_INCREMENT,
+  `nomeCampus` varchar(50) NOT NULL,
+  `localCampus` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`idCampus`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `campus`
+--
+
+LOCK TABLES `campus` WRITE;
+/*!40000 ALTER TABLE `campus` DISABLE KEYS */;
+/*!40000 ALTER TABLE `campus` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `coordenadores`
+--
+
+DROP TABLE IF EXISTS `coordenadores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `coordenadores` (
+  `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
+  `siape` int(11) NOT NULL,
+  `formacao` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`idUsuario`),
+  CONSTRAINT `coordenadores_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `coordenadores`
+--
+
+LOCK TABLES `coordenadores` WRITE;
+/*!40000 ALTER TABLE `coordenadores` DISABLE KEYS */;
+/*!40000 ALTER TABLE `coordenadores` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `coordenadores_projetos`
+--
+
+DROP TABLE IF EXISTS `coordenadores_projetos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `coordenadores_projetos` (
+  `idUsuario` int(11) NOT NULL,
+  `idProjeto` int(11) NOT NULL,
+  `dataInicio` date DEFAULT NULL,
+  `dataFim` date DEFAULT NULL,
+  PRIMARY KEY (`idUsuario`,`idProjeto`),
+  KEY `idProjeto` (`idProjeto`),
+  CONSTRAINT `coordenadores_projetos_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `coordenadores` (`idUsuario`),
+  CONSTRAINT `coordenadores_projetos_ibfk_2` FOREIGN KEY (`idProjeto`) REFERENCES `projetos` (`idProjeto`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `coordenadores_projetos`
+--
+
+LOCK TABLES `coordenadores_projetos` WRITE;
+/*!40000 ALTER TABLE `coordenadores_projetos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `coordenadores_projetos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `fotos`
+--
+
+DROP TABLE IF EXISTS `fotos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `fotos` (
+  `idFoto` int(11) NOT NULL AUTO_INCREMENT,
+  `arquivoFoto` blob NOT NULL,
+  `idPostagem` int(11) NOT NULL,
+  PRIMARY KEY (`idFoto`),
+  KEY `idPostagem` (`idPostagem`),
+  CONSTRAINT `fotos_ibfk_1` FOREIGN KEY (`idPostagem`) REFERENCES `postagens` (`idPostagem`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `fotos`
+--
+
+LOCK TABLES `fotos` WRITE;
+/*!40000 ALTER TABLE `fotos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `fotos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `noticiasgerais`
+--
+
+DROP TABLE IF EXISTS `noticiasgerais`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `noticiasgerais` (
+  `idNoticia` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(100) NOT NULL,
+  `texto` varchar(1000) DEFAULT NULL,
+  `imagem` blob,
+  `dataPublicacao` date NOT NULL,
+  `idAdministrador` int(11) NOT NULL,
+  PRIMARY KEY (`idNoticia`),
+  KEY `idAdministrador` (`idAdministrador`),
+  CONSTRAINT `noticiasgerais_ibfk_1` FOREIGN KEY (`idAdministrador`) REFERENCES `administradores` (`idUsuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `noticiasgerais`
+--
+
+LOCK TABLES `noticiasgerais` WRITE;
+/*!40000 ALTER TABLE `noticiasgerais` DISABLE KEYS */;
+/*!40000 ALTER TABLE `noticiasgerais` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `palavraschave`
+--
+
+DROP TABLE IF EXISTS `palavraschave`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `palavraschave` (
+  `idPalavra` int(11) NOT NULL AUTO_INCREMENT,
+  `palavra` varchar(30) NOT NULL,
+  PRIMARY KEY (`idPalavra`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `palavraschave`
+--
+
+LOCK TABLES `palavraschave` WRITE;
+/*!40000 ALTER TABLE `palavraschave` DISABLE KEYS */;
+/*!40000 ALTER TABLE `palavraschave` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `postagens`
+--
+
+DROP TABLE IF EXISTS `postagens`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `postagens` (
+  `idPostagem` int(11) NOT NULL AUTO_INCREMENT,
+  `idProjeto` int(11) NOT NULL,
+  `legenda` varchar(200) DEFAULT NULL,
+  `data` date DEFAULT NULL,
+  PRIMARY KEY (`idPostagem`),
+  KEY `idProjeto` (`idProjeto`),
+  CONSTRAINT `postagens_ibfk_1` FOREIGN KEY (`idProjeto`) REFERENCES `projetos` (`idProjeto`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `postagens`
+--
+
+LOCK TABLES `postagens` WRITE;
+/*!40000 ALTER TABLE `postagens` DISABLE KEYS */;
+/*!40000 ALTER TABLE `postagens` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `projetos`
+--
+
+DROP TABLE IF EXISTS `projetos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `projetos` (
+  `idProjeto` int(11) NOT NULL AUTO_INCREMENT,
+  `tituloProjeto` varchar(100) NOT NULL,
+  `resumo` varchar(2000) DEFAULT NULL,
+  `idCampus` int(11) NOT NULL,
+  `edital` varchar(50) DEFAULT NULL,
+  `dataInicio` date DEFAULT NULL,
+  `dataFim` date DEFAULT NULL,
+  `prorrogacao` date DEFAULT NULL,
+  `emAndamento` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`idProjeto`),
+  KEY `idCampus` (`idCampus`),
+  CONSTRAINT `projetos_ibfk_1` FOREIGN KEY (`idCampus`) REFERENCES `campus` (`idCampus`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `projetos`
+--
+
+LOCK TABLES `projetos` WRITE;
+/*!40000 ALTER TABLE `projetos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `projetos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `solicitacoes`
+--
+
+DROP TABLE IF EXISTS `solicitacoes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `solicitacoes` (
+  `idSolicitacao` int(11) NOT NULL AUTO_INCREMENT,
+  `idUsuario` int(11) NOT NULL,
+  `data` date DEFAULT NULL,
+  `descricao` varchar(500) DEFAULT NULL,
+  `aceitacao` tinyint(1) DEFAULT NULL,
+  `anexo` blob,
+  PRIMARY KEY (`idSolicitacao`),
+  KEY `idUsuario` (`idUsuario`),
+  CONSTRAINT `solicitacoes_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `solicitacoes`
+--
+
+LOCK TABLES `solicitacoes` WRITE;
+/*!40000 ALTER TABLE `solicitacoes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `solicitacoes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `usuarios`
+--
+
+DROP TABLE IF EXISTS `usuarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `usuarios` (
+  `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
+  `cpf` bigint(11) NOT NULL,
+  `nome` varchar(50) DEFAULT NULL,
+  `apelido` int(11) DEFAULT NULL,
+  `senha` varchar(50) NOT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `ativa` tinyint(1) NOT NULL,
+  PRIMARY KEY (`idUsuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+LOCK TABLES `usuarios` WRITE;
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2025-03-31 11:22:21
