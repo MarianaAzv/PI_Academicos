@@ -19,6 +19,10 @@ import javafx.stage.Stage;
 public class TelaLoginController {
     
     private Stage stageLogin;
+    private Connection conexao;
+    private final LoginDao dao = new LoginDao();
+    private ArrayList<String> listaDados;
+    private Usuario user;
                      
      @FXML
     private Button btnEntrar;
@@ -79,6 +83,14 @@ public class TelaLoginController {
     public void abrirJanela(){
         System.out.println("controller.TelaLoginController.abrirJanela()");
     }
+    
+    public void processarLogin(){
+        if(!dao.bancoOnline()){
+            System.out.println("Banco desconectado");
+        }
+        else if(txtNome.getText()!=null && !txtNome.getText().isEmpty() && txtSenha.getText()!=null && !txtSenha.getText().isEmpty()){
+    }
+        
     public void setStage(Stage stage){
         this.stageLogin = stage;
     }
