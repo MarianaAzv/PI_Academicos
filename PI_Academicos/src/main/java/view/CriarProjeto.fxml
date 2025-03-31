@@ -27,7 +27,7 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label fx:id="lblCadastro" text="Cadastro" textFill="#840d0b" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <Label text="Cadastro" textFill="#840d0b" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <padding>
             <Insets top="40.0" />
          </padding>
@@ -50,7 +50,7 @@
                 <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label fx:id="lblNomeCompleto" text="Nome completo:" textFill="#840d0b" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+                  <Label text="Nome completo:" textFill="#840d0b" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
                      <font>
                         <Font name="Courier New Bold" size="20.0" />
                      </font>
@@ -58,7 +58,7 @@
                         <Insets right="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <TextField fx:id="txtNomeCompleto" GridPane.columnIndex="3" />
+                  <TextField GridPane.columnIndex="3" />
                </children>
             </GridPane>
             <GridPane layoutX="10.0" layoutY="10.0" prefWidth="1251.0">
@@ -78,8 +78,8 @@
                   <RowConstraints maxHeight="160.0" minHeight="10.0" prefHeight="159.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <TextField fx:id="txtEmail" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                  <Label fx:id="lblUsuario" text="Usúario:" textFill="#840d0b" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                  <TextField GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <Label text="Usúario:" textFill="#840d0b" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
                      <font>
                         <Font name="Courier New Bold" size="20.0" />
                      </font>
@@ -87,7 +87,7 @@
                         <Insets right="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label fx:id="lblCPF" text="CPF:" textFill="#840d0b" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                  <Label text="CPF:" textFill="#840d0b" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <font>
                         <Font name="Courier New Bold" size="20.0" />
                      </font>
@@ -95,7 +95,7 @@
                         <Insets right="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label fx:id="lblFormatacao" text="Formação:" textFill="#840d0b" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                  <Label text="Formação:" textFill="#840d0b" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                      <font>
                         <Font name="Courier New Bold" size="20.0" />
                      </font>
@@ -103,10 +103,10 @@
                         <Insets right="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <TextField fx:id="txtUsuario" prefHeight="25.0" prefWidth="932.0" GridPane.columnIndex="2" />
-                  <TextField fx:id="txtCPF" prefHeight="25.0" prefWidth="242.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <TextField fx:id="txtFormatacao" prefHeight="25.0" prefWidth="249.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Label fx:id="lblSenha" text="Senha:" textFill="#840d0b" GridPane.columnIndex="3" GridPane.halignment="RIGHT">
+                  <TextField prefHeight="25.0" prefWidth="932.0" GridPane.columnIndex="2" />
+                  <TextField prefHeight="25.0" prefWidth="242.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <TextField prefHeight="25.0" prefWidth="249.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Label text="Senha:" textFill="#840d0b" GridPane.columnIndex="3" GridPane.halignment="RIGHT">
                      <font>
                         <Font name="Courier New Bold" size="20.0" />
                      </font>
@@ -114,8 +114,8 @@
                         <Insets right="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <PasswordField fx:id="txtSenha" GridPane.columnIndex="4" />
-                  <Label fx:id="lblEmail" text="E-mail:" textFill="#840d0b" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                  <PasswordField GridPane.columnIndex="4" />
+                  <Label text="E-mail:" textFill="#840d0b" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <font>
                         <Font name="Courier New Bold" size="20.0" />
                      </font>
@@ -123,7 +123,7 @@
                         <Insets right="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label fx:id="lblSIAPE" text="SIAPE:" textFill="#840d0b" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                  <Label text="SIAPE:" textFill="#840d0b" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                      <font>
                         <Font name="Courier New Bold" size="20.0" />
                      </font>
@@ -131,7 +131,7 @@
                         <Insets right="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <TextField fx:id="txtSIAPE" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                  <TextField GridPane.columnIndex="4" GridPane.rowIndex="2" />
                </children>
             </GridPane>
             <GridPane prefHeight="130.0" prefWidth="1248.0">
@@ -148,7 +148,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="btnSubmeter" mnemonicParsing="false" prefHeight="39.0" prefWidth="125.0" style="-fx-background-color: #840d0b;" text="Submeter" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="125.0" style="-fx-background-color: #840d0b;" text="Submeter" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
@@ -172,19 +172,19 @@
                <children>
                   <Pane prefHeight="188.0" prefWidth="1056.0" style="-fx-background-color: DBA5A5; -fx-background-radius: 15;" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <children>
-                        <Label fx:id="lblMensagemsdeSubmissaoparte1" layoutX="112.0" layoutY="28.0" prefHeight="24.0" prefWidth="730.0" text="Após a submissão, seu cadastro será  enviado para  avalição,">
+                        <Label layoutX="112.0" layoutY="28.0" prefHeight="24.0" prefWidth="730.0" text="Após a submissão, seu cadastro será  enviado para  avalição,">
                            <font>
                               <Font name="Courier New Bold" size="20.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblMensagemsdeSubmissaoparte2" layoutX="118.0" layoutY="61.0" prefHeight="24.0" prefWidth="690.0" text=" você receberá o retorno via email nos próximos 5 dias.">
+                        <Label layoutX="118.0" layoutY="61.0" prefHeight="24.0" prefWidth="690.0" text=" você receberá o retorno via email nos próximos 5 dias.">
                            <font>
                               <Font name="Courier New Bold" size="20.0" />
                            </font>
                         </Label>
                      </children>
                   </Pane>
-                  <ImageView fx:id="imgLogo" fitHeight="80.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                  <ImageView fitHeight="80.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
                      <image>
                         <Image url="@../../resources/imagens/Variant3.png" />
                      </image>
