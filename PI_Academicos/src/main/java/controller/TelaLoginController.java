@@ -62,11 +62,16 @@ public class TelaLoginController {
             Stage stage = new Stage();
         
             TelaPrincipalCoordenadorController tpc = loader.getController();
+            
         
             Scene cena = new Scene(root);
             stage.setTitle("Tela principal Coordenador");
             stage.setScene(cena);
+            //deixa a tela maximizada
+            stage.setMaximized(true);
+            
             stage.show();
+            stageLogin.close();
             
         }else {
             
@@ -111,6 +116,7 @@ public class TelaLoginController {
         
         Scene cena = new Scene(root);
         stage.setTitle("Cadastro Coordenador");
+        stage.setMaximized(true);
         stage.setScene(cena);
         stage.show();
 

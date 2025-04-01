@@ -26,6 +26,7 @@ public class App extends Application {
         Parent root = loader.load();
         
         Stage telaLogin = new Stage();
+        telaLogin.setMaximized(true);
         
         TelaLoginController tlc = loader.getController();
         tlc.setStage(telaLogin);
