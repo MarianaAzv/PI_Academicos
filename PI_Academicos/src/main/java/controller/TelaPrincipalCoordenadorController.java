@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package controller;
 
 import javafx.fxml.FXML;
@@ -6,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
-public class TelaPrincipalBolsistaController {
+public class TelaPrincipalCoordenadorController {
 
     @FXML
     private Text TxtNomeUsuario;
@@ -16,6 +20,12 @@ public class TelaPrincipalBolsistaController {
 
     @FXML
     private Button btnAtualizarPerfil;
+
+    @FXML
+    private Button btnAtualizarProjeto;
+
+    @FXML
+    private Button btnCriarPerfil;
 
     @FXML
     private Button btnOutrosProjetos;
@@ -42,7 +52,7 @@ public class TelaPrincipalBolsistaController {
     private ImageView imgProjeto;
 
     @FXML
-    private ImageView imgUsuarioBolsista;
+    private ImageView imgUsuarioCoordenador;
 
     @FXML
     private Label lblNomeBolsista;
