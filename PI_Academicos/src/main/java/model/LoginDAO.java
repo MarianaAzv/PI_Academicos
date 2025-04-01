@@ -29,16 +29,20 @@ public class LoginDAO extends GenericDAO {
 
 			stmt.setString(1, apelido);
 			stmt.setString(2, senha);
+                        System.out.println(stmt);
 			ResultSet rs = stmt.executeQuery();
+                        System.out.println(rs);
 
 			while (rs.next()) {
 				usuario = new Usuario();
-				usuario.setId(rs.getInt("id"));
+				usuario.setId(rs.getInt("idUsuario"));
+                                usuario.setCpf(rs.getInt("cpf"));
 				usuario.setNome(rs.getString("nome"));
 				usuario.setApelido(rs.getString("apelido"));
 				usuario.setEmail(rs.getString("email"));
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setAtiva(rs.getBoolean("ativa"));
+                                
 			}
 
 			rs.close();

@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -48,11 +49,34 @@ public class TelaLoginController {
     @FXML
     void onClickEntrar(ActionEvent event) throws IOException, SQLException {
         
-        processarLogin();
-        String apelido = txtNome.toString();
-        String senha = txtSenha.toString();
-        autenticar(apelido, senha);
-        //if( usuario != null)
+        //processarLogin();
+        String apelido = txtNome.getText();
+        String senha = txtSenha.getText();
+        Usuario usuario = autenticar(apelido, senha);
+        if( usuario != null){
+            
+            URL url = new File("src/main/java/view/TelaPrincipalCoordenador.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage stage = new Stage();
+        
+            TelaPrincipalCoordenadorController tpc = loader.getController();
+        
+            Scene cena = new Scene(root);
+            stage.setTitle("Tela principal Coordenador");
+            stage.setScene(cena);
+            stage.show();
+            
+        }else {
+            
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+        alerta.setTitle("Nome ou senha incorretos");
+        alerta.setHeaderText("Verifique as informações inseridas");
+        alerta.setContentText("Digite novamente");
+        alerta.showAndWait();
+        
+    }
     }
     
     public void setStage(Stage stage){
@@ -97,20 +121,19 @@ public class TelaLoginController {
 
     }
     
-    public void processarLogin()throws IOException, SQLException{
-        if(!dao.bancoOnline()){
+
+    private Usuario autenticar(String apelido, String senha) throws SQLException {
+   if(!dao.bancoOnline()){
             System.out.println("Banco desconectado");
         }
-        else if(txtNome.getText()!=null && !txtNome.getText().isEmpty() && txtSenha.getText()!=null && !txtSenha.getText().isEmpty()){
-            System.out.println("Processo de autenticação");
+        else if(apelido !=null && !apelido.isEmpty() && senha !=null && !senha.isEmpty()){
+            LoginDAO logindao = new LoginDAO();
+            Usuario usuario = logindao.autenticar(apelido, senha);
+            return usuario;
     }
         else{
             System.out.println("Verifique as informações");
         }
-    }
-    
-    private ArrayList<String> autenticar(String apelido, String senha) throws SQLException {
-
         return null;
     }
 }

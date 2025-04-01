@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class TelaPrincipalCoordenadorController {
 
@@ -92,5 +93,11 @@ public class TelaPrincipalCoordenadorController {
 
     @FXML
     private Text txtProrrogacao;
+    private Stage stageLogin;
+    
+public void setStage(Stage stage){
+        this.stageLogin = stage;
+    }
 
 }
+

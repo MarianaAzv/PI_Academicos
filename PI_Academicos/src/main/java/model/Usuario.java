@@ -3,7 +3,8 @@ package model;
 
 public class Usuario {
     
-        private long id;
+        private int id;
+        private long cpf;
 	private String nome;
 	private String apelido;
 	private String email;
@@ -12,8 +13,9 @@ public class Usuario {
 
 	// Método construtor com todos os parâmetros
 
-    public Usuario(long id, String nome, String apelido, String email, String senha, Boolean ativa) {
+    public Usuario(int id, long cpf, String nome, String apelido, String email, String senha, Boolean ativa) {
         this.id = id;
+        this.cpf = cpf;
         this.nome = nome;
         this.apelido = apelido;
         this.email = email;
@@ -21,8 +23,12 @@ public class Usuario {
         this.ativa = ativa;
     }
 
+    
+   
+
     // metodo sem o parametro de id
-    public Usuario(String nome, String apelido, String email, String senha, Boolean ativa) {
+     public Usuario(long cpf, String nome, String apelido, String email, String senha, Boolean ativa) {   
+        this.cpf = cpf;
         this.nome = nome;
         this.apelido = apelido;
         this.email = email;
@@ -31,7 +37,7 @@ public class Usuario {
     }
 
     //metodo construtor para login
-     public Usuario(String apelido, String senha) {
+    public Usuario(String apelido, String senha) {
         this.apelido = apelido;
         this.senha = senha;
     }
@@ -39,14 +45,22 @@ public class Usuario {
     // metodo sem parametros
     public Usuario() {
     }
-    
 
+    //Geters e Setters
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public long getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(long cpf) {
+        this.cpf = cpf;
     }
 
     public String getNome() {
@@ -88,6 +102,9 @@ public class Usuario {
     public void setAtiva(Boolean ativa) {
         this.ativa = ativa;
     }
+    
+
+   
     
 	
 
