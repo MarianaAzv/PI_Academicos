@@ -41,7 +41,7 @@ public class TelaLoginController {
     private Text lblRecuperarSenha;
 
     @FXML
-    private TextField txtNome;
+    private TextField txtApelido;
 
     @FXML
     private PasswordField txtSenha;
@@ -50,7 +50,7 @@ public class TelaLoginController {
     void onClickEntrar(ActionEvent event) throws IOException, SQLException {
         
         //processarLogin();
-        String apelido = txtNome.getText();
+        String apelido = txtApelido.getText();
         String senha = txtSenha.getText();
         Usuario usuario = autenticar(apelido, senha);
         if( usuario != null){
