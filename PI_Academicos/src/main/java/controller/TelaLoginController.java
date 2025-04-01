@@ -49,6 +49,10 @@ public class TelaLoginController {
     void onClickEntrar(ActionEvent event) throws IOException, SQLException {
         
         processarLogin();
+        String apelido = txtNome.toString();
+        String senha = txtSenha.toString();
+        autenticar(apelido, senha);
+        //if( usuario != null)
     }
     
     public void setStage(Stage stage){
