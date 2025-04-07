@@ -1,13 +1,33 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package controller;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.input.MouseEvent;
 
-/**
- *
- * @author Aluno
- */
-public class CadastrarPostagemController {
-    
+public class PleaseProvideControllerClassName {
+
+    @FXML
+    private Button btnPostar;
+
+    @FXML
+    private Label lblImagem;
+
+    @FXML
+    private Label lblNomeProjeto;
+
+    @FXML
+    private TextArea txtLegenda;
+
+    @FXML
+    void onClickImagem(MouseEvent event) {
+
+    }
+
+    @FXML
+    void onClickPostar(ActionEvent event) {
+
+    }
+
 }
+

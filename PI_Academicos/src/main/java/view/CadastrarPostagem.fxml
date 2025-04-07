@@ -24,13 +24,16 @@
    <children>
       <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="20.0" GridPane.columnIndex="1">
          <children>
-            <Label alignment="BOTTOM_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="28.0" prefWidth="291.0" text="Nome do Projeto" textFill="#840d0b">
+            <Label fx:id="lblNomeProjeto" alignment="BOTTOM_LEFT" maxWidth="1920.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="28.0" prefWidth="291.0" text="Nome do Projeto" textFill="#840d0b" VBox.vgrow="ALWAYS">
                <font>
                   <Font name="Courier New Bold" size="17.0" />
                </font>
             </Label>
-            <TextArea prefHeight="200.0" prefWidth="200.0" promptText="Legenda" VBox.vgrow="ALWAYS" />
-            <Button alignment="BOTTOM_RIGHT" mnemonicParsing="false" text="Postar" />
+            <TextArea fx:id="txtLegenda" prefHeight="200.0" prefWidth="200.0" promptText="Legenda" VBox.vgrow="ALWAYS" />
+            <Button fx:id="btnPostar" alignment="BOTTOM_RIGHT" mnemonicParsing="false" onAction="#onClickPostar" style="-fx-background-color: #840d0b;" text="POSTAR" textFill="WHITE">
+               <font>
+                  <Font name="Courier New Bold" size="14.0" />
+               </font></Button>
          </children>
          <GridPane.margin>
             <Insets left="20.0" right="20.0" />
@@ -56,7 +59,7 @@
                      <children>
                         <ImageView fitHeight="22.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
                            <image>
-                              <Image url="@../../../../../../../../../Downloads/Component%207.png" />
+                              <Image url="@../../resources/imagens/Component%207.png" />
                            </image>
                            <GridPane.margin>
                               <Insets bottom="10.0" left="10.0" />
@@ -64,13 +67,13 @@
                         </ImageView>
                         <ImageView fitHeight="21.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                            <image>
-                              <Image url="@../../../../../../../../../Downloads/Component%204.png" />
+                              <Image url="@../../resources/imagens/Component%204.png" />
                            </image>
                            <GridPane.margin>
                               <Insets bottom="10.0" right="10.0" />
                            </GridPane.margin>
                         </ImageView>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="94.0" text="+ Imagem" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                        <Label fx:id="lblImagem" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#onClickImagem" prefHeight="25.0" prefWidth="94.0" text="+ Imagem" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                            <font>
                               <Font size="16.0" />
                            </font>
