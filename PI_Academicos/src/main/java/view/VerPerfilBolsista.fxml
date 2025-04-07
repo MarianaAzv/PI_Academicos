@@ -51,7 +51,7 @@
                               <Insets right="5.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label fx:id="lblNomeCoord" prefHeight="24.0" prefWidth="548.0" GridPane.columnIndex="2">
+                        <Label fx:id="lblNomeBol" prefHeight="24.0" prefWidth="548.0" GridPane.columnIndex="2">
                            <font>
                               <Font name="Courier New Bold" size="18.0" />
                            </font>
@@ -74,7 +74,7 @@
                         <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="300.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="15.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
                         <Label fx:id="lblUsuario" text="Usuário:" textFill="#840d0b" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
@@ -93,7 +93,7 @@
                               <Insets right="5.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label fx:id="lblFormacao" text="Formação:" textFill="#840d0b" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                        <Label fx:id="lblMatricula" text="Matrícula:" textFill="#840d0b" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                            <font>
                               <Font name="Courier New Bold" size="20.0" />
                            </font>
@@ -117,7 +117,7 @@
                               <Insets right="5.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label fx:id="lblSIAPE" text="SIAPE:" textFill="#840d0b" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                        <Label fx:id="lblCurso" text="Curso:" textFill="#840d0b" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                            <font>
                               <Font name="Courier New Bold" size="20.0" />
                            </font>
@@ -125,7 +125,7 @@
                               <Insets right="5.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label fx:id="lblUsuarioCoord" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="2">
+                        <Label fx:id="lblUsuarioBols" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="2">
                            <font>
                               <Font name="Courier New Bold" size="18.0" />
                            </font>
@@ -133,7 +133,7 @@
                               <Insets left="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="lblCPFCoord" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <Label fx:id="lblCPFBols" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <font>
                               <Font name="Courier New Bold" size="18.0" />
                            </font>
@@ -141,7 +141,7 @@
                               <Insets left="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="lblFormacaoCoord" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                        <Label fx:id="lblFormacaoBols" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                            <font>
                               <Font name="Courier New Bold" size="18.0" />
                            </font>
@@ -149,7 +149,7 @@
                               <Insets left="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="lblSenhaCoord" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="4">
+                        <Label fx:id="lblSenhaBols" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="4">
                            <font>
                               <Font name="Courier New Bold" size="18.0" />
                            </font>
@@ -157,7 +157,7 @@
                               <Insets left="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="lblEmailCoord" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                        <Label fx:id="lblEmailBols" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
                            <font>
                               <Font name="Courier New Bold" size="18.0" />
                            </font>
@@ -165,13 +165,66 @@
                               <Insets left="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="lblSIAPECoord" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                        <Label fx:id="lblSIAPEBols" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
                            <font>
                               <Font name="Courier New Bold" size="18.0" />
                            </font>
                            <padding>
                               <Insets left="5.0" />
                            </padding>
+                        </Label>
+                     </children>
+                  </GridPane>
+                  <GridPane prefHeight="346.0" prefWidth="1012.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="10.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="200.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="10.0" prefWidth="60.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="200.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="10.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label fx:id="lblData" text="Data" textFill="#840d0b" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                           <font>
+                              <Font name="Courier New Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblInicioDaBolsa" text="Inicio da bolsa:" textFill="#840d0b" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                           <font>
+                              <Font name="Courier New Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblInicioDaBolsa1" text="Fim da bolsa:" textFill="#840d0b" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                           <font>
+                              <Font name="Courier New Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblDataInicioBols" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                           <font>
+                              <Font name="Courier New Bold" size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                           <GridPane.margin>
+                              <Insets top="10.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label fx:id="lblDataInicioBols" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                           <font>
+                              <Font name="Courier New Bold" size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                           <GridPane.margin>
+                              <Insets top="10.0" />
+                           </GridPane.margin>
                         </Label>
                      </children>
                   </GridPane>
@@ -185,7 +238,7 @@
                   <Insets left="10.0" top="10.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fx:id="imgFotoCoordenador" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <ImageView fx:id="imgFotoBolsista" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="50.0" />
                </GridPane.margin>
