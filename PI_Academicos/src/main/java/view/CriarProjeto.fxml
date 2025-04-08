@@ -110,7 +110,7 @@
                   <TextField fx:id="txtDatadeInicio" prefHeight="25.0" prefWidth="249.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
                      <children>
-                        <Button fx:id="btnSimBolsista" mnemonicParsing="false" text="Sim">
+                        <Button fx:id="btnSimBolsista" mnemonicParsing="false" onAction="#OnClickSimBolsista" text="Sim">
                            <opaqueInsets>
                               <Insets right="5.0" />
                            </opaqueInsets>
@@ -120,7 +120,7 @@
                            <font>
                               <Font name="Courier New Bold" size="12.0" />
                            </font></Button>
-                        <Button fx:id="btnnaoBolsista" mnemonicParsing="false" text="Não">
+                        <Button fx:id="btnnaoBolsista" mnemonicParsing="false" onAction="#OnClickNaoBolsista" text="Não">
                            <opaqueInsets>
                               <Insets left="5.0" />
                            </opaqueInsets>
@@ -172,14 +172,14 @@
                   </Label>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3">
                      <children>
-                        <Button fx:id="btnSimCocoordenador" mnemonicParsing="false" text="Sim">
+                        <Button fx:id="btnSimCocoordenador" mnemonicParsing="false" onAction="#OnClickSimCocoordenador" text="Sim">
                            <HBox.margin>
                               <Insets right="5.0" top="20.0" />
                            </HBox.margin>
                            <font>
                               <Font name="Courier New Bold" size="12.0" />
                            </font></Button>
-                        <Button fx:id="btnNaococoordenador" mnemonicParsing="false" text="Não">
+                        <Button fx:id="btnNaococoordenador" mnemonicParsing="false" onAction="#OnClickNaoCocoordenador" text="Não">
                            <HBox.margin>
                               <Insets left="5.0" top="20.0" />
                            </HBox.margin>
@@ -227,7 +227,7 @@
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <children>
-                        <Button fx:id="btnPDF" mnemonicParsing="false" style="-fx-background-color: #840d0b;" text="PDF" textFill="WHITE">
+                        <Button fx:id="btnPDF" mnemonicParsing="false" onAction="#OnClickPDF" style="-fx-background-color: #840d0b;" text="PDF" textFill="WHITE">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
@@ -235,7 +235,7 @@
                               <Font name="Courier New Bold" size="18.0" />
                            </font>
                         </Button>
-                        <Button fx:id="btnEnviar" mnemonicParsing="false" style="-fx-background-color: #840d0b;" text="enviar" textFill="WHITE">
+                        <Button fx:id="btnEnviar" mnemonicParsing="false" onAction="#OnClickEnviar" style="-fx-background-color: #840d0b;" text="enviar" textFill="WHITE">
                            <HBox.margin>
                               <Insets left="5.0" />
                            </HBox.margin>

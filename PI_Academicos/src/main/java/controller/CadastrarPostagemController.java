@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 
-public class PleaseProvideControllerClassName {
+public class CadastrarPostagemController {
 
     @FXML
     private Button btnPostar;

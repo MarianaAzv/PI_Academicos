@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -88,5 +89,35 @@ public class CriarProjetoController {
     @FXML
     private TextArea txtResumo;
 
+    
+     @FXML
+    void OnClickEnviar(ActionEvent event) {
+
+    }
+
+    @FXML
+    void OnClickNaoBolsista(ActionEvent event) {
+
+    }
+
+    @FXML
+    void OnClickNaoCocoordenador(ActionEvent event) {
+
+    }
+
+    @FXML
+    void OnClickPDF(ActionEvent event) {
+
+    }
+
+    @FXML
+    void OnClickSimBolsista(ActionEvent event) {
+
+    }
+
+    @FXML
+    void OnClickSimCocoordenador(ActionEvent event) {
+
+    }
 }
 
