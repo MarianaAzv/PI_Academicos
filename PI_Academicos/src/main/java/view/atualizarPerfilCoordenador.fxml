@@ -22,7 +22,7 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <GridPane GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+      <GridPane fx:id="btnAtualizarProjeto" onDragDetected="#AtualizarProjetoOnClick" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -183,12 +183,17 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ImageView fx:id="imgPerfil" fitHeight="87.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <ImageView fx:id="imgPerfil" fitHeight="87.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
                   <Text fx:id="TxtNomeUsuario" fill="#840d0b" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Courier New Bold" size="14.0" />
                      </font>
                   </Text>
+                  <Label fx:id="lblNomeCoordenador" contentDisplay="CENTER" prefHeight="115.0" prefWidth="174.0" textAlignment="RIGHT" textFill="#840d0b" wrapText="true" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="Courier New Bold" size="20.0" />
+                     </font>
+                  </Label>
                </children>
             </GridPane>
             <GridPane GridPane.rowIndex="3">
@@ -201,12 +206,17 @@
                   <RowConstraints maxHeight="190.0" minHeight="10.0" prefHeight="184.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ImageView fx:id="imgProjeto" fitHeight="87.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <ImageView fx:id="imgProjeto" fitHeight="87.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
                   <Text fx:id="TxtNomeUsuario1" fill="#840d0b" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Courier New Bold" size="14.0" />
                      </font>
                   </Text>
+                  <Label fx:id="lblNomeProjeto" contentDisplay="CENTER" prefHeight="115.0" prefWidth="174.0" textAlignment="RIGHT" textFill="#840d0b" wrapText="true" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="Courier New Bold" size="20.0" />
+                     </font>
+                  </Label>
                </children>
             </GridPane>
             <GridPane prefHeight="174.0" prefWidth="275.0" GridPane.rowIndex="2">
@@ -220,24 +230,24 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="btnVerperfil" mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Ver perfil" textFill="#840d0b" GridPane.halignment="CENTER">
+                  <Button fx:id="btnVerperfil" mnemonicParsing="false" onAction="#onClickVerPerfil" style="-fx-background-color: DBA5A5;" text="- Ver perfil" textFill="#840d0b" GridPane.halignment="CENTER">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnCriarPerfil" mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Criar perfil" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-                     <font>
-                        <Font name="Courier New" size="18.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="btnAtualizarPerfil" mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Atualizar perfil" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                  <Button fx:id="btnCriarPerfil" mnemonicParsing="false" onAction="#onClickCriarPerfil" style="-fx-background-color: DBA5A5;" text="- Criar perfil" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnSair" mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Sair" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                  <Button fx:id="btnAtualizarPerfil" mnemonicParsing="false" onAction="#onClickAtualizarPerfil" style="-fx-background-color: DBA5A5;" text="- Atualizar perfil" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <font>
-                        <Font name="Courier New" size="18.0" />
+                        <Font name="Courier New Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnSair" mnemonicParsing="false" onAction="#onClickSair" style="-fx-background-color: DBA5A5;" text="- Sair" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
                </children>
@@ -254,29 +264,29 @@
                   <RowConstraints maxHeight="158.0" minHeight="10.0" prefHeight="77.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="btnPublicacao" mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="+ Publicação" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                  <Button fx:id="btnPublicacao" mnemonicParsing="false" onAction="#onClickPublicacao" style="-fx-background-color: DBA5A5;" text="+ Publicação" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnArtigo" mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="+ Artigo" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                  <Button fx:id="btnArtigo" mnemonicParsing="false" onAction="#onClickArtigo" style="-fx-background-color: DBA5A5;" text="+ Artigo" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnVerProjeto" mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Ver projeto" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                  <Button fx:id="btnVerProjeto" mnemonicParsing="false" onAction="#onClickVerProjeto" style="-fx-background-color: DBA5A5;" text="- Ver projeto" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
                      <font>
-                        <Font name="Courier New" size="18.0" />
+                        <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnAtualizarProjeto" mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Atualizar projeto" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+                  <Button fx:id="btnOutrosProjetos" mnemonicParsing="false" onAction="#onClickOutrosProjetos" style="-fx-background-color: DBA5A5;" text="- Outros projetos" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP">
                      <font>
-                        <Font name="Courier New" size="18.0" />
+                        <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnOutrosProjetos" mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Outros projetos" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP">
+                  <Button fx:id="btnVerProjeto1" mnemonicParsing="false" onAction="#onClickAtualizarProjeto" style="-fx-background-color: DBA5A5;" text="- Atualizar projeto" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                      <font>
-                        <Font name="Courier New" size="18.0" />
+                        <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
                </children>
