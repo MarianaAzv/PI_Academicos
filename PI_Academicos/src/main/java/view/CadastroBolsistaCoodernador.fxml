@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="634.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="contrller.CadastroCocoordenadorCoordenadorController">
+<GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="634.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="contrller.CadastroBolsistaCoordenadorController">
   <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="30.0" prefWidth="17.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="1282.0" minWidth="10.0" prefWidth="1256.0" />
@@ -73,12 +73,12 @@
                         <Font name="Courier New Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblFormacao" text="Matricula:" textFill="#840d0b" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                  <Label fx:id="lblMatricula" text="Matricula:" textFill="#840d0b" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <font>
                         <Font name="Courier New Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblSIAPE" text="Curso:" textFill="#840d0b" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                  <Label fx:id="lblCurso" text="Curso:" textFill="#840d0b" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                      <font>
                         <Font name="Courier New Bold" size="14.0" />
                      </font>
@@ -94,17 +94,20 @@
                      </font>
                   </Label>
                   <TextField fx:id="txtUsuario" GridPane.columnIndex="2" />
-                  <TextField fx:id="txtFormacao" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <TextField fx:id="txttSIAPE" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                  <TextField fx:id="txtMatricula" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <TextField fx:id="txtCurso" GridPane.columnIndex="4" GridPane.rowIndex="2" />
                   <TextField fx:id="txtSenha" GridPane.columnIndex="4" />
                   <TextField fx:id="txtEmail" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                  <Button mnemonicParsing="false" style="-fx-background-color: #840d0b;" text="PDF" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button fx:id="btnPDF" mnemonicParsing="false" onAction="#OnCliclPDF" prefHeight="27.0" prefWidth="66.0" style="-fx-background-color: #840d0b;" text="PDF" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Courier New Bold" size="14.0" />
+                     </font></Button>
                </children>
             </GridPane>
             <GridPane>
               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="2.0" prefWidth="18.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="36.0" minWidth="0.0" prefWidth="36.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="70.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="410.0" minWidth="10.0" prefWidth="410.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="70.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="2.0" prefWidth="18.0" />
@@ -113,7 +116,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Data" textFill="#840d0b" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                  <Label fx:id="lblData" text="Data" textFill="#840d0b" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                      <font>
                         <Font name="Courier New Bold" size="14.0" />
                      </font>
@@ -122,23 +125,55 @@
             </GridPane>
             <GridPane>
               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="2.0" prefWidth="18.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="130.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="130.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="15.0" minWidth="0.0" prefWidth="15.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="130.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="130.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="2.0" prefWidth="18.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
+               <children>
+                  <Label fx:id="lblIniciodaBolsa" text="Início da bolsa" textFill="#840d0b" GridPane.columnIndex="2">
+                     <font>
+                        <Font name="Courier New Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblFimdaBolsa" text="Fim da bolsa" textFill="#840d0b" GridPane.columnIndex="4">
+                     <font>
+                        <Font name="Courier New Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtIniciodaBolsa" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <TextField fx:id="txtFimdaBolsa" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+               </children>
             </GridPane>
-            <Button fx:id="btnEEnviar" mnemonicParsing="false" onAction="#OnClickEnviar" prefWidth="100.0" style="-fx-background-color: #840d0b;" text="Enviar" textFill="WHITE">
-               <font>
-                  <Font name="Courier New Bold" size="14.0" />
-               </font>
-            </Button>
+            <GridPane prefHeight="34.0" prefWidth="581.0">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="2.0" prefWidth="18.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="70.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="410.0" minWidth="10.0" prefWidth="410.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="70.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="2.0" prefWidth="18.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints maxHeight="10.0" minHeight="2.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="23.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button fx:id="btnEnviar" mnemonicParsing="false" onAction="#OnClickEnviar" prefWidth="100.0" style="-fx-background-color: #840d0b;" text="Enviar" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Courier New Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </GridPane>
          </children></VBox>
-      <Label fx:id="lblCadastrarCoCoordenador" text="Cadastrar Bolsista " textFill="#840d0b" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+      <Label fx:id="lblCadastrarBolsista" text="Cadastrar Bolsista " textFill="#840d0b" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
          <font>
             <Font name="Courier New Bold" size="35.0" />
          </font>
