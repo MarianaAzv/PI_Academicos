@@ -150,9 +150,9 @@ public void setStage(Stage stage){
     }
             
      
-      public void setStage(Stage stage){
-        this.stageTelaPrincipalCoordenador = stage;
-    }
+     //public void setStage(Stage stage){
+      // this.stageTelaPrincipalCoordenador = stage;
+   //}
 
         
     }
@@ -176,6 +176,6 @@ public void setStage(Stage stage){
  //   }
    // void onClickOutrosProjetos(){
         
-  //  }
+   }
     
 

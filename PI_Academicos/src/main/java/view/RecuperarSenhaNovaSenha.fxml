@@ -21,7 +21,7 @@
    <children>
       <Label text="Insira sua nova senha:" GridPane.halignment="CENTER">
          <font>
-            <Font name="Courier New" size="18.0" />
+            <Font name="Courier New Bold" size="18.0" />
          </font>
       </Label>
       <GridPane GridPane.rowIndex="2">
