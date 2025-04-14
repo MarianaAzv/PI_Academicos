@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -9,10 +10,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="634.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="contrller.CadastroBolsistaCoordenadorController">
+<GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="634.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CadastroBolsistaCoordenadorController">
   <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="30.0" prefWidth="17.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="1282.0" minWidth="10.0" prefWidth="1256.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="1256.0" minWidth="10.0" prefWidth="1256.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="30.0" prefWidth="17.0" />
   </columnConstraints>
   <rowConstraints>
@@ -138,6 +139,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
+                  <DatePicker fx:id="DataInicioBolsa" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                   <Label fx:id="lblIniciodaBolsa" text="Início da bolsa" textFill="#840d0b" GridPane.columnIndex="2">
                      <font>
                         <Font name="Courier New Bold" size="14.0" />
@@ -148,8 +150,7 @@
                         <Font name="Courier New Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtIniciodaBolsa" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <TextField fx:id="txtFimdaBolsa" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <DatePicker fx:id="DataFimdaBolsa" GridPane.columnIndex="4" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <GridPane prefHeight="34.0" prefWidth="581.0">

@@ -3,10 +3,17 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class CadastroBolsistaCoordenadorController {
+
+    @FXML
+    private DatePicker DataFimdaBolsa;
+
+    @FXML
+    private DatePicker DataInicioBolsa;
 
     @FXML
     private Button btnEnviar;
@@ -55,12 +62,6 @@ public class CadastroBolsistaCoordenadorController {
 
     @FXML
     private TextField txtEmail;
-
-    @FXML
-    private TextField txtFimdaBolsa;
-
-    @FXML
-    private TextField txtIniciodaBolsa;
 
     @FXML
     private TextField txtMatricula;
