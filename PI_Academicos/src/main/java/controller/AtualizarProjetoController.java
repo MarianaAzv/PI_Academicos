@@ -66,7 +66,7 @@ public class AtualizarProjetoController {
     private Label lblResumo;
 
     @FXML
-    private Label lbltitulocriarprojeto;
+    private Label lbltituloAtualizarprojeto;
 
     @FXML
     private TextField txtCampus;

@@ -29,7 +29,7 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label fx:id="lbltitulocriarprojeto" text="Criar Projeto" textFill="#840d0b" GridPane.columnIndex="2" GridPane.rowIndex="1">
+      <Label fx:id="lbltituloAtualizarprojeto" text="Atualizar Projeto" textFill="#840d0b" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <padding>
             <Insets top="40.0" />
          </padding>
