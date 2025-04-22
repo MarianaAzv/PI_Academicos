@@ -66,7 +66,7 @@ public class AtualizarProjetoController {
     private Label lblResumo;
 
     @FXML
-    private Label lbltituloAtualizarprojeto;
+    private Label lbltitulocriarprojeto;
 
     @FXML
     private TextField txtCampus;
@@ -93,7 +93,27 @@ public class AtualizarProjetoController {
     private TextArea txtResumo;
 
     @FXML
-    void OnClickEnviar(ActionEvent event) {
+    void OnClickAdicionarBolsista(ActionEvent event) {
+
+    }
+
+    @FXML
+    void OnClickAdicionarCocoordenador(ActionEvent event) {
+
+    }
+
+    @FXML
+    void OnClickAtualizar(ActionEvent event) {
+
+    }
+
+    @FXML
+    void OnClickDesativarBolsista(ActionEvent event) {
+
+    }
+
+    @FXML
+    void OnClickDesativarCocoordenador(ActionEvent event) {
 
     }
 
