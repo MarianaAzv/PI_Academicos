@@ -349,14 +349,14 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-<<<<<<< Updated upstream
+
                   <ImageView fx:id="imgPerfil" fitHeight="87.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                   <Text fx:id="TxtNomeUsuario" fill="#840d0b" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Courier New Bold" size="14.0" />
                      </font>
                   </Text>
-=======
+
                   <GridPane>
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -367,7 +367,7 @@
                     </rowConstraints>
                      <children>
                         <ImageView fx:id="imgUsuarioCoordenador" fitHeight="122.0" fitWidth="148.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
-                        <Text fx:id="TxtNomeUsuario" fill="#840d0b" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.halignment="CENTER">
+                        <Text fx:id="TxtNomeUsuario2" fill="#840d0b" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.halignment="CENTER">
                            <font>
                               <Font name="Courier New Bold" size="18.0" />
                            </font>
@@ -403,7 +403,7 @@
                            </font></Button>
                      </children>
                   </GridPane>
->>>>>>> Stashed changes
+
                </children>
             </GridPane>
             <GridPane GridPane.rowIndex="3">
