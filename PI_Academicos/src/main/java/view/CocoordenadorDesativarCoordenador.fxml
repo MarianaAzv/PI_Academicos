@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BolsistaDesativarCoordenadorController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CocoordenadorDesativarCoordenadorController">
   <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="10.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="1000.0" minWidth="10.0" prefWidth="1000.0" />
@@ -34,27 +34,27 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <CheckBox fx:id="CBNomedoBolsistaMatricula" alignment="CENTER" cache="true" mnemonicParsing="false" text="Nome do Bolsista - Matricula">
+                  <CheckBox fx:id="CBNomedoCocoordenadorSIAPE1" alignment="CENTER" cache="true" mnemonicParsing="false" text="Nome do Cocoordenador - SIAPE">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox fx:id="CBNomedoBolsistaMatricula2" mnemonicParsing="false" text="Nome do Bolsista - Matricula">
+                  <CheckBox fx:id="CBNomedoCocoordenadorSIAPE2" mnemonicParsing="false" text="Nome do Cocoordenador - SIAPE">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox fx:id="CBNomedoBolsistaMatricula3" mnemonicParsing="false" text="Nome do Bolsista - Matricula">
+                  <CheckBox fx:id="CBNomedoCocoordenadorSIAPE3" mnemonicParsing="false" text="Nome do Cocoordenador - SIAPE">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox fx:id="CBNomedoBolsistaMatricula4" mnemonicParsing="false" text="Nome do Bolsista - Matricula">
+                  <CheckBox fx:id="CBNomedoCocoordenadorSIAPE4" mnemonicParsing="false" text="Nome do Cocoordenador - SIAPE">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox fx:id="CBNomedoBolsistaMatricula5" mnemonicParsing="false" text="Nome do Bolsista - Matricula">
+                  <CheckBox fx:id="CBNomedoCocoordenadorSIAPE5" mnemonicParsing="false" text="Nome do Cocoordenador - SIAPE">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
@@ -67,7 +67,7 @@
                </font></Button>
          </children>
       </GridPane>
-      <Label fx:id="lblBolsistas" text="Bolsistas:" textFill="#840d0b" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+      <Label fx:id="lblCoCoordenador" text="CoCoordenador" textFill="#840d0b" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
          <font>
             <Font name="Courier New Bold" size="35.0" />
          </font>
