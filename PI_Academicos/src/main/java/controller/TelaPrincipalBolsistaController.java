@@ -1,12 +1,32 @@
 package controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.sql.Connection;
+import java.util.ArrayList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import model.Usuario;
 
 public class TelaPrincipalBolsistaController {
+    //carregar
+     private Stage stageTelaPrincipalBolsista;
+    private Connection conexao;
+    private final Usuario dao = new Usuario();
+    private ArrayList<String> listaDados;
+    private Usuario user;
 
     @FXML
     private Text TxtNomeUsuario;
@@ -82,5 +102,79 @@ public class TelaPrincipalBolsistaController {
 
     @FXML
     private Text txtProrrogacao;
+  //  private Stage stageLogin;
+    
+   // public void setStage(Stage stage){ // dps ver como diferenciar o bolsista do coordenador a partir do login
+     // this.stageLogin = stage;
+   // }
+//    
+//      @FXML
+//    void onClickVerPerfil(ActionEvent event) throws IOException {
+//
+//    
+//    Usuario usuario= null;
+//    if( usuario != null){
+//            
+//            URL url = new File("src/main/java/view/VerPerfilBolsista.fxml").toURI().toURL();
+//            FXMLLoader loader = new FXMLLoader(url);
+//            Parent root = loader.load();
+//        
+//            Stage stage = new Stage();
+//            
+//            VerPerfilBolsistaController vpfb = loader.getController(); //lembrar de arrumar o vpf do coordenador para vpfc
+//            
+//        
+//            Scene cena = new Scene(root);
+//            stage.setTitle("Perfil bolsista");
+//            stage.setScene(cena);
+//            //deixa a tela maximizada
+//            stage.setMaximized(true);
+//            
+//            stage.show();
+//            stageTelaPrincipalBolsista.close();
+//            
+//                }else {
+ 
+//                       AlertaUtil.mostrarErro("Erro", "Usuário e senha inválidos!");// JAQUE adicionou um pacote Util para colocar os alertas
+//        
+//    }
+//    
+//    }
+        @FXML
+    void onClickAtualizarPerfil(ActionEvent event) throws IOException {
+        
+        URL url = new File("src/main/java/view/AtualizaPerfilBolsista.fxml").toURI().toURL();       
+        FXMLLoader loader = new FXMLLoader(url);
+        
+        Parent root = loader.load();
+        
+        Stage stage = new Stage();
+        
+        AtualizarPerfilBolsistaController apb = loader.getController();
+        
+        Scene cena = new Scene(root);
+        stage.setTitle("Atualizar perfil bolsista");
+        stage.setMaximized(true);
+        stage.setScene(cena);
+        stage.show();
 
+    }
+    @FXML
+    void onClickAdicionarPublicacao(ActionEvent event) throws IOException {
+        URL url = new File("src/main/java/view/CadastrarPostagemController.fxml").toURI().toURL();
+        
+        FXMLLoader loader = new FXMLLoader(url);
+        
+        Parent root = loader.load();
+        
+        Stage stage = new Stage(); 
+        
+        CadastrarPostagemController cpc = loader.getController();
+        
+         Scene cena = new Scene(root);
+        stage.setTitle("Cadastrar Postagem pelo bolsista");
+        stage.setMaximized(true);
+        stage.setScene(cena);
+        stage.show();
+    }
 }

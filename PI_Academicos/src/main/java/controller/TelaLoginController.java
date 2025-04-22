@@ -22,6 +22,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.LoginDAO;
 import model.Usuario;
+import util.AlertaUtil;
 
 public class TelaLoginController {
     
@@ -75,11 +76,13 @@ public class TelaLoginController {
             
         }else {
             
-        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-        alerta.setTitle("Nome ou senha incorretos");
-        alerta.setHeaderText("Verifique as informações inseridas");
-        alerta.setContentText("Digite novamente");
-        alerta.showAndWait();
+             AlertaUtil.mostrarErro("Erro", "Usuário e senha inválidos!");// JAQUE adicionou um pacote Util para colocar os alertas
+            
+//        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+//        alerta.setTitle("Nome ou senha incorretos");
+//        alerta.setHeaderText("Verifique as informações inseridas");
+//        alerta.setContentText("Digite novamente");
+//        alerta.showAndWait();
         
     }
     }
