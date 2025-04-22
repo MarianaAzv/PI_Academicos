@@ -22,10 +22,10 @@ import model.Usuario;
 
 public class TelaPrincipalCoordenadorController {
     
-      private Stage stageTelaPrincipalCoordenador;
+    private Stage stageTelaPrincipalCoordenador;
     private Connection conexao;
     private final Usuario dao = new Usuario();
-    private ArrayList<String> listaDados;
+    private ArrayList<String> dados;
     private Usuario user;
 
     @FXML
@@ -110,6 +110,8 @@ public class TelaPrincipalCoordenadorController {
     private Text txtProrrogacao;
     private Stage stageLogin;
     
+    //Text txtNomeCoordenador = " " + dados.get(0);;
+    
 public void setStage(Stage stage){
         this.stageLogin = stage;
     }
@@ -175,6 +177,14 @@ public void setStage(Stage stage){
         
  //   }
    // void onClickOutrosProjetos(){
+    
+    void ajustarElementosJanela(ArrayList<String> dados) {
+        System.out.println("Aqui chegam os parâmetros do login "
+                + dados.get(0) + " - " + dados.get(1));
+        txtNomeCoordenador.setText(dados.get(0));
+        textNomeProjeto.setText(dados.get(0));
+       
+    }
         
    }
     

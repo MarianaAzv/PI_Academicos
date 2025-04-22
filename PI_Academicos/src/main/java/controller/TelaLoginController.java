@@ -3,6 +3,7 @@ package controller;
 import dal.ConexaoBD;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -50,30 +51,13 @@ public class TelaLoginController {
     @FXML
     void onClickEntrar(ActionEvent event) throws IOException, SQLException {
         
-        //processarLogin();
-        String apelido = txtApelido.getText();
+        processarLogin();
+        /*String apelido = txtApelido.getText();
         String senha = txtSenha.getText();
-        Usuario usuario = autenticar(apelido, senha);
-        if( usuario != null){
+        listaDados = autenticar(apelido, senha);
+        if( listaDados != null){
             
-            URL url = new File("src/main/java/view/TelaPrincipalCoordenador.fxml").toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-        
-            Stage stage = new Stage();
-        
-            TelaPrincipalCoordenadorController tpc = loader.getController();
-            
-        
-            Scene cena = new Scene(root);
-            stage.setTitle("Tela principal Coordenador");
-            stage.setScene(cena);
-            //deixa a tela maximizada
-            stage.setMaximized(true);
-            
-            stage.show();
-            stageLogin.close();
-            
+                   
         }else {
             
              AlertaUtil.mostrarErro("Erro", "Usuário e senha inválidos!");// JAQUE adicionou um pacote Util para colocar os alertas
@@ -84,16 +68,16 @@ public class TelaLoginController {
 //        alerta.setContentText("Digite novamente");
 //        alerta.showAndWait();
         
-    }
+    }*/
     }
     
     public void setStage(Stage stage){
         this.stageLogin = stage;
     }
     
-        public void verificarBanco() {
+    public void verificarBanco() {
+        
         this.conexao = ConexaoBD.conectar();
-
         if (this.conexao != null) {
             System.out.println("Conectou no banco de dados");
         } else {
@@ -102,8 +86,30 @@ public class TelaLoginController {
 
     }
         
-        public void abrirJanela(){
+    public void abrirJanela(){
         verificarBanco();
+    }
+        
+    public void processarLogin() throws IOException, SQLException {
+        if (!dao.bancoOnline()) {
+            System.out.println("Banco de dados desconectado!");
+        } else if (txtApelido.getText() != null && !txtApelido.getText().isEmpty() && txtSenha.getText() != null && !txtSenha.getText().isEmpty()) {
+            listaDados = autenticar(txtApelido.getText(),txtSenha.getText());
+            if (listaDados != null) {
+                System.out.println("Bem vindo " + listaDados.get(0) + " acesso liberado!");
+                       
+                if (stageLogin != null) { 
+                    stageLogin.close();
+                }
+                abrirTelaPrincipal(listaDados);
+            } else {
+               System.out.println("Usuário e senha invalidos!");
+
+            }
+        } else {
+            System.out.println("Verifique as informações!");
+        }
+
     }
     @FXML
     void onClickCadastro(MouseEvent event) throws IOException {
@@ -131,18 +137,39 @@ public class TelaLoginController {
     }
     
 
-    private Usuario autenticar(String apelido, String senha) throws SQLException {
-   if(!dao.bancoOnline()){
-            System.out.println("Banco desconectado");
-        }
-        else if(apelido !=null && !apelido.isEmpty() && senha !=null && !senha.isEmpty()){
-            LoginDAO logindao = new LoginDAO();
-            Usuario usuario = logindao.autenticar(apelido, senha);
-            return usuario;
-    }
-        else{
-            System.out.println("Verifique as informações");
+    private ArrayList<String> autenticar(String apelido, String senha) throws SQLException {
+    user = dao.autenticar(apelido, senha);
+        if (user != null) {
+            ArrayList<String> listaDados = new ArrayList<>();
+            listaDados.add(user.getNome());
+            listaDados.add(user.getApelido());
+            return listaDados;
         }
         return null;
+    }
+    
+    private void abrirTelaPrincipal(ArrayList<String> listaDados) throws MalformedURLException, IOException{
+        
+         URL url = new File("src/main/java/view/TelaPrincipalCoordenador.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage stagePrincipal = new Stage();
+        
+            TelaPrincipalCoordenadorController tpc = loader.getController();    
+            tpc.setStage(stagePrincipal);
+            
+            stagePrincipal.setOnShown(evento -> {
+            tpc.ajustarElementosJanela(listaDados);
+        });
+        
+            Scene cena = new Scene(root);
+            stagePrincipal.setTitle("Tela principal Coordenador");
+            stagePrincipal.setScene(cena);
+            //deixa a tela maximizada
+            stagePrincipal.setMaximized(true);
+            
+            stagePrincipal.show();
+            stageLogin.close();
     }
 }
