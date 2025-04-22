@@ -277,7 +277,7 @@
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnAtualizarPerfil1" mnemonicParsing="false" onAction="#onClickAtualizarPerfil" style="-fx-background-color: DBA5A5;" text="- Cadastrar bolsista" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                  <Button fx:id="btnCadastrarBolsista" mnemonicParsing="false" onAction="#onClickCadastrarBolsista" style="-fx-background-color: DBA5A5;" text="- Cadastrar bolsista" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
@@ -289,6 +289,7 @@
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
                <rowConstraints>
+                  <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
@@ -306,12 +307,17 @@
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnOutrosProjetos" mnemonicParsing="false" onAction="#onClickOutrosProjetos" style="-fx-background-color: DBA5A5;" text="- Outros projetos" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+                  <Button fx:id="btnOutrosProjetos" mnemonicParsing="false" onAction="#onClickOutrosProjetos" style="-fx-background-color: DBA5A5;" text="- Outros projetos" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
                   <Button fx:id="btnVerProjeto" mnemonicParsing="false" onAction="#onClickVerProjeto" style="-fx-background-color: DBA5A5;" text="- Ver projeto" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                     <font>
+                        <Font name="Courier New Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnAtualizarProjeto" mnemonicParsing="false" onAction="#onClickAtualizarProjeto" style="-fx-background-color: DBA5A5;" text="- Atualizar projeto" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
