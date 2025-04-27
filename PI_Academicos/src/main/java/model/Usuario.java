@@ -41,13 +41,27 @@ public class Usuario {
         this.apelido = apelido;
         this.senha = senha;
     }
+    
+    // metodo construtor para cadastrar
+     public Usuario(long cpf, String nome, String apelido, String email, String senha) {   
+        this.cpf = cpf;
+        this.nome = nome;
+        this.apelido = apelido;
+        this.email = email;
+        this.senha = senha;
+    }
      
     // metodo sem parametros
     public Usuario() {
     }
+    
+    // metodo construtor apenas id
+     public Usuario(int id) {   
+        this.id = id;
+    }
 
     //Geters e Setters
-    public long getId() {
+    public int getId() {
         return id;
     }
 

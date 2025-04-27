@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controller;
 
+import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,13 +8,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+import model.Coordenador;
+import model.CoordenadorDAO;
+import model.Usuario;
 
-/**
- *
- * @author Aluno
- */
 public class CadastroCoordenadorController {
-       @FXML
+    
+    Stage stageCadastroCoordenador;
+    
+    @FXML
     private Button btnSubmeter;
 
     @FXML
@@ -33,7 +33,7 @@ public class CadastroCoordenadorController {
     private Label lblEmail;
 
     @FXML
-    private Label lblFormatacao;
+    private Label lblFormacao;
 
     @FXML
     private Label lblMensagemsdeSubmissaoparte1;
@@ -60,7 +60,7 @@ public class CadastroCoordenadorController {
     private TextField txtEmail;
 
     @FXML
-    private TextField txtFormatacao;
+    private TextField txtFormacao;
 
     @FXML
     private TextField txtNomeCompleto;
@@ -74,8 +74,32 @@ public class CadastroCoordenadorController {
     @FXML
     private TextField txtUsuario;   
     
-     @FXML
-    void OnClickSubmeter(ActionEvent event) {
-
+    @FXML
+    void OnClickSubmeter(ActionEvent event) throws SQLException {
+        
+        Long cpf = Long.parseLong(txtCPF.getText());
+        int siape = Integer.parseInt(txtSIAPE.getText());
+        
+        //incluirApenasUsuario(cpf,txtNomeCompleto.getText(),txtUsuario.getText(),txtEmail.getText(),txtSenha.getText());
+        incluir(cpf,txtNomeCompleto.getText(),txtUsuario.getText(),txtEmail.getText(),txtSenha.getText(), siape, txtFormacao.getText());
+    }
+    
+    void setStage(Stage telaCadastroCoordenador){
+        this.stageCadastroCoordenador=telaCadastroCoordenador;
+    }
+    
+    void incluir(Long cpf, String nome, String apelido, String email, String senha, int siape, String formacao) throws SQLException {
+        Usuario usuario = new Usuario(cpf, nome, apelido, email, senha);
+        Coordenador coordenador = new Coordenador(siape, formacao);
+        new CoordenadorDAO().cadastrarUsuarioCoordenador(usuario,coordenador);
+        System.out.println("Registro inserido com sucesso!");
+        //System.out.println(coordenador.getCpf());
+        //stageCadastroCoordenador.close();
+    }
+    
+    void incluirApenasUsuario(Long cpf, String nome, String apelido, String email, String senha) throws SQLException {
+        Coordenador coordenador = new Coordenador(cpf, nome, apelido, email, senha);
+        //new CoordenadorDAO().cadastrarUsuario(coordenador);
+        System.out.println("Registro inserido com sucesso!");
     }
 }

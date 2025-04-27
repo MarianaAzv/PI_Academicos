@@ -5,13 +5,13 @@ import java.sql.*;
 public class ConexaoBD {
      // São criadas constantes pois as informações são estáticas
 
-    private static final String URL_MYSQL = "jdbc:mysql://localhost:3306/db_academicos";
+    private static final String URL_MYSQL = "jdbc:mysql://localhost:3306/academicos_db";
 
     private static final String DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
 
     private static final String USER = "root";
 
-    private static final String PASSWORD = "aluno";
+    private static final String PASSWORD = "0902";
 
     // Método para estabelecer conexão com o BD
     public static Connection conectar() {
