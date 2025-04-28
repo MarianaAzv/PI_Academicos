@@ -109,6 +109,7 @@ public class VerPerfilCoordenadorController {
 
     @FXML
     void onClickArtigo(ActionEvent event) {
+        
 
     }
 
@@ -121,7 +122,7 @@ public class VerPerfilCoordenadorController {
         
             Stage stage = new Stage();
         
-            AtualizarPerfilCoordenadorController apc = loader.getController();
+            AtualizarPerfilCoordenadorController apcc = loader.getController();
             
         
             Scene cena = new Scene(root);

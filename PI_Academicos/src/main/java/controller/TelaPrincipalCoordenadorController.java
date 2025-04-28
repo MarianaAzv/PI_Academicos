@@ -27,7 +27,7 @@ public class TelaPrincipalCoordenadorController {
     private Stage stagePrincipalCoordenador;
     private Connection conexao;
     private final Usuario dao = new Usuario();
-    private ArrayList<String> dados;
+    //private ArrayList<String> dados;
     private Usuario user;
 
     @FXML
@@ -157,7 +157,7 @@ public void setStage(Stage stage){
     @FXML
     void onClickAtualizarPerfil(MouseEvent event) throws MalformedURLException, IOException {
 
-        URL url = new File("src/main/java/view/AtualizarPerfilCoordenador.fxml").toURI().toURL();       
+        URL url = new File("src/main/java/view/atualizarPerfilCoordenador.fxml").toURI().toURL();       
         FXMLLoader loader = new FXMLLoader(url);
         
         Parent root = loader.load();
@@ -181,27 +181,43 @@ public void setStage(Stage stage){
    }
 
         
-    
-   // void onClickAtualizarPerfil(){
-        
-   // }
-    
-  //  void onClickCriarProjeto(){
-        
-   // }
-  //  void onClickSair(){
-        
-  //  }
-   // void onClickAdicionarPublicação(){
-        
-  //  }
-   // void onClickAdicionarArtigo(){
-        
-  //  }
-  //  void onClickAtualizarProjeto(){
-        
- //   }
-   // void onClickOutrosProjetos(){
+   @FXML
+    void onClickArtigo(ActionEvent event) {
+
+    }
+
+  
+
+    @FXML
+    void onClickAtualizarProjeto(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onClickCadastrarBolsista(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onClickOutrosProjetos(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onClickPublicacao(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onClickSair(ActionEvent event) {
+
+    }
+
+
+    @FXML
+    void onClickVerProjeto(ActionEvent event) {
+
+    }
      
      private void abrirTelaAtualizarPerfil(ArrayList<String> listaDados) throws MalformedURLException, IOException{
          URL url = new File("src/main/java/view/AtualizarPerfilCoordenador.fxml").toURI().toURL();       
@@ -220,11 +236,12 @@ public void setStage(Stage stage){
         stageAtualizar.show();
      }
     
-    void ajustarElementosJanela(ArrayList<String> dados) {
+    void ajustarElementosJanela(Usuario user) {
+        this.user=user;
         System.out.println("Aqui chegam os parâmetros do login "
-                + dados.get(0) + " - " + dados.get(1));
-        txtNomeCoordenador.setText(dados.get(0));
-        textNomeProjeto.setText(dados.get(0));
+                + user.getNome() + " - " + user.getId());
+        txtNomeCoordenador.setText(user.getNome());
+  //      textNomeProjeto.setText(dados.get(0));
        
     }
         
