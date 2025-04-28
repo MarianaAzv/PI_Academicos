@@ -15,7 +15,7 @@ import model.Usuario;
 
 public class CadastroCoordenadorController {
     
-    Stage stageCadastroCoordenador;
+    private Stage stageCadastroCoordenador;
     
     @FXML
     private Button btnSubmeter;
@@ -80,12 +80,11 @@ public class CadastroCoordenadorController {
         Long cpf = Long.parseLong(txtCPF.getText());
         int siape = Integer.parseInt(txtSIAPE.getText());
         
-        //incluirApenasUsuario(cpf,txtNomeCompleto.getText(),txtUsuario.getText(),txtEmail.getText(),txtSenha.getText());
         incluir(cpf,txtNomeCompleto.getText(),txtUsuario.getText(),txtEmail.getText(),txtSenha.getText(), siape, txtFormacao.getText());
     }
     
-    void setStage(Stage telaCadastroCoordenador){
-        this.stageCadastroCoordenador=telaCadastroCoordenador;
+    public void setStage(Stage telaCadastroCoordenador){
+        this.stageCadastroCoordenador = telaCadastroCoordenador;
     }
     
     void incluir(Long cpf, String nome, String apelido, String email, String senha, int siape, String formacao) throws SQLException {
@@ -93,13 +92,7 @@ public class CadastroCoordenadorController {
         Coordenador coordenador = new Coordenador(siape, formacao);
         new CoordenadorDAO().cadastrarUsuarioCoordenador(usuario,coordenador);
         System.out.println("Registro inserido com sucesso!");
-        //System.out.println(coordenador.getCpf());
-        //stageCadastroCoordenador.close();
+        stageCadastroCoordenador.close();
     }
     
-    void incluirApenasUsuario(Long cpf, String nome, String apelido, String email, String senha) throws SQLException {
-        Coordenador coordenador = new Coordenador(cpf, nome, apelido, email, senha);
-        //new CoordenadorDAO().cadastrarUsuario(coordenador);
-        System.out.println("Registro inserido com sucesso!");
-    }
 }

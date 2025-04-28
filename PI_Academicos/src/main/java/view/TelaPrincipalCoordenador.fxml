@@ -347,6 +347,7 @@
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints />
                </rowConstraints>
                <children>
 
@@ -445,7 +446,7 @@
                         <Font name="Courier New" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnAtualizarPerfil" mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="- Atualizar perfil" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                  <Button fx:id="btnAtualizarPerfil" mnemonicParsing="false" onMouseClicked="#onClickAtualizarPerfil" style="-fx-background-color: DBA5A5;" text="- Atualizar perfil" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>

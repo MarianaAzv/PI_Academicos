@@ -1,8 +1,6 @@
-CREATE DATABASE  IF NOT EXISTS `db_academicos` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `db_academicos`;
 -- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
 --
--- Host: localhost    Database: db_academicos
+-- Host: localhost    Database: academicos_db
 -- ------------------------------------------------------
 -- Server version	8.0.39
 
@@ -25,7 +23,7 @@ DROP TABLE IF EXISTS `administradores`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `administradores` (
-  `idUsuario` int NOT NULL AUTO_INCREMENT,
+  `idUsuario` int NOT NULL,
   PRIMARY KEY (`idUsuario`),
   CONSTRAINT `administradores_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -152,7 +150,7 @@ DROP TABLE IF EXISTS `bolsistas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `bolsistas` (
-  `idUsuario` int NOT NULL AUTO_INCREMENT,
+  `idUsuario` int NOT NULL,
   `matricula` bigint NOT NULL,
   `curso` varchar(50) DEFAULT NULL,
   `acessoPostagens` tinyint(1) NOT NULL,
@@ -231,7 +229,7 @@ DROP TABLE IF EXISTS `coordenadores`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `coordenadores` (
-  `idUsuario` int NOT NULL AUTO_INCREMENT,
+  `idUsuario` int NOT NULL,
   `siape` int NOT NULL,
   `formacao` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`idUsuario`),
@@ -245,6 +243,7 @@ CREATE TABLE `coordenadores` (
 
 LOCK TABLES `coordenadores` WRITE;
 /*!40000 ALTER TABLE `coordenadores` DISABLE KEYS */;
+INSERT INTO `coordenadores` VALUES (8,999,'999'),(9,777,'777'),(10,222,'122'),(11,555,'555'),(12,0,'000'),(13,0,'000');
 /*!40000 ALTER TABLE `coordenadores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -422,7 +421,7 @@ DROP TABLE IF EXISTS `solicitacoes`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `solicitacoes` (
   `idSolicitacao` int NOT NULL AUTO_INCREMENT,
-  `idUsuario` int NOT NULL,
+  `idUsuario` int DEFAULT NULL,
   `data` date DEFAULT NULL,
   `descricao` varchar(500) DEFAULT NULL,
   `aceitacao` tinyint(1) DEFAULT NULL,
@@ -456,9 +455,9 @@ CREATE TABLE `usuarios` (
   `apelido` varchar(30) DEFAULT NULL,
   `senha` varchar(50) NOT NULL,
   `email` varchar(50) DEFAULT NULL,
-  `ativa` tinyint(1) NOT NULL,
+  `ativa` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idUsuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -467,6 +466,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (1,777,'777','777','777','777',0),(2,888,'anne','annebj','888','888',0),(3,111,'hue','hue','111','111',0),(4,111,'hue','hue','111','111',0),(5,222,'olivia','olivia','222','222',0),(6,666,'eee','eee','666','666',0),(7,666,'eee','eee','666','666',0),(8,999,'anne','anne','999','999',0),(9,777,'amabile','calllover','777','777',0),(10,122,'anner','woul','222','222',0),(11,555,'paro','paro','555','555',0),(12,0,'newton','newton','000','000',0),(13,0,'newton','newton','000','000',0);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -479,4 +479,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-03-31 16:41:36
+-- Dump completed on 2025-04-27 21:09:35

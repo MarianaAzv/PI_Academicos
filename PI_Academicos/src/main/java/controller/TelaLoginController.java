@@ -52,23 +52,6 @@ public class TelaLoginController {
     void onClickEntrar(ActionEvent event) throws IOException, SQLException {
         
         processarLogin();
-        /*String apelido = txtApelido.getText();
-        String senha = txtSenha.getText();
-        listaDados = autenticar(apelido, senha);
-        if( listaDados != null){
-            
-                   
-        }else {
-            
-             AlertaUtil.mostrarErro("Erro", "Usuário e senha inválidos!");// JAQUE adicionou um pacote Util para colocar os alertas
-            
-//        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-//        alerta.setTitle("Nome ou senha incorretos");
-//        alerta.setHeaderText("Verifique as informações inseridas");
-//        alerta.setContentText("Digite novamente");
-//        alerta.showAndWait();
-        
-    }*/
     }
     
     public void setStage(Stage stage){

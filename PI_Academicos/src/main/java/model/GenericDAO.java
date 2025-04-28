@@ -22,13 +22,25 @@ public abstract class GenericDAO {
 	}
         
         // Método para salvar
-    protected void save(String insertSql, Object... parametros) throws SQLException {
+        protected void save(String insertSql, Object... parametros) throws SQLException {
         PreparedStatement pstmt = conectarDAO().prepareStatement(insertSql);
 
         for (int i = 0; i < parametros.length; i++) {
             pstmt.setObject(i + 1, parametros[i]);
         }
 
+        pstmt.execute();
+        pstmt.close();
+        conexao.close();
+    }
+        
+        // Método para atualizar
+    protected void update(String updateSql, Object id, Object... parametros) throws SQLException {
+        PreparedStatement pstmt = conectarDAO().prepareStatement(updateSql);
+        for (int i = 0; i < parametros.length; i++) {
+            pstmt.setObject(i + 1, parametros[i]);
+        }
+        pstmt.setObject(parametros.length + 1, id);
         pstmt.execute();
         pstmt.close();
         conexao.close();
