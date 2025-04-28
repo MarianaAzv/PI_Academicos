@@ -30,7 +30,7 @@ public class TelaLoginController {
     private Stage stageLogin;
     private Connection conexao;
     private final LoginDAO dao = new LoginDAO();
-    //private ArrayList<String> listaDados;
+    private ArrayList<String> listaDados;
     private Usuario user;
                      
      @FXML
@@ -77,14 +77,14 @@ public class TelaLoginController {
         if (!dao.bancoOnline()) {
             System.out.println("Banco de dados desconectado!");
         } else if (txtApelido.getText() != null && !txtApelido.getText().isEmpty() && txtSenha.getText() != null && !txtSenha.getText().isEmpty()) {
-            user = autenticar(txtApelido.getText(),txtSenha.getText());
-            if (user != null) {
-                System.out.println("Bem vindo " + user.getNome() + " acesso liberado!");
+            listaDados = autenticar(txtApelido.getText(),txtSenha.getText());
+            if (listaDados != null) {
+                System.out.println("Bem vindo " + listaDados.get(0) + " acesso liberado!");
                        
                 if (stageLogin != null) { 
                     stageLogin.close();
                 }
-                abrirTelaPrincipal(user);
+                abrirTelaPrincipal(listaDados);
             } else {
                System.out.println("Usuário e senha invalidos!");
 
@@ -120,16 +120,18 @@ public class TelaLoginController {
     }
     
 
-    private Usuario autenticar(String apelido, String senha) throws SQLException {
+    private ArrayList<String> autenticar(String apelido, String senha) throws SQLException {
     user = dao.autenticar(apelido, senha);
         if (user != null) {
-           
-            return user;
+            ArrayList<String> listaDados = new ArrayList<>();
+            listaDados.add(user.getNome());
+            listaDados.add(user.getApelido());
+            return listaDados;
         }
         return null;
     }
     
-    private void abrirTelaPrincipal(Usuario user) throws MalformedURLException, IOException{
+    private void abrirTelaPrincipal(ArrayList<String> listaDados) throws MalformedURLException, IOException{
         
          URL url = new File("src/main/java/view/TelaPrincipalCoordenador.fxml").toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
@@ -141,7 +143,7 @@ public class TelaLoginController {
             tpc.setStage(stagePrincipal);
             
             stagePrincipal.setOnShown(evento -> {
-            tpc.ajustarElementosJanela(user);
+            tpc.ajustarElementosJanela(listaDados);
         });
         
             Scene cena = new Scene(root);
