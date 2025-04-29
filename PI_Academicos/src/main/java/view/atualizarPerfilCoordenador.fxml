@@ -189,7 +189,7 @@
                         <Font name="Courier New Bold" size="14.0" />
                      </font>
                   </Text>
-                  <Label fx:id="lblNomeBolsista" contentDisplay="CENTER" prefHeight="115.0" prefWidth="174.0" textAlignment="RIGHT" textFill="#840d0b" wrapText="true" GridPane.valignment="BOTTOM">
+                  <Label fx:id="lblNomeCoordenador" contentDisplay="CENTER" prefHeight="115.0" prefWidth="174.0" textAlignment="RIGHT" textFill="#840d0b" wrapText="true" GridPane.valignment="BOTTOM">
                      <font>
                         <Font name="Courier New Bold" size="20.0" />
                      </font>
@@ -245,7 +245,7 @@
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnAtualizarPerfil1" mnemonicParsing="false" onAction="#onClickAtualizarPerfil" style="-fx-background-color: DBA5A5;" text="- Cadastrar bolsista" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                  <Button fx:id="btnAtualizarPerfil1" mnemonicParsing="false" onAction="#onClickCadastrarBolsista" style="-fx-background-color: DBA5A5;" text="- Cadastrar bolsista" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
@@ -291,7 +291,7 @@
             <Insets />
          </opaqueInsets>
          <GridPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            <Insets bottom="10.0" left="10.0" right="10.0" top="27.0" />
          </GridPane.margin>
       </GridPane>
    </children>
