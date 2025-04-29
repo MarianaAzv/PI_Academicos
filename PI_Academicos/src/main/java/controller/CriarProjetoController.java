@@ -1,5 +1,9 @@
 package controller;
 
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,8 +12,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 public class CriarProjetoController {
+    
+    private Stage stageCriarProjeto;
+    
+     @FXML
+    private ComboBox<String> CBcampus;
 
     @FXML
     private ComboBox<?> CBcategoria;
@@ -68,9 +78,7 @@ public class CriarProjetoController {
     @FXML
     private Label lbltitulocriarprojeto;
 
-    @FXML
-    private TextField txtCampus;
-
+ 
     @FXML
     private TextField txtCoordenador;
 
@@ -90,9 +98,35 @@ public class CriarProjetoController {
     private TextArea txtResumo;
 
     
+    public void setStage(Stage telaCriarProjeto){
+        this.stageCriarProjeto = telaCriarProjeto;
+    }
+    
      @FXML
-    void OnClickEnviar(ActionEvent event) {
-
+    void OnClickEnviar(ActionEvent event) throws ParseException {
+        
+        
+          SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date dtf = formato.parse(txtDatadeFim.getText());
+        
+        // Localdate para data
+        //LocalDate;
+        
+        //Para o combo box é pelo dao na inicializacao
+        
+        //Pois o metodo é so para cadastrar
+        
+         Date dti = formato.parse(txtDatadeInicio.getText());
+         
+         
+          
+           
+         
+         
+        
+        
+      // incluir(txtNomedoProjeto.getText(),txtResumo.getText(),1,txtEmail.getText(),txtSenha.getText(), siape, txtFormacao.getText());
+        
     }
 
     @FXML

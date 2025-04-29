@@ -106,7 +106,6 @@
                      </GridPane.margin>
                   </Label>
                   <TextField fx:id="txtCoordenador" prefHeight="25.0" prefWidth="932.0" GridPane.columnIndex="2" />
-                  <TextField fx:id="txtCampus" prefHeight="25.0" prefWidth="242.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                   <TextField fx:id="txtDatadeInicio" prefHeight="25.0" prefWidth="249.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
                      <children>
@@ -189,6 +188,7 @@
                      </children>
                   </HBox>
                   <TextField fx:id="txtDatadeFim" layoutX="397.0" layoutY="138.0" prefHeight="25.0" prefWidth="249.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <ComboBox fx:id="CBcampus" prefHeight="25.0" prefWidth="287.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <GridPane prefHeight="169.0" prefWidth="1221.0">
