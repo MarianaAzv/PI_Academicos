@@ -19,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Coordenador;
 //import model.Coordenador;
 import model.Usuario;
 
@@ -27,8 +28,9 @@ public class TelaPrincipalCoordenadorController {
     private Stage stagePrincipalCoordenador;
     private Connection conexao;
     private final Usuario dao = new Usuario();
-    private ArrayList<String> dados;
-    private Usuario user;
+ 
+    private Coordenador coordenador;
+    
 
     @FXML
     private Text TxtNomeUsuario;
@@ -118,7 +120,7 @@ public void setStage(Stage stage){
         this.stageLogin = stage;
     }
 
-       @FXML
+      @FXML
     void onClickVerPerfil(ActionEvent event) throws IOException {
 
         //carregando a tela principal do coordenador
@@ -153,11 +155,12 @@ public void setStage(Stage stage){
         
     }
 }
+   
     
     @FXML
-    void onClickAtualizarPerfil(MouseEvent event) throws MalformedURLException, IOException {
+    void onClickAtualizarPerfil(ActionEvent event) throws IOException {
 
-        URL url = new File("src/main/java/view/AtualizarPerfilCoordenador.fxml").toURI().toURL();       
+        URL url = new File("src/main/java/view/atualizarPerfilCoordenador.fxml").toURI().toURL();       
         FXMLLoader loader = new FXMLLoader(url);
         
         Parent root = loader.load();
@@ -165,7 +168,8 @@ public void setStage(Stage stage){
         Stage stageAtualizar = new Stage();
         
         AtualizarPerfilCoordenadorController apcc = loader.getController();
-        
+        apcc.setCoodenador(coordenador);
+        //apcc.setStage(stageAtualizar);
         
         
         Scene cena = new Scene(root);
@@ -173,6 +177,8 @@ public void setStage(Stage stage){
         stageAtualizar.setMaximized(true);
         stageAtualizar.setScene(cena);
         stageAtualizar.show();
+        
+        
     }     
             
      
@@ -180,11 +186,7 @@ public void setStage(Stage stage){
       this.stagePrincipalCoordenador = telaPrincipalCoordenador;
    }
 
-        
-    
-   // void onClickAtualizarPerfil(){
-        
-   // }
+       
     
   //  void onClickCriarProjeto(){
         
@@ -203,28 +205,19 @@ public void setStage(Stage stage){
  //   }
    // void onClickOutrosProjetos(){
      
-     private void abrirTelaAtualizarPerfil(ArrayList<String> listaDados) throws MalformedURLException, IOException{
-         URL url = new File("src/main/java/view/AtualizarPerfilCoordenador.fxml").toURI().toURL();       
-        FXMLLoader loader = new FXMLLoader(url);
+     private void abrirTelaAtualizarPerfil(ArrayList<String> listaDados){
+    
         
-        Parent root = loader.load();
         
-        Stage stageAtualizar = new Stage();
-        
-        AtualizarPerfilCoordenadorController apcc = loader.getController();
-        
-        Scene cena = new Scene(root);
-        stageAtualizar.setTitle("Atualizar Perfil Coordenador");
-        stageAtualizar.setMaximized(true);
-        stageAtualizar.setScene(cena);
-        stageAtualizar.show();
      }
     
-    void ajustarElementosJanela(ArrayList<String> dados) {
+    void ajustarElementosJanela(Coordenador coordenador) {
+        this.coordenador=coordenador;
         System.out.println("Aqui chegam os parâmetros do login "
-                + dados.get(0) + " - " + dados.get(1));
-        txtNomeCoordenador.setText(dados.get(0));
-        textNomeProjeto.setText(dados.get(0));
+                + coordenador.getNome() + " - " + coordenador.getSiape());
+        txtNomeCoordenador.setText(coordenador.getNome());
+        String siape = String.valueOf(coordenador.getSiape());
+        textNomeProjeto.setText(siape);
        
     }
         

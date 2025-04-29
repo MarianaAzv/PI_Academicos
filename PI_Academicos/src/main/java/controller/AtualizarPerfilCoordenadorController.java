@@ -20,6 +20,7 @@ public class AtualizarPerfilCoordenadorController {
 
     private Stage stageAtualizarCoordenador;
     Coordenador coordenador;
+    
     private ArrayList<String> dados;
     
     @FXML
@@ -130,6 +131,7 @@ public class AtualizarPerfilCoordenadorController {
         Long cpf = Long.parseLong(txtCPF.getText());
         int siape = Integer.parseInt(txtSIAPE.getText());
         
+        //passar esses parametro pro coordenador lá em cima
         atualizarCoordenador(cpf,txtNome.getText(),txtUsuario.getText(),txtEmail.getText(),txtSenha.getText(), siape, txtFormacao.getText());
     }
 
@@ -137,6 +139,11 @@ public class AtualizarPerfilCoordenadorController {
     void onClickAtualizarPerfil(ActionEvent event) throws SQLException {
         
    
+    }
+    
+    @FXML
+    void onClickCadastrarBolsista(ActionEvent event) {
+
     }
 
     @FXML
@@ -175,6 +182,11 @@ public class AtualizarPerfilCoordenadorController {
         Coordenador coordenador = new Coordenador(siape, formacao);
         new CoordenadorDAO().atualizarCoordenador(usuario,coordenador);
         System.out.println("Coordenador atualizado com sucesso!");
+    }
+
+    void setCoodenador(Coordenador coord) {
+       this.coordenador = coord;
+       txtNome.setText(coordenador.getNome());
     }
     
    

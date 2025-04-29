@@ -245,7 +245,7 @@
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnAtualizarPerfil1" mnemonicParsing="false" onAction="#onClickCadastrarBolsista" style="-fx-background-color: DBA5A5;" text="- Cadastrar bolsista" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                  <Button fx:id="btnCadastrarBolsista" mnemonicParsing="false" onAction="#onClickCadastrarBolsista" style="-fx-background-color: DBA5A5;" text="- Cadastrar bolsista" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
