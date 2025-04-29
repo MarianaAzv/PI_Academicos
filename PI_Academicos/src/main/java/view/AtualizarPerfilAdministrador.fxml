@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="920.0" minWidth="1290.0" style="-fx-background-color: ECECEC;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AtualizarPerfilAdministradorController.controller">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="920.0" minWidth="1290.0" style="-fx-background-color: ECECEC;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AtualizarPerfilAdministradorController">
   <columnConstraints>
     <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="1012.0" />
     <ColumnConstraints hgrow="NEVER" maxWidth="300.0" minWidth="10.0" prefWidth="300.0" />
@@ -22,7 +22,7 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <GridPane fx:id="btnAtualizarProjeto" onDragDetected="#AtualizarProjetoOnClick" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+      <GridPane fx:id="btnAtualizarProjeto" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -107,7 +107,7 @@
                         <TextField fx:id="txtCPF" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                         <TextField fx:id="txtSenha" GridPane.columnIndex="4" />
                         <TextField fx:id="txtEmail" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                        <Button mnemonicParsing="false" style="-fx-background-color: #840d0b;" text="Atualizar" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="TOP">
+                        <Button fx:id="btnAtualizar" mnemonicParsing="false" onAction="#onClickAtualizar" style="-fx-background-color: #840d0b;" text="Atualizar" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                            </GridPane.margin>
