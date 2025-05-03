@@ -21,6 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Bolsista;
 import model.Coordenador;
 import model.LoginDAO;
 import model.Usuario;
@@ -87,6 +88,11 @@ public class TelaLoginController {
                  if(user instanceof Coordenador){
                                 Coordenador c = (Coordenador) user;
                                 abrirTelaPrincipalCoordenador(c);
+                            }else if (user instanceof Bolsista) {//login bolsista
+                                Bolsista b = (Bolsista) user;
+                                 System.out.println("Abrindo tela de Bolsista...");
+
+                                abrirTelaPrincipalBolsista(b);
                             }
                 
                 
@@ -158,5 +164,26 @@ public class TelaLoginController {
             
             stagePrincipal.show();
             stageLogin.close();
+    }
+private void abrirTelaPrincipalBolsista(Bolsista bolsista) throws MalformedURLException, IOException {
+ URL url = new File("src/main/java/view/TelaPrincipalBolsista.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stagePrincipal = new Stage();
+        TelaPrincipalBolsistaController tpb = loader.getController();
+        tpb.setStage(stagePrincipal);
+
+        stagePrincipal.setOnShown(evento -> {
+            tpb.ajustarElementosJanela(bolsista);
+        });
+
+        Scene cena = new Scene(root);
+        stagePrincipal.setTitle("Tela Principal Bolsista");
+        stagePrincipal.setMaximized(true);
+         stagePrincipal.setScene(cena);
+        stagePrincipal.show();
+        stageLogin.close();
+
     }
 }

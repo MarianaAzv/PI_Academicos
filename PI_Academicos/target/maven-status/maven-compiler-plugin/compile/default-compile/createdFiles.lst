@@ -1,16 +1,19 @@
 controller\CadastroBolsistaCoordenadorController.class
 controller\RecuperarSenhaCodigoController.class
+model\Projeto.class
 controller\CriarProjetoController.class
 controller\VerPerfilAdministradorController.class
 controller\EscolherProjetoController.class
 model\Usuario.class
 controller\CocoordenadorDesativarCoordenadorController.class
 model\GenericDAO.class
+model\Campus.class
 controller\TelaLoginController.class
 model\LoginDAO.class
 controller\TelaPrincipalBolsistaController.class
 module-info.class
 controller\CadastrarPostagemController.class
+model\BolsistaDAO.class
 model\Coordenador.class
 controller\MaisCoCoordenadorController.class
 controller\AtualizarPerfilCoordenadorController.class
@@ -24,6 +27,7 @@ controller\CadastrarArtigoController.class
 dal\ConexaoBD.class
 model\Administrador.class
 controller\CadastroCocoordenadorCoordenadorController.class
+model\ProjetoDAO.class
 model\Bolsista.class
 controller\AtualizarPerfilBolsistaController.class
 controller\TelaPrincipalAdministradorController.class
