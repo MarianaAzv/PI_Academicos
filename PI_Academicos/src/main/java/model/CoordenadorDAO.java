@@ -1,5 +1,6 @@
 package model;
 
+import controller.AtualizarPerfilCoordenadorController;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +14,7 @@ public class CoordenadorDAO extends GenericDAO{
         
         Connection con = conectarDAO();
         
-        String queryUsuario = "INSERT INTO USUARIOS(cpf, nome, apelido, senha, email) VALUES(?,?,?,?,?)";
+        String queryUsuario = "INSERT INTO USUARIOS(cpf, nome, apelido, senha, email,ativa) VALUES(?,?,?,?,?,1)";
         String queryCoordenador = "INSERT INTO COORDENADORES(idUsuario, siape, formacao) VALUES (?,?,?)";
 
     try (con) {
@@ -47,27 +48,10 @@ public class CoordenadorDAO extends GenericDAO{
     }
     
     
-    
-    
-    String queryUsuario = "INSERT INTO USUARIOS(cpf, nome, apelido, senha, email) VALUES(?,?,?,?,?)";
-        String queryCoordenador = "INSERT INTO COORDENADORES(idUsuario, siape, formacao) VALUES (?,?,?)";
-    
+        
     // Método para atualizar usuarios
-    public void atualizarCoordenador(Usuario usuario, Coordenador coordenador) throws SQLException {
-        //String updateUsuario = "UPDATE USUARIOS SET cpf = ?, nome = ?, apelido = ?, senha = ?, email = ? WHERE idUsuario = ?";
-       // String updateCoordenador = "UPDATE COORDENADORES SET siape = ?, formacao = ? WHERE idUsuario = ?";
-	
-       // update(updateUsuario, usuario.getCpf(), usuario.getNome(), usuario.getApelido(),usuario.getSenha(),usuario.getEmail(),usuario.getId());
-        //update(updateCoordenador, coordenador.getSiape(), coordenador.getFormacao(), coordenador.getId());
-        
-        
-        
-        
-        
-        
-        
-        
-        
+    public void atualizarCoordenador(Coordenador coordenador) throws SQLException {
+  
         Connection con = conectarDAO();
         
         String queryUsuario = "UPDATE USUARIOS SET cpf = ?, nome = ?, apelido = ?, senha = ?, email = ? WHERE idUsuario = ?";
@@ -76,18 +60,15 @@ public class CoordenadorDAO extends GenericDAO{
     try (con) {
     // Inserir em Usuario
     PreparedStatement stmtUsuario = con.prepareStatement(queryUsuario, PreparedStatement.RETURN_GENERATED_KEYS);
-    stmtUsuario.setLong(1, usuario.getCpf());
-    stmtUsuario.setString(2, usuario.getNome());
-    stmtUsuario.setString(3, usuario.getApelido());
-    stmtUsuario.setString(4, usuario.getSenha());
-    stmtUsuario.setString(5, usuario.getEmail());  
-    stmtUsuario.setInt(6, usuario.getId()); 
+    stmtUsuario.setLong(1, coordenador.getCpf());
+    stmtUsuario.setString(2, coordenador.getNome());
+    stmtUsuario.setString(3, coordenador.getApelido());
+    stmtUsuario.setString(4, coordenador.getSenha());
+    stmtUsuario.setString(5, coordenador.getEmail());  
+    stmtUsuario.setInt(6, coordenador.getId()); 
     stmtUsuario.executeUpdate();
 
-    ResultSet keys = stmtUsuario.getGeneratedKeys();
-    if (keys.next()) {
-        int idGerado = keys.getInt(1);
-        coordenador.setId(idGerado);
+
 
         // Inserir em Coordenador
         PreparedStatement stmtCoordenador = con.prepareStatement(queryCoordenador);
@@ -96,21 +77,31 @@ public class CoordenadorDAO extends GenericDAO{
         stmtCoordenador.setInt(3, coordenador.getId());
         stmtCoordenador.executeUpdate();
 
-        System.out.println("Coordenador cadastrado com ID: " + idGerado);
+        System.out.println("Coordenador cadastrado com ID: " + coordenador.getId());
     }
-} catch (Exception e) {
-    e.printStackTrace();
-}
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    } 
+} 
+    
+    //Método para validar nome de usuário
+        public int validarApelido(String apelido, int id) throws SQLException{
+            
+            String buscarApelido = "select * from usuarios where apelido = ? AND idUsuario != ?";
+            int rowCount = 0;
+            Usuario usuario = null;
+            Connection con = conectarDAO();
+            if (con != null) {
+
+            PreparedStatement stmtUsuario = con.prepareStatement(buscarApelido);
+            stmtUsuario.setString(1, apelido);
+            stmtUsuario.setInt(2, id);
+            ResultSet rs = stmtUsuario.executeQuery();
+                while (rs.next()) {
+                    rowCount++;
+                }
+                System.out.println("Total de linhas retornadas: " + rowCount);
+     
+        }
+            return rowCount;
+        }
+                     
 
 }

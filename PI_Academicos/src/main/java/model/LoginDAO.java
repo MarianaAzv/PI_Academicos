@@ -40,7 +40,7 @@ public class LoginDAO extends GenericDAO {
 
                                 }
                                 else if(rs.getString("curso") != null){
-                                    usuario = new Bolsista();
+                                    usuario = new Bolsista(rs.getLong("matricula"), rs.getString("curso"));
 
                                 }
 				usuario.setId(rs.getInt("idUsuario"));
@@ -64,4 +64,6 @@ public class LoginDAO extends GenericDAO {
 		}
 
 	}
+        
+        
 }

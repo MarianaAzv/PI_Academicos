@@ -86,7 +86,7 @@ public class TelaLoginController {
                 }
                  if(user instanceof Coordenador){
                                 Coordenador c = (Coordenador) user;
-                                abrirTelaPrincipal(c);
+                                abrirTelaPrincipalCoordenador(c);
                             }
                 
                 
@@ -110,6 +110,7 @@ public class TelaLoginController {
         Stage stage = new Stage();
         
         CadastroCoordenadorController cc = loader.getController();
+        cc.setStage(stage);
         
         Scene cena = new Scene(root);
         stage.setTitle("Cadastro Coordenador");
@@ -134,7 +135,7 @@ public class TelaLoginController {
         return null;
     }
     
-    private void abrirTelaPrincipal(Coordenador coordenador) throws MalformedURLException, IOException{
+    private void abrirTelaPrincipalCoordenador(Coordenador coordenador) throws MalformedURLException, IOException{
         
          URL url = new File("src/main/java/view/TelaPrincipalCoordenador.fxml").toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
@@ -143,7 +144,7 @@ public class TelaLoginController {
             Stage stagePrincipal = new Stage();
         
             TelaPrincipalCoordenadorController tpc = loader.getController();    
-        tpc.setStage(stagePrincipal);
+        tpc.setStagePrincipal(stagePrincipal);
             
             stagePrincipal.setOnShown(evento -> {
             tpc.ajustarElementosJanela(coordenador);

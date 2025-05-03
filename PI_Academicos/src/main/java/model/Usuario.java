@@ -117,11 +117,6 @@ public class Usuario {
         this.ativa = ativa;
     }
     
-
-   
-    
-	
-
 	
     
 }

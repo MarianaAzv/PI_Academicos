@@ -15,11 +15,15 @@ import javafx.stage.Stage;
 import model.Coordenador;
 import model.CoordenadorDAO;
 import model.Usuario;
+import static util.AlertaUtil.mostrarAviso;
+import static util.AlertaUtil.mostrarConfirmacao;
 
 public class AtualizarPerfilCoordenadorController {
 
     private Stage stageAtualizarCoordenador;
     Coordenador coordenador;
+    boolean ativa=true;
+    
     
     private ArrayList<String> dados;
     
@@ -115,7 +119,9 @@ public class AtualizarPerfilCoordenadorController {
 
     @FXML
     private TextField txtUsuario;
-
+    
+    
+    
     @FXML
     void AtualizarProjetoOnClick(MouseEvent event) {
 
@@ -128,11 +134,14 @@ public class AtualizarPerfilCoordenadorController {
 
     @FXML
     void onClickAtualizar(ActionEvent event) throws SQLException {
-        Long cpf = Long.parseLong(txtCPF.getText());
-        int siape = Integer.parseInt(txtSIAPE.getText());
         
-        //passar esses parametro pro coordenador lá em cima
-        atualizarCoordenador(cpf,txtNome.getText(),txtUsuario.getText(),txtEmail.getText(),txtSenha.getText(), siape, txtFormacao.getText());
+        try{
+        Long cpf = Long.parseLong(txtCPF.getText());
+        int siape = Integer.parseInt(txtSIAPE.getText()); 
+        atualizarCoordenador(coordenador.getId(),cpf,txtNome.getText(),txtUsuario.getText(),txtEmail.getText(),txtSenha.getText(), ativa, siape, txtFormacao.getText());
+        }catch(NumberFormatException n){
+            mostrarAviso("CPF ou SIAPE inválidos","Os valores inseridos para CPF e SIAPE devem ser apenas números");
+        }
     }
 
     @FXML
@@ -175,19 +184,35 @@ public class AtualizarPerfilCoordenadorController {
         this.stageAtualizarCoordenador = telaAtualizarCoordenador;
     }
     
-    
-    
-    void atualizarCoordenador(Long cpf, String nome, String apelido, String email, String senha, int siape, String formacao) throws SQLException{
-        Usuario usuario = new Usuario(cpf, nome, apelido, email, senha);
-        Coordenador coordenador = new Coordenador(siape, formacao);
-        new CoordenadorDAO().atualizarCoordenador(usuario,coordenador);
-        System.out.println("Coordenador atualizado com sucesso!");
-    }
-
-    void setCoodenador(Coordenador coord) {
+    public void setCoordenador(Coordenador coord) {
        this.coordenador = coord;
        txtNome.setText(coordenador.getNome());
+       txtUsuario.setText(coordenador.getApelido());
+       String cpf = String.valueOf(coordenador.getCpf());
+       txtCPF.setText(cpf);
+       txtFormacao.setText(coordenador.getFormacao());
+       txtSenha.setText(coordenador.getSenha());
+       txtEmail.setText(coordenador.getEmail());
+       String siape = String.valueOf(coordenador.getSiape());
+       txtSIAPE.setText(siape);
     }
+    
+    void atualizarCoordenador(int id,long cpf, String nome, String apelido,String email,String senha,boolean ativa, int siape, String formacao) throws SQLException{
+        
+        
+        Coordenador coordenador = new Coordenador(id, cpf, nome, apelido, email, senha, ativa, siape, formacao);
+        int repetido = new CoordenadorDAO().validarApelido(apelido,id);
+        if(repetido>0){
+            mostrarAviso("Nome de usuário indisponível","Este nome de usuário já está sendo usado");
+           
+        }
+        else{
+        new CoordenadorDAO().atualizarCoordenador(coordenador);
+        mostrarConfirmacao("Usuário alterado","O usuário foi alterado com sucesso!");
+        }
+    }
+
+    
     
    
 

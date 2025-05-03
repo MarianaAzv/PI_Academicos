@@ -114,13 +114,12 @@ public class TelaPrincipalCoordenadorController {
     private Text txtProrrogacao;
     private Stage stageLogin;
     
-    //Text txtNomeCoordenador = " " + dados.get(0);;
     
-public void setStage(Stage stage){
+    public void setStage(Stage stage){
         this.stageLogin = stage;
     }
 
-      @FXML
+    @FXML
     void onClickVerPerfil(ActionEvent event) throws IOException {
 
         //carregando a tela principal do coordenador
@@ -160,7 +159,7 @@ public void setStage(Stage stage){
     @FXML
     void onClickAtualizarPerfil(ActionEvent event) throws IOException {
 
-        URL url = new File("src/main/java/view/atualizarPerfilCoordenador.fxml").toURI().toURL();       
+        URL url = new File("src/main/java/view/AtualizarPerfilCoordenador.fxml").toURI().toURL();       
         FXMLLoader loader = new FXMLLoader(url);
         
         Parent root = loader.load();
@@ -168,18 +167,53 @@ public void setStage(Stage stage){
         Stage stageAtualizar = new Stage();
         
         AtualizarPerfilCoordenadorController apcc = loader.getController();
-        apcc.setCoodenador(coordenador);
-        //apcc.setStage(stageAtualizar);
-        
+        apcc.setCoordenador(coordenador);      
         
         Scene cena = new Scene(root);
         stageAtualizar.setTitle("Atualizar Perfil Coordenador");
         stageAtualizar.setMaximized(true);
         stageAtualizar.setScene(cena);
         stageAtualizar.show();
-        
-        
-    }     
+               
+    } 
+
+    @FXML
+    void onClickAdicionarArtigo(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onClickAdicionarPublicacao(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onClickAtualizarProjeto(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onClickCriarPerfil(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onClickOutrosProjetos(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onClickSair(ActionEvent event) {
+
+        stagePrincipalCoordenador.close();
+
+    }
+
+
+    @FXML
+    void onClickVerProjeto(ActionEvent event) {
+
+    }    
             
      
      public void setStagePrincipal(Stage telaPrincipalCoordenador){
@@ -188,33 +222,11 @@ public void setStage(Stage stage){
 
        
     
-  //  void onClickCriarProjeto(){
-        
-   // }
-  //  void onClickSair(){
-        
-  //  }
-   // void onClickAdicionarPublicação(){
-        
-  //  }
-   // void onClickAdicionarArtigo(){
-        
-  //  }
-  //  void onClickAtualizarProjeto(){
-        
- //   }
-   // void onClickOutrosProjetos(){
-     
-     private void abrirTelaAtualizarPerfil(ArrayList<String> listaDados){
-    
-        
-        
-     }
-    
     void ajustarElementosJanela(Coordenador coordenador) {
         this.coordenador=coordenador;
+        
         System.out.println("Aqui chegam os parâmetros do login "
-                + coordenador.getNome() + " - " + coordenador.getSiape());
+                + coordenador.getNome() + " - " + coordenador.getSiape() + "ATIVA: " + coordenador.getAtiva());
         txtNomeCoordenador.setText(coordenador.getNome());
         String siape = String.valueOf(coordenador.getSiape());
         textNomeProjeto.setText(siape);
