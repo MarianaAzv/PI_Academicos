@@ -169,7 +169,6 @@
                                           <Font name="Courier New Bold" size="18.0" />
                                        </font>
                                     </Label>
-                                    <Text fx:id="txtNomeBolsista" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" />
                                  </children>
                               </GridPane>
                               <GridPane GridPane.rowIndex="3">
@@ -368,7 +367,7 @@
                   <RowConstraints maxHeight="190.0" minHeight="10.0" prefHeight="184.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ImageView fx:id="imgProjeto" fitHeight="87.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+                  <ImageView fx:id="imgProjetoBarra" fitHeight="87.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
                   <Text fx:id="TxtNomeProjetoBarra" fill="#840d0b" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Courier New Bold" size="14.0" />
@@ -387,7 +386,7 @@
                   <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="btnVerperfil" mnemonicParsing="false" onAction="#onClickVerPerfil" style="-fx-background-color: DBA5A5;" text="- Ver perfil" textFill="#840d0b" GridPane.halignment="CENTER">
+                  <Button fx:id="btnVerPerfil" mnemonicParsing="false" onAction="#onClickVerPerfil" style="-fx-background-color: DBA5A5;" text="- Ver perfil" textFill="#840d0b" GridPane.halignment="CENTER">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>

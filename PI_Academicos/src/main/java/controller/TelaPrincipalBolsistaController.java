@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -29,7 +30,7 @@ public class TelaPrincipalBolsistaController {
     @FXML
     private Text TxtNomeUsuario;
      @FXML
-    private Text TxtNomeUsuario1;
+    private Text TxtNomeProjetoBarra;
 
     @FXML
     private Button btnArtigo;
@@ -60,11 +61,47 @@ public class TelaPrincipalBolsistaController {
     @FXML
     private ImageView imgPerfilProjeto;
     
-    @FXML
-    private ImageView imgProjeto;
+      @FXML
+    private ImageView imgProjetoBarra;
     
     @FXML
     private ImageView imgUsuarioBolsista;
+    
+    @FXML
+    private Text textNomeProjeto;
+     @FXML
+    private Label lblNomeBolsista;
+
+    @FXML
+    private Label lblNomeCocoordenador;
+
+    @FXML
+    private Label lblNomeCoordenador;
+
+    @FXML
+    private Label lblResumo;
+
+    @FXML
+    private Text txtCampus;
+
+    @FXML
+    private Text txtFim;
+
+    @FXML
+    private Text txtInicio;
+
+    @FXML
+    private Text txtNomeBolsita;
+
+    @FXML
+    private Text txtNomeCocoordenador;
+
+    @FXML
+    private Text txtNomeCoordenador;
+
+    @FXML
+    private Text txtProrrogacao;
+
 
     private Stage stageLogin;
 
@@ -144,5 +181,9 @@ public class TelaPrincipalBolsistaController {
         System.out.println("Aqui chegam os parâmetros do login " +
                 bolsista.getNome() + " - " + bolsista.getMatricula() + " ATIVA: " + bolsista.getAtiva());
         TxtNomeUsuario.setText(bolsista.getNome());
+        String matricula = String.valueOf(bolsista.getMatricula());
+        textNomeProjeto.setText(matricula);
+        TxtNomeProjetoBarra.setText(matricula);
+        
     }
 }
