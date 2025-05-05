@@ -48,7 +48,7 @@ public class LoginDAO extends GenericDAO {
                                    usuario = new Administrador(); 
                                 }
 				usuario.setId(rs.getInt("idUsuario"));
-                                usuario.setCpf(rs.getInt("cpf"));
+                                usuario.setCpf(rs.getLong("cpf"));
 				usuario.setNome(rs.getString("nome"));
 				usuario.setApelido(rs.getString("apelido"));
 				usuario.setEmail(rs.getString("email"));

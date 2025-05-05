@@ -5,7 +5,7 @@ import java.sql.*;
 public class ConexaoBD {
      // São criadas constantes pois as informações são estáticas
 
-    private static final String URL_MYSQL = "jdbc:mysql://localhost:3306/academicos_db";
+    private static final String URL_MYSQL = "jdbc:mysql://localhost:3306/academicos";
 
     private static final String DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
 
