@@ -135,18 +135,28 @@ public class TelaPrincipalBolsistaController {
     void onClickAtualizarPerfil(ActionEvent event) throws IOException {
         URL url = new File("src/main/java/view/AtualizarPerfilBolsista.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
+        
         Parent root = loader.load();
 
-        Stage stage = new Stage();
+        Stage stageAtualizar = new Stage();
+
+        //Stage stage = new Stage();
+        
         AtualizarPerfilBolsistaController apb = loader.getController();
         apb.setBolsista(bolsista);
-
+        
         Scene cena = new Scene(root);
-        stage.setTitle("Atualizar Perfil Bolsista");
-        stage.setMaximized(true);
-        stage.setScene(cena);
-        stage.show();
-        stageTelaPrincipalBolsista.close();
+        stageAtualizar.setTitle("Atualizar Perfil bolsist");
+        stageAtualizar.setMaximized(true);
+        stageAtualizar.setScene(cena);
+        stageAtualizar.show();
+
+        //Scene cena = new Scene(root);
+       // stage.setTitle("Atualizar Perfil Bolsista");
+        //stage.setMaximized(true);
+       // stage.setScene(cena);
+        //stage.show();
+        //stageTelaPrincipalBolsista.close();
     }
     
     @FXML

@@ -43,7 +43,7 @@ public class BolsistaDAO extends GenericDAO {
             e.printStackTrace();
         }
     }
-
+//atualia
     public void atualizarBolsista(Bolsista bolsista) throws SQLException {
         Connection con = conectarDAO();
 
@@ -51,7 +51,7 @@ public class BolsistaDAO extends GenericDAO {
         String queryBolsista = "UPDATE BOLSISTAS SET matricula = ?, curso = ?, acessoPostagens = ?, acessoArtigos = ? WHERE idUsuario = ?";
 
         try (con) {
-            // atualizar usuario
+            // inser usuario
             PreparedStatement stmtUsuario = con.prepareStatement(queryUsuario, PreparedStatement.RETURN_GENERATED_KEYS);
             stmtUsuario.setLong(1, bolsista.getCpf());
             stmtUsuario.setString(2, bolsista.getNome());
@@ -61,7 +61,7 @@ public class BolsistaDAO extends GenericDAO {
             stmtUsuario.setInt(6, bolsista.getId());
             stmtUsuario.executeUpdate();
 
-            // atualizar bolsista
+            // inser bolsista
             PreparedStatement stmtBolsista = con.prepareStatement(queryBolsista);
             stmtBolsista.setLong(1, bolsista.getMatricula());
             stmtBolsista.setString(2, bolsista.getCurso());
