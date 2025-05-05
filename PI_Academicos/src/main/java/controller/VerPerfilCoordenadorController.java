@@ -14,11 +14,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import model.Coordenador;
 
 public class VerPerfilCoordenadorController {
     
-    private Stage stageTelaPrincipalCoordenador;
-    private Stage stageLogin;
+    private Stage stageVerPerfil;
+    Coordenador coordenador;
         
     @FXML
     private Text TxtNomeUsuario;
@@ -106,6 +107,19 @@ public class VerPerfilCoordenadorController {
 
     @FXML
     private Label lblUsuarioCoord;
+    
+    public void setCoordenador(Coordenador coord) {
+       this.coordenador = coord;
+       lblNomeCoord.setText(coordenador.getNome());
+       lblUsuarioCoord.setText(coordenador.getApelido());
+       String cpf = String.valueOf(coordenador.getCpf());
+       lblCPFCoord.setText(cpf);
+       lblFormacaoCoord.setText(coordenador.getFormacao());
+       lblSenhaCoord.setText(coordenador.getSenha());
+       lblEmailCoord.setText(coordenador.getEmail());
+       String siape = String.valueOf(coordenador.getSiape());
+       lblSIAPECoord.setText(siape);
+    }
 
     @FXML
     void onClickArtigo(ActionEvent event) {
@@ -122,7 +136,8 @@ public class VerPerfilCoordenadorController {
             Stage stage = new Stage();
         
             AtualizarPerfilCoordenadorController apc = loader.getController();
-            
+            apc.setCoordenador(coordenador); 
+            apc.setStage(stage);
         
             Scene cena = new Scene(root);
             stage.setTitle("Atualizar Perfil Coordenador");
@@ -131,7 +146,7 @@ public class VerPerfilCoordenadorController {
             stage.setMaximized(true);
             
             stage.show();
-            stageLogin.close();
+            stageVerPerfil.close();
 
     }
 
@@ -146,8 +161,26 @@ public class VerPerfilCoordenadorController {
     }
 
     @FXML
-    void onClickSair(ActionEvent event) {
+    void onClickSair(ActionEvent event) throws IOException {
 
+         URL url = new File("src/main/java/view/TelaPrincipalCoordenador.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage stagePrincipalCoordenador = new Stage();
+            
+            TelaPrincipalCoordenadorController tcc = loader.getController();
+            tcc.ajustarElementosJanela(coordenador); 
+            tcc.setStage(stagePrincipalCoordenador);
+        
+            Scene cena = new Scene(root);
+            stagePrincipalCoordenador.setTitle("Tela Principal Coordenador");
+            stagePrincipalCoordenador.setScene(cena);
+            //deixa a tela maximizada
+           stagePrincipalCoordenador.setMaximized(true);
+            
+            stagePrincipalCoordenador.show();
+            stageVerPerfil.close();
     }
 
     @FXML
@@ -168,7 +201,7 @@ public class VerPerfilCoordenadorController {
             stage.setMaximized(true);
             
             stage.show();
-            stageLogin.close();
+            stageVerPerfil.close();
 
     }
 
@@ -190,7 +223,7 @@ public class VerPerfilCoordenadorController {
             stage.setMaximized(true);
             
             stage.show();
-            stageLogin.close();
+            stageVerPerfil.close();
 
     }
     
@@ -212,7 +245,7 @@ public class VerPerfilCoordenadorController {
             stage.setMaximized(true);
             
             stage.show();
-            stageLogin.close();
+            stageVerPerfil.close();
 
     }
     
@@ -233,12 +266,12 @@ public class VerPerfilCoordenadorController {
             stage.setScene(cena);
             
             stage.show();
-            stageLogin.close();
+            stageVerPerfil.close();
 
     }
     
 public void setStage(Stage stage){
-        this.stageTelaPrincipalCoordenador = stage;
+        this.stageVerPerfil= stage;
         
      
     

@@ -119,37 +119,27 @@ public class TelaPrincipalCoordenadorController {
     @FXML
     void onClickVerPerfil(ActionEvent event) throws IOException {
 
-        //carregando a tela principal do coordenador
-        Usuario usuario = null; //talvez errado
-         if( usuario != null){
             
             URL url = new File("src/main/java/view/VerPerfilCoordenador.fxml").toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
         
-            Stage stage = new Stage();
+            Stage stageVerPerfil = new Stage();
             
             VerPerfilCoordenadorController vpf = loader.getController();
-            
+            vpf.setCoordenador(coordenador); 
+            vpf.setStage(stageVerPerfil);
         
             Scene cena = new Scene(root);
-            stage.setTitle("Perfil Coordenador");
-            stage.setScene(cena);
+            stageVerPerfil.setTitle("Perfil Coordenador");
+            stageVerPerfil.setScene(cena);
             //deixa a tela maximizada
-            stage.setMaximized(true);
+            stageVerPerfil.setMaximized(true);
             
-            stage.show();
+            stageVerPerfil.show();
             stagePrincipalCoordenador.close();
             
-            }else {
             
-        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-        alerta.setTitle("Nome ou senha incorretos");
-        alerta.setHeaderText("Verifique as informações inseridas");
-        alerta.setContentText("Digite novamente");
-        alerta.showAndWait();
-        
-    }
 }
    
     
@@ -164,13 +154,15 @@ public class TelaPrincipalCoordenadorController {
         Stage stageAtualizar = new Stage();
         
         AtualizarPerfilCoordenadorController apcc = loader.getController();
-        apcc.setCoordenador(coordenador);      
+        apcc.setCoordenador(coordenador); 
+        apcc.setStage(stageAtualizar);
         
         Scene cena = new Scene(root);
         stageAtualizar.setTitle("Atualizar Perfil Coordenador");
         stageAtualizar.setMaximized(true);
         stageAtualizar.setScene(cena);
         stageAtualizar.show();
+        stagePrincipalCoordenador.close();
                
     } 
 
@@ -243,8 +235,8 @@ public class TelaPrincipalCoordenadorController {
     }    
             
      
-     public void setStagePrincipal(Stage telaPrincipalCoordenador){
-      this.stagePrincipalCoordenador = telaPrincipalCoordenador;
+     public void setStagePrincipal(Stage stagePrincipalCoordenador){
+      this.stagePrincipalCoordenador = stagePrincipalCoordenador;
    }
 
        
@@ -259,6 +251,8 @@ public class TelaPrincipalCoordenadorController {
         textNomeProjeto.setText(siape);
        
     }
+    
+   
         
    }
     

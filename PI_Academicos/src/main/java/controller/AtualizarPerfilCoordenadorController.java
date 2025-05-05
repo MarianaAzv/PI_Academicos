@@ -1,9 +1,15 @@
 package controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -166,8 +172,29 @@ public class AtualizarPerfilCoordenadorController {
     }
 
     @FXML
-    void onClickSair(ActionEvent event) {
+    void onClickSair(ActionEvent event) throws IOException {
 
+         URL url = new File("src/main/java/view/TelaPrincipalCoordenador.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage stagePrincipal = new Stage();
+        
+            TelaPrincipalCoordenadorController tpc = loader.getController();    
+            tpc.setStagePrincipal(stagePrincipal);
+            
+            stagePrincipal.setOnShown(evento -> {
+            tpc.ajustarElementosJanela(coordenador);
+        });
+        
+            Scene cena = new Scene(root);
+            stagePrincipal.setTitle("Tela principal Coordenador");
+            stagePrincipal.setScene(cena);
+            //deixa a tela maximizada
+            stagePrincipal.setMaximized(true);
+            
+            stagePrincipal.show();
+            stageAtualizarCoordenador.close();
     }
 
     @FXML
