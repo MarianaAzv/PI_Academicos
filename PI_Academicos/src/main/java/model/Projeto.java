@@ -4,6 +4,20 @@ import java.time.LocalDate;
 
 public class Projeto {
 
+    /**
+     * @return the campus
+     */
+    public Campus getCampus() {
+        return campus;
+    }
+
+    /**
+     * @param campus the campus to set
+     */
+    public void setCampus(Campus campus) {
+        this.campus = campus;
+    }
+
     
     
     
