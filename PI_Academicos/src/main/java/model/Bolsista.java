@@ -42,6 +42,13 @@ public class Bolsista extends Usuario {
      //   this.dataInicio = dataInicio;
      //   this.dataFim = dataFim;
     }
+    //CONSTRUTOR PARA ATUALIZAR SEM ATRIBUTOS DE DATA E SEM ACESSOS
+        public Bolsista(int id, long cpf, String nome, String apelido, String email, String senha, boolean ativa, long matricula, String curso) {
+        super(id, cpf, nome, apelido, email, senha, ativa);
+        this.matricula = matricula;
+        this.curso = curso;
+       // this. = dataInicio;
+    }
 
     // GetSet ok
     public long getMatricula() {

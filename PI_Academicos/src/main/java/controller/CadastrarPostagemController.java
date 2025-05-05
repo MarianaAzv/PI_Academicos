@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import model.Bolsista;
 
 public class CadastrarPostagemController {
 
@@ -30,6 +32,15 @@ public class CadastrarPostagemController {
     void onClickPostar(ActionEvent event) {
 
     }
+
+   
+
+    void setStage(Stage stagePostagem) {
+    }
+   
+    
+
+    
 
 }
 

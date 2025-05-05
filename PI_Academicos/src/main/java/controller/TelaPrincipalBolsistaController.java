@@ -2,6 +2,7 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -101,12 +102,13 @@ public class TelaPrincipalBolsistaController {
 
     @FXML
     private Text txtProrrogacao;
+  //  private Stage stageTelaPrincipalBolsista;
 
 
-    private Stage stageLogin;
+    //private Stage stageAtualizarBolsista;
 
     public void setStage(Stage stage) {
-        this.stageLogin = stage;
+        this.stageTelaPrincipalBolsista = stage;
     }
 
     @FXML
@@ -160,16 +162,56 @@ public class TelaPrincipalBolsistaController {
     }
     
     @FXML
-    void onClickPublicacao(ActionEvent event) {
-       System.out.println("Botão Publicação clicado!");
+    void onClickPublicacao(ActionEvent event) throws MalformedURLException, IOException {
+        
+            URL url = new File("src/main/java/view/CadastrarPostagem.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        
+        Parent root = loader.load();
+
+        Stage stagePostagem = new Stage();
+
+        //Stage stage = new Stage();
+        
+         
+        CadastrarPostagemController cpb = loader.getController();
+        cpb.setStage(stagePostagem);
+        
+        Scene cena = new Scene(root);
+        stagePostagem.setTitle("  bolsista cadastro postagem");
+        stagePostagem.setMaximized(true);
+        stagePostagem.setScene(cena);
+        stagePostagem.show();
+        
+       System.out.println(" Publicação clicado!");
     }
     @FXML
-    void onClickArtigo(ActionEvent event) {
-       System.out.println("Botão Artigo clicado!");
+    void onClickArtigo(ActionEvent event) throws MalformedURLException, IOException {
+        
+             URL url = new File("src/main/java/view/CadastrarArtigo.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        
+        Parent root = loader.load();
+
+        Stage stageArtigo = new Stage();
+
+        //Stage stage = new Stage();
+        
+         
+        CadastrarArtigoController cab = loader.getController();
+        cab.setStage(stageArtigo);
+        
+        Scene cena = new Scene(root);
+        stageArtigo.setTitle("  bolsista cadastro artigo");
+        stageArtigo.setMaximized(true);
+        stageArtigo.setScene(cena);
+        stageArtigo.show();
+        
+       System.out.println(" Artigo clicado!");
     }
     @FXML
     void onClickOutrosProjetos(ActionEvent event) {
-       System.out.println("Botão Outros Projetos clicado!");
+       System.out.println(" Outros Projetos clicado!");
     }
 
     @FXML
@@ -178,7 +220,7 @@ public class TelaPrincipalBolsistaController {
     }
     @FXML
     void onClickVerProjeto(ActionEvent event) {
-       System.out.println("Botão Ver Projeto clicado!");
+       System.out.println(" Ver Projeto clicado!");
     }
 
     public void setStagePrincipal(Stage telaPrincipalBolsista) {
