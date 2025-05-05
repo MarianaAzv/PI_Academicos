@@ -1,6 +1,7 @@
 package controller;
 
 
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,6 +14,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import model.Coordenador;
+import model.CoordenadorDAO;
+import model.Usuario;
+import static util.AlertaUtil.mostrarAviso;
+import static util.AlertaUtil.mostrarConfirmacao;
 
 public class CriarProjetoController {
     
@@ -105,33 +111,28 @@ public class CriarProjetoController {
      @FXML
     void OnClickEnviar(ActionEvent event) throws ParseException {
         
-        
-          SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date dtf = formato.parse(txtDatadeFim.getText());
-        
+      
+         // SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+       // Date dtf = formato.parse(txtDatadeFim.getText());
+       // Date dti = formato.parse(txtDatadeInicio.getText());
+         
+      //incluir(txtNomedoProjeto.getText(),CBcampus.getCampus().getIdCampus);
+       
+       
         // Localdate para data
         //LocalDate;
         
         //Para o combo box é pelo dao na inicializacao
         
         //Pois o metodo é so para cadastrar
-        
-         Date dti = formato.parse(txtDatadeInicio.getText());
-         
-         
-          
-           
-         
-         
-        
-        
-      // incluir(txtNomedoProjeto.getText(),txtResumo.getText(),1,txtEmail.getText(),txtSenha.getText(), siape, txtFormacao.getText());
-        
-    }
+   
+     }
 
+
+    
     @FXML
     void OnClickNaoBolsista(ActionEvent event) {
-
+ 
     }
 
     @FXML
@@ -146,12 +147,31 @@ public class CriarProjetoController {
 
     @FXML
     void OnClickSimBolsista(ActionEvent event) {
-
+  
     }
 
     @FXML
     void OnClickSimCocoordenador(ActionEvent event) {
 
     }
+    
+   // void incluir(String Titulo, String Resumo,int campus,LocalDate dataInicio,LocalDate DataFim throws SQLException {
+     //   Usuario usuario = new Usuario(cpf, nome, apelido, email, senha);
+       // Coordenador coordenador = new Coordenador(siape, formacao);
+       // int repetido = new CoordenadorDAO().validarApelido(apelido,0);
+       // if(repetido>0){
+         //   mostrarAviso("Nome de usuário indisponível","Este nome de usuário já está sendo usado");
+           
+       // }
+       // else{
+       // new CoordenadorDAO().cadastrarUsuarioCoordenador(usuario,coordenador);
+       // mostrarConfirmacao("Usuário cadastrado","O usuário foi registrado no sistema com sucesso!");
+       // stageCadastroCoordenador.close();
+        //}
+    //}
+    
+
 }
+
+
 

@@ -191,8 +191,35 @@ public class TelaPrincipalCoordenadorController {
 
     
     @FXML
-    void onClickCriarProjeto(ActionEvent event) {
+    void onClickCriarProjeto(ActionEvent event) throws IOException, MalformedURLException {
 
+         
+                 
+         URL url = new File("src/main/java/view/CriarProjeto.fxml").toURI().toURL();
+        
+        FXMLLoader loader = new FXMLLoader(url);
+        
+        Parent root = loader.load();
+        //Comunicar com o combo box com o DAO
+        
+        
+        Stage telaCriarProjeto = new Stage();
+        
+         CriarProjetoController tpc = loader.getController();
+        // tpc.CBcampus.setNomeCampus("Gaspar");
+        tpc.setStage(telaCriarProjeto);
+        
+        
+        
+          Scene cena = new Scene(root);
+           telaCriarProjeto.setTitle("Tela Criar Projeto");
+            telaCriarProjeto.setMaximized(true);
+        telaCriarProjeto.setScene(cena);
+        telaCriarProjeto.show();
+        
+        
+        
+       
     }
 
     @FXML

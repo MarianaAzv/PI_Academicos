@@ -13,7 +13,7 @@ public class ProjetoDAO extends GenericDAO{
         
        Connection con = conectarDAO();
         
-        String queryProjeto = "INSERT INTO projetos(,tituloProjeto,resumo,idCampus,edital,dataInicio,dataFim,prorrogacao,emAndamento) VALUES(?,?,?,?,?,?,?,?)";
+        String queryProjeto = "INSERT INTO projetos(tituloProjeto,resumo,idCampus,edital,dataInicio,dataFim,prorrogacao,emAndamento) VALUES(?,?,?,?,?,?,?,?)";
         
   try  ( 
           con
