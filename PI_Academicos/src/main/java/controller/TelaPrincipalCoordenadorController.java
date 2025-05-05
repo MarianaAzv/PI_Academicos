@@ -72,9 +72,6 @@ public class TelaPrincipalCoordenadorController {
     private ImageView imgProjeto;
 
     @FXML
-    private ImageView imgUsuarioCoordenador;
-
-    @FXML
     private Label lblNomeBolsista;
 
     @FXML
@@ -192,8 +189,9 @@ public class TelaPrincipalCoordenadorController {
 
     }
 
+    
     @FXML
-    void onClickCriarPerfil(ActionEvent event) {
+    void onClickCriarProjeto(ActionEvent event) {
 
     }
 
