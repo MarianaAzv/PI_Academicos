@@ -1,11 +1,13 @@
 controller\CadastroBolsistaCoordenadorController.class
 controller\RecuperarSenhaCodigoController.class
 model\Projeto.class
+model\AdministradorDAO.class
 controller\CriarProjetoController.class
 controller\VerPerfilAdministradorController.class
 controller\EscolherProjetoController.class
 model\Usuario.class
 controller\CocoordenadorDesativarCoordenadorController.class
+controller\TelaNoticiaController.class
 model\GenericDAO.class
 model\Campus.class
 controller\TelaLoginController.class

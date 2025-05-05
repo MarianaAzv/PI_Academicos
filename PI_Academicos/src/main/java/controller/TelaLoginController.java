@@ -21,6 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Administrador;
 import model.Bolsista;
 import model.Coordenador;
 import model.LoginDAO;
@@ -90,9 +91,14 @@ public class TelaLoginController {
                                 abrirTelaPrincipalCoordenador(c);
                             }else if (user instanceof Bolsista) {//login bolsista
                                 Bolsista b = (Bolsista) user;
-                                 System.out.println("Abrindo tela de Bolsista...");
+                                System.out.println("Abrindo tela de Bolsista...");
 
                                 abrirTelaPrincipalBolsista(b);
+                            } else if (user instanceof Administrador) {//login adm
+                                Administrador a = (Administrador) user;
+                                System.out.println("Abrindo tela de Administrador...");
+
+                                abrirTelaPrincipalAdministrador(a);
                             }
                 
                 
@@ -185,5 +191,30 @@ private void abrirTelaPrincipalBolsista(Bolsista bolsista) throws MalformedURLEx
         stagePrincipal.show();
         stageLogin.close();
 
+    }
+
+    private void abrirTelaPrincipalAdministrador(Administrador adm) throws MalformedURLException, IOException{
+        
+         URL url = new File("src/main/java/view/TelaPrincipalAdministrador.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage stagePrincipal = new Stage();
+        
+            TelaPrincipalAdministradorController tpa = loader.getController();    
+            tpa.setStage(stagePrincipal);
+            
+//            stagePrincipal.setOnShown(evento -> {
+//            tpa.ajustarElementosJanela(adm);
+//        });
+        
+            Scene cena = new Scene(root);
+            stagePrincipal.setTitle("Tela principal Administrador");
+            stagePrincipal.setScene(cena);
+            //deixa a tela maximizada
+            stagePrincipal.setMaximized(true);
+            
+            stagePrincipal.show();
+            stageLogin.close();
     }
 }

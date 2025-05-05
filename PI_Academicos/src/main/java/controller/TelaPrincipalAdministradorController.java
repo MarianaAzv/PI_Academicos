@@ -72,9 +72,9 @@ public class TelaPrincipalAdministradorController {
     }
 
     @FXML
-    void onClickPublicacao(ActionEvent event) {
+    void onClickPublicacao(ActionEvent event) throws IOException {
         
-       // abrirTelaNoticia();
+       abrirTelaNoticia();
 
     }
 
@@ -145,7 +145,7 @@ public class TelaPrincipalAdministradorController {
             Stage stagePerfil = new Stage();
         
             VerPerfilAdministradorController vpac = loader.getController();    
-            //apac.setStage(stageAtualizar);
+            vpac.setStage(stagePerfil);
         
             Scene cena = new Scene(root);
             stagePerfil.setTitle("Tela Perfil Administrador");
@@ -157,23 +157,23 @@ public class TelaPrincipalAdministradorController {
             stageADM.close();
     }
     
-//    private void abrirTelaNoticia() throws MalformedURLException, IOException{
-//        
-//         URL url = new File("src/main/java/view/CadastroNoticia.fxml").toURI().toURL();
-//            FXMLLoader loader = new FXMLLoader(url);
-//            Parent root = loader.load();
-//        
-//            Stage stageCadastroNoticia = new Stage();
-//        
-//            CadastroNoticiaController cnc = loader.getController();    
-//            //cac.setStage(stageCadastroADM);
-//        
-//            Scene cena = new Scene(root);
-//            stageCadastroNoticia.setTitle("Tela Cadastrar Noticia");
-//            stageCadastroNoticia.setScene(cena);
-//            
-//            stageCadastroNoticia.show();
-//            
-//    }
+    private void abrirTelaNoticia() throws MalformedURLException, IOException{
+        
+         URL url = new File("src/main/java/view/CadastroNoticia.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage stageCadastroNoticia = new Stage();
+        
+            TelaNoticiaController tnc = loader.getController();    
+            //tnc.setStage(stageCadastroADM);
+        
+            Scene cena = new Scene(root);
+            stageCadastroNoticia.setTitle("Tela Cadastrar Noticia");
+            stageCadastroNoticia.setScene(cena);
+            
+            stageCadastroNoticia.show();
+            
+    }
     
 }

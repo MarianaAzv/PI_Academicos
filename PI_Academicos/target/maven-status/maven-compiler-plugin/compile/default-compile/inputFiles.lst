@@ -7,6 +7,7 @@ C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\Tela
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\dal\ConexaoBD.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Projeto.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CocoordenadorDesativarCoordenadorController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\TelaNoticiaController.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\RecuperarSenhaNovaSenhaController.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarPerfilAdministradorController.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\MaisCoCoordenadorController.java
@@ -34,6 +35,7 @@ C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\Cada
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\CoordenadorDAO.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\LoginDAO.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CadastrarPostagemController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\AdministradorDAO.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\BolsistaDAO.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\TelaPrincipalAdministradorController.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\ProjetoDAO.java
