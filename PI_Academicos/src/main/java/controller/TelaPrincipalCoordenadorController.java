@@ -206,10 +206,12 @@ public class TelaPrincipalCoordenadorController {
         Stage telaCriarProjeto = new Stage();
         
          CriarProjetoController tpc = loader.getController();
-        // tpc.CBcampus.setNomeCampus("Gaspar");
+       
         tpc.setStage(telaCriarProjeto);
         
-        
+       //  telaCriarProjeto.setOnShown(evento -> {
+         //   tpc.ajustarElementosJanela();
+        //});
         
           Scene cena = new Scene(root);
            telaCriarProjeto.setTitle("Tela Criar Projeto");

@@ -4,6 +4,7 @@ package controller;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import model.Campus;
 import model.Coordenador;
 import model.CoordenadorDAO;
 import model.Usuario;
@@ -116,7 +118,7 @@ public class CriarProjetoController {
        // Date dtf = formato.parse(txtDatadeFim.getText());
        // Date dti = formato.parse(txtDatadeInicio.getText());
          
-      //incluir(txtNomedoProjeto.getText(),CBcampus.getCampus().getIdCampus);
+    // incluir(txtNomedoProjeto.getText());
        
        
         // Localdate para data
@@ -155,20 +157,16 @@ public class CriarProjetoController {
 
     }
     
-   // void incluir(String Titulo, String Resumo,int campus,LocalDate dataInicio,LocalDate DataFim throws SQLException {
-     //   Usuario usuario = new Usuario(cpf, nome, apelido, email, senha);
-       // Coordenador coordenador = new Coordenador(siape, formacao);
-       // int repetido = new CoordenadorDAO().validarApelido(apelido,0);
-       // if(repetido>0){
-         //   mostrarAviso("Nome de usuário indisponível","Este nome de usuário já está sendo usado");
-           
-       // }
-       // else{
-       // new CoordenadorDAO().cadastrarUsuarioCoordenador(usuario,coordenador);
-       // mostrarConfirmacao("Usuário cadastrado","O usuário foi registrado no sistema com sucesso!");
-       // stageCadastroCoordenador.close();
-        //}
-    //}
+ void ajustarElementosJanela(Campus campus){
+     //Analisar se é campus ou se é projetos
+     //ArrayList para set dos nomes dos campus no combo box de campus
+     //  ArrayList[] campusnomes = new ArrayList[];
+       
+       //for(int i = 0;i> lenft;i++){
+      //campusnomes.setText(campus.getNomeCampus());
+    //  CBcampus= campusnome;
+    //   }
+   }
     
 
 }
