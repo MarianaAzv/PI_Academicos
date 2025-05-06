@@ -36,7 +36,7 @@ public class Projeto {
     
     
     //Tentativa de incluir no Banco
-    public Projeto(String titulo , String resumo, Campus campus, String edital, LocalDate dataInicio, LocalDate dataFim, LocalDate prorrogacao,boolean emAndamento ) {
+    public Projeto(String titulo , String resumo, Campus campus, String edital, LocalDate dataInicio, LocalDate dataFim) {
        
     }
     

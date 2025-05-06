@@ -14,7 +14,7 @@ public class AreasConhecimentoDAO extends GenericDAO{
          List<AreasConhecimento> listCategorias= new ArrayList<>();
         
        Connection con = conectarDAO();
-       String queryCategorias = "SELECT idArea,nomeArea FROM AreasConhecimento";
+       String queryCategorias = "SELECT idArea,nomeArea FROM areasdeconhecimento";
        try(con){
             PreparedStatement stmtCategorias = con.prepareStatement(queryCategorias);
             

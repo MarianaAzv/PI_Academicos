@@ -5,6 +5,10 @@ package controller;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +28,7 @@ import model.CampusDAO;
 import model.Coordenador;
 import model.CoordenadorDAO;
 import model.Projeto;
+import model.ProjetoDAO;
 import model.Usuario;
 import static util.AlertaUtil.mostrarAviso;
 import static util.AlertaUtil.mostrarConfirmacao;
@@ -118,25 +123,29 @@ public class CriarProjetoController {
     
      @FXML
     void OnClickEnviar(ActionEvent event) throws ParseException {
-        
-      
-         // SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-       // Date dtf = formato.parse(txtDatadeFim.getText());
-       // Date dti = formato.parse(txtDatadeInicio.getText());
-         
-    // incluir(txtNomedoProjeto.getText());
-       
-       
-        // Localdate para data
-        //LocalDate;
-        
         //Para o combo box é pelo dao na inicializacao
         
         //Pois o metodo é so para cadastrar
+      // Localdate para data
+        //LocalDate;
+       try{ 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dI = LocalDate.parse(txtDatadeInicio.getText(), formatter);
+        LocalDate dF= LocalDate.parse(txtDatadeFim.getText(), formatter);
+       
+       Campus campusnomeSelecionado = CBcampus.getValue();
+       
+         
+     incluir(txtNomedoProjeto.getText(),txtResumo.getText(),campusnomeSelecionado,txtEdital.getText(),dI,dF);
+      
    
+     } catch(SQLException e){
+          mostrarAviso("Falha","A falha em cadastrar esse projeto");
+     } catch(DateTimeParseException e){
+          mostrarAviso("Falha","O formato da data de inicio ou de Fim nao esta no padrao normal");
      }
 
-
+    }
     
     @FXML
     void OnClickNaoBolsista(ActionEvent event) {
@@ -181,12 +190,14 @@ public class CriarProjetoController {
         mostrarAviso("Banco de Dados","A falha de comunicação entre o sistema e o Banco");
   }
    }
- void incluir(String tituloProjeto, Campus idCampus) throws SQLException {
-       Projeto projeto = new Projeto(tituloProjeto,idCampus);
-        
-        
+ void incluir(String titulo,String resumo, Campus campus, String edital,LocalDate dataInicio,LocalDate dataFim) throws SQLException {
+       Projeto projeto = new Projeto(titulo,resumo,campus,edital,dataInicio,dataFim);
+     
+    projeto.setEmAndamento(true);
       
-        new ProjetoDAO().cadastrarUsuarioCoordenador(usuario,coordenador);
+        ProjetoDAO pdao =new ProjetoDAO();
+        pdao.cadastraprojeto(projeto);
+       
         mostrarConfirmacao("Projeto cadastrado","O projeto foi registrado no sistema com sucesso!");
         stageCriarProjeto.close();
        

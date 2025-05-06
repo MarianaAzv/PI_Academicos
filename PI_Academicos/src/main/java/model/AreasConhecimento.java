@@ -33,5 +33,9 @@ public class AreasConhecimento {
     public void setNomeArea(String nomeArea) {
         this.nomeArea = nomeArea;
     }
+     @Override
+    public String toString(){
+        return nomeArea;
+    }
    
 }
