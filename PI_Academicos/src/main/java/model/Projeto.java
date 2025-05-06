@@ -35,8 +35,8 @@ public class Projeto {
       
     
     
-    //Tentativa de incluir no Banco
-    public Projeto(String titulo , String resumo, Campus campus, String edital, LocalDate dataInicio, LocalDate dataFim) {
+    
+    public Projeto(String titulo , String resumo, Campus campus, String edital, LocalDate dataInicio, LocalDate dataFim,LocalDate prorrogacao, Boolean emAndamento) {
         this.titulo = titulo;
     this.resumo = resumo;
     this.campus = campus;

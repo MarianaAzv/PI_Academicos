@@ -1,5 +1,9 @@
 package controller;
 
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,11 +12,21 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+import model.AreasConhecimento;
+import model.Campus;
+import model.Projeto;
+import model.ProjetoDAO;
+import static util.AlertaUtil.mostrarAviso;
+import static util.AlertaUtil.mostrarConfirmacao;
 
 public class AtualizarProjetoController {
 
+     private Stage stageAtualizarProjeto;
+        @FXML
+    private ComboBox<Campus> CBcampus;
     @FXML
-    private ComboBox<?> CBcategoria;
+    private ComboBox<AreasConhecimento> CBcategoria;
 
     @FXML
     private Label LblDatadeinicio;
@@ -68,9 +82,7 @@ public class AtualizarProjetoController {
     @FXML
     private Label lbltitulocriarprojeto;
 
-    @FXML
-    private TextField txtCampus;
-
+ 
     @FXML
     private TextField txtCoordenador;
 
@@ -104,8 +116,27 @@ public class AtualizarProjetoController {
 
     @FXML
     void OnClickAtualizar(ActionEvent event) {
-
+     //  try{
+      
+        //    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+     //   LocalDate dI = LocalDate.parse(txtDatadeInicio.getText(), formatter);
+     //   LocalDate dF= LocalDate.parse(txtDatadeFim.getText(), formatter);
+      //   LocalDate PR= LocalDate.parse(txtProrrogacao.getText(), formatter);
+         
+       //    Campus campusnomeSelecionado = CBcampus.getValue();
+          // Projeto.setIdProjeto(IdProjeto);
+        
+   //  atualizarProjeto(Projeto.getid,txtNomedoProjeto.getText(),txtResumo.getText(),campusnomeSelecionado,txtEdital.getText(),dI,dF,PR);
+     
+     
+   //    } catch(SQLException e){
+    //      mostrarAviso("Falha","A falha em atuaizar esse projeto");
+   //  } 
+  //     catch(DateTimeParseException e){
+  //        mostrarAviso("Falha","O formato da data de inicio ou de Fim nao esta no padrao normal");
+  //   }
     }
+    
 
     @FXML
     void OnClickDesativarBolsista(ActionEvent event) {
@@ -116,5 +147,15 @@ public class AtualizarProjetoController {
     void OnClickDesativarCocoordenador(ActionEvent event) {
 
     }
-
+    
+     public void setStage(Stage telaAtualizarProjeto){
+        this.stageAtualizarProjeto = telaAtualizarProjeto;
+    }
+  void atualizarProjeto(int idProjeto,String titulo,String resumo, Campus campus, String edital,LocalDate dataInicio,LocalDate dataFim,LocalDate prorrogacao ) throws SQLException{
+        
+       //  ProjetoDAO pdao =new ProjetoDAO();
+      //  pdao.atualizarProjeto(Projeto);
+      // mostrarConfirmacao("Projeto alterado","O projeto foi alterado com sucesso!");
+        
+  }
 }
