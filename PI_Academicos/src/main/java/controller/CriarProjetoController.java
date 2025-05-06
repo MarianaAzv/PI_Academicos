@@ -17,6 +17,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import model.AreasConhecimento;
+import model.AreasConhecimentoDAO;
 import model.Campus;
 import model.CampusDAO;
 import model.Coordenador;
@@ -34,7 +36,7 @@ public class CriarProjetoController {
     private ComboBox<Campus> CBcampus;
 
     @FXML
-    private ComboBox<?> CBcategoria;
+    private ComboBox<AreasConhecimento> CBcategoria;
 
     @FXML
     private Label LblDatadeinicio;
@@ -168,6 +170,12 @@ public class CriarProjetoController {
      List<Campus> listCampus = cdao.buscarCampus();
      CBcampus.getItems().clear();
      CBcampus.getItems().addAll(listCampus);
+     
+       AreasConhecimentoDAO acdao = new AreasConhecimentoDAO();
+     List<AreasConhecimento> listCategorias = acdao.buscarCategorias();
+     CBcategoria.getItems().clear();
+    CBcategoria.getItems().addAll(listCategorias);
+    
   } catch(SQLException e){
     
         mostrarAviso("Banco de Dados","A falha de comunicação entre o sistema e o Banco");
