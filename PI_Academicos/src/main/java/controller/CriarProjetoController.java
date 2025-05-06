@@ -2,6 +2,10 @@ package controller;
 
 
 
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,6 +18,9 @@ import java.util.Date;
 import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -163,8 +170,27 @@ public class CriarProjetoController {
     }
 
     @FXML
-    void OnClickSimBolsista(ActionEvent event) {
-  
+    void OnClickSimBolsista(ActionEvent event) throws MalformedURLException, IOException {
+        
+        
+            URL url = new File("src/main/java/view/CadastroBolsistaCoodernador.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage TelaCadastroBolsistaCoordenador = new Stage();
+            
+            CadastroBolsistaCoordenadorController cbcc = loader.getController();
+            
+           cbcc.setStage(TelaCadastroBolsistaCoordenador); 
+          
+        
+            Scene cena = new Scene(root);
+            TelaCadastroBolsistaCoordenador.setTitle("Cadastro Bolsista");
+            TelaCadastroBolsistaCoordenador.setScene(cena);
+           
+            
+           TelaCadastroBolsistaCoordenador.show();
+            stageCriarProjeto.close();
     }
 
     @FXML

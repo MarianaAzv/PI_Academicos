@@ -8,8 +8,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import static util.AlertaUtil.mostrarAviso;
 
+import static util.AlertaUtil.mostrarAviso;
+
+import javafx.stage.Stage;
+
+
 public class CadastroBolsistaCoordenadorController {
 
+     private Stage stageCadastrarBolsistaCoordenador;  
     @FXML
     private DatePicker DataFimdaBolsa;
 
@@ -92,11 +98,15 @@ public class CadastroBolsistaCoordenadorController {
     void OnClickPDF(ActionEvent event) {
 
     }
+    
+    
 
     private void incluir(Long cpf, String text, String text0, String text1, String text2, Long matricula, String text3) {
         
     }
-    
+     public void setStage(Stage TelaCadastroBolsistaCoordenador){
+        this.stageCadastrarBolsistaCoordenador = TelaCadastroBolsistaCoordenador;
+    }
    
 
 }
