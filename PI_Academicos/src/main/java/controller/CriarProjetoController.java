@@ -21,6 +21,7 @@ import model.Campus;
 import model.CampusDAO;
 import model.Coordenador;
 import model.CoordenadorDAO;
+import model.Projeto;
 import model.Usuario;
 import static util.AlertaUtil.mostrarAviso;
 import static util.AlertaUtil.mostrarConfirmacao;
@@ -172,6 +173,16 @@ public class CriarProjetoController {
         mostrarAviso("Banco de Dados","A falha de comunicação entre o sistema e o Banco");
   }
    }
+ void incluir(String tituloProjeto, Campus idCampus) throws SQLException {
+       Projeto projeto = new Projeto(tituloProjeto,idCampus);
+        
+        
+      
+        new ProjetoDAO().cadastrarUsuarioCoordenador(usuario,coordenador);
+        mostrarConfirmacao("Projeto cadastrado","O projeto foi registrado no sistema com sucesso!");
+        stageCriarProjeto.close();
+       
+    }
     
 
 }
