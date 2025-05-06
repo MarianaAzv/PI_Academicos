@@ -81,6 +81,37 @@ public class CoordenadorDAO extends GenericDAO{
     }
 } 
     
+    //Método para desativar usuário
+    public void desativarCoordenador(Coordenador coordenador) throws SQLException{
+        
+        Connection con = conectarDAO();
+        
+        String queryUsuario = "UPDATE USUARIOS SET ativa = 0 WHERE idUsuario = ?";
+        
+        try (con) {
+    // Inserir em Usuario
+    PreparedStatement stmtUsuario = con.prepareStatement(queryUsuario, PreparedStatement.RETURN_GENERATED_KEYS);
+    stmtUsuario.setInt(1, coordenador.getId()); 
+    stmtUsuario.executeUpdate();
+    }
+   }
+    
+    //Método para desativar usuário
+    public void ativarCoordenador(Coordenador coordenador) throws SQLException{
+        
+        Connection con = conectarDAO();
+        
+        String queryUsuario = "UPDATE USUARIOS SET ativa = 1 WHERE idUsuario = ?";
+        
+        try (con) {
+    // Inserir em Usuario
+    PreparedStatement stmtUsuario = con.prepareStatement(queryUsuario, PreparedStatement.RETURN_GENERATED_KEYS);
+    stmtUsuario.setInt(1, coordenador.getId()); 
+    stmtUsuario.executeUpdate();
+    }
+   }
+    
+        
     //Método para validar nome de usuário
         public int validarApelido(String apelido, int id) throws SQLException{
             

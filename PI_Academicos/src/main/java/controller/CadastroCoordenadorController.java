@@ -102,6 +102,9 @@ public class CadastroCoordenadorController {
             mostrarAviso("Nome de usuário indisponível","Este nome de usuário já está sendo usado");
            
         }
+        else if(nome.isEmpty() || apelido.isEmpty() || email.isEmpty() || senha.isEmpty()){
+         mostrarAviso("Campos de preenchimento obrigatórios","Todos os campos de cadastro devem ser preenchidos.");
+    }
         else{
         new CoordenadorDAO().cadastrarUsuarioCoordenador(usuario,coordenador);
         mostrarConfirmacao("Usuário cadastrado","O usuário foi registrado no sistema com sucesso!");

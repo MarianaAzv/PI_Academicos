@@ -217,7 +217,7 @@
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnAtualizarPerfil" mnemonicParsing="false" onAction="#onClickAtualizarPerfil" style="-fx-background-color: DBA5A5;" text="- Atualizar perfil" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                  <Button fx:id="btnDesativar" mnemonicParsing="false" onAction="#onClickDesativar" style="-fx-background-color: DBA5A5;" text="- Desativar Perfil" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
@@ -245,7 +245,7 @@
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnCadastrarADM" mnemonicParsing="false" onAction="#onClickCadastrarADM" style="-fx-background-color: DBA5A5;" text="- Cadastrar Adiministrador" textAlignment="CENTER" textFill="#840d0b" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                  <Button fx:id="btnCadastrarADM" mnemonicParsing="false" onAction="#onClickCadastrarADM" style="-fx-background-color: DBA5A5;" text="- Cadastrar Administrador" textAlignment="CENTER" textFill="#840d0b" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>

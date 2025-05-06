@@ -5,12 +5,15 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.Optional;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -18,12 +21,17 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Administrador;
+import model.AdministradorDAO;
+import static util.AlertaUtil.mostrarAviso;
+import static util.AlertaUtil.mostrarConfirmacao;
 
 public class AtualizarPerfilAdministradorController {
     
-    private Stage stagePerfilADM;
+    private Administrador adm;
+    private Stage stageAtualizarADM;
     
-        @FXML
+    @FXML
     private Text TxtNomeUsuario;
 
     @FXML
@@ -33,7 +41,7 @@ public class AtualizarPerfilAdministradorController {
     private Button btnAtualizar;
 
     @FXML
-    private Button btnAtualizarPerfil;
+    private Button btnDesativar;
 
     @FXML
     private GridPane btnAtualizarProjeto;
@@ -97,13 +105,61 @@ public class AtualizarPerfilAdministradorController {
 
 
     @FXML
-    void onClickAtualizar(ActionEvent event) {
+    void onClickAtualizar(ActionEvent event) throws SQLException {
 
+        try{
+        Long cpf = Long.parseLong(txtCPF.getText());
+        atualizarAdministrador(adm.getId(),cpf,txtNome.getText(),txtUsuario.getText(),txtEmail.getText(),txtSenha.getText());
+        }catch(NumberFormatException n){
+            mostrarAviso("CPF inválido","O valor inserido para CPF deve ser apenas números");
+        }
     }
 
     @FXML
-    void onClickAtualizarPerfil(ActionEvent event) {
+    void onClickDesativar(ActionEvent event) throws IOException, SQLException {
+        
+        //mostrarConfirmacao("Usuário alterado","O usuário foi alterado com sucesso!");
+        if(adm.getAtiva()==true){
+            Optional<ButtonType> result = mostrarConfirmacao("O seu perfil está prestes a ser DESATIVADO", "Têm certeza que deseja desativar o perfil?");
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            System.out.println("Usuário desativado.");
+            new AdministradorDAO().desativarAdministrador(adm);
+        } else {
+            System.out.println("Usuário cancelou a ação.");
+        }
+        }
+        else{
+            Optional<ButtonType> result = mostrarConfirmacao("O seu perfil está prestes a ser ATIVADO", "Têm certeza que deseja ativar o perfil?");
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            System.out.println("Usuário ativado");
+            new AdministradorDAO().ativarAdministrador(adm);
+        } else {
+            System.out.println("Usuário cancelou a ação.");
+        }
+        }
+        
+        URL url = new File("src/main/java/view/TelaPrincipalAdministrador.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
 
+        Stage stagePrincipal = new Stage();
+
+        TelaPrincipalAdministradorController tpc = loader.getController();
+        tpc.setStage(stagePrincipal);
+
+        stagePrincipal.setOnShown(evento -> {
+        tpc.ajustarElementosJanela(adm);
+        });
+
+        Scene cena = new Scene(root);
+        stagePrincipal.setTitle("Tela principal Administrador");
+        stagePrincipal.setScene(cena);
+        //deixa a tela maximizada
+        stagePrincipal.setMaximized(true);
+
+        stagePrincipal.show();
+        stageAtualizarADM.close();
+        
     }
 
     @FXML
@@ -121,8 +177,29 @@ public class AtualizarPerfilAdministradorController {
     }
 
     @FXML
-    void onClickSair(ActionEvent event) {
+    void onClickSair(ActionEvent event) throws IOException {
 
+        URL url = new File("src/main/java/view/TelaPrincipalAdministrador.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage stagePrincipal = new Stage();
+        
+            TelaPrincipalAdministradorController tpa = loader.getController();    
+            tpa.setStage(stagePrincipal);
+            
+           stagePrincipal.setOnShown(evento -> {
+            tpa.ajustarElementosJanela(adm);
+       });
+        
+            Scene cena = new Scene(root);
+            stagePrincipal.setTitle("Tela principal Administrador");
+            stagePrincipal.setScene(cena);
+            //deixa a tela maximizada
+            stagePrincipal.setMaximized(true);
+            
+            stagePrincipal.show();
+            stageAtualizarADM.close();
     }
 
     @FXML
@@ -162,7 +239,7 @@ public class AtualizarPerfilAdministradorController {
             Stage stagePerfil = new Stage();
         
             VerPerfilAdministradorController vpac = loader.getController();    
-            //apac.setStage(stageAtualizar);
+            vpac.setStage(stagePerfil);
         
             Scene cena = new Scene(root);
             stagePerfil.setTitle("Tela Perfil Administrador");
@@ -171,7 +248,7 @@ public class AtualizarPerfilAdministradorController {
             stagePerfil.setMaximized(true);
             
             stagePerfil.show();
-            stagePerfilADM.close();
+            stageAtualizarADM.close();
     }
      
     private void abrirTelaAtualizar() throws MalformedURLException, IOException{
@@ -192,8 +269,40 @@ public class AtualizarPerfilAdministradorController {
             stageAtualizar.setMaximized(true);
             
             stageAtualizar.show();
-            stagePerfilADM.close();
+            stageAtualizarADM.close();
     }
+    
+    
+
+     public void setStage(Stage stage){
+         this.stageAtualizarADM=stage;
+     }
+    public void setAdministrador(Administrador adm) {
+       this.adm = adm;
+       txtNome.setText(adm.getNome());
+       txtUsuario.setText(adm.getApelido());
+       String cpf = String.valueOf(adm.getCpf());
+       txtCPF.setText(cpf);
+       txtSenha.setText(adm.getSenha());
+       txtEmail.setText(adm.getEmail());
+       
+    }
+    
+    void atualizarAdministrador(int id,long cpf, String nome, String apelido,String email,String senha) throws SQLException{
+        
+        
+        Administrador adm = new Administrador(id, cpf, nome, apelido, email, senha);
+        int repetido = new AdministradorDAO().validarApelido(apelido,id);
+        if(repetido>0){
+            mostrarAviso("Nome de usuário indisponível","Este nome de usuário já está sendo usado");
+           
+        }
+        else{
+        new AdministradorDAO().atualizarAdministrador(adm);
+        mostrarConfirmacao("Usuário alterado","O usuário foi alterado com sucesso!");
+        }
+    }
+    
      
     //    private void abrirTelaNoticia() throws MalformedURLException, IOException{
 //        

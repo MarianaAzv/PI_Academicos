@@ -16,16 +16,18 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Administrador;
 
 public class TelaPrincipalAdministradorController {
     
+    private Administrador adm;
     private Stage stageADM;
     
     @FXML
-    private Text TxtNomeUsuario;
+    private Text txtNomeUsuario;
 
     @FXML
-    private Text TxtNomeUsuario1;
+    private Text txtNomeUsuario1;
 
     @FXML
     private Button btnAtualizarPerfil;
@@ -67,7 +69,9 @@ public class TelaPrincipalAdministradorController {
     @FXML
     void onClickCadastrarADM(ActionEvent event) throws IOException {
         
+        if(adm.getAtiva()==true){
         abrirTelaCadastroADM();
+        }
 
     }
 
@@ -79,8 +83,26 @@ public class TelaPrincipalAdministradorController {
     }
 
     @FXML
-    void onClickSair(ActionEvent event) {
+    void onClickSair(ActionEvent event) throws IOException {
     // metodo para sair do perfil e ir para a tela de login
+    
+     URL url = new File("src/main/java/view/TelaLogin.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stageLogin = new Stage();
+
+        TelaLoginController tpc = loader.getController();
+        tpc.setStage(stageLogin);     
+
+        Scene cena = new Scene(root);
+        stageLogin.setTitle("Tela de Login");
+        stageLogin.setScene(cena);
+        //deixa a tela maximizada
+        stageLogin.setMaximized(true);
+        stageLogin.show();
+        
+        stageADM.close();
     }
 
     @FXML
@@ -104,8 +126,9 @@ public class TelaPrincipalAdministradorController {
         
             Stage stageAtualizar = new Stage();
         
-            AtualizarPerfilAdministradorController apac = loader.getController();    
-            //apac.setStage(stageAtualizar);
+            AtualizarPerfilAdministradorController apac = loader.getController();  
+            apac.setAdministrador(adm);
+            apac.setStage(stageAtualizar);
         
             Scene cena = new Scene(root);
             stageAtualizar.setTitle("Tela Atualizar Administrador");
@@ -117,7 +140,7 @@ public class TelaPrincipalAdministradorController {
             stageADM.close();
     }
      
-    private void abrirTelaCadastroADM() throws MalformedURLException, IOException{
+    private void abrirTelaCadastroADM() throws IOException{
         
          URL url = new File("src/main/java/view/CadastrarAdministrador.fxml").toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
@@ -126,7 +149,7 @@ public class TelaPrincipalAdministradorController {
             Stage stageCadastroADM = new Stage();
         
             CadastrarAdministradorController cac = loader.getController();    
-            //cac.setStage(stageCadastroADM);
+            cac.setStage(stageCadastroADM);
         
             Scene cena = new Scene(root);
             stageCadastroADM.setTitle("Tela Cadastrar Administrador");
@@ -136,7 +159,7 @@ public class TelaPrincipalAdministradorController {
             
     }
     
-    private void abrirTelaVerPerfilADM() throws MalformedURLException, IOException{
+    private void abrirTelaVerPerfilADM() throws IOException{
         
          URL url = new File("src/main/java/view/VerPerfilAdministrador.fxml").toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
@@ -146,6 +169,7 @@ public class TelaPrincipalAdministradorController {
         
             VerPerfilAdministradorController vpac = loader.getController();    
             vpac.setStage(stagePerfil);
+            vpac.setAdministrador(adm);
         
             Scene cena = new Scene(root);
             stagePerfil.setTitle("Tela Perfil Administrador");
@@ -174,6 +198,22 @@ public class TelaPrincipalAdministradorController {
             
             stageCadastroNoticia.show();
             
+    }
+    
+    void ajustarElementosJanela(Administrador adm) {
+        this.adm=adm;
+        
+        System.out.println("Aqui chegam os parâmetros do login "
+                + adm.getNome() + " - " + "ATIVA: " + adm.getAtiva());
+        //txtNomeUsuario.setText(adm.getNome());
+
+        
+        if(adm.getAtiva()==false){
+        
+        btnCadastrarADM.setStyle("-fx-text-fill: gray; -fx-background-color: DBA5A5;");
+        btnPublicacao.setStyle("-fx-text-fill: gray; -fx-background-color: DBA5A5;");
+        }
+       
     }
     
 }

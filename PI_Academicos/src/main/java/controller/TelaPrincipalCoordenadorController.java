@@ -45,7 +45,7 @@ public class TelaPrincipalCoordenadorController {
     private Button btnAtualizarProjeto;
 
     @FXML
-    private Button btnCriarPerfil;
+    private Button btnCriarProjeto;
 
     @FXML
     private Button btnOutrosProjetos;
@@ -109,11 +109,15 @@ public class TelaPrincipalCoordenadorController {
 
     @FXML
     private Text txtProrrogacao;
-    private Stage stageLogin;
     
+    
+   
     
     public void setStage(Stage stage){
-        this.stageLogin = stage;
+        this.stagePrincipalCoordenador = stage;
+        
+        
+        
     }
 
     @FXML
@@ -168,7 +172,9 @@ public class TelaPrincipalCoordenadorController {
 
     @FXML
     void onClickAdicionarArtigo(ActionEvent event) {
-
+        
+        
+        
     }
 
     @FXML
@@ -185,7 +191,7 @@ public class TelaPrincipalCoordenadorController {
     @FXML
     void onClickCriarProjeto(ActionEvent event) throws IOException, MalformedURLException {
 
-         
+         if(coordenador.getAtiva()==true){
                  
          URL url = new File("src/main/java/view/CriarProjeto.fxml").toURI().toURL();
         
@@ -211,6 +217,7 @@ public class TelaPrincipalCoordenadorController {
         telaCriarProjeto.setScene(cena);
         telaCriarProjeto.show();
         
+         }
         
         
        
@@ -222,9 +229,26 @@ public class TelaPrincipalCoordenadorController {
     }
 
     @FXML
-    void onClickSair(ActionEvent event) {
+    void onClickSair(ActionEvent event) throws IOException {
 
+         URL url = new File("src/main/java/view/TelaLogin.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stageLogin = new Stage();
+
+        TelaLoginController tpc = loader.getController();
+        tpc.setStage(stageLogin);     
+
+        Scene cena = new Scene(root);
+        stageLogin.setTitle("Tela de Login");
+        stageLogin.setScene(cena);
+        //deixa a tela maximizada
+        stageLogin.setMaximized(true);
+        stageLogin.show();
+        
         stagePrincipalCoordenador.close();
+        
 
     }
 
@@ -249,8 +273,22 @@ public class TelaPrincipalCoordenadorController {
         txtNomeCoordenador.setText(coordenador.getNome());
         String siape = String.valueOf(coordenador.getSiape());
         textNomeProjeto.setText(siape);
+        
+        if(coordenador.getAtiva()==false){
+        
+        btnArtigo.setStyle("-fx-text-fill: gray; -fx-background-color: DBA5A5;");
+        btnPublicacao.setStyle("-fx-text-fill: gray; -fx-background-color: DBA5A5;");
+        btnCriarProjeto.setStyle("-fx-text-fill: gray; -fx-background-color: DBA5A5;");
+        btnAtualizarProjeto.setStyle("-fx-text-fill: gray; -fx-background-color: DBA5A5;");
+        }
        
     }
+    
+    //public void setCoordenador(Coordenador coord) {
+      // this.coordenador = coord;
+    //}
+    
+    
     
    
         

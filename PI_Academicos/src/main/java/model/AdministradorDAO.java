@@ -81,4 +81,37 @@ public class AdministradorDAO extends GenericDAO {
         System.out.println("Administrador cadastrado com ID: " + administrador.getId());
     }
 }
+        
+        //Método para desativar usuário
+    public void desativarAdministrador(Administrador administrador) throws SQLException{
+        
+        Connection con = conectarDAO();
+        
+        String queryUsuario = "UPDATE USUARIOS SET ativa = 0 WHERE idUsuario = ?";
+        
+        try (con) {
+    // Inserir em Usuario
+    PreparedStatement stmtUsuario = con.prepareStatement(queryUsuario, PreparedStatement.RETURN_GENERATED_KEYS);
+    stmtUsuario.setInt(1, administrador.getId()); 
+    stmtUsuario.executeUpdate();
+    }
+   }
+    
+    //Método para ativar usuário
+    public void ativarAdministrador(Administrador administrador) throws SQLException{
+        
+        Connection con = conectarDAO();
+        
+        String queryUsuario = "UPDATE USUARIOS SET ativa = 1 WHERE idUsuario = ?";
+        
+        try (con) {
+    // Inserir em Usuario
+    PreparedStatement stmtUsuario = con.prepareStatement(queryUsuario, PreparedStatement.RETURN_GENERATED_KEYS);
+    stmtUsuario.setInt(1, administrador.getId()); 
+    stmtUsuario.executeUpdate();
+    }
+   }
+    
+    
+    
 }

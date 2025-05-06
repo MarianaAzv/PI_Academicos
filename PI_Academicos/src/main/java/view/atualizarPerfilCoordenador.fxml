@@ -240,7 +240,7 @@
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnSair" mnemonicParsing="false" onAction="#onClickSair" style="-fx-background-color: DBA5A5;" text="- Sair" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                  <Button fx:id="btnDesativar" mnemonicParsing="false" onAction="#onClickDesativar" style="-fx-background-color: DBA5A5;" text="- Desativar Perfil" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>

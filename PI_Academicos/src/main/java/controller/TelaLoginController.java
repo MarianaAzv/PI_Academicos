@@ -157,6 +157,7 @@ public class TelaLoginController {
         
             TelaPrincipalCoordenadorController tpc = loader.getController();    
             tpc.setStagePrincipal(stagePrincipal);
+            //tpc.setCoordenador(coordenador);
             
             stagePrincipal.setOnShown(evento -> {
             tpc.ajustarElementosJanela(coordenador);
@@ -204,9 +205,9 @@ private void abrirTelaPrincipalBolsista(Bolsista bolsista) throws MalformedURLEx
             TelaPrincipalAdministradorController tpa = loader.getController();    
             tpa.setStage(stagePrincipal);
             
-//            stagePrincipal.setOnShown(evento -> {
-//            tpa.ajustarElementosJanela(adm);
-//        });
+           stagePrincipal.setOnShown(evento -> {
+            tpa.ajustarElementosJanela(adm);
+       });
         
             Scene cena = new Scene(root);
             stagePrincipal.setTitle("Tela principal Administrador");

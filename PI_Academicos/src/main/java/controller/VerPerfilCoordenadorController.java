@@ -215,7 +215,7 @@ public class VerPerfilCoordenadorController {
             Stage stage = new Stage();
         
             TelaPrincipalCoordenadorController tpc = loader.getController();
-            
+            tpc.setStagePrincipal(stage);
         
             Scene cena = new Scene(root);
             stage.setTitle("Tela principal Coordenador");
@@ -272,8 +272,6 @@ public class VerPerfilCoordenadorController {
     
 public void setStage(Stage stage){
         this.stageVerPerfil= stage;
-        
-     
-    
+            
 }
 }

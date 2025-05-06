@@ -249,7 +249,7 @@
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnCadastrarADM" mnemonicParsing="false" onAction="#onClickCadastrarADM" style="-fx-background-color: DBA5A5;" text="- Cadastrar Adiministrador" textAlignment="CENTER" textFill="#840d0b" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                  <Button fx:id="btnCadastrarADM" mnemonicParsing="false" onAction="#onClickCadastrarADM" style="-fx-background-color: DBA5A5;" text="- Cadastrar Administrador" textAlignment="CENTER" textFill="#840d0b" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>

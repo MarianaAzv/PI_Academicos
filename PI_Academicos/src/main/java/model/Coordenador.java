@@ -13,6 +13,13 @@ public class Coordenador extends Usuario{
         this.formacao = formacao;
     }
     
+    // Método construtor sem boolean ativa
+    public Coordenador(int id, long cpf, String nome, String apelido, String email, String senha, int siape, String formacao ) {
+        super(id, cpf, nome, apelido, email,senha);
+        this.siape = siape;
+        this.formacao = formacao;
+    }
+    
      // Método construtor para incluir
     public Coordenador(long cpf, String nome, String apelido, String email, String senha, int siape, String formacao ) {
         super(cpf, nome, apelido, email, senha);
@@ -30,6 +37,7 @@ public class Coordenador extends Usuario{
         this.siape = siape;
         this.formacao = formacao;
     }
+
     
 
     

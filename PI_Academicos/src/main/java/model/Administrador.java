@@ -7,6 +7,11 @@ public class Administrador extends Usuario {
     public Administrador(int id, long cpf, String nome, String apelido, String email, String senha, Boolean ativa) {
         super(id, cpf, nome, apelido, email, senha, ativa);
     }
+    
+    //metodo construtor sem boolean ativa
+    public Administrador(int id, long cpf, String nome, String apelido, String email, String senha) {
+        super(id, cpf, nome, apelido, email, senha);
+    }
 
     public Administrador(long cpf, String nome, String apelido, String email, String senha, Boolean ativa) {
         super(cpf, nome, apelido, email, senha, ativa);
