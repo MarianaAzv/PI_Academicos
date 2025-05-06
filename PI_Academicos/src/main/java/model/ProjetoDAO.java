@@ -29,10 +29,14 @@ public class ProjetoDAO extends GenericDAO{
     stmtProjeto.setString(4, projeto.getEdital());
     stmtProjeto.setDate(5, Date.valueOf(projeto.getDataInicio()));  
     stmtProjeto.setDate(6,Date.valueOf(projeto.getDataFim()) ); 
-    stmtProjeto.setDate(7, Date.valueOf(projeto.getProrroacao())); 
+  stmtProjeto.setDate(7, projeto.getProrroacao() != null ? java.sql.Date.valueOf(projeto.getProrroacao()) : null);
     stmtProjeto.setBoolean(8, projeto.isEmAndamento()); 
-    stmtProjeto.executeUpdate();
    
+   
+    int linhasAfetadas = stmtProjeto.executeUpdate();
+        if (linhasAfetadas == 0) {
+            throw new SQLException("Falha ao inserir");
+        }else{
 
    ResultSet keys = stmtProjeto.getGeneratedKeys();
     if (keys.next()) {
@@ -40,6 +44,7 @@ public class ProjetoDAO extends GenericDAO{
                 projeto.setIdProjeto(idGerado);
                 System.out.println("Projeto cadastrado com ID: " + idGerado);
              }
+  }
   }
 
          catch (SQLException e) {

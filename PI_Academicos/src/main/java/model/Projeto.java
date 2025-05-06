@@ -37,7 +37,14 @@ public class Projeto {
     
     //Tentativa de incluir no Banco
     public Projeto(String titulo , String resumo, Campus campus, String edital, LocalDate dataInicio, LocalDate dataFim) {
-       
+        this.titulo = titulo;
+    this.resumo = resumo;
+    this.campus = campus;
+    this.edital = edital;
+    this.dataInicio = dataInicio;
+    this.dataFim = dataFim;
+    this.prorrogacao = null; 
+    this.emAndamento = false;    
     }
     
     public int getIdProjeto() {
