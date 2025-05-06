@@ -1,11 +1,13 @@
 package controller;
 
 
+
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -16,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import model.Campus;
+import model.CampusDAO;
 import model.Coordenador;
 import model.CoordenadorDAO;
 import model.Usuario;
@@ -27,7 +30,7 @@ public class CriarProjetoController {
     private Stage stageCriarProjeto;
     
      @FXML
-    private ComboBox<String> CBcampus;
+    private ComboBox<Campus> CBcampus;
 
     @FXML
     private ComboBox<?> CBcategoria;
@@ -157,15 +160,17 @@ public class CriarProjetoController {
 
     }
     
- void ajustarElementosJanela(Campus campus){
-     //Analisar se é campus ou se é projetos
-     //ArrayList para set dos nomes dos campus no combo box de campus
-     //  ArrayList[] campusnomes = new ArrayList[];
-       
-       //for(int i = 0;i> lenft;i++){
-      //campusnomes.setText(campus.getNomeCampus());
-    //  CBcampus= campusnome;
-    //   }
+ public void ajustarElementosJanela(){
+  //ArrayList para set dos nomes dos campus no combo box de campus
+  try{
+      CampusDAO cdao = new CampusDAO();
+     List<Campus> listCampus = cdao.buscarCampus();
+     CBcampus.getItems().clear();
+     CBcampus.getItems().addAll(listCampus);
+  } catch(SQLException e){
+    
+        mostrarAviso("Banco de Dados","A falha de comunicação entre o sistema e o Banco");
+  }
    }
     
 

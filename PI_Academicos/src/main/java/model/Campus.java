@@ -4,6 +4,13 @@ package model;
 
 public class Campus {
 
+   private int idCampus;
+   private String Projeto;
+   private String nomeCampus;
+   private String localCampus;
+   
+   
+   
     /**
      * @return the idCampus
      */
@@ -59,8 +66,9 @@ public class Campus {
     public void setLocalCampus(String localCampus) {
         this.localCampus = localCampus;
     }
-   private int idCampus;
-   private String Projeto;
-   private String nomeCampus;
-   private String localCampus;
+   @Override
+    public String toString(){
+        return nomeCampus;
+    }
+   
 }

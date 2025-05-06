@@ -201,9 +201,9 @@ public class TelaPrincipalCoordenadorController {
        
         tpc.setStage(telaCriarProjeto);
         
-       //  telaCriarProjeto.setOnShown(evento -> {
-         //   tpc.ajustarElementosJanela();
-        //});
+         telaCriarProjeto.setOnShown(evento -> {
+        tpc.ajustarElementosJanela();
+      });
         
           Scene cena = new Scene(root);
            telaCriarProjeto.setTitle("Tela Criar Projeto");
