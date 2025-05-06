@@ -36,7 +36,7 @@
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="123.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="247.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="679.0" minWidth="10.0" prefWidth="615.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="725.0" minWidth="10.0" prefWidth="700.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="105.0" />
                     </columnConstraints>
                     <rowConstraints>
@@ -48,12 +48,12 @@
                               <Font name="Courier New Bold" size="20.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets right="5.0" />
+                              <Insets />
                            </GridPane.margin>
                         </Label>
-                        <Label fx:id="lblNomeR" prefHeight="30.0" prefWidth="594.0" GridPane.columnIndex="2">
+                        <Label fx:id="lblNomeR" prefHeight="30.0" prefWidth="594.0" GridPane.columnIndex="2" GridPane.halignment="LEFT">
                            <font>
-                              <Font name="Courier New Bold" size="18.0" />
+                              <Font name="Courier New Bold" size="24.0" />
                            </font>
                         </Label>
                      </children>
@@ -64,7 +64,7 @@
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="10.0" prefWidth="247.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="290.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="125.0" minWidth="10.0" prefWidth="123.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="290.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="350.0" minWidth="10.0" prefWidth="290.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="105.0" />
                      </columnConstraints>
                      <rowConstraints>
@@ -216,17 +216,17 @@
                   <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="btnVerperfil" mnemonicParsing="false" onAction="#onClickVerPerfil" style="-fx-background-color: DBA5A5;" text="- Ver perfil" textFill="#840d0b" GridPane.halignment="CENTER">
+                  <Button fx:id="btnVerperfil" mnemonicParsing="false" onAction="#onClickVerPerfil" onMouseDragOver="#OnDragVerPerfil" prefHeight="50.0" prefWidth="280.0" style="-fx-background-color: D07979;" text="Ver perfil" textFill="#840d0b" GridPane.halignment="CENTER">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnAtualizarPerfil" mnemonicParsing="false" onAction="#onClickAtualizarPerfil" style="-fx-background-color: DBA5A5;" text="- Atualizar perfil" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                  <Button fx:id="btnAtualizarPerfil" mnemonicParsing="false" onAction="#onClickAtualizarPerfil" onMouseEntered="#OnDragEnterAtualizarPerfil" onMouseExited="#OnDragExitAtualizarPerfil" prefHeight="50.0" prefWidth="280.0" style="-fx-background-color: DBA5A5;" text="Atualizar perfil" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnSair" mnemonicParsing="false" onAction="#onClickSair" style="-fx-background-color: DBA5A5;" text="- Sair" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                  <Button fx:id="btnSair" mnemonicParsing="false" onAction="#onClickSair" prefHeight="50.0" prefWidth="280.0" style="-fx-background-color: DBA5A5;" text="Sair" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
@@ -239,17 +239,17 @@
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="77.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="btnPublicacao" mnemonicParsing="false" onAction="#onClickPublicacao" style="-fx-background-color: DBA5A5;" text="+ Publicação" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                  <Button fx:id="btnPublicacao" mnemonicParsing="false" onAction="#onClickPublicacao" prefHeight="50.0" prefWidth="280.0" style="-fx-background-color: DBA5A5;" text="+ Publicação" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnCadastrarADM" mnemonicParsing="false" onAction="#onClickCadastrarADM" style="-fx-background-color: DBA5A5;" text="- Cadastrar Administrador" textAlignment="CENTER" textFill="#840d0b" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                  <Button fx:id="btnCadastrarADM" mnemonicParsing="false" onAction="#onClickCadastrarADM" prefHeight="50.0" prefWidth="280.0" style="-fx-background-color: DBA5A5;" text="Cadastrar Administrador" textAlignment="CENTER" textFill="#840d0b" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>

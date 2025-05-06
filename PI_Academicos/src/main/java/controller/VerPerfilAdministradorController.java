@@ -12,6 +12,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
 import javafx.scene.text.Text;
 import model.Administrador;
 
@@ -95,6 +98,21 @@ public class VerPerfilAdministradorController  {
     void onClickAtualizarPerfil(ActionEvent event) {
 
     }
+    
+      @FXML
+    void OnDragEnterAtualizarPerfil(MouseEvent event) {
+        
+         btnAtualizarPerfil.setStyle("-fx-background-color: D07979" );
+
+    }
+
+    @FXML
+    void OnDragExitAtualizarPerfil(MouseEvent event) {
+        
+         btnAtualizarPerfil.setStyle("-fx-background-color:  DBA5A5" );
+
+    }
+    
 
     @FXML
     void onClickCadastrarADM(ActionEvent event) {
@@ -136,6 +154,13 @@ public class VerPerfilAdministradorController  {
     void onClickVerPerfil(ActionEvent event) {
 
     }
+    
+    @FXML
+    void OnDragVerPerfil(MouseDragEvent event) {
+
+    }
+    
+    
     
     public void setAdministrador(Administrador adm) {
        this.adm = adm;
