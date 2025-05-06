@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import static util.AlertaUtil.mostrarAviso;
 
 public class CadastroBolsistaCoordenadorController {
 
@@ -77,12 +78,25 @@ public class CadastroBolsistaCoordenadorController {
 
     @FXML
     void OnClickEnviar(ActionEvent event) {
+         try{
+        Long cpf = Long.parseLong(txtCPF.getText());
+        Long matricula = Long.parseLong(txtMatricula.getText());
+        incluir(cpf,txtNomeCompleto.getText(),txtUsuario.getText(),txtEmail.getText(),txtSenha.getText(), matricula, txtCurso.getText());
+        }catch(NumberFormatException n){
+            mostrarAviso("CPF ou Matricula inválidos","Os valores inseridos para CPF e Matricula do bolsista devem ser apenas números");
+        }
 
     }
 
     @FXML
-    void OnCliclPDF(ActionEvent event) {
+    void OnClickPDF(ActionEvent event) {
 
     }
+
+    private void incluir(Long cpf, String text, String text0, String text1, String text2, Long matricula, String text3) {
+        
+    }
+    
+   
 
 }

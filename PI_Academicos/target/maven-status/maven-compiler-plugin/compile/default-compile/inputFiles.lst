@@ -14,6 +14,7 @@ C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\Mais
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CadastroCoordenadorController.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarProjetoController.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\RecuperarSenhaCodigoController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\AreasConhecimento.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\VerPerfilCoordenadorController.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\MaisBolsistaController.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Coordenador.java
@@ -26,11 +27,13 @@ C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\util\AlertaUtil
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\EscolherProjetoController.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Administrador.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\GenericDAO.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\CampusDAO.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CriarProjetoController.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\VerPerfilAdministradorController.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\module-info.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Campus.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CadastrarArtigoController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\AreasConhecimentoDAO.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CadastroBolsistaCoordenadorController.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\CoordenadorDAO.java
 C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\LoginDAO.java

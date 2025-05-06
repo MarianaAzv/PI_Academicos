@@ -102,10 +102,6 @@ public class TelaPrincipalBolsistaController {
 
     @FXML
     private Text txtProrrogacao;
-  //  private Stage stageTelaPrincipalBolsista;
-
-
-    //private Stage stageAtualizarBolsista;
 
     public void setStage(Stage stage) {
         this.stageTelaPrincipalBolsista = stage;
@@ -142,7 +138,6 @@ public class TelaPrincipalBolsistaController {
 
         Stage stageAtualizar = new Stage();
 
-        //Stage stage = new Stage();
         
         AtualizarPerfilBolsistaController apb = loader.getController();
         apb.setBolsista(bolsista);
@@ -153,12 +148,6 @@ public class TelaPrincipalBolsistaController {
         stageAtualizar.setScene(cena);
         stageAtualizar.show();
 
-        //Scene cena = new Scene(root);
-       // stage.setTitle("Atualizar Perfil Bolsista");
-        //stage.setMaximized(true);
-       // stage.setScene(cena);
-        //stage.show();
-        //stageTelaPrincipalBolsista.close();
     }
     
     @FXML
@@ -170,8 +159,6 @@ public class TelaPrincipalBolsistaController {
         Parent root = loader.load();
 
         Stage stagePostagem = new Stage();
-
-        //Stage stage = new Stage();
         
          
         CadastrarPostagemController cpb = loader.getController();
@@ -194,8 +181,6 @@ public class TelaPrincipalBolsistaController {
         Parent root = loader.load();
 
         Stage stageArtigo = new Stage();
-
-        //Stage stage = new Stage();
         
          
         CadastrarArtigoController cab = loader.getController();

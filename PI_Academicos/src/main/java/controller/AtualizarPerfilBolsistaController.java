@@ -4,7 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-//import java.time.LocalDate;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,10 +36,10 @@ public class AtualizarPerfilBolsistaController {
     private Button btnAtualizarPerfil, btnSair;
 
     @FXML
-    private Label lblCPF, lblCurso, lblEmail, lblMatricula, lblNome; // lblDataInicio, lblDataFim;
+    private Label lblCPF, lblCurso, lblEmail, lblMatricula, lblNome, lblDataInicio, lblDataFim;
 
     @FXML
-    private TextField txtCPF, txtCurso, txtEmail, txtMatricula, txtNome, txtSenha, txtUsuario; //txtDataInicio, txtDataFim;
+    private TextField txtCPF, txtCurso, txtEmail, txtMatricula, txtNome, txtSenha, txtUsuario, txtDataInicio, txtDataFim;
 
 
     public void setStage(Stage stageAtualizarBolsista) {
@@ -55,15 +56,15 @@ public class AtualizarPerfilBolsistaController {
             txtSenha.setText(bolsista.getSenha());
             txtEmail.setText(bolsista.getEmail());
             txtMatricula.setText(String.valueOf(bolsista.getMatricula()));
-      //      txtDataInicio.setText(bolsista.getDataInicio().toString());
-         //   txtDataFim.setText(bolsista.getDataFim().toString());
+            txtDataInicio.setText(bolsista.getDataInicio().toString());
+            txtDataFim.setText(bolsista.getDataFim().toString());
         } else {
             mostrarAviso("Erro", "Bolsista não encontrado.");
         }
     }
 
-    void atualizarBolsista(int id, long cpf, String nome, String apelido, String email, String senha, boolean ativa, long matricula, String curso) throws SQLException {// LocalDate dataInicio, LocalDate dataFim, boolean acessoPostagens, boolean acessoArtigos
-        Bolsista bolsista = new Bolsista(id, cpf, nome, apelido, email, senha, ativa, matricula, curso);//dataInicio, dataFim, acessoPostagens, acessoArtigos
+    void atualizarBolsista(int id, long cpf, String nome, String apelido, String email, String senha, boolean ativa, long matricula, String curso, LocalDate dataInicio, LocalDate dataFim) throws SQLException {// LocalDate dataInicio, LocalDate dataFim, boolean acessoPostagens, boolean acessoArtigos
+        Bolsista bolsista = new Bolsista(id, cpf, nome, apelido, email, senha, ativa, matricula, curso, dataInicio, dataFim);
 
         
         int repetido = bolsistaDAO.validarApelido(apelido, id);
@@ -80,11 +81,7 @@ public class AtualizarPerfilBolsistaController {
 
     @FXML
     void onClickAtualizar(ActionEvent event) throws SQLException {
-        try {
-               // if (txtCPF.getText().isEmpty() || txtMatricula.getText().isEmpty() || txtCurso.getText().isEmpty() {//|| txtDataInicio.getText().isEmpty() {//|| txtDataFim.getText().isEmpty()) {
-              //  mostrarAviso("Campos obrigatórios", "Todos os campos devem estar preenchidos.");
-             //   return;
-            //   }
+        try {          
 
             Long cpf = Long.parseLong(txtCPF.getText());
             Long matricula = Long.parseLong(txtMatricula.getText());
@@ -93,8 +90,9 @@ public class AtualizarPerfilBolsistaController {
                 bolsista.getId(),cpf,txtNome.getText(),txtUsuario.getText(),txtEmail.getText(),txtSenha.getText(),ativa,matricula,txtCurso.getText());
                //    LocalDate dataInicio = LocalDate.parse(txtDataInicio.getText());
               //     LocalDate dataFim = LocalDate.parse(txtDataFim.getText());
-             // dataInicio,
-            //dataFim,                      
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dI = LocalDate.parse(txtDataInicio.getText(), formatter);
+        LocalDate dF= LocalDate.parse(txtDataFim.getText(), formatter);
         } catch (NumberFormatException e) {
             mostrarAviso("Erro", "CPF, matrícula e datas devem estar em formatos válidos.");
         }

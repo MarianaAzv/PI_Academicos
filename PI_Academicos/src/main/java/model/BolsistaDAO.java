@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +12,7 @@ public class BolsistaDAO extends GenericDAO {
         Connection con = conectarDAO();
 
         String queryUsuario = "INSERT INTO USUARIOS(cpf, nome, apelido, senha, email, ativa) VALUES(?,?,?,?,?,1)";
-        String queryBolsista = "INSERT INTO BOLSISTAS(idUsuario, matricula, curso) VALUES (?,?,?)";//, acessoPostagens, acessoArtigos
+        String queryBolsista = "INSERT INTO BOLSISTAS(idUsuario, matricula, curso, dataInicio, dataFim) VALUES (?,?,?,?,?)" ;
 
         try (con) {
             // inserir usuario
@@ -33,8 +34,8 @@ public class BolsistaDAO extends GenericDAO {
                 stmtBolsista.setInt(1, idGerado);
                 stmtBolsista.setLong(2, bolsista.getMatricula());
                 stmtBolsista.setString(3, bolsista.getCurso());
-            //    stmtBolsista.setBoolean(4, bolsista.getAcessoPostagens());
-          //      stmtBolsista.setBoolean(5, bolsista.getAcessoArtigos());
+                stmtBolsista.setDate(3, Date.valueOf(bolsista.getDataInicio()));  
+                stmtBolsista.setDate(4,Date.valueOf(bolsista.getDataFim()) );        
                 stmtBolsista.executeUpdate();
 
                 System.out.println("Bolsista cadastrado com ID: " + idGerado);
@@ -48,7 +49,7 @@ public class BolsistaDAO extends GenericDAO {
         Connection con = conectarDAO();
 
         String queryUsuario = "UPDATE USUARIOS SET cpf = ?, nome = ?, apelido = ?, senha = ?, email = ? WHERE idUsuario = ?";
-        String queryBolsista = "UPDATE BOLSISTAS SET matricula = ?, curso = ?= ? WHERE idUsuario = ?";//, acessoPostagens = ?, acessoArtigos 
+        String queryBolsista = "UPDATE BOLSISTAS SET matricula = ?, curso = ?,dataInicio = ?, dataFim = ? WHERE idUsuario = ?"; 
 
         try (con) {
             // inser usuario
@@ -65,9 +66,9 @@ public class BolsistaDAO extends GenericDAO {
             PreparedStatement stmtBolsista = con.prepareStatement(queryBolsista);
             stmtBolsista.setLong(1, bolsista.getMatricula());
             stmtBolsista.setString(2, bolsista.getCurso());
-         //   stmtBolsista.setBoolean(3, bolsista.getAcessoPostagens());
-        //    stmtBolsista.setBoolean(4, bolsista.getAcessoArtigos());
-            stmtBolsista.setInt(3, bolsista.getId());
+            stmtBolsista.setDate(3, Date.valueOf(bolsista.getDataInicio()));  
+            stmtBolsista.setDate(4,Date.valueOf(bolsista.getDataFim()) );               
+            stmtBolsista.setInt(5, bolsista.getId());
             stmtBolsista.executeUpdate();
 
             System.out.println("Bolsista atualizado com ID: " + bolsista.getId());
