@@ -21,7 +21,9 @@ public class LoginDAO extends GenericDAO {
 	}
         //Método para autenticar usuários
 	public Usuario autenticar(String apelido, String senha) throws SQLException {
-		String sql = "SELECT * FROM USUARIOS WHERE apelido=? AND senha=?";
+		String sql = "select * from usuarios left join coordenadores  ON coordenadores.idUsuario "
+                        + "= usuarios.idUsuario left join bolsistas ON bolsistas.idUsuario = usuarios.idUsuario"
+                        + " left join administradores on administradores.idUsuario=usuarios.idUsuario WHERE apelido=? AND senha=?";
 		Usuario usuario = null;
 		Connection con = conectarDAO();
 		if (con != null) {
@@ -34,9 +36,19 @@ public class LoginDAO extends GenericDAO {
                         System.out.println(rs);
 
 			while (rs.next()) {
-				usuario = new Usuario();
+                            
+                                if(rs.getString("formacao") != null){
+                                    usuario = new Coordenador(rs.getInt("siape"), rs.getString("formacao"));
+
+                                }
+                                else if(rs.getString("curso") != null){
+                                    usuario = new Bolsista(rs.getLong("matricula"), rs.getString("curso"));
+
+                                } else {
+                                   usuario = new Administrador(); 
+                                }
 				usuario.setId(rs.getInt("idUsuario"));
-                                usuario.setCpf(rs.getInt("cpf"));
+                                usuario.setCpf(rs.getLong("cpf"));
 				usuario.setNome(rs.getString("nome"));
 				usuario.setApelido(rs.getString("apelido"));
 				usuario.setEmail(rs.getString("email"));
@@ -44,7 +56,8 @@ public class LoginDAO extends GenericDAO {
 				usuario.setAtiva(rs.getBoolean("ativa"));
                                 
 			}
-
+                           
+                
 			rs.close();
 			stmt.close();
 			conectarDAO().close();
@@ -55,4 +68,6 @@ public class LoginDAO extends GenericDAO {
 		}
 
 	}
+        
+        
 }

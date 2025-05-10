@@ -99,7 +99,7 @@
                   <TextField fx:id="txtCurso" GridPane.columnIndex="4" GridPane.rowIndex="2" />
                   <TextField fx:id="txtSenha" GridPane.columnIndex="4" />
                   <TextField fx:id="txtEmail" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                  <Button fx:id="btnPDF" mnemonicParsing="false" onAction="#OnCliclPDF" prefHeight="27.0" prefWidth="66.0" style="-fx-background-color: #840d0b;" text="PDF" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                  <Button fx:id="btnPDF" mnemonicParsing="false" onAction="#OnClickPDF" prefHeight="27.0" prefWidth="66.0" style="-fx-background-color: #840d0b;" text="PDF" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                      <font>
                         <Font name="Courier New Bold" size="14.0" />
                      </font></Button>

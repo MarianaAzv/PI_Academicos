@@ -15,6 +15,7 @@ public class AlertaUtil {
         alerta.showAndWait();
     }
     
+
     public static void mostrarErro(String titulo, String mensagem){
         mostrarAlerta(Alert.AlertType.ERROR, titulo, mensagem);
     }
@@ -33,6 +34,8 @@ public class AlertaUtil {
         alerta.setTitle(titulo);
         alerta.setHeaderText(null);
         alerta.setContentText(mensagem);
+        
+        
         return alerta.showAndWait();
     }
 

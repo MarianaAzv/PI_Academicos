@@ -15,56 +15,62 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Bolsista;
 import model.Usuario;
+import util.AlertaUtil;
 
 public class TelaPrincipalBolsistaController {
-    //carregar
-     private Stage stageTelaPrincipalBolsista;
+
+    private Stage stageTelaPrincipalBolsista;
     private Connection conexao;
     private final Usuario dao = new Usuario();
-    private ArrayList<String> listaDados;
-    private Usuario user;
+    private Bolsista bolsista;
 
     @FXML
     private Text TxtNomeUsuario;
+     @FXML
+    private Text TxtNomeProjetoBarra;
 
     @FXML
     private Button btnArtigo;
-
+    
     @FXML
     private Button btnAtualizarPerfil;
-
-    @FXML
+     @FXML
     private Button btnOutrosProjetos;
-
+    
     @FXML
     private Button btnPublicacao;
-
+    
     @FXML
     private Button btnSair;
-
+    
     @FXML
     private Button btnVerProjeto;
-
+    
     @FXML
-    private Button btnVerperfil;
-
+    private Button btnVerPerfil;
+    
     @FXML
     private ImageView imgLogo;
-
+    
+     @FXML
+    private ImageView imgPerfil;
+    
     @FXML
     private ImageView imgPerfilProjeto;
-
-    @FXML
-    private ImageView imgProjeto;
-
+    
+      @FXML
+    private ImageView imgProjetoBarra;
+    
     @FXML
     private ImageView imgUsuarioBolsista;
-
+    
     @FXML
+    private Text textNomeProjeto;
+     @FXML
     private Label lblNomeBolsista;
 
     @FXML
@@ -77,9 +83,6 @@ public class TelaPrincipalBolsistaController {
     private Label lblResumo;
 
     @FXML
-    private Text textNomeProjeto;
-
-    @FXML
     private Text txtCampus;
 
     @FXML
@@ -89,7 +92,7 @@ public class TelaPrincipalBolsistaController {
     private Text txtInicio;
 
     @FXML
-    private Text txtNomeBolsitas;
+    private Text txtNomeBolsita;
 
     @FXML
     private Text txtNomeCocoordenador;
@@ -98,83 +101,126 @@ public class TelaPrincipalBolsistaController {
     private Text txtNomeCoordenador;
 
     @FXML
-    private Text txtNomeProjeto;
+    private Text txtProrrogacao;
+
+    public void setStage(Stage stage) {
+        this.stageTelaPrincipalBolsista = stage;
+    }
 
     @FXML
-    private Text txtProrrogacao;
-  //  private Stage stageLogin;
-    
-   // public void setStage(Stage stage){ // dps ver como diferenciar o bolsista do coordenador a partir do login
-     // this.stageLogin = stage;
-   // }
-//    
-//      @FXML
-//    void onClickVerPerfil(ActionEvent event) throws IOException {
-//
-//    
-//    Usuario usuario= null;
-//    if( usuario != null){
-//            
-//            URL url = new File("src/main/java/view/VerPerfilBolsista.fxml").toURI().toURL();
-//            FXMLLoader loader = new FXMLLoader(url);
-//            Parent root = loader.load();
-//        
-//            Stage stage = new Stage();
-//            
-//            VerPerfilBolsistaController vpfb = loader.getController(); //lembrar de arrumar o vpf do coordenador para vpfc
-//            
-//        
-//            Scene cena = new Scene(root);
-//            stage.setTitle("Perfil bolsista");
-//            stage.setScene(cena);
-//            //deixa a tela maximizada
-//            stage.setMaximized(true);
-//            
-//            stage.show();
-//            stageTelaPrincipalBolsista.close();
-//            
-//                }else {
- 
-//                       AlertaUtil.mostrarErro("Erro", "Usuário e senha inválidos!");// JAQUE adicionou um pacote Util para colocar os alertas
-//        
-//    }
-//    
-//    }
-        @FXML
+    void onClickVerPerfil(ActionEvent event) throws IOException {
+        if (bolsista != null) {
+            URL url = new File("src/main/java/view/VerPerfilBolsista.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            VerPerfilBolsistaController vpb = loader.getController();
+
+            Scene cena = new Scene(root);
+            stage.setTitle("Perfil Bolsista");
+            stage.setScene(cena);
+            stage.setMaximized(true);
+            stage.show();
+            stageTelaPrincipalBolsista.close();
+
+        } else {
+            AlertaUtil.mostrarErro("Erro", "Usuário não encontrado ou inválido.");
+        }
+    }
+
+    @FXML
     void onClickAtualizarPerfil(ActionEvent event) throws IOException {
-        
-        URL url = new File("src/main/java/view/AtualizaPerfilBolsista.fxml").toURI().toURL();       
+        URL url = new File("src/main/java/view/AtualizarPerfilBolsista.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
         
         Parent root = loader.load();
-        
-        Stage stage = new Stage();
+
+        Stage stageAtualizar = new Stage();
+
         
         AtualizarPerfilBolsistaController apb = loader.getController();
+        apb.setBolsista(bolsista);
         
         Scene cena = new Scene(root);
-        stage.setTitle("Atualizar perfil bolsista");
-        stage.setMaximized(true);
-        stage.setScene(cena);
-        stage.show();
+        stageAtualizar.setTitle("Atualizar Perfil bolsist");
+        stageAtualizar.setMaximized(true);
+        stageAtualizar.setScene(cena);
+        stageAtualizar.show();
 
     }
+    
     @FXML
-    void onClickAdicionarPublicacao(ActionEvent event) throws IOException {
-        URL url = new File("src/main/java/view/CadastrarPostagemController.fxml").toURI().toURL();
+    void onClickPublicacao(ActionEvent event) throws MalformedURLException, IOException {
         
+            URL url = new File("src/main/java/view/CadastrarPostagem.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
         
         Parent root = loader.load();
+
+        Stage stagePostagem = new Stage();
         
-        Stage stage = new Stage(); 
+         
+        CadastrarPostagemController cpb = loader.getController();
+        cpb.setStage(stagePostagem);
         
-        CadastrarPostagemController cpc = loader.getController();
+        Scene cena = new Scene(root);
+        stagePostagem.setTitle("  bolsista cadastro postagem");
+        stagePostagem.setMaximized(true);
+        stagePostagem.setScene(cena);
+        stagePostagem.show();
         
-         Scene cena = new Scene(root);
-        stage.setTitle("Cadastrar Postagem pelo bolsista");
-        stage.setMaximized(true);
-        stage.setScene(cena);
-        stage.show();
+       System.out.println(" Publicação clicado!");
+    }
+    @FXML
+    void onClickArtigo(ActionEvent event) throws MalformedURLException, IOException {
+        
+             URL url = new File("src/main/java/view/CadastrarArtigo.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        
+        Parent root = loader.load();
+
+        Stage stageArtigo = new Stage();
+        
+         
+        CadastrarArtigoController cab = loader.getController();
+        cab.setStage(stageArtigo);
+        
+        Scene cena = new Scene(root);
+        stageArtigo.setTitle("  bolsista cadastro artigo");
+        stageArtigo.setMaximized(true);
+        stageArtigo.setScene(cena);
+        stageArtigo.show();
+        
+       System.out.println(" Artigo clicado!");
+    }
+    @FXML
+    void onClickOutrosProjetos(ActionEvent event) {
+       System.out.println(" Outros Projetos clicado!");
+    }
+
+    @FXML
+    void onClickSair(ActionEvent event) {
+        stageTelaPrincipalBolsista.close();
+    }
+    @FXML
+    void onClickVerProjeto(ActionEvent event) {
+       System.out.println(" Ver Projeto clicado!");
+    }
+
+    public void setStagePrincipal(Stage telaPrincipalBolsista) {
+        this.stageTelaPrincipalBolsista = telaPrincipalBolsista;
+    }
+
+    void ajustarElementosJanela(Bolsista bolsista) {
+        this.bolsista = bolsista;
+        
+        System.out.println("Aqui chegam os parâmetros do login " +
+                bolsista.getNome() + " - " + bolsista.getMatricula() + " ATIVA: " + bolsista.getAtiva());
+        TxtNomeUsuario.setText(bolsista.getNome());
+        String matricula = String.valueOf(bolsista.getMatricula());
+        textNomeProjeto.setText(matricula);
+        TxtNomeProjetoBarra.setText(matricula);
+        
     }
 }

@@ -23,6 +23,16 @@ public class Usuario {
         this.ativa = ativa;
     }
 
+    // Método construtor sem boolean ativa
+
+    public Usuario(int id, long cpf, String nome, String apelido, String email, String senha) {
+        this.id = id;
+        this.cpf = cpf;
+        this.nome = nome;
+        this.apelido = apelido;
+        this.email = email;
+        this.senha = senha;
+    }
     
    
 
@@ -117,11 +127,6 @@ public class Usuario {
         this.ativa = ativa;
     }
     
-
-   
-    
-	
-
 	
     
 }

@@ -29,7 +29,7 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label fx:id="lbltitulocriarprojeto" text="Criar Projeto" textFill="#840d0b" GridPane.columnIndex="2" GridPane.rowIndex="1">
+      <Label fx:id="lbltitulocriarprojeto" text="Atualizar Projeto" textFill="#840d0b" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <padding>
             <Insets top="40.0" />
          </padding>
@@ -107,7 +107,6 @@
                      </GridPane.margin>
                   </Label>
                   <TextField fx:id="txtCoordenador" prefHeight="25.0" prefWidth="932.0" GridPane.columnIndex="2" />
-                  <TextField fx:id="txtCampus" prefHeight="25.0" prefWidth="242.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                   <TextField fx:id="txtDatadeInicio" prefHeight="25.0" prefWidth="249.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                   <Label fx:id="lblCategoria" text="Categoria:" textFill="#840d0b" GridPane.columnIndex="3" GridPane.halignment="RIGHT">
                      <font>
@@ -191,6 +190,7 @@
                      </font>
                   </Label>
                   <TextField fx:id="txtProrrogacao" layoutX="383.0" layoutY="215.0" prefHeight="25.0" prefWidth="249.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                  <ComboBox fx:id="CBcampus" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                </children>
             </GridPane>
             <GridPane prefHeight="169.0" prefWidth="1221.0">

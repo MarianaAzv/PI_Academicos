@@ -19,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Coordenador;
 //import model.Coordenador;
 import model.Usuario;
 
@@ -27,8 +28,9 @@ public class TelaPrincipalCoordenadorController {
     private Stage stagePrincipalCoordenador;
     private Connection conexao;
     private final Usuario dao = new Usuario();
-    private ArrayList<String> dados;
-    private Usuario user;
+ 
+    private Coordenador coordenador;
+    
 
     @FXML
     private Text TxtNomeUsuario;
@@ -43,7 +45,7 @@ public class TelaPrincipalCoordenadorController {
     private Button btnAtualizarProjeto;
 
     @FXML
-    private Button btnCriarPerfil;
+    private Button btnCriarProjeto;
 
     @FXML
     private Button btnOutrosProjetos;
@@ -68,9 +70,6 @@ public class TelaPrincipalCoordenadorController {
 
     @FXML
     private ImageView imgProjeto;
-
-    @FXML
-    private ImageView imgUsuarioCoordenador;
 
     @FXML
     private Label lblNomeBolsista;
@@ -110,52 +109,46 @@ public class TelaPrincipalCoordenadorController {
 
     @FXML
     private Text txtProrrogacao;
-    private Stage stageLogin;
     
-    //Text txtNomeCoordenador = " " + dados.get(0);;
     
-public void setStage(Stage stage){
-        this.stageLogin = stage;
+   
+    
+    public void setStage(Stage stage){
+        this.stagePrincipalCoordenador = stage;
+        
+        
+        
     }
 
-       @FXML
+    @FXML
     void onClickVerPerfil(ActionEvent event) throws IOException {
 
-        //carregando a tela principal do coordenador
-        Usuario usuario = null; //talvez errado
-         if( usuario != null){
             
             URL url = new File("src/main/java/view/VerPerfilCoordenador.fxml").toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
         
-            Stage stage = new Stage();
+            Stage stageVerPerfil = new Stage();
             
             VerPerfilCoordenadorController vpf = loader.getController();
-            
+            vpf.setCoordenador(coordenador); 
+            vpf.setStage(stageVerPerfil);
         
             Scene cena = new Scene(root);
-            stage.setTitle("Perfil Coordenador");
-            stage.setScene(cena);
+            stageVerPerfil.setTitle("Perfil Coordenador");
+            stageVerPerfil.setScene(cena);
             //deixa a tela maximizada
-            stage.setMaximized(true);
+            stageVerPerfil.setMaximized(true);
             
-            stage.show();
+            stageVerPerfil.show();
             stagePrincipalCoordenador.close();
             
-            }else {
             
-        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-        alerta.setTitle("Nome ou senha incorretos");
-        alerta.setHeaderText("Verifique as informações inseridas");
-        alerta.setContentText("Digite novamente");
-        alerta.showAndWait();
-        
-    }
 }
+   
     
     @FXML
-    void onClickAtualizarPerfil(MouseEvent event) throws MalformedURLException, IOException {
+    void onClickAtualizarPerfil(ActionEvent event) throws IOException {
 
         URL url = new File("src/main/java/view/AtualizarPerfilCoordenador.fxml").toURI().toURL();       
         FXMLLoader loader = new FXMLLoader(url);
@@ -165,68 +158,156 @@ public void setStage(Stage stage){
         Stage stageAtualizar = new Stage();
         
         AtualizarPerfilCoordenadorController apcc = loader.getController();
-        
-        
+        apcc.setCoordenador(coordenador); 
+        apcc.setStage(stageAtualizar);
         
         Scene cena = new Scene(root);
         stageAtualizar.setTitle("Atualizar Perfil Coordenador");
         stageAtualizar.setMaximized(true);
         stageAtualizar.setScene(cena);
         stageAtualizar.show();
-    }     
-            
-     
-     public void setStagePrincipal(Stage telaPrincipalCoordenador){
-      this.stagePrincipalCoordenador = telaPrincipalCoordenador;
-   }
+        stagePrincipalCoordenador.close();
+               
+    } 
 
+    @FXML
+    void onClickAdicionarArtigo(ActionEvent event) {
         
+        
+        
+    }
+
+    @FXML
+    void onClickAdicionarPublicacao(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onClickAtualizarProjeto(ActionEvent event) throws MalformedURLException, IOException {
+ //URL url = new File("src/main/java/view/AtualizarProjeto.fxml").toURI().toURL();       
+   //     FXMLLoader loader = new FXMLLoader(url);
+   //     
+    //    Parent root = loader.load();
+        
+     //   Stage stageAtualizarProjeto = new Stage();
+        
+      //  AtualizarProjetoController apc = loader.getController();
+        
+     //   apc.setStage(stageAtualizarProjeto);
+        
+    //    Scene cena = new Scene(root);
+    //    stageAtualizarProjeto.setTitle("Atualizar Projeto");
+    //    stageAtualizarProjeto.setMaximized(true);
+    //    stageAtualizarProjeto.setScene(cena);
+     //   stageAtualizarProjeto.show();
+     //   stagePrincipalCoordenador.close();
+
+    }
+
     
-   // void onClickAtualizarPerfil(){
+    @FXML
+    void onClickCriarProjeto(ActionEvent event) throws IOException, MalformedURLException {
+
+         if(coordenador.getAtiva()==true){
+                 
+         URL url = new File("src/main/java/view/CriarProjeto.fxml").toURI().toURL();
         
-   // }
-    
-  //  void onClickCriarProjeto(){
-        
-   // }
-  //  void onClickSair(){
-        
-  //  }
-   // void onClickAdicionarPublicação(){
-        
-  //  }
-   // void onClickAdicionarArtigo(){
-        
-  //  }
-  //  void onClickAtualizarProjeto(){
-        
- //   }
-   // void onClickOutrosProjetos(){
-     
-     private void abrirTelaAtualizarPerfil(ArrayList<String> listaDados) throws MalformedURLException, IOException{
-         URL url = new File("src/main/java/view/AtualizarPerfilCoordenador.fxml").toURI().toURL();       
         FXMLLoader loader = new FXMLLoader(url);
         
         Parent root = loader.load();
+        //Comunicar com o combo box com o DAO
         
-        Stage stageAtualizar = new Stage();
         
-        AtualizarPerfilCoordenadorController apcc = loader.getController();
+        Stage telaCriarProjeto = new Stage();
         
-        Scene cena = new Scene(root);
-        stageAtualizar.setTitle("Atualizar Perfil Coordenador");
-        stageAtualizar.setMaximized(true);
-        stageAtualizar.setScene(cena);
-        stageAtualizar.show();
-     }
-    
-    void ajustarElementosJanela(ArrayList<String> dados) {
-        System.out.println("Aqui chegam os parâmetros do login "
-                + dados.get(0) + " - " + dados.get(1));
-        txtNomeCoordenador.setText(dados.get(0));
-        textNomeProjeto.setText(dados.get(0));
+         CriarProjetoController tpc = loader.getController();
+       
+        tpc.setStage(telaCriarProjeto);
+        
+         telaCriarProjeto.setOnShown(evento -> {
+        tpc.ajustarElementosJanela();
+      });
+        
+          Scene cena = new Scene(root);
+           telaCriarProjeto.setTitle("Tela Criar Projeto");
+            telaCriarProjeto.setMaximized(true);
+        telaCriarProjeto.setScene(cena);
+        telaCriarProjeto.show();
+        
+         }
+        
+        
        
     }
+
+    @FXML
+    void onClickOutrosProjetos(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onClickSair(ActionEvent event) throws IOException {
+
+         URL url = new File("src/main/java/view/TelaLogin.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stageLogin = new Stage();
+
+        TelaLoginController tpc = loader.getController();
+        tpc.setStage(stageLogin);     
+
+        Scene cena = new Scene(root);
+        stageLogin.setTitle("Tela de Login");
+        stageLogin.setScene(cena);
+        //deixa a tela maximizada
+        stageLogin.setMaximized(true);
+        stageLogin.show();
+        
+        stagePrincipalCoordenador.close();
+        
+
+    }
+
+
+    @FXML
+    void onClickVerProjeto(ActionEvent event) {
+
+    }    
+            
+     
+     public void setStagePrincipal(Stage stagePrincipalCoordenador){
+      this.stagePrincipalCoordenador = stagePrincipalCoordenador;
+   }
+
+       
+    
+    void ajustarElementosJanela(Coordenador coordenador) {
+        this.coordenador=coordenador;
+        
+        System.out.println("Aqui chegam os parâmetros do login "
+                + coordenador.getNome() + " - " + coordenador.getSiape() + "ATIVA: " + coordenador.getAtiva());
+        txtNomeCoordenador.setText(coordenador.getNome());
+        String siape = String.valueOf(coordenador.getSiape());
+        textNomeProjeto.setText(siape);
+        
+        if(coordenador.getAtiva()==false){
+        
+        btnArtigo.setStyle("-fx-text-fill: gray; -fx-background-color: DBA5A5;");
+        btnPublicacao.setStyle("-fx-text-fill: gray; -fx-background-color: DBA5A5;");
+        btnCriarProjeto.setStyle("-fx-text-fill: gray; -fx-background-color: DBA5A5;");
+        btnAtualizarProjeto.setStyle("-fx-text-fill: gray; -fx-background-color: DBA5A5;");
+        }
+       
+    }
+    
+    //public void setCoordenador(Coordenador coord) {
+      // this.coordenador = coord;
+    //}
+    
+    
+    
+   
         
    }
     

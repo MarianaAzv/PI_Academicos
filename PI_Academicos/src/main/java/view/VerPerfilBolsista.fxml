@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="920.0" minWidth="1290.0" style="-fx-background-color: ECECEC;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="VerPerfilBolsistaController.controller">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="920.0" minWidth="1290.0" style="-fx-background-color: ECECEC;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.VerPerfilBolsistaController">
   <columnConstraints>
     <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="1012.0" />
     <ColumnConstraints hgrow="NEVER" maxWidth="300.0" minWidth="10.0" prefWidth="300.0" />
@@ -125,7 +125,7 @@
                               <Insets right="5.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label fx:id="lblUsuarioBols" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="2">
+                        <Label fx:id="lblUsuarioBolsista" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="2">
                            <font>
                               <Font name="Courier New Bold" size="18.0" />
                            </font>
@@ -133,7 +133,7 @@
                               <Insets left="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="lblCPFBols" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <Label fx:id="lblCPFBolsista" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <font>
                               <Font name="Courier New Bold" size="18.0" />
                            </font>
@@ -141,7 +141,7 @@
                               <Insets left="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="lblFormacaoBols" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                        <Label fx:id="lblMatriculaBols" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                            <font>
                               <Font name="Courier New Bold" size="18.0" />
                            </font>
@@ -149,7 +149,7 @@
                               <Insets left="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="lblSenhaBols" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="4">
+                        <Label fx:id="lblSenhaBolsista" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="4">
                            <font>
                               <Font name="Courier New Bold" size="18.0" />
                            </font>
@@ -157,7 +157,7 @@
                               <Insets left="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="lblEmailBols" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                        <Label fx:id="lblEmailBolsista" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
                            <font>
                               <Font name="Courier New Bold" size="18.0" />
                            </font>
@@ -165,7 +165,7 @@
                               <Insets left="5.0" />
                            </padding>
                         </Label>
-                        <Label fx:id="lblSIAPEBols" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                        <Label fx:id="lblCursoBolsista" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
                            <font>
                               <Font name="Courier New Bold" size="18.0" />
                            </font>
@@ -199,7 +199,7 @@
                               <Font name="Courier New Bold" size="20.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblInicioDaBolsa1" text="Fim da bolsa:" textFill="#840d0b" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                        <Label fx:id="lblFimDaBolsa" text="Fim da bolsa:" textFill="#840d0b" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                            <font>
                               <Font name="Courier New Bold" size="20.0" />
                            </font>
@@ -292,11 +292,6 @@
                </rowConstraints>
                <children>
                   <ImageView fx:id="imgProjeto" fitHeight="87.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
-                  <Text fx:id="TxtNomeUsuario1" fill="#840d0b" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                     <font>
-                        <Font name="Courier New Bold" size="14.0" />
-                     </font>
-                  </Text>
                   <Label fx:id="lblNomeProjeto" contentDisplay="CENTER" prefHeight="115.0" prefWidth="174.0" textAlignment="RIGHT" textFill="#840d0b" wrapText="true" GridPane.valignment="BOTTOM">
                      <font>
                         <Font name="Courier New Bold" size="20.0" />
@@ -315,7 +310,7 @@
                   <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="btnVerperfil" mnemonicParsing="false" onAction="#onClickVerPerfil" style="-fx-background-color: DBA5A5;" text="- Ver perfil" textFill="#840d0b" GridPane.halignment="CENTER">
+                  <Button fx:id="btnVerPerfil" mnemonicParsing="false" onAction="#onClickVerPerfil" style="-fx-background-color: DBA5A5;" text="- Ver perfil" textFill="#840d0b" GridPane.halignment="CENTER">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
@@ -368,7 +363,7 @@
             </GridPane>
          </children>
          <GridPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            <Insets bottom="10.0" left="10.0" right="10.0" top="27.0" />
          </GridPane.margin>
       </GridPane>
    </children>

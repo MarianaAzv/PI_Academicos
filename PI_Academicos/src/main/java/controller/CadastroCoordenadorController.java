@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 import model.Coordenador;
 import model.CoordenadorDAO;
 import model.Usuario;
+import static util.AlertaUtil.mostrarAviso;
+import static util.AlertaUtil.mostrarConfirmacao;
 
 public class CadastroCoordenadorController {
     
@@ -77,10 +79,15 @@ public class CadastroCoordenadorController {
     @FXML
     void OnClickSubmeter(ActionEvent event) throws SQLException {
         
+        try{
         Long cpf = Long.parseLong(txtCPF.getText());
         int siape = Integer.parseInt(txtSIAPE.getText());
-        
         incluir(cpf,txtNomeCompleto.getText(),txtUsuario.getText(),txtEmail.getText(),txtSenha.getText(), siape, txtFormacao.getText());
+        }catch(NumberFormatException n){
+            mostrarAviso("CPF ou SIAPE inválidos","Os valores inseridos para CPF e SIAPE devem ser apenas números");
+        }
+        
+        
     }
     
     public void setStage(Stage telaCadastroCoordenador){
@@ -90,9 +97,19 @@ public class CadastroCoordenadorController {
     void incluir(Long cpf, String nome, String apelido, String email, String senha, int siape, String formacao) throws SQLException {
         Usuario usuario = new Usuario(cpf, nome, apelido, email, senha);
         Coordenador coordenador = new Coordenador(siape, formacao);
+        int repetido = new CoordenadorDAO().validarApelido(apelido,0);
+        if(repetido>0){
+            mostrarAviso("Nome de usuário indisponível","Este nome de usuário já está sendo usado");
+           
+        }
+        else if(nome.isEmpty() || apelido.isEmpty() || email.isEmpty() || senha.isEmpty()){
+         mostrarAviso("Campos de preenchimento obrigatórios","Todos os campos de cadastro devem ser preenchidos.");
+    }
+        else{
         new CoordenadorDAO().cadastrarUsuarioCoordenador(usuario,coordenador);
-        System.out.println("Registro inserido com sucesso!");
+        mostrarConfirmacao("Usuário cadastrado","O usuário foi registrado no sistema com sucesso!");
         stageCadastroCoordenador.close();
+        }
     }
     
 }
