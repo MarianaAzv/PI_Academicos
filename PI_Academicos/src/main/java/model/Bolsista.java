@@ -51,6 +51,11 @@ public class Bolsista extends Usuario {
         this.dataFim = dataFim;
 
     }
+//11-05
+    Bolsista(long aLong, String string) {
+        this.matricula = matricula;
+        this.curso = curso;
+    }
 
     // GetSet ok
     public long getMatricula() {

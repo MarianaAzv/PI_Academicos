@@ -204,7 +204,7 @@
                               <Font name="Courier New Bold" size="20.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblDataInicioBols" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                        <Label fx:id="lblDataFimBols" prefHeight="24.0" prefWidth="280.0" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.valignment="TOP">
                            <font>
                               <Font name="Courier New Bold" size="18.0" />
                            </font>

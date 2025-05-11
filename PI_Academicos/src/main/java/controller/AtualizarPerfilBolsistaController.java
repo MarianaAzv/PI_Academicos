@@ -86,13 +86,13 @@ public class AtualizarPerfilBolsistaController {
             Long cpf = Long.parseLong(txtCPF.getText());
             Long matricula = Long.parseLong(txtMatricula.getText());
       
-            atualizarBolsista(
-                bolsista.getId(),cpf,txtNome.getText(),txtUsuario.getText(),txtEmail.getText(),txtSenha.getText(),ativa,matricula,txtCurso.getText());
-               //    LocalDate dataInicio = LocalDate.parse(txtDataInicio.getText());
-              //     LocalDate dataFim = LocalDate.parse(txtDataFim.getText());
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate dI = LocalDate.parse(txtDataInicio.getText(), formatter);
-        LocalDate dF= LocalDate.parse(txtDataFim.getText(), formatter);
+          DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+LocalDate dataInicio = LocalDate.parse(txtDataInicio.getText(), formatter);
+LocalDate dataFim = LocalDate.parse(txtDataFim.getText(), formatter);
+
+atualizarBolsista(
+    bolsista.getId(), cpf, txtNome.getText(), txtUsuario.getText(), txtEmail.getText(),
+    txtSenha.getText(), ativa, matricula, txtCurso.getText(), dataInicio, dataFim);
         } catch (NumberFormatException e) {
             mostrarAviso("Erro", "CPF, matrícula e datas devem estar em formatos válidos.");
         }

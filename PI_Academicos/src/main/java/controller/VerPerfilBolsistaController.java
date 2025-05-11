@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,12 +15,13 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Bolsista;
 
 public class VerPerfilBolsistaController {
     
-    private Stage stageTelaPrincipalBolsista;
-    private Stage stageLogin;
-
+    private Stage stage;
+    Bolsista bolsista;
+    
     @FXML
     private Text TxtNomeUsuario;
 
@@ -69,6 +71,9 @@ public class VerPerfilBolsistaController {
     private Label lblData;
 
     @FXML
+    private Label lblDataFimBols;
+    
+    @FXML
     private Label lblDataInicioBols;
 
     @FXML
@@ -112,6 +117,34 @@ public class VerPerfilBolsistaController {
 
     @FXML
     private Label lblUsuarioBolsista;
+     public void setBolsista(Bolsista bol) {
+    this.bolsista = bol;
+    lblNomeBol.setText(bolsista.getNome());
+    lblUsuarioBolsista.setText(bolsista.getApelido());
+    lblCPFBolsista.setText(String.valueOf(bolsista.getCpf()));
+    lblCursoBolsista.setText(bolsista.getCurso());
+    lblSenhaBolsista.setText(bolsista.getSenha());
+    lblEmailBolsista.setText(bolsista.getEmail());
+    lblMatriculaBols.setText(String.valueOf(bolsista.getMatricula()));
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    // Verificando se as datas não estão nulas antes de formatar
+    if (bolsista.getDataInicio() != null) {
+        lblDataInicioBols.setText(bolsista.getDataInicio().format(formatter));
+    } else {
+        lblDataInicioBols.setText("Data não disponível");
+    }
+
+    if (bolsista.getDataFim() != null) {
+        lblDataFimBols.setText(bolsista.getDataFim().format(formatter));
+    } else {
+        lblDataFimBols.setText("Data não disponível");
+    }
+
+       //lblDataInicioBols.setText(bolsista.getDataInicio().toString());
+      // lblDataFimBols.setText(bolsista.getDataFim().toString());
+    }
 
     @FXML
     void onClickArtigo(ActionEvent event) {
@@ -137,7 +170,7 @@ public class VerPerfilBolsistaController {
             stage.setMaximized(true);
             
             stage.show();
-            stageLogin.close();
+            stage.close();
 
     }
 
@@ -174,7 +207,7 @@ public class VerPerfilBolsistaController {
             stage.setMaximized(true);
             
             stage.show();
-            stageLogin.close();
+            stage.close();
 
     }
 
@@ -196,7 +229,7 @@ public class VerPerfilBolsistaController {
             stage.setMaximized(true);
             
             stage.show();
-            stageLogin.close();
+            stage.close();
 
     }
 

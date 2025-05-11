@@ -107,27 +107,32 @@ public class TelaPrincipalBolsistaController {
         this.stageTelaPrincipalBolsista = stage;
     }
 
-    @FXML
-    void onClickVerPerfil(ActionEvent event) throws IOException {
+   @FXML
+void onClickVerPerfil(ActionEvent event) {
+    try {
         if (bolsista != null) {
             URL url = new File("src/main/java/view/VerPerfilBolsista.fxml").toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
 
-            Stage stage = new Stage();
             VerPerfilBolsistaController vpb = loader.getController();
+            vpb.setBolsista(this.bolsista);
 
+            Stage stage = new Stage();
             Scene cena = new Scene(root);
             stage.setTitle("Perfil Bolsista");
             stage.setScene(cena);
             stage.setMaximized(true);
             stage.show();
             stageTelaPrincipalBolsista.close();
-
         } else {
             AlertaUtil.mostrarErro("Erro", "Usuário não encontrado ou inválido.");
         }
+    } catch (Exception e) {
+        e.printStackTrace();
+        AlertaUtil.mostrarErro("Erro ao abrir tela", e.getMessage());
     }
+}
 
     @FXML
     void onClickAtualizarPerfil(ActionEvent event) throws IOException {
