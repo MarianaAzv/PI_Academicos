@@ -136,15 +136,21 @@ public class CriarProjetoController {
       // Localdate para data
         //LocalDate;
        try{ 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        
+       
+       if(txtNomedoProjeto.getText().isEmpty() || txtResumo.getText().isEmpty() ||txtEdital.getText().isEmpty() || txtDatadeInicio.getText().isEmpty() || txtDatadeFim.getText().isEmpty() ||  CBcampus.getValue() == null || CBcategoria.getValue() == null  ){
+           mostrarAviso("Falta informacao","Por favor inserir todos os dados corretamente");
+           
+           return;
+       } else{
+       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dI = LocalDate.parse(txtDatadeInicio.getText(), formatter);
         LocalDate dF= LocalDate.parse(txtDatadeFim.getText(), formatter);
-       
-       Campus campusnomeSelecionado = CBcampus.getValue();
-       
+         
+         Campus campusnomeSelecionado = CBcampus.getValue();
          
      incluir(txtNomedoProjeto.getText(),txtResumo.getText(),campusnomeSelecionado,txtEdital.getText(),dI,dF,null,true);
-      
+       }
    
      } catch(SQLException e){
           mostrarAviso("Falha","A falha em cadastrar esse projeto");
