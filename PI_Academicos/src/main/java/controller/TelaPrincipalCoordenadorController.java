@@ -184,23 +184,23 @@ public class TelaPrincipalCoordenadorController {
 
     @FXML
     void onClickAtualizarProjeto(ActionEvent event) throws MalformedURLException, IOException {
- //URL url = new File("src/main/java/view/AtualizarProjeto.fxml").toURI().toURL();       
-   //     FXMLLoader loader = new FXMLLoader(url);
-   //     
-    //    Parent root = loader.load();
+ URL url = new File("src/main/java/view/AtualizarProjeto.fxml").toURI().toURL();       
+      FXMLLoader loader = new FXMLLoader(url);
+       
+      Parent root = loader.load();
         
-     //   Stage stageAtualizarProjeto = new Stage();
+     Stage stageAtualizarProjeto = new Stage();
         
-      //  AtualizarProjetoController apc = loader.getController();
+       AtualizarProjetoController apc = loader.getController();
         
-     //   apc.setStage(stageAtualizarProjeto);
+        apc.setStage(stageAtualizarProjeto);
         
-    //    Scene cena = new Scene(root);
-    //    stageAtualizarProjeto.setTitle("Atualizar Projeto");
-    //    stageAtualizarProjeto.setMaximized(true);
-    //    stageAtualizarProjeto.setScene(cena);
-     //   stageAtualizarProjeto.show();
-     //   stagePrincipalCoordenador.close();
+      Scene cena = new Scene(root);
+       stageAtualizarProjeto.setTitle("Atualizar Projeto");
+       stageAtualizarProjeto.setMaximized(true);
+        stageAtualizarProjeto.setScene(cena);
+       stageAtualizarProjeto.show();
+        stagePrincipalCoordenador.close();
 
     }
 

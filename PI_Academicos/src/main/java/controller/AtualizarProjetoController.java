@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import model.AreasConhecimento;
 import model.Campus;
+import model.Coordenador;
 import model.Projeto;
 import model.ProjetoDAO;
 import static util.AlertaUtil.mostrarAviso;
@@ -23,6 +24,7 @@ import static util.AlertaUtil.mostrarConfirmacao;
 public class AtualizarProjetoController {
 
      private Stage stageAtualizarProjeto;
+     Projeto projeto;
         @FXML
     private ComboBox<Campus> CBcampus;
     @FXML
@@ -116,25 +118,27 @@ public class AtualizarProjetoController {
 
     @FXML
     void OnClickAtualizar(ActionEvent event) {
-     //  try{
-      
-        //    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-     //   LocalDate dI = LocalDate.parse(txtDatadeInicio.getText(), formatter);
-     //   LocalDate dF= LocalDate.parse(txtDatadeFim.getText(), formatter);
-      //   LocalDate PR= LocalDate.parse(txtProrrogacao.getText(), formatter);
-         
-       //    Campus campusnomeSelecionado = CBcampus.getValue();
-          // Projeto.setIdProjeto(IdProjeto);
         
-   //  atualizarProjeto(Projeto.getid,txtNomedoProjeto.getText(),txtResumo.getText(),campusnomeSelecionado,txtEdital.getText(),dI,dF,PR);
+       try{
+      
+           DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+       LocalDate dI = LocalDate.parse(txtDatadeInicio.getText(), formatter);
+       LocalDate dF= LocalDate.parse(txtDatadeFim.getText(), formatter);
+         LocalDate PR= LocalDate.parse(txtProrrogacao.getText(), formatter);
+         
+           Campus campusnomeSelecionado = CBcampus.getValue();
+          
+          
+        
+     atualizarProjeto(projeto.getIdProjeto(),txtNomedoProjeto.getText(),txtResumo.getText(),campusnomeSelecionado,txtEdital.getText(),dI,dF,PR);
      
      
-   //    } catch(SQLException e){
-    //      mostrarAviso("Falha","A falha em atuaizar esse projeto");
-   //  } 
-  //     catch(DateTimeParseException e){
-  //        mostrarAviso("Falha","O formato da data de inicio ou de Fim nao esta no padrao normal");
-  //   }
+      } catch(SQLException e){
+         mostrarAviso("Falha","A falha em atuaizar esse projeto");
+     } 
+       catch(DateTimeParseException e){
+         mostrarAviso("Falha","O formato da data de inicio ou de Fim nao esta no padrao normal");
+    }
     }
     
 
@@ -150,12 +154,28 @@ public class AtualizarProjetoController {
     
      public void setStage(Stage telaAtualizarProjeto){
         this.stageAtualizarProjeto = telaAtualizarProjeto;
+        
+    }
+     
+     public void setProjeto(Projeto pro) {
+       this.projeto = pro;
+       txtNomedoProjeto.setText(projeto.getTitulo());
+       txtResumo.setText(projeto.getResumo());
+       txtEdital.setText(projeto.getEdital());
+      String DataInicio = String.valueOf(projeto.getDataInicio());
+      txtDatadeInicio.setText(DataInicio);
+       String DataFim = String.valueOf(projeto.getDataFim());
+      txtDatadeInicio.setText(DataFim);
+      String prorroga = String.valueOf(projeto.getProrroacao());
+      txtProrrogacao.setText(prorroga);
+      txtCoordenador.setText(projeto.getCocoordenadores());
+      
     }
   void atualizarProjeto(int idProjeto,String titulo,String resumo, Campus campus, String edital,LocalDate dataInicio,LocalDate dataFim,LocalDate prorrogacao ) throws SQLException{
         
-       //  ProjetoDAO pdao =new ProjetoDAO();
-      //  pdao.atualizarProjeto(Projeto);
-      // mostrarConfirmacao("Projeto alterado","O projeto foi alterado com sucesso!");
+         ProjetoDAO pdao =new ProjetoDAO();
+        pdao.atualizarProjeto(projeto);
+       mostrarConfirmacao("Projeto alterado","O projeto foi alterado com sucesso!");
         
   }
 }

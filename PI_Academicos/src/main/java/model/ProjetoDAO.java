@@ -53,35 +53,35 @@ public class ProjetoDAO extends GenericDAO{
 }
     }
     
-   //  public void atualizarCoordenador(Projeto projeto) throws SQLException {
-  //
-  //      Connection con = conectarDAO();
+    public void atualizarProjeto(Projeto projeto) throws SQLException {
+  
+        Connection con = conectarDAO();
         
-  //      String queryUsuario = "UPDATE projetos SET tituloProjeto = ?, resumo = ?, idCampus = ?, edital = ?, dataInicio = ?, dataFim = ?,prorrogacao = ?, emAndamento = ? WHERE IdProjeto = ?";
+        String queryUsuario = "UPDATE projetos SET tituloProjeto = ?, resumo = ?, idCampus = ?, edital = ?, dataInicio = ?, dataFim = ?,prorrogacao = ?, emAndamento = ? WHERE IdProjeto = ?";
        
 
- //   try (con) {
+    try (con) {
     
-  //  PreparedStatement stmtProjeto = con.prepareStatement(queryUsuario, PreparedStatement.RETURN_GENERATED_KEYS);
-  //  stmtProjeto.setString(1, projeto.getTitulo());
-  //  stmtProjeto.setString(2, projeto.getResumo());
+   PreparedStatement stmtProjeto = con.prepareStatement(queryUsuario, PreparedStatement.RETURN_GENERATED_KEYS);
+   stmtProjeto.setString(1, projeto.getTitulo());
+   stmtProjeto.setString(2, projeto.getResumo());
   
- //  stmtProjeto.setInt(3, projeto.getCampus().getIdCampus());
+   stmtProjeto.setInt(3, projeto.getCampus().getIdCampus());
  
- //   stmtProjeto.setString(4, projeto.getEdital());
- //   stmtProjeto.setDate(5, Date.valueOf(projeto.getDataInicio()));  
- //   stmtProjeto.setDate(6,Date.valueOf(projeto.getDataFim()) ); 
-//  stmtProjeto.setDate(7, projeto.getProrroacao() != null ? java.sql.Date.valueOf(projeto.getProrroacao()) : null);
- //   stmtProjeto.setBoolean(8, projeto.isEmAndamento());  
- //   stmtProjeto.executeUpdate();
+    stmtProjeto.setString(4, projeto.getEdital());
+    stmtProjeto.setDate(5, Date.valueOf(projeto.getDataInicio()));  
+    stmtProjeto.setDate(6,Date.valueOf(projeto.getDataFim()) ); 
+  stmtProjeto.setDate(7, projeto.getProrroacao() != null ? java.sql.Date.valueOf(projeto.getProrroacao()) : null);
+   stmtProjeto.setBoolean(8, projeto.isEmAndamento());  
+   stmtProjeto.executeUpdate();
 
 
 
         
 
-     //   System.out.println("Projeto cadastrado com ID: " + projeto.getIdProjeto());
-   // }
-//} 
+  System.out.println("Projeto atualizado com ID: " + projeto.getIdProjeto());
+ }
+} 
 }
 
     
