@@ -140,24 +140,24 @@ public class TelaPrincipalAdministradorController {
             stageADM.close();
     }
      
-    private void abrirTelaCadastroADM() throws IOException{
-        
-         URL url = new File("src/main/java/view/CadastrarAdministrador.fxml").toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-        
-            Stage stageCadastroADM = new Stage();
-        
-            CadastrarAdministradorController cac = loader.getController();    
-            cac.setStage(stageCadastroADM);
-        
-            Scene cena = new Scene(root);
-            stageCadastroADM.setTitle("Tela Cadastrar Administrador");
-            stageCadastroADM.setScene(cena);
-            
-            stageCadastroADM.show();
-            
-    }
+//    private void abrirTelaCadastroADM() throws IOException{
+//        
+//         URL url = new File("src/main/java/view/CadastrarAdministrador.fxml").toURI().toURL();
+//            FXMLLoader loader = new FXMLLoader(url);
+//            Parent root = loader.load();
+//        
+//            Stage stageCadastroADM = new Stage();
+//        
+//            CadastrarAdministradorController cac = loader.getController();    
+//            cac.setStage(stageCadastroADM);
+//        
+//            Scene cena = new Scene(root);
+//            stageCadastroADM.setTitle("Tela Cadastrar Administrador");
+//            stageCadastroADM.setScene(cena);
+//            
+//            stageCadastroADM.show();
+//            
+//    }
     
     private void abrirTelaVerPerfilADM() throws IOException{
         

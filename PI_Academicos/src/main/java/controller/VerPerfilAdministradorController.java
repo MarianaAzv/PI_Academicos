@@ -2,6 +2,7 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
@@ -23,17 +24,17 @@ public class VerPerfilAdministradorController  {
     Administrador adm;
     private Stage stageVerPerfil;
     
-    @FXML
+   @FXML
     private Text TxtNomeUsuario;
 
     @FXML
-    private Text TxtNomeUsuario1;
+    private Button btnADM;
 
     @FXML
     private Button btnAtualizarPerfil;
 
     @FXML
-    private Button btnCadastrarADM;
+    private Button btnNotificacoes;
 
     @FXML
     private Button btnPublicacao;
@@ -46,9 +47,6 @@ public class VerPerfilAdministradorController  {
 
     @FXML
     private ImageView imgFotoAdministrador;
-
-    @FXML
-    private ImageView imgInstituto;
 
     @FXML
     private ImageView imgPerfil;
@@ -72,9 +70,6 @@ public class VerPerfilAdministradorController  {
     private Label lblNomeAdm;
 
     @FXML
-    private Label lblNomeInstituto;
-
-    @FXML
     private Label lblNomeR;
 
     @FXML
@@ -87,15 +82,18 @@ public class VerPerfilAdministradorController  {
     private Label lblUsuario;
 
     @FXML
-    private Label lblUsuarioR;  
+    private Label lblUsuarioR; 
     
     
     public void setStage(Stage stage){
         this.stageVerPerfil = stage;
     }
     
+     //**********************************
     @FXML
-    void onClickAtualizarPerfil(ActionEvent event) {
+    void onClickAtualizarPerfil(ActionEvent event) throws IOException {
+        
+        abrirTelaAtualizar();
 
     }
     
@@ -103,7 +101,6 @@ public class VerPerfilAdministradorController  {
     void OnDragEnterAtualizarPerfil(MouseEvent event) {
         
          btnAtualizarPerfil.setStyle("-fx-background-color: D07979" );
-
     }
 
     @FXML
@@ -112,17 +109,36 @@ public class VerPerfilAdministradorController  {
          btnAtualizarPerfil.setStyle("-fx-background-color:  DBA5A5" );
 
     }
+
+     //**********************************
+    @FXML
+    void onClickADM(ActionEvent event) {
+
+    }
     
-
     @FXML
-    void onClickCadastrarADM(ActionEvent event) {
-
+    void OnDragEnterADM(MouseEvent event) {
+         btnADM.setStyle("-fx-background-color: D07979" );
+    }
+      @FXML
+    void OnDragExitADM(MouseEvent event) {
+         btnADM.setStyle("-fx-background-color:  DBA5A5" );
     }
 
+     //**********************************
     @FXML
-    void onClickPublicacao(ActionEvent event) {
-
+    void onClickPublicacao(ActionEvent event) throws IOException {
+       // abrirTelaNoticia();
     }
+    @FXML
+    void OnDragEnterPublicacao(MouseEvent event) {
+         btnPublicacao.setStyle("-fx-background-color: D07979" );
+    }
+    @FXML
+    void OnDragExitPublicacao(MouseEvent event) {
+         btnPublicacao.setStyle("-fx-background-color:  DBA5A5" );
+    }
+    //**********************************
 
     @FXML
     void onClickSair(ActionEvent event) throws IOException {
@@ -149,17 +165,45 @@ public class VerPerfilAdministradorController  {
             stagePrincipal.show();
             stageVerPerfil.close();
     }
+    @FXML
+    void OnDragEnterSair(MouseEvent event) {
+         btnSair.setStyle("-fx-background-color: D07979" );
+    }
+    @FXML
+    void OnDragExitSair(MouseEvent event) {
+         btnSair.setStyle("-fx-background-color:  DBA5A5" );
+    }
+//**********************************
 
     @FXML
     void onClickVerPerfil(ActionEvent event) {
 
     }
+
+    @FXML
+    void OnDragEnterVerPerfil(MouseDragEvent event) {
+         btnVerperfil.setStyle("-fx-background-color:  DBA5A5" );
+    }
+     @FXML
+    void OnDragExitVerPerfil(MouseDragEvent event) {
+         btnVerperfil.setStyle("-fx-background-color:  DBA5A5" );
+    }
+//**********************************
     
     @FXML
-    void OnDragVerPerfil(MouseDragEvent event) {
+    void onClickBtnNotificacoes(ActionEvent event) {
 
     }
     
+    @FXML
+    void OnDragExitNotificacoes(MouseEvent event) {
+        btnNotificacoes.setStyle("-fx-background-color:  DBA5A5" );
+    }
+    @FXML
+    void OnDragEnterNotificacoes(MouseEvent event) {
+        btnNotificacoes.setStyle("-fx-background-color:  DBA5A5" );
+    }
+//**********************************    
     
     
     public void setAdministrador(Administrador adm) {
@@ -173,4 +217,49 @@ public class VerPerfilAdministradorController  {
        
     }
     
+//    private void abrirTelaNoticia() throws MalformedURLException, IOException{
+//        
+//         URL url = new File("src/main/java/view/CadastroNoticia.fxml").toURI().toURL();
+//            FXMLLoader loader = new FXMLLoader(url);
+//            Parent root = loader.load();
+//        
+//            Stage stageCadastroNoticia = new Stage();
+//        
+//            TelaNoticiaController tnc = loader.getController();    
+//            //tnc.setStage(stageCadastroADM);
+//        
+//            Scene cena = new Scene(root);
+//            stageCadastroNoticia.setTitle("Tela Cadastrar Noticia");
+//            stageCadastroNoticia.setScene(cena);
+//            
+//            stageCadastroNoticia.show();
+//            
+//    }
+    
+     private void abrirTelaAtualizar() throws MalformedURLException, IOException{
+        
+         URL url = new File("src/main/java/view/AtualizarPerfilAdministrador.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage stageAtualizar = new Stage();
+        
+            AtualizarPerfilAdministradorController apac = loader.getController();  
+            apac.setAdministrador(adm);
+            apac.setStage(stageAtualizar);
+        
+            Scene cena = new Scene(root);
+            stageAtualizar.setTitle("Tela Atualizar Administrador");
+            stageAtualizar.setScene(cena);
+            //deixa a tela maximizada
+            stageAtualizar.setMaximized(true);
+            
+            stageAtualizar.show();
+            stageVerPerfil.close();
+    }
+    
+ 
 }
+  
+    
+
