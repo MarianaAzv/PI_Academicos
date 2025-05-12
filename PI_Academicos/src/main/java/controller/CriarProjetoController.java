@@ -168,6 +168,7 @@ public class CriarProjetoController {
     
     @FXML
     void OnClickNaoBolsista(ActionEvent event) {
+        // Mudar a cor do botao
  System.out.print("Nao ha Bolsista");
     }
 

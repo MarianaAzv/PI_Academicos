@@ -25,6 +25,13 @@
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
+         <children>
+            <Button fx:id="btnNomeProjeto1" mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="Projetos" textFill="#840d0b" GridPane.halignment="CENTER">
+               <font>
+                  <Font name="Courier New Bold" size="35.0" />
+               </font>
+            </Button>
+         </children>
       </GridPane>
       <GridPane layoutX="10.0" layoutY="10.0" GridPane.rowIndex="1">
          <columnConstraints>
@@ -70,14 +77,9 @@
             </GridPane>
          </children>
       </GridPane>
-      <Button mnemonicParsing="false" style="-fx-background-color: ECECEC;" text="+ Criar projeto" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+      <Button fx:id="btnCriarProjetos" mnemonicParsing="false" onAction="#OnClickCriarProjeto" style="-fx-background-color: ECECEC;" text="+ Criar projeto" GridPane.halignment="CENTER" GridPane.rowIndex="3">
          <font>
             <Font name="Courier New Bold" size="18.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnNomeProjeto1" mnemonicParsing="false" style="-fx-background-color: DBA5A5;" text="Projetos" textFill="#840d0b" GridPane.halignment="CENTER">
-         <font>
-            <Font name="Courier New Bold" size="35.0" />
          </font>
       </Button>
    </children>
