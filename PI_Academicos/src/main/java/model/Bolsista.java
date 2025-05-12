@@ -19,8 +19,8 @@ public class Bolsista extends Usuario {
         this.curso = curso;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
-        this.acessoPostagens = acessoPostagens;
-        this.acessoArtigos = acessoArtigos;
+        //this.acessoPostagens = acessoPostagens;
+        //this.acessoArtigos = acessoArtigos;
     }
 
     // Construtor sem ID para INSERIR novo bolsista)

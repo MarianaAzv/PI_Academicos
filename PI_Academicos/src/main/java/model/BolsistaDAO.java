@@ -12,7 +12,8 @@ public class BolsistaDAO extends GenericDAO {
         Connection con = conectarDAO();
 
         String queryUsuario = "INSERT INTO USUARIOS(cpf, nome, apelido, senha, email, ativa) VALUES(?,?,?,?,?,1)";
-        String queryBolsista = "INSERT INTO BOLSISTAS(idUsuario, matricula, curso, dataInicio, dataFim) VALUES (?,?,?,?,?)" ;
+        String queryBolsista = "INSERT INTO BOLSISTAS(idUsuario, matricula, curso) VALUES (?,?,?)" ;
+        String queryBolsistaProjetos = "INSERT INTO BOLSISTAS_PROJETOS(idUsuario, idProjeto, dataInicio, dataFim)VALUES (?,1,?,?)" ;
 
         try (con) {
             // inserir usuario
@@ -32,14 +33,27 @@ public class BolsistaDAO extends GenericDAO {
                 // inserir bolsista
                 PreparedStatement stmtBolsista = con.prepareStatement(queryBolsista);
                 stmtBolsista.setInt(1, idGerado);
+                                System.out.println("id cadastrado com ID: " + idGerado);
+
                 stmtBolsista.setLong(2, bolsista.getMatricula());
+                                System.out.println("matricula cadastrado com ID: " + idGerado);
+
                 stmtBolsista.setString(3, bolsista.getCurso());
-                stmtBolsista.setDate(3, Date.valueOf(bolsista.getDataInicio()));  
-                stmtBolsista.setDate(4,Date.valueOf(bolsista.getDataFim()) );        
+                                System.out.println("curso cadastrado com ID: " + idGerado);
+
+       
+
                 stmtBolsista.executeUpdate();
+                //INSERIR BOLSISTA NO PROJETO
+                    PreparedStatement stmtBolsistaProjeto = con.prepareStatement(queryBolsistaProjetos);
+                 stmtBolsistaProjeto.setInt(1, idGerado);                
+                 stmtBolsistaProjeto.setDate(2, Date.valueOf(bolsista.getDataInicio()));  
+                 stmtBolsistaProjeto.setDate(3,Date.valueOf(bolsista.getDataFim()) );                   
+                 stmtBolsistaProjeto.executeUpdate();
 
                 System.out.println("Bolsista cadastrado com ID: " + idGerado);
             }
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
