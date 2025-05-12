@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.Desktop;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -184,12 +185,20 @@ System.out.print("Nao ha cordenador");
         fileChooser.getExtensionFilters().addAll(
          new ExtensionFilter("Text Files", "*.pdf"));
         arquivoPDF = fileChooser.showOpenDialog(stageCriarProjeto);
-            if (arquivoPDF != null) {
+        
+        if (arquivoPDF != null) {
             Desktop.getDesktop().open(arquivoPDF);
                 System.out.println(arquivoPDF.getPath());
-
-
- }
+                String caminhoArquivo = arquivoPDF.getPath();
+                FileInputStream fileInputStream = new FileInputStream(caminhoArquivo);
+                
+                 byte[] conteudoPDF = fileInputStream.readAllBytes();
+                 
+                 //instrucao.setString(1, "nome_do_arquivo.pdf"); // Substitui por um nome de arquivo válido
+                 //instrucao.setBytes(2, conteudoPDF);
+            }
+        
+        
     }
 
     @FXML

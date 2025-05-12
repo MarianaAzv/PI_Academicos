@@ -11,26 +11,27 @@ import java.time.format.DateTimeFormatter;
 
 public class SolicitacaoDAO extends GenericDAO{
     
-    /*public void cadastrarSolicitacao(Solicitacao solicitacao) throws SQLException{
+    public void cadastrarSolicitacao(Solicitacao solicitacao) throws SQLException, FileNotFoundException{
     
         Connection con = conectarDAO();
         
         String sql = "INSERT INTO solicitacoes (idUsuario, data, descricao, aceitacao, anexo) VALUES (?, ?, ?, ?, ?)";
         
+        /*try{
              PreparedStatement stmt = con.prepareStatement(sql);
-             FileInputStream fis = new FileInputStream(solicitacao.getAnexo())) {
+             FileInputStream fis = new FileInputStream(solicitacao.getAnexo()) {
         
            
             stmt.setInt(1, solicitacao.getUsuario().getId());
-            stmt.setBinaryStream(2, fis, (int) selectedFile.length());
+            stmt.setBinaryStream(5, fis, (int) selectedFile.length());
 
             int rowsAffected = stmt.executeUpdate();
             System.out.println("PDF saved successfully. Rows affected: " + rowsAffected);
-
+             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }*/
+        }*/
+    }
     
     
     
