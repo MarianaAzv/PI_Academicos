@@ -147,11 +147,15 @@ public class CriarProjetoController {
         LocalDate dI = LocalDate.parse(txtDatadeInicio.getText(), formatter);
         LocalDate dF= LocalDate.parse(txtDatadeFim.getText(), formatter);
          
-         Campus campusnomeSelecionado = CBcampus.getValue();
-         
-     incluir(txtNomedoProjeto.getText(),txtResumo.getText(),campusnomeSelecionado,txtEdital.getText(),dI,dF,null,true);
+        if(dI.isAfter(dF)){
+            mostrarAviso("Datas","A data do final do projeto esta menor que a data de inicio do projeto");
+            return;
+        } else{
+            Campus campusnomeSelecionado = CBcampus.getValue();
+            
+            incluir(txtNomedoProjeto.getText(),txtResumo.getText(),campusnomeSelecionado,txtEdital.getText(),dI,dF,null,true);
+        }
        }
-   
      } catch(SQLException e){
           mostrarAviso("Falha","A falha em cadastrar esse projeto");
      } catch(DateTimeParseException e){
