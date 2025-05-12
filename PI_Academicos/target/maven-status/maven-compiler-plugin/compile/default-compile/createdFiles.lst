@@ -1,6 +1,7 @@
 controller\RecuperarSenhaCodigoController.class
 model\AdministradorDAO.class
 controller\VerPerfilAdministradorController.class
+model\SolicitacaoDAO.class
 controller\TelaNoticiaController.class
 controller\TelaPrincipalBolsistaController.class
 controller\CadastrarPostagemController.class
@@ -22,6 +23,7 @@ model\CoordenadorDAO.class
 controller\CadastroBolsistaCoordenadorController.class
 model\Projeto.class
 controller\CriarProjetoController.class
+model\Solicitacao.class
 controller\EscolherProjetoController.class
 model\Usuario.class
 controller\CocoordenadorDesativarCoordenadorController.class

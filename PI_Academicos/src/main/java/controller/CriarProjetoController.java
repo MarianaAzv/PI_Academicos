@@ -1,7 +1,6 @@
 package controller;
 
-
-
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -27,6 +26,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import model.AreasConhecimento;
 import model.AreasConhecimentoDAO;
@@ -43,6 +44,7 @@ import static util.AlertaUtil.mostrarConfirmacao;
 public class CriarProjetoController {
     
     private Stage stageCriarProjeto;
+    File arquivoPDF=null;
     
      @FXML
     private ComboBox<Campus> CBcampus;
@@ -137,7 +139,6 @@ public class CriarProjetoController {
         //LocalDate;
        try{ 
         
-       
        if(txtNomedoProjeto.getText().isEmpty() || txtResumo.getText().isEmpty() ||txtEdital.getText().isEmpty() || txtDatadeInicio.getText().isEmpty() || txtDatadeFim.getText().isEmpty() ||  CBcampus.getValue() == null || CBcategoria.getValue() == null  ){
            mostrarAviso("Falta informacao","Por favor inserir todos os dados corretamente");
            
@@ -146,7 +147,7 @@ public class CriarProjetoController {
        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dI = LocalDate.parse(txtDatadeInicio.getText(), formatter);
         LocalDate dF= LocalDate.parse(txtDatadeFim.getText(), formatter);
-         
+       
         if(dI.isAfter(dF)){
             mostrarAviso("Datas","A data do final do projeto esta menor que a data de inicio do projeto");
             return;
@@ -175,8 +176,20 @@ System.out.print("Nao ha cordenador");
     }
 
     @FXML
-    void OnClickPDF(ActionEvent event) {
-  
+    void OnClickPDF(ActionEvent event) throws IOException {
+
+        //adicao de janela para escolher arquivo pdf 
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        fileChooser.getExtensionFilters().addAll(
+         new ExtensionFilter("Text Files", "*.pdf"));
+        arquivoPDF = fileChooser.showOpenDialog(stageCriarProjeto);
+            if (arquivoPDF != null) {
+            Desktop.getDesktop().open(arquivoPDF);
+                System.out.println(arquivoPDF.getPath());
+
+
+ }
     }
 
     @FXML
@@ -200,7 +213,7 @@ System.out.print("Nao ha cordenador");
            
             
            TelaCadastroBolsistaCoordenador.show();
-          
+            stageCriarProjeto.close();
     }
 
     @FXML
@@ -238,6 +251,10 @@ System.out.print("Nao ha cordenador");
         stageCriarProjeto.close();
        
     }
+ 
+ void enviarSolicitacao(){
+     
+ }
     
 
 }
