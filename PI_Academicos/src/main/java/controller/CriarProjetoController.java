@@ -213,12 +213,30 @@ System.out.print("Nao ha cordenador");
            
             
            TelaCadastroBolsistaCoordenador.show();
-            stageCriarProjeto.close();
+           
     }
 
     @FXML
-    void OnClickSimCocoordenador(ActionEvent event) {
-
+    void OnClickSimCocoordenador(ActionEvent event) throws MalformedURLException, IOException {
+        
+URL url = new File("src/main/java/view/CadastroCocoordenadorCoordenador.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage TelaCadastroCocoordenadorCoordenador = new Stage();
+            
+            CadastroCocoordenadorCoordenadorController cccc = loader.getController();
+            
+           cccc.setStage(TelaCadastroCocoordenadorCoordenador); 
+          
+        
+            Scene cena = new Scene(root);
+            TelaCadastroCocoordenadorCoordenador.setTitle("Cadastro Cocoordenador");
+            TelaCadastroCocoordenadorCoordenador.setScene(cena);
+           
+            
+        TelaCadastroCocoordenadorCoordenador.show();
+           
     }
     
  public void ajustarElementosJanela(){
