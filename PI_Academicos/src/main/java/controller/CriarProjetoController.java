@@ -143,7 +143,7 @@ public class CriarProjetoController {
        Campus campusnomeSelecionado = CBcampus.getValue();
        
          
-     incluir(txtNomedoProjeto.getText(),txtResumo.getText(),campusnomeSelecionado,txtEdital.getText(),dI,dF);
+     incluir(txtNomedoProjeto.getText(),txtResumo.getText(),campusnomeSelecionado,txtEdital.getText(),dI,dF,null,true);
       
    
      } catch(SQLException e){
@@ -156,17 +156,17 @@ public class CriarProjetoController {
     
     @FXML
     void OnClickNaoBolsista(ActionEvent event) {
- 
+ System.out.print("Nao ha Bolsista");
     }
 
     @FXML
     void OnClickNaoCocoordenador(ActionEvent event) {
-
+System.out.print("Nao ha cordenador");
     }
 
     @FXML
     void OnClickPDF(ActionEvent event) {
-
+  
     }
 
     @FXML
@@ -190,7 +190,7 @@ public class CriarProjetoController {
            
             
            TelaCadastroBolsistaCoordenador.show();
-            stageCriarProjeto.close();
+          
     }
 
     @FXML
@@ -216,8 +216,8 @@ public class CriarProjetoController {
         mostrarAviso("Banco de Dados","A falha de comunicação entre o sistema e o Banco");
   }
    }
- void incluir(String titulo,String resumo, Campus campus, String edital,LocalDate dataInicio,LocalDate dataFim) throws SQLException {
-       Projeto projeto = new Projeto(titulo,resumo,campus,edital,dataInicio,dataFim);
+ void incluir(String titulo,String resumo, Campus campus, String edital,LocalDate dataInicio,LocalDate dataFim,LocalDate prorrogacao, boolean emAndamento) throws SQLException {
+       Projeto projeto = new Projeto(titulo,resumo,campus,edital,dataInicio,dataFim,prorrogacao,emAndamento);
      
     projeto.setEmAndamento(true);
       
