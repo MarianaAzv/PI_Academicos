@@ -165,10 +165,11 @@ public class AtualizarProjetoController {
       String DataInicio = String.valueOf(projeto.getDataInicio());
       txtDatadeInicio.setText(DataInicio);
        String DataFim = String.valueOf(projeto.getDataFim());
-      txtDatadeInicio.setText(DataFim);
+      txtDatadeFim.setText(DataFim);
       String prorroga = String.valueOf(projeto.getProrroacao());
       txtProrrogacao.setText(prorroga);
       txtCoordenador.setText(projeto.getCocoordenadores());
+      //Falta combo box
       
     }
   void atualizarProjeto(int idProjeto,String titulo,String resumo, Campus campus, String edital,LocalDate dataInicio,LocalDate dataFim,LocalDate prorrogacao ) throws SQLException{

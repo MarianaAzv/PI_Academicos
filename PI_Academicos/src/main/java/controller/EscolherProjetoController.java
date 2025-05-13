@@ -30,6 +30,7 @@ public class EscolherProjetoController {
 
     private Stage stageEscolherProjeto; 
          Coordenador coordenador;
+         Projeto projeto;
          
         @FXML
     private Button btnCriarProjetos;
@@ -80,7 +81,7 @@ if(coordenador.getAtiva()==true){
          CriarProjetoController tpc = loader.getController();
        
         tpc.setStage(telaCriarProjeto);
-        
+        tpc.setCoordenador(coordenador);
          telaCriarProjeto.setOnShown(evento -> {
         tpc.ajustarElementosJanela();
       });
@@ -146,7 +147,8 @@ try{
         
             TelaPrincipalCoordenadorController tpc = loader.getController();    
             tpc.setStagePrincipal(stagePrincipal);
-            //tpc.setCoordenador(coordenador);
+            tpc.setCoordenador(coordenador);
+            tpc.setProjeto(projeto);
             
             stagePrincipal.setOnShown(evento -> {
             tpc.ajustarElementosJanela(coordenador,projeto);

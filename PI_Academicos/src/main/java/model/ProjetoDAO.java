@@ -11,28 +11,23 @@ import java.util.List;
 
 public class ProjetoDAO extends GenericDAO{
     
-    public void cadastraprojeto(Projeto projeto) throws SQLException{
+    public void cadastraprojeto(Projeto projeto,int id) throws SQLException{
         
        Connection con = conectarDAO();
         
         String queryProjeto = "INSERT INTO projetos(tituloProjeto,resumo,idCampus,edital,dataInicio,dataFim,prorrogacao,emAndamento) VALUES(?,?,?,?,?,?,?,?)";
+        String queryCoordenadorProjeto = "Insert into coordenadores_projetos(idUsuario,idProjeto,dataInicio,dataFim) values(?,?,?,?)";
         
-  try  ( 
-          con
-   )
-     
-  {
+        try  (con){
          PreparedStatement stmtProjeto = con.prepareStatement(queryProjeto, PreparedStatement.RETURN_GENERATED_KEYS);
-    stmtProjeto.setString(1, projeto.getTitulo());
-    stmtProjeto.setString(2, projeto.getResumo());
-  
-   stmtProjeto.setInt(3, projeto.getCampus().getIdCampus());
- 
-    stmtProjeto.setString(4, projeto.getEdital());
-    stmtProjeto.setDate(5, Date.valueOf(projeto.getDataInicio()));  
-    stmtProjeto.setDate(6,Date.valueOf(projeto.getDataFim()) ); 
-  stmtProjeto.setDate(7, projeto.getProrroacao() != null ? java.sql.Date.valueOf(projeto.getProrroacao()) : null);
-    stmtProjeto.setBoolean(8, projeto.isEmAndamento()); 
+         stmtProjeto.setString(1, projeto.getTitulo());
+         stmtProjeto.setString(2, projeto.getResumo());
+         stmtProjeto.setInt(3, projeto.getCampus().getIdCampus());
+         stmtProjeto.setString(4, projeto.getEdital());
+         stmtProjeto.setDate(5, Date.valueOf(projeto.getDataInicio()));  
+         stmtProjeto.setDate(6,Date.valueOf(projeto.getDataFim()) ); 
+         stmtProjeto.setDate(7, projeto.getProrroacao() != null ? java.sql.Date.valueOf(projeto.getProrroacao()) : null);
+         stmtProjeto.setBoolean(8, projeto.isEmAndamento()); 
    
    
     int linhasAfetadas = stmtProjeto.executeUpdate();
@@ -47,12 +42,26 @@ public class ProjetoDAO extends GenericDAO{
                 System.out.println("Projeto cadastrado com ID: " + idGerado);
              }
   }
+ 
+   PreparedStatement stmtCoordenadorProjeto = con.prepareStatement(queryCoordenadorProjeto, PreparedStatement.RETURN_GENERATED_KEYS);
+   
+   stmtCoordenadorProjeto.setInt(1,id);
+   stmtCoordenadorProjeto.setInt(2,projeto.getIdProjeto());
+   stmtCoordenadorProjeto.setDate(3,Date.valueOf(projeto.getDataInicio()));
+   stmtCoordenadorProjeto.setDate(4,Date.valueOf(projeto.getDataFim()));
+   linhasAfetadas = stmtCoordenadorProjeto.executeUpdate();
+            System.out.println(linhasAfetadas + "linhas afetadas");
+      System.out.println("ID do coordenador "+ id);
+      
+   
   }
-
          catch (SQLException e) {
             e.printStackTrace();
+          System.out.print("Erro ao cadatrar o projeto");
         
 }
+  
+  
     }
     
     public void atualizarProjeto(Projeto projeto) throws SQLException {

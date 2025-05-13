@@ -46,6 +46,7 @@ public class CriarProjetoController {
     
     private Stage stageCriarProjeto;
     File arquivoPDF=null;
+    Coordenador coordenador;
     
      @FXML
     private ComboBox<Campus> CBcampus;
@@ -140,7 +141,7 @@ public class CriarProjetoController {
         //LocalDate;
        try{ 
         
-       if(txtNomedoProjeto.getText().isEmpty() || txtResumo.getText().isEmpty() ||txtEdital.getText().isEmpty() || txtDatadeInicio.getText().isEmpty() || txtDatadeFim.getText().isEmpty() ||  CBcampus.getValue() == null || CBcategoria.getValue() == null  ){
+       if(txtNomedoProjeto.getText().isEmpty() || txtResumo.getText().isEmpty() ||txtEdital.getText().isEmpty() || txtCoordenador.getText().isEmpty() || txtDatadeInicio.getText().isEmpty() || txtDatadeFim.getText().isEmpty() ||  CBcampus.getValue() == null || CBcategoria.getValue() == null  ){
            mostrarAviso("Falta informacao","Por favor inserir todos os dados corretamente");
            
            return;
@@ -155,7 +156,7 @@ public class CriarProjetoController {
         } else{
             Campus campusnomeSelecionado = CBcampus.getValue();
             
-            incluir(txtNomedoProjeto.getText(),txtResumo.getText(),campusnomeSelecionado,txtEdital.getText(),dI,dF,null,true);
+            incluir(txtNomedoProjeto.getText(),txtResumo.getText(),campusnomeSelecionado,txtEdital.getText(),dI,dF,null,true,coordenador.getId());
         }
        }
      } catch(SQLException e){
@@ -267,13 +268,13 @@ URL url = new File("src/main/java/view/CadastroCocoordenadorCoordenador.fxml").t
         mostrarAviso("Banco de Dados","A falha de comunicação entre o sistema e o Banco");
   }
    }
- void incluir(String titulo,String resumo, Campus campus, String edital,LocalDate dataInicio,LocalDate dataFim,LocalDate prorrogacao, boolean emAndamento) throws SQLException {
+ void incluir(String titulo,String resumo, Campus campus, String edital,LocalDate dataInicio,LocalDate dataFim,LocalDate prorrogacao, boolean emAndamento,int id) throws SQLException {
        Projeto projeto = new Projeto(titulo,resumo,campus,edital,dataInicio,dataFim,prorrogacao,emAndamento);
-     
+      
     projeto.setEmAndamento(true);
       
         ProjetoDAO pdao =new ProjetoDAO();
-        pdao.cadastraprojeto(projeto);
+        pdao.cadastraprojeto(projeto,id);
        
         mostrarConfirmacao("Projeto cadastrado","O projeto foi registrado no sistema com sucesso!");
         stageCriarProjeto.close();
@@ -283,7 +284,9 @@ URL url = new File("src/main/java/view/CadastroCocoordenadorCoordenador.fxml").t
  void enviarSolicitacao(){
      
  }
-    
+   public  void setCoordenador(Coordenador coordenador) {
+        this.coordenador = coordenador;
+    }
 
 }
 

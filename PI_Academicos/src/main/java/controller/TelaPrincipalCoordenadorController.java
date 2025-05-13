@@ -133,7 +133,8 @@ public class TelaPrincipalCoordenadorController {
             Stage stageVerPerfil = new Stage();
             
             VerPerfilCoordenadorController vpf = loader.getController();
-            vpf.setCoordenador(coordenador); 
+            vpf.setCoordenador(coordenador);
+            vpf.setProjeto(projeto);
             vpf.setStage(stageVerPerfil);
         
             Scene cena = new Scene(root);
@@ -196,6 +197,7 @@ public class TelaPrincipalCoordenadorController {
        AtualizarProjetoController apc = loader.getController();
         
         apc.setStage(stageAtualizarProjeto);
+        apc.setProjeto(projeto);
         
       Scene cena = new Scene(root);
        stageAtualizarProjeto.setTitle("Atualizar Projeto");
@@ -304,9 +306,12 @@ public class TelaPrincipalCoordenadorController {
        
     }
     
-    //public void setCoordenador(Coordenador coord) {
-      // this.coordenador = coord;
-    //}
+    public void setCoordenador(Coordenador coord) {
+       this.coordenador = coord;
+    }
+    public void setProjeto(Projeto projeto) {
+       this.projeto = projeto;
+    }
     
     
     

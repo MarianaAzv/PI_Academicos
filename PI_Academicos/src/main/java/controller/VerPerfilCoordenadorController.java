@@ -15,11 +15,13 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import model.Coordenador;
+import model.Projeto;
 
 public class VerPerfilCoordenadorController {
     
     private Stage stageVerPerfil;
     Coordenador coordenador;
+    Projeto projeto;
         
     @FXML
     private Text TxtNomeUsuario;
@@ -120,6 +122,10 @@ public class VerPerfilCoordenadorController {
        String siape = String.valueOf(coordenador.getSiape());
        lblSIAPECoord.setText(siape);
     }
+    
+    public void setProjeto(Projeto projeto){
+        this.projeto=projeto;
+    }
 
     @FXML
     void onClickArtigo(ActionEvent event) {
@@ -170,7 +176,7 @@ public class VerPerfilCoordenadorController {
             Stage stagePrincipalCoordenador = new Stage();
             
             TelaPrincipalCoordenadorController tcc = loader.getController();
-          //  tcc.ajustarElementosJanela(coordenador, projeto); 
+           tcc.ajustarElementosJanela(coordenador, projeto); 
             tcc.setStage(stagePrincipalCoordenador);
         
             Scene cena = new Scene(root);
@@ -274,4 +280,5 @@ public void setStage(Stage stage){
         this.stageVerPerfil= stage;
             
 }
+
 }
