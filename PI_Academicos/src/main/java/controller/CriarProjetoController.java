@@ -171,11 +171,15 @@ public class CriarProjetoController {
     void OnClickNaoBolsista(ActionEvent event) {
         // Mudar a cor do botao
  System.out.print("Nao ha Bolsista");
+ // Se o usuario clicou no outro botao entao muda a cor para normal 
+ btnnaoBolsista.setStyle("-fx-text-fill: gray; -fx-background-color: DBA5A5;");
     }
 
     @FXML
     void OnClickNaoCocoordenador(ActionEvent event) {
 System.out.print("Nao ha cordenador");
+ btnNaococoordenador.setStyle("-fx-text-fill: gray; -fx-background-color: DBA5A5;");
+
     }
 
     @FXML
@@ -224,6 +228,7 @@ System.out.print("Nao ha cordenador");
            
             
            TelaCadastroBolsistaCoordenador.show();
+           btnSimBolsista.setStyle("-fx-text-fill: gray; -fx-background-color: DBA5A5;");
            
     }
 
