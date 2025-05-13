@@ -170,7 +170,7 @@ public class VerPerfilCoordenadorController {
             Stage stagePrincipalCoordenador = new Stage();
             
             TelaPrincipalCoordenadorController tcc = loader.getController();
-            tcc.ajustarElementosJanela(coordenador); 
+          //  tcc.ajustarElementosJanela(coordenador, projeto); 
             tcc.setStage(stagePrincipalCoordenador);
         
             Scene cena = new Scene(root);

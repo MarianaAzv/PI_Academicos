@@ -86,15 +86,16 @@ public class ProjetoDAO extends GenericDAO{
 }
     
     
-      public List<Projeto> selecionarProjeto() throws SQLException {
+      public List<Projeto> selecionarProjeto(Coordenador coordenador) throws SQLException {
          List<Projeto> projetos = new ArrayList<>();
          
           Connection con = conectarDAO();
           
-        String sql = "SELECT * FROM PROJETOS ";
+        String sql = "SELECT p.* FROM PROJETOS as p inner join coordenadores_projetos as cp on p.idProjeto = cp.idProjeto where cp.idUsuario=?";
         
         try(con ){
              PreparedStatement stmtProjeto = con.prepareStatement(sql);
+             stmtProjeto.setInt(1,coordenador.getId());
               ResultSet rs = stmtProjeto.executeQuery();
               
               

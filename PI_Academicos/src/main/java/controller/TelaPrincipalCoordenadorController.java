@@ -20,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Coordenador;
+import model.Projeto;
 //import model.Coordenador;
 import model.Usuario;
 
@@ -30,6 +31,7 @@ public class TelaPrincipalCoordenadorController {
     private final Usuario dao = new Usuario();
  
     private Coordenador coordenador;
+    Projeto projeto;
     
 
     @FXML
@@ -282,14 +284,15 @@ public class TelaPrincipalCoordenadorController {
 
        
     
-    void ajustarElementosJanela(Coordenador coordenador) {
+    void ajustarElementosJanela(Coordenador coordenador, Projeto projeto) {
         this.coordenador=coordenador;
+        this.projeto=projeto;
         
         System.out.println("Aqui chegam os parâmetros do login "
                 + coordenador.getNome() + " - " + coordenador.getSiape() + "ATIVA: " + coordenador.getAtiva());
         txtNomeCoordenador.setText(coordenador.getNome());
         String siape = String.valueOf(coordenador.getSiape());
-        textNomeProjeto.setText(siape);
+        textNomeProjeto.setText(projeto.getTitulo());
         
         if(coordenador.getAtiva()==false){
         

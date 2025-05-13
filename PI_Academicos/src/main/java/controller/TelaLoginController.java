@@ -8,6 +8,8 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -177,11 +179,18 @@ public class TelaLoginController {
         
            Stage stagePrincipal = new Stage();
         
-          EscolherProjetoController tpc = loader.getController();    
+          EscolherProjetoController tpc = loader.getController();  
+          tpc.setCoordenador(coordenador);
           tpc.setStage(stagePrincipal);
-        //    //tpc.setCoordenador(coordenador);
+          
             
-            
+             stagePrincipal.setOnShown(evento -> {
+             try {
+                 tpc.OnClickProjeto();
+             } catch (SQLException ex) {
+                 Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+             }
+      });
         
           Scene cena = new Scene(root);
            stagePrincipal.setTitle("Tela principal Coordenador");

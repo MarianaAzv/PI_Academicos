@@ -29,9 +29,7 @@ import static util.AlertaUtil.mostrarAviso;
 public class EscolherProjetoController {
 
     private Stage stageEscolherProjeto; 
-         Projeto projeto;
          Coordenador coordenador;
-         public List<Projeto> projeUsuario;
          
         @FXML
     private Button btnCriarProjetos;
@@ -55,7 +53,9 @@ public class EscolherProjetoController {
 
     
            public void setStage(Stage stageEscolherProjeto){
-        this.stageEscolherProjeto= stageEscolherProjeto;    
+            this.stageEscolherProjeto= stageEscolherProjeto;
+        
+        
            }
     
     //Abre essa tela antes da tela da tela principal, esta precisa criar projeto e 
@@ -102,7 +102,7 @@ if(coordenador.getAtiva()==true){
  public void setProjeto() {
      ProjetoDAO dao = new ProjetoDAO();
     try {
-        List<Projeto> projetos = dao.selecionarProjeto();
+     //   List<Projeto> projetos = dao.selecionarProjeto();
         OnClickProjeto();
     } catch (SQLException e) {
        mostrarAviso("Erro","Falha com o Banco");
@@ -119,7 +119,7 @@ if(coordenador.getAtiva()==true){
 try{
   
   ProjetoDAO dao = new ProjetoDAO();
-        List<Projeto> projetos = dao.selecionarProjeto();
+        List<Projeto> projetos = dao.selecionarProjeto(coordenador);
         
     for (Projeto projeto : projetos) {
             Button btn = new Button(projeto.getTitulo());
@@ -149,7 +149,7 @@ try{
             //tpc.setCoordenador(coordenador);
             
             stagePrincipal.setOnShown(evento -> {
-            tpc.ajustarElementosJanela(coordenador);
+            tpc.ajustarElementosJanela(coordenador,projeto);
         });
         
             Scene cena = new Scene(root);
@@ -161,6 +161,10 @@ try{
             stagePrincipal.show();
             stageEscolherProjeto.close();
  }
+
+    void setCoordenador(Coordenador coordenador) {
+        this.coordenador = coordenador;
+    }
 
 }
     
