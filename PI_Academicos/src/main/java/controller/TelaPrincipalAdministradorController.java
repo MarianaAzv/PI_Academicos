@@ -183,7 +183,7 @@ public class TelaPrincipalAdministradorController {
     
     private void abrirTelaNoticia() throws MalformedURLException, IOException{
         
-         URL url = new File("src/main/java/view/CadastroNoticia.fxml").toURI().toURL();
+         URL url = new File("src/main/java/view/TelaNoticia.fxml").toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
         
