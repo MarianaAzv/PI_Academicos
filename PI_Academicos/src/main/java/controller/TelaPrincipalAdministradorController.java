@@ -14,6 +14,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Administrador;
@@ -24,16 +26,16 @@ public class TelaPrincipalAdministradorController {
     private Stage stageADM;
     
     @FXML
-    private Text txtNomeUsuario;
+    private Text TxtNomeUsuario;
 
     @FXML
-    private Text txtNomeUsuario1;
+    private Button btnADM;
 
     @FXML
     private Button btnAtualizarPerfil;
 
     @FXML
-    private Button btnCadastrarADM;
+    private Button btnNotificacoes;
 
     @FXML
     private Button btnPublicacao;
@@ -45,9 +47,6 @@ public class TelaPrincipalAdministradorController {
     private Button btnVerperfil;
 
     @FXML
-    private ImageView imgInstituto;
-
-    @FXML
     private ImageView imgLogo;
 
     @FXML
@@ -55,130 +54,117 @@ public class TelaPrincipalAdministradorController {
 
     @FXML
     private Label lblNomeAdm;
+    
 
-    @FXML
-    private Label lblNomeInstituto;
-
-    @FXML
-    void onClickAtualizarPerfil(ActionEvent event) throws IOException {
-        
+     @FXML
+    void onClickAtualizarPerfil(ActionEvent event) throws IOException {  
         abrirTelaAtualizar();
-
+    }
+    
+      @FXML
+    void OnDragEnterAtualizarPerfil(MouseEvent event) {
+        
+         btnAtualizarPerfil.setStyle("-fx-background-color: D07979" );
     }
 
     @FXML
-    void onClickCadastrarADM(ActionEvent event) throws IOException {
+    void OnDragExitAtualizarPerfil(MouseEvent event) {
         
-     //   if(adm.getAtiva()==true){
-     //   abrirTelaCadastroADM();
-     //   }
+         btnAtualizarPerfil.setStyle("-fx-background-color:  DBA5A5" );
 
     }
 
+     //**********************************
+    @FXML
+    void onClickADM(ActionEvent event) throws IOException {
+        abrirTelaADMS();
+    }
+    
+    @FXML
+    void OnDragEnterADM(MouseEvent event) {
+         btnADM.setStyle("-fx-background-color: D07979" );
+    }
+      @FXML
+    void OnDragExitADM(MouseEvent event) {
+         btnADM.setStyle("-fx-background-color:  DBA5A5" );
+    }
+
+     //**********************************
     @FXML
     void onClickPublicacao(ActionEvent event) throws IOException {
-        
-       abrirTelaNoticia();
-
+        abrirTelaNoticia();
     }
+    @FXML
+    void OnDragEnterPublicacao(MouseEvent event) {
+         btnPublicacao.setStyle("-fx-background-color: D07979" );
+    }
+    @FXML
+    void OnDragExitPublicacao(MouseEvent event) {
+         btnPublicacao.setStyle("-fx-background-color:  DBA5A5" );
+    }
+    //**********************************
 
     @FXML
     void onClickSair(ActionEvent event) throws IOException {
-    // metodo para sair do perfil e ir para a tela de login
-    
-     URL url = new File("src/main/java/view/TelaLogin.fxml").toURI().toURL();
-        FXMLLoader loader = new FXMLLoader(url);
-        Parent root = loader.load();
-
-        Stage stageLogin = new Stage();
-
-        TelaLoginController tpc = loader.getController();
-        tpc.setStage(stageLogin);     
-
-        Scene cena = new Scene(root);
-        stageLogin.setTitle("Tela de Login");
-        stageLogin.setScene(cena);
-        //deixa a tela maximizada
-        stageLogin.setMaximized(true);
-        stageLogin.show();
-        
-        stageADM.close();
+        abrirTelaPrincipal();
     }
+    @FXML
+    void OnDragEnterSair(MouseEvent event) {
+         btnSair.setStyle("-fx-background-color: D07979" );
+    }
+    @FXML
+    void OnDragExitSair(MouseEvent event) {
+         btnSair.setStyle("-fx-background-color:  DBA5A5" );
+    }
+//**********************************
 
     @FXML
     void onClickVerPerfil(ActionEvent event) throws IOException {
-        
-        abrirTelaVerPerfilADM();
+        abrirTelaVerPerfil();
+    }
 
+    @FXML
+    void OnDragEnterVerPerfil(MouseDragEvent event) {
+         btnVerperfil.setStyle("-fx-background-color:  D07979" );
+    }
+     @FXML
+    void OnDragExitVerPerfil(MouseDragEvent event) {
+         btnVerperfil.setStyle("-fx-background-color:  DBA5A5" );
+    }
+//**********************************
+    
+    @FXML
+    void onClickBtnNotificacoes(ActionEvent event) throws IOException {
+        abrirTelaNotificacoes();
     }
     
-    ///////////////////////////////////////////METODOS/////////////////////////////////////////////////
-    
-    public void setStage(Stage stage){
-        this.stageADM = stage;
+    @FXML
+    void OnDragExitNotificacoes(MouseEvent event) {
+        btnNotificacoes.setStyle("-fx-background-color:  DBA5A5" );
     }
-    
-    private void abrirTelaAtualizar() throws MalformedURLException, IOException{
-        
-         URL url = new File("src/main/java/view/AtualizarPerfilAdministrador.fxml").toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-        
-            Stage stageAtualizar = new Stage();
-        
-            AtualizarPerfilAdministradorController apac = loader.getController();  
-            apac.setAdministrador(adm);
-            apac.setStage(stageAtualizar);
-        
-            Scene cena = new Scene(root);
-            stageAtualizar.setTitle("Tela Atualizar Administrador");
-            stageAtualizar.setScene(cena);
-            //deixa a tela maximizada
-            stageAtualizar.setMaximized(true);
-            
-            stageAtualizar.show();
-            stageADM.close();
+    @FXML
+    void OnDragEnterNotificacoes(MouseEvent event) {
+        btnNotificacoes.setStyle("-fx-background-color:  D07979" );
     }
-     
-//    private void abrirTelaCadastroADM() throws IOException{
-//        
-//         URL url = new File("src/main/java/view/CadastrarAdministrador.fxml").toURI().toURL();
-//            FXMLLoader loader = new FXMLLoader(url);
-//            Parent root = loader.load();
-//        
-//            Stage stageCadastroADM = new Stage();
-//        
-//            CadastrarAdministradorController cac = loader.getController();    
-//            cac.setStage(stageCadastroADM);
-//        
-//            Scene cena = new Scene(root);
-//            stageCadastroADM.setTitle("Tela Cadastrar Administrador");
-//            stageCadastroADM.setScene(cena);
-//            
-//            stageCadastroADM.show();
-//            
-//    }
+//**********************************    
     
-    private void abrirTelaVerPerfilADM() throws IOException{
+     private void abrirTelaVerPerfil() throws MalformedURLException, IOException{
         
          URL url = new File("src/main/java/view/VerPerfilAdministrador.fxml").toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
         
-            Stage stagePerfil = new Stage();
+            Stage stageVerPerfil = new Stage();
         
             VerPerfilAdministradorController vpac = loader.getController();    
-            vpac.setStage(stagePerfil);
-            vpac.setAdministrador(adm);
+            //tnc.setStage(stageCadastroADM);
         
             Scene cena = new Scene(root);
-            stagePerfil.setTitle("Tela Perfil Administrador");
-            stagePerfil.setScene(cena);
-            //deixa a tela maximizada
-            stagePerfil.setMaximized(true);
+            stageVerPerfil.setTitle("Perfil administrador");
+            stageVerPerfil.setScene(cena);
             
-            stagePerfil.show();
-            stageADM.close();
+            stageVerPerfil.show();
+            
     }
     
     private void abrirTelaNoticia() throws MalformedURLException, IOException{
@@ -200,6 +186,99 @@ public class TelaPrincipalAdministradorController {
             
     }
     
+     private void abrirTelaAtualizar() throws MalformedURLException, IOException{
+        
+         URL url = new File("src/main/java/view/AtualizarPerfilAdministrador.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage stageAtualizar = new Stage();
+        
+            AtualizarPerfilAdministradorController apac = loader.getController();  
+            apac.setAdministrador(adm);
+            apac.setStage(stageAtualizar);
+        
+            Scene cena = new Scene(root);
+            stageAtualizar.setTitle("Tela Atualizar Administrador");
+            stageAtualizar.setScene(cena);
+            //deixa a tela maximizada
+            stageAtualizar.setMaximized(true);
+            
+            stageAtualizar.show();
+            stageADM.close();
+    }
+     
+    private void abrirTelaADMS() throws IOException{
+        
+         URL url = new File("src/main/java/view/Administradores.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage stageADMS = new Stage();
+        
+            AdministradoresController ac = loader.getController();  
+            ac.setAdministrador(adm);
+            ac.setStage(stageADMS);
+        
+            Scene cena = new Scene(root);
+            stageADMS.setTitle("Tela Administradores");
+            stageADMS.setScene(cena);
+            //deixa a tela maximizada
+            stageADMS.setMaximized(true);
+            
+            stageADMS.show();
+            stageADM.close();
+    }
+    
+    private void abrirTelaNotificacoes() throws IOException{
+        
+         URL url = new File("src/main/java/view/Notificacoes.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage stageNotificacoes = new Stage();
+        
+            NotificacoesController nc = loader.getController();  
+            nc.setAdministrador(adm);
+            nc.setStage(stageNotificacoes);
+        
+            Scene cena = new Scene(root);
+            stageNotificacoes.setTitle("Tela notificações");
+            stageNotificacoes.setScene(cena);
+            //deixa a tela maximizada
+            stageNotificacoes.setMaximized(true);
+            
+            stageNotificacoes.show();
+            stageADM.close();
+    }
+    
+    private void abrirTelaPrincipal() throws IOException{
+     URL url = new File("src/main/java/view/TelaPrincipalAdministrador.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage stagePrincipal = new Stage();
+        
+            TelaPrincipalAdministradorController tpa = loader.getController();    
+            tpa.setStage(stagePrincipal);
+            
+           stagePrincipal.setOnShown(evento -> {
+            tpa.ajustarElementosJanela(adm);});
+        
+            Scene cena = new Scene(root);
+            stagePrincipal.setTitle("Tela principal Administrador");
+            stagePrincipal.setScene(cena);
+            //deixa a tela maximizada
+            stagePrincipal.setMaximized(true);
+            
+            stagePrincipal.show();
+            stageADM.close();
+    }
+    
+    public void setStage(Stage stage){
+        this.stageADM = stage;
+    }
+    
     void ajustarElementosJanela(Administrador adm) {
         this.adm=adm;
         
@@ -210,8 +289,6 @@ public class TelaPrincipalAdministradorController {
         
         if(adm.getAtiva()==false){
         
-        btnCadastrarADM.setStyle("-fx-text-fill: gray; -fx-background-color: DBA5A5;");
-        btnPublicacao.setStyle("-fx-text-fill: gray; -fx-background-color: DBA5A5;");
         }
        
     }
