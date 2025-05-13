@@ -69,9 +69,9 @@ public class TelaPrincipalAdministradorController {
     @FXML
     void onClickCadastrarADM(ActionEvent event) throws IOException {
         
-        if(adm.getAtiva()==true){
-        abrirTelaCadastroADM();
-        }
+     //   if(adm.getAtiva()==true){
+     //   abrirTelaCadastroADM();
+     //   }
 
     }
 

@@ -7,6 +7,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,9 +18,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Coordenador;
 import model.Projeto;
+import model.ProjetoDAO;
 import static util.AlertaUtil.mostrarAviso;
 
    //Toda vez que clicar num botao ele abre a tela principal do cordenador que esta logado com o 
@@ -25,6 +31,7 @@ public class EscolherProjetoController {
     private Stage stageEscolherProjeto; 
          Projeto projeto;
          Coordenador coordenador;
+         public List<Projeto> projeUsuario;
          
         @FXML
     private Button btnCriarProjetos;
@@ -40,7 +47,16 @@ public class EscolherProjetoController {
 
     @FXML
     private ImageView imgFotoDoProjeto;
+       @FXML
+    private VBox vboxbutton;
 
+    @FXML
+    private VBox vboximg;
+
+    
+           public void setStage(Stage stageEscolherProjeto){
+        this.stageEscolherProjeto= stageEscolherProjeto;    
+           }
     
     //Abre essa tela antes da tela da tela principal, esta precisa criar projeto e 
     //mostrar quais projeto ja existem no sistema relacionados ao id da pessoa ou em quais ela ja esta cadastrada
@@ -81,22 +97,71 @@ if(coordenador.getAtiva()==true){
     }
     }
          
-         public void setStage(Stage stageEscolherProjeto){
-        this.stageEscolherProjeto= stageEscolherProjeto;
-            
-}
- public void setProjeto(Projeto pro) {
-       this.projeto = pro;
- //     btnNomeProjeto; 
-      
+  
+    
+ public void setProjeto() {
+     ProjetoDAO dao = new ProjetoDAO();
+    try {
+        List<Projeto> projetos = dao.selecionarProjeto();
+        OnClickProjeto();
+    } catch (SQLException e) {
+       mostrarAviso("Erro","Falha com o Banco");
     }
+    }
+  
+   
  
- public void OnClickProjeto(Projeto escoproje ){
- //Esse botao abre o projeto escolhido    
+ public void OnClickProjeto() throws SQLException{
+ //Esse botao abre o projeto escolhido  
+ 
+  vboxbutton.getChildren().clear();
+
+try{
+  
+  ProjetoDAO dao = new ProjetoDAO();
+        List<Projeto> projetos = dao.selecionarProjeto();
+        
+    for (Projeto projeto : projetos) {
+            Button btn = new Button(projeto.getTitulo());
+            btn.setOnAction(event -> {
+                try {
+                    abriProjeto(projeto);
+                } catch (IOException e) {
+                    mostrarAviso("Erro","Erro ao carregar projeto");
+                }
+            });
+            vboxbutton.getChildren().add(btn);
+        }
+}catch(SQLException e){
+    mostrarAviso("Erro","Erro ao carregar os projeto");
+}
+ }
+
+ private void abriProjeto(Projeto projeto) throws MalformedURLException, IOException{
+    URL url = new File("src/main/java/view/TelaPrincipalCoordenador.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage stagePrincipal = new Stage();
+        
+            TelaPrincipalCoordenadorController tpc = loader.getController();    
+            tpc.setStagePrincipal(stagePrincipal);
+            //tpc.setCoordenador(coordenador);
+            
+            stagePrincipal.setOnShown(evento -> {
+            tpc.ajustarElementosJanela(coordenador);
+        });
+        
+            Scene cena = new Scene(root);
+            stagePrincipal.setTitle("Tela principal Coordenador");
+            stagePrincipal.setScene(cena);
+            //deixa a tela maximizada
+            stagePrincipal.setMaximized(true);
+            
+            stagePrincipal.show();
+            stageEscolherProjeto.close();
  }
 
 }
-
-
     
 

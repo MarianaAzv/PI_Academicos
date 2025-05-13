@@ -70,5 +70,12 @@ public class Campus {
     public String toString(){
         return nomeCampus;
     }
+    
+    public Campus(int idCampus) {
+    this.idCampus = idCampus;
+}
+    public Campus(){
+        
+    }
    
 }

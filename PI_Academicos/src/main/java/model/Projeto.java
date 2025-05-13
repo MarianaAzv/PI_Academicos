@@ -182,5 +182,7 @@ public class Projeto {
         this.cocoordenadores = cocoordenadores;
     }
     
-   
+   public Projeto(){
+       
+   }
 }

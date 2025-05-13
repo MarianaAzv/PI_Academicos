@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProjetoDAO extends GenericDAO{
     
@@ -81,8 +83,47 @@ public class ProjetoDAO extends GenericDAO{
 
   System.out.println("Projeto atualizado com ID: " + projeto.getIdProjeto());
  }
-} 
 }
+    
+    
+      public List<Projeto> selecionarProjeto() throws SQLException {
+         List<Projeto> projetos = new ArrayList<>();
+         
+          Connection con = conectarDAO();
+          
+        String sql = "SELECT * FROM PROJETOS ";
+        
+        try(con ){
+             PreparedStatement stmtProjeto = con.prepareStatement(sql);
+              ResultSet rs = stmtProjeto.executeQuery();
+              
+              
+        while (rs.next()) {
+            Campus campus = new Campus();
+            campus.setIdCampus(rs.getInt("idCampus"));
+
+            Projeto projeto = new Projeto(
+                rs.getString("tituloProjeto"),
+                rs.getString("resumo"),
+                campus,
+                rs.getString("edital"),
+                rs.getDate("dataInicio").toLocalDate(),
+                rs.getDate("dataFim").toLocalDate(),
+                rs.getDate("prorrogacao") != null ? rs.getDate("prorrogacao").toLocalDate() : null,
+                rs.getBoolean("emAndamento")
+            );
+        
+
+       projeto.setIdProjeto(rs.getInt("idProjeto"));
+
+            projetos.add(projeto);
+        }
+        }
+        return projetos;
+        }
+    
+    }
+
 
     
 

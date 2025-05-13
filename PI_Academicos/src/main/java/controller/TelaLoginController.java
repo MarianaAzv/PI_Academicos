@@ -149,27 +149,44 @@ public class TelaLoginController {
     
     public void abrirTelaPrincipalCoordenador(Coordenador coordenador) throws MalformedURLException, IOException{
         
-            URL url = new File("src/main/java/view/TelaPrincipalCoordenador.fxml").toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
+         //   URL url = new File("src/main/java/view/TelaPrincipalCoordenador.fxml").toURI().toURL();
+         //   FXMLLoader loader = new FXMLLoader(url);
+         //   Parent root = loader.load();
         
-            Stage stagePrincipal = new Stage();
+        //   Stage stagePrincipal = new Stage();
         
-            TelaPrincipalCoordenadorController tpc = loader.getController();    
-            tpc.setStagePrincipal(stagePrincipal);
-            //tpc.setCoordenador(coordenador);
+        //   TelaPrincipalCoordenadorController tpc = loader.getController();    
+        //    tpc.setStagePrincipal(stagePrincipal);
+        //    //tpc.setCoordenador(coordenador);
             
-            stagePrincipal.setOnShown(evento -> {
-            tpc.ajustarElementosJanela(coordenador);
-        });
+       //    stagePrincipal.setOnShown(evento -> {
+        //    tpc.ajustarElementosJanela(coordenador);
+     //  });
         
-            Scene cena = new Scene(root);
-            stagePrincipal.setTitle("Tela principal Coordenador");
-            stagePrincipal.setScene(cena);
-            //deixa a tela maximizada
-            stagePrincipal.setMaximized(true);
+          //  Scene cena = new Scene(root);
+          //  stagePrincipal.setTitle("Tela principal Coordenador");
+          //  stagePrincipal.setScene(cena);
+           // deixa a tela maximizada
+         //  stagePrincipal.setMaximized(true);
             
-            stagePrincipal.show();
+         //   stagePrincipal.show();
+         
+         URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
+         FXMLLoader loader = new FXMLLoader(url);
+          Parent root = loader.load();
+        
+           Stage stagePrincipal = new Stage();
+        
+          EscolherProjetoController tpc = loader.getController();    
+          tpc.setStage(stagePrincipal);
+        //    //tpc.setCoordenador(coordenador);
+            
+            
+        
+          Scene cena = new Scene(root);
+           stagePrincipal.setTitle("Tela principal Coordenador");
+           stagePrincipal.setScene(cena);
+           stagePrincipal.show();
             stageLogin.close();
     }
 private void abrirTelaPrincipalBolsista(Bolsista bolsista) throws MalformedURLException, IOException {
