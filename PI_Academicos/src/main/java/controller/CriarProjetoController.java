@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -38,6 +39,8 @@ import model.Coordenador;
 import model.CoordenadorDAO;
 import model.Projeto;
 import model.ProjetoDAO;
+import model.Solicitacao;
+import model.SolicitacaoDAO;
 import model.Usuario;
 import static util.AlertaUtil.mostrarAviso;
 import static util.AlertaUtil.mostrarConfirmacao;
@@ -189,10 +192,10 @@ System.out.print("Nao ha cordenador");
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
         fileChooser.getExtensionFilters().addAll(
-         new ExtensionFilter("Text Files", "*.pdf"));
-        arquivoPDF = fileChooser.showOpenDialog(stageCriarProjeto);
-        
-        if (arquivoPDF != null) {
+        new ExtensionFilter("Text Files", "*.pdf"));
+        //arquivoPDF = fileChooser.showOpenDialog(stageCriarProjeto); 
+        arquivoPDF = fileChooser.showOpenDialog(btnPDF.getScene().getWindow());
+        /*if (arquivoPDF != null) {
             Desktop.getDesktop().open(arquivoPDF);
                 System.out.println(arquivoPDF.getPath());
                 String caminhoArquivo = arquivoPDF.getPath();
@@ -202,7 +205,24 @@ System.out.print("Nao ha cordenador");
                  
                  //instrucao.setString(1, "nome_do_arquivo.pdf"); // Substitui por um nome de arquivo válido
                  //instrucao.setBytes(2, conteudoPDF);
+            }*/
+        
+        if (arquivoPDF != null) {
+            try {
+               // byte[] conteudoPDF = Files.readAllBytes(arquivoPDF.toPath());
+                //String nomeArquivo = arquivoPDF.getName();
+                
+                Usuario usuario = new Usuario();
+                usuario.setId(coordenador.getId());
+                Solicitacao solicitacao = new Solicitacao(usuario, arquivoPDF);
+                new SolicitacaoDAO().salvarPDF(solicitacao);
+                System.out.println("Arquivo PDF salvo no banco de dados.");
+                // Adicione aqui feedback para o usuário (ex: um Label informando o sucesso)
+            } catch (IOException e) {
+                System.err.println("Erro ao ler o arquivo PDF: " + e.getMessage());
+                // Adicione aqui tratamento de erro para o usuário
             }
+        }
         
         
     }

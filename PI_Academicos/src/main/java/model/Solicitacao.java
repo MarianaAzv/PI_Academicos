@@ -12,6 +12,18 @@ public class Solicitacao {
     private boolean aceitacao;
     private File anexo;
 
+    public Solicitacao(int idSolicitacao, Usuario usuario, File anexo){
+        this.idSolicitacao=idSolicitacao;
+        this.usuario=usuario;
+        this.anexo=anexo;
+        
+    }
+    
+     public Solicitacao( Usuario usuario, File anexo){
+        this.usuario=usuario;
+        this.anexo=anexo;
+        
+    }
     public void setIdSolicitacao(int idSolicitacao) {
         this.idSolicitacao = idSolicitacao;
     }
