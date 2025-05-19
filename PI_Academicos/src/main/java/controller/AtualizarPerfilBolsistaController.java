@@ -18,6 +18,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Bolsista;
 import model.BolsistaDAO;
+import model.Projeto;
 import util.AlertaUtil;
 import static util.AlertaUtil.mostrarAviso;
 import static util.AlertaUtil.mostrarConfirmacao;
@@ -26,6 +27,7 @@ public class AtualizarPerfilBolsistaController {
 
     private Stage stageAtualizarBolsista;
     private Bolsista bolsista;
+    Projeto projeto;
     private BolsistaDAO bolsistaDAO = new BolsistaDAO();
     private boolean ativa = true;
 
@@ -76,7 +78,7 @@ public class AtualizarPerfilBolsistaController {
         if (repetido > 0) {
             mostrarAviso("Nome de usuário indisponível", "Este nome de usuário já está sendo usado.");
         } else {
-            bolsistaDAO.atualizarBolsista(bolsista);
+            bolsistaDAO.atualizarBolsista(bolsista, projeto);
             mostrarConfirmacao("Usuário alterado", "O usuário foi alterado com sucesso!");
         }
     }

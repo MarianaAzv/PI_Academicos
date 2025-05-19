@@ -13,12 +13,15 @@ import static util.AlertaUtil.mostrarConfirmacao;
 import javafx.stage.Stage;
 import model.Bolsista;
 import model.BolsistaDAO;
+import model.Projeto;
 import model.Usuario;
 
 
 public class CadastroBolsistaCoordenadorController {
 
-     private Stage stageCadastrarBolsistaCoordenador;  
+     private Stage stageCadastrarBolsistaCoordenador;
+     Projeto projeto;
+     
     @FXML
     private DatePicker DataFimdaBolsa;
 
@@ -138,7 +141,7 @@ public class CadastroBolsistaCoordenadorController {
         } else if (nome.isEmpty() || apelido.isEmpty() || email.isEmpty() || senha.isEmpty() || curso.isEmpty()) {
             mostrarAviso("Campos obrigatórios", "TODOS os campos devem ser preenchidos.");
         } else {
-            new BolsistaDAO().cadastrarUsuarioBolsista(usuario, bolsista);
+            new BolsistaDAO().cadastrarUsuarioBolsista(usuario, bolsista, projeto);
             mostrarConfirmacao("Cadastro realizado", "O bolsista foi registrado com sucesso!");
             stageCadastrarBolsistaCoordenador.close();
         }
@@ -148,6 +151,9 @@ public class CadastroBolsistaCoordenadorController {
         this.stageCadastrarBolsistaCoordenador = TelaCadastroBolsistaCoordenador;
     }
 
+     public void setProjeto(Projeto projeto){
+        this.projeto = projeto;
+    }
     
    
 

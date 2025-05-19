@@ -107,10 +107,4 @@ public class Bolsista extends Usuario {
         this.acessoArtigos = acessoArtigos;
     }
 
-  public void setIdProjeto(int idProjeto) {
-    this.idProjeto = idProjeto; // Retorna corretamente o ID do projeto do bolsista
-    }
-  public int getIdProjeto() {
-    return idProjeto; // Retorna corretamente o ID do projeto do bolsista
-}
 }

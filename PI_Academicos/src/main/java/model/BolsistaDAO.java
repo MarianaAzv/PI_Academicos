@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class BolsistaDAO extends GenericDAO {
 
     // Método para cadastrar um novo bolsista no banco de dados
-    public void cadastrarUsuarioBolsista(Usuario usuario, Bolsista bolsista) {
+    public void cadastrarUsuarioBolsista(Usuario usuario, Bolsista bolsista, Projeto projeto) {
         Connection con = conectarDAO();
 
         String queryUsuario = "INSERT INTO USUARIOS(cpf, nome, apelido, senha, email, ativa) VALUES(?,?,?,?,?,1)";
@@ -41,7 +41,7 @@ public class BolsistaDAO extends GenericDAO {
                 // Inserir bolsista no projeto
                 PreparedStatement stmtBolsistaProjeto = con.prepareStatement(queryBolsistaProjetos);
                 stmtBolsistaProjeto.setInt(1, idGerado);
-                stmtBolsistaProjeto.setInt(2, bolsista.getIdProjeto()); // Mantendo funcionalidade do bolsista
+                stmtBolsistaProjeto.setInt(2, projeto.getIdProjeto()); // Mantendo funcionalidade do bolsista
                 stmtBolsistaProjeto.setDate(3, bolsista.getDataInicio() != null ? Date.valueOf(bolsista.getDataInicio()) : null);
                 stmtBolsistaProjeto.setDate(4, bolsista.getDataFim() != null ? Date.valueOf(bolsista.getDataFim()) : null);
                 stmtBolsistaProjeto.executeUpdate();
@@ -55,7 +55,7 @@ public class BolsistaDAO extends GenericDAO {
     }
 
     // Método para atualizar bolsista no banco
-    public void atualizarBolsista(Bolsista bolsista) throws SQLException {
+    public void atualizarBolsista(Bolsista bolsista, Projeto projeto) throws SQLException {
         Connection con = conectarDAO();
 
         String queryUsuario = "UPDATE USUARIOS SET cpf = ?, nome = ?, apelido = ?, senha = ?, email = ? WHERE idUsuario = ?";
@@ -84,7 +84,7 @@ public class BolsistaDAO extends GenericDAO {
 
             // Atualiza BOLSISTAS_PROJETOS (mantendo funcionalidade exclusiva do bolsista)
             PreparedStatement stmtProjeto = con.prepareStatement(queryProjeto);
-            stmtProjeto.setInt(1, bolsista.getIdProjeto()); // Mantendo a lógica do projeto do bolsista
+            stmtProjeto.setInt(1, projeto.getIdProjeto()); // Mantendo a lógica do projeto do bolsista
             stmtProjeto.setDate(2, bolsista.getDataInicio() != null ? Date.valueOf(bolsista.getDataInicio()) : null);
             stmtProjeto.setDate(3, bolsista.getDataFim() != null ? Date.valueOf(bolsista.getDataFim()) : null);
             stmtProjeto.setInt(4, bolsista.getId());
