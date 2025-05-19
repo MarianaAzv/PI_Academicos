@@ -80,15 +80,6 @@
                   <RowConstraints maxHeight="160.0" minHeight="10.0" prefHeight="116.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <TextField fx:id="txtEdital" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                  <Label fx:id="lblCoordenador" text="Coordenador:" textFill="#840d0b" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
-                     <font>
-                        <Font name="Courier New Bold" size="20.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets right="5.0" />
-                     </GridPane.margin>
-                  </Label>
                   <Label fx:id="lblCampus" text="Câmpus:" textFill="#840d0b" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <font>
                         <Font name="Courier New Bold" size="20.0" />
@@ -105,33 +96,13 @@
                         <Insets right="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <TextField fx:id="txtCoordenador" prefHeight="25.0" prefWidth="932.0" GridPane.columnIndex="2" />
                   <TextField fx:id="txtDatadeInicio" prefHeight="25.0" prefWidth="249.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
                      <children>
-                        <Button fx:id="btnSimBolsista" mnemonicParsing="false" onAction="#OnClickSimBolsista" text="Sim">
-                           <opaqueInsets>
-                              <Insets right="5.0" />
-                           </opaqueInsets>
-                           <HBox.margin>
-                              <Insets right="5.0" top="20.0" />
-                           </HBox.margin>
-                           <font>
-                              <Font name="Courier New Bold" size="12.0" />
-                           </font></Button>
-                        <Button fx:id="btnnaoBolsista" mnemonicParsing="false" onAction="#OnClickNaoBolsista" text="Não">
-                           <opaqueInsets>
-                              <Insets left="5.0" />
-                           </opaqueInsets>
-                           <HBox.margin>
-                              <Insets left="5.0" top="20.0" />
-                           </HBox.margin>
-                           <font>
-                              <Font name="Courier New Bold" size="12.0" />
-                           </font></Button>
+                        <TextField fx:id="txtEdital" />
                      </children>
                   </HBox>
-                  <Label fx:id="lblCategoria" text="Categoria:" textFill="#840d0b" GridPane.columnIndex="3" GridPane.halignment="RIGHT">
+                  <Label fx:id="lblCategoria" text="Categoria:" textFill="#840d0b" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <font>
                         <Font name="Courier New Bold" size="20.0" />
                      </font>
@@ -139,7 +110,7 @@
                         <Insets right="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label fx:id="lblEdital" text="Edital:" textFill="#840d0b" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                  <Label fx:id="lblEdital" text="Edital:" textFill="#840d0b" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                      <font>
                         <Font name="Courier New Bold" size="20.0" />
                      </font>
@@ -147,15 +118,7 @@
                         <Insets right="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label fx:id="lblBolsista" text="Bolsista:" textFill="#840d0b" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
-                     <font>
-                        <Font name="Courier New Bold" size="20.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets right="5.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <ComboBox fx:id="CBcategoria" prefWidth="150.0" GridPane.columnIndex="4" />
+                  <ComboBox fx:id="CBcategoria" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
                   <Label fx:id="lblDatadeFim" layoutX="211.0" layoutY="138.0" text="Data de fim:" textFill="#840d0b" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
                      <font>
                         <Font name="Courier New Bold" size="20.0" />
@@ -164,29 +127,7 @@
                         <Insets right="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <Label fx:id="lblCocoordenador" layoutX="718.0" layoutY="138.0" text="Cocoordenador:" textFill="#840d0b" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
-                     <font>
-                        <Font name="Courier New Bold" size="20.0" />
-                     </font>
-                  </Label>
-                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3">
-                     <children>
-                        <Button fx:id="btnSimCocoordenador" mnemonicParsing="false" onAction="#OnClickSimCocoordenador" text="Sim">
-                           <HBox.margin>
-                              <Insets right="5.0" top="20.0" />
-                           </HBox.margin>
-                           <font>
-                              <Font name="Courier New Bold" size="12.0" />
-                           </font></Button>
-                        <Button fx:id="btnNaococoordenador" mnemonicParsing="false" onAction="#OnClickNaoCocoordenador" text="Não">
-                           <HBox.margin>
-                              <Insets left="5.0" top="20.0" />
-                           </HBox.margin>
-                           <font>
-                              <Font name="Courier New Bold" size="12.0" />
-                           </font></Button>
-                     </children>
-                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
                   <TextField fx:id="txtDatadeFim" layoutX="397.0" layoutY="138.0" prefHeight="25.0" prefWidth="249.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                   <ComboBox fx:id="CBcampus" prefHeight="25.0" prefWidth="287.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                </children>
