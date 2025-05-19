@@ -52,6 +52,8 @@ public class CriarProjetoController {
     
     private Stage stageCriarProjeto;
     Coordenador coordenador;
+    AreasConhecimento areasconhecimento;
+    
     File arquivoPDF = null;
     private final String DIRETORIO_PDFS = Paths.get(System.getProperty("user.home"), "pdfs_baixados").toString();
     
@@ -311,6 +313,7 @@ public class CriarProjetoController {
  public void incluir(String titulo,String resumo, Campus campus, String edital,LocalDate dataInicio,LocalDate dataFim,LocalDate prorrogacao, boolean emAndamento,int id) throws SQLException {
        Projeto projeto = new Projeto(titulo,resumo,campus,edital,dataInicio,dataFim,prorrogacao,emAndamento);
       
+      
     projeto.setEmAndamento(true);
       
         ProjetoDAO pdao =new ProjetoDAO();
@@ -345,6 +348,8 @@ public class CriarProjetoController {
    public  void setCoordenador(Coordenador coordenador) {
         this.coordenador = coordenador;
     }
+   
+   
 
 }
 

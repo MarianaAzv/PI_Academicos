@@ -17,6 +17,7 @@ public class ProjetoDAO extends GenericDAO{
         
         String queryProjeto = "INSERT INTO projetos(tituloProjeto,resumo,idCampus,edital,dataInicio,dataFim,prorrogacao,emAndamento) VALUES(?,?,?,?,?,?,?,?)";
         String queryCoordenadorProjeto = "Insert into coordenadores_projetos(idUsuario,idProjeto,dataInicio,dataFim) values(?,?,?,?)";
+    //    String queryAreasProjeto = "Insert into areas_projetos(idArea,idProjeto) values(?,?)";
         
         try  (con){
          PreparedStatement stmtProjeto = con.prepareStatement(queryProjeto, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -54,15 +55,30 @@ public class ProjetoDAO extends GenericDAO{
       System.out.println("ID do coordenador "+ id);
       
    
-  }
-         catch (SQLException e) {
+ 
+        
+   // PreparedStatement stmtAreasProjeto = con.prepareStatement(queryAreasProjeto, PreparedStatement.RETURN_GENERATED_KEYS);
+   
+     //stmtAreasProjeto.setInt(1, projeto.getAreaConhecimento().getIdArea());
+     //stmtAreasProjeto.setInt(2,projeto.getIdProjeto());
+ 
+
+    //linhasAfetadas =  stmtAreasProjeto.executeUpdate();
+      //      System.out.println(linhasAfetadas + "linhas afetadas");
+     // System.out.println("ID do coordenador "+ id);
+      
+
+  }  catch (SQLException e) {
             e.printStackTrace();
           System.out.print("Erro ao cadatrar o projeto");
         
 }
+}
+        
   
   
-    }
+  
+    
     
     public void atualizarProjeto(Projeto projeto) throws SQLException {
   

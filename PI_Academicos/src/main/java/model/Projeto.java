@@ -23,7 +23,7 @@ public class Projeto {
     
      private int idProjeto;
     private String titulo;
-    private String areaConhecimento;
+    private AreasConhecimento areaConhecimento;
     private String resumo;
     private String edital;
     private LocalDate dataInicio;
@@ -38,6 +38,7 @@ public class Projeto {
     
     public Projeto(String titulo , String resumo, Campus campus, String edital, LocalDate dataInicio, LocalDate dataFim,LocalDate prorrogacao, boolean emAndamento) {
         this.titulo = titulo;
+       
     this.resumo = resumo;
     this.campus = campus;
     this.edital = edital;
@@ -73,14 +74,14 @@ public class Projeto {
     /**
      * @return the areaConhecimento
      */
-    public String getAreaConhecimento() {
+    public AreasConhecimento getAreaConhecimento() {
         return areaConhecimento;
     }
 
     /**
      * @param areaConhecimento the areaConhecimento to set
      */
-    public void setAreaConhecimento(String areaConhecimento) {
+    public void setAreaConhecimento(AreasConhecimento areaConhecimento) {
         this.areaConhecimento = areaConhecimento;
     }
 
@@ -181,6 +182,10 @@ public class Projeto {
     public void setCocoordenadores(String cocoordenadores) {
         this.cocoordenadores = cocoordenadores;
     }
+    
+     //public void setAreasConhecimento(AreasConhecimento areasconhecimento) {
+       // this.areaConhecimento = areasconhecimento;
+    //}
     
    public Projeto(){
        
