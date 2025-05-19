@@ -199,6 +199,10 @@ public class TelaPrincipalCoordenadorController {
         apc.setStage(stageAtualizarProjeto);
         apc.setProjeto(projeto);
         
+          stageAtualizarProjeto.setOnShown(evento -> {
+        apc.ajustarElementosJanela();
+      });
+        
       Scene cena = new Scene(root);
        stageAtualizarProjeto.setTitle("Atualizar Projeto");
        stageAtualizarProjeto.setMaximized(true);

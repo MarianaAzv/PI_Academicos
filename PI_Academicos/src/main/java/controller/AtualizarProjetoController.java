@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,7 +15,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import model.AreasConhecimento;
+import model.AreasConhecimentoDAO;
 import model.Campus;
+import model.CampusDAO;
 import model.Coordenador;
 import model.Projeto;
 import model.ProjetoDAO;
@@ -25,6 +28,9 @@ public class AtualizarProjetoController {
 
      private Stage stageAtualizarProjeto;
      Projeto projeto;
+     Campus campus;
+     AreasConhecimento areaconhecimento;
+     
         @FXML
     private ComboBox<Campus> CBcampus;
     @FXML
@@ -171,6 +177,11 @@ public class AtualizarProjetoController {
       txtCoordenador.setText(projeto.getCocoordenadores());
       //Falta combo box
       
+        if (projeto.getCampus() != null) {
+        CBcampus.setValue(projeto.getCampus());
+        System.out.print("Set campus atualizar");
+    }
+      
     }
   void atualizarProjeto(int idProjeto,String titulo,String resumo, Campus campus, String edital,LocalDate dataInicio,LocalDate dataFim,LocalDate prorrogacao ) throws SQLException{
         
@@ -179,4 +190,27 @@ public class AtualizarProjetoController {
        mostrarConfirmacao("Projeto alterado","O projeto foi alterado com sucesso!");
         
   }
+  
+  public void ajustarElementosJanela(){
+  //ArrayList para set dos nomes dos campus no combo box de campus
+  try{
+      CampusDAO cdao = new CampusDAO();
+     List<Campus> listCampus = cdao.buscarCampus();
+    
+     CBcampus.getItems().addAll(listCampus);
+     
+      if (projeto != null && projeto.getCampus() != null) {
+            CBcampus.setValue(projeto.getCampus());
+            System.out.print("Set atualizar");
+        }
+       AreasConhecimentoDAO acdao = new AreasConhecimentoDAO();
+     List<AreasConhecimento> listCategorias = acdao.buscarCategorias();
+    
+    CBcategoria.getItems().addAll(listCategorias);
+    
+  } catch(SQLException e){
+    
+        mostrarAviso("Banco de Dados","A falha de comunicação entre o sistema e o Banco");
+  }
+   }
 }
