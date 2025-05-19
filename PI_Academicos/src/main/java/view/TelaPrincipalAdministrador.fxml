@@ -181,7 +181,7 @@
                   <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="btnVerperfil" mnemonicParsing="false" onAction="#onClickVerPerfil" onMouseEntered="#OnDragEnterVerPerfil" onMouseExited="#OnDragExitVerPerfil" prefHeight="60.0" prefWidth="280.0" style="-fx-background-color: DBA5A5;" text="Ver perfil" textFill="#840d0b" GridPane.halignment="CENTER">
+                  <Button fx:id="btnVerPerfil" mnemonicParsing="false" onAction="#onClickVerPerfil" onMouseEntered="#OnDragEnterVerPerfil" onMouseExited="#OnDragExitVerPerfil" prefHeight="60.0" prefWidth="280.0" style="-fx-background-color: DBA5A5;" text="Ver perfil" textFill="#840d0b" GridPane.halignment="CENTER">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>

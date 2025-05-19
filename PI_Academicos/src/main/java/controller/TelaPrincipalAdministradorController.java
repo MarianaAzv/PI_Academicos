@@ -44,7 +44,7 @@ public class TelaPrincipalAdministradorController {
     private Button btnSair;
 
     @FXML
-    private Button btnVerperfil;
+    private Button btnVerPerfil;
 
     @FXML
     private ImageView imgLogo;
@@ -106,7 +106,7 @@ public class TelaPrincipalAdministradorController {
 
     @FXML
     void onClickSair(ActionEvent event) throws IOException {
-        abrirTelaPrincipal();
+       abrirTelaLogin();
     }
     @FXML
     void OnDragEnterSair(MouseEvent event) {
@@ -124,12 +124,12 @@ public class TelaPrincipalAdministradorController {
     }
 
     @FXML
-    void OnDragEnterVerPerfil(MouseDragEvent event) {
-         btnVerperfil.setStyle("-fx-background-color:  D07979" );
+    void OnDragEnterVerPerfil(MouseEvent event) {
+         btnVerPerfil.setStyle("-fx-background-color:  D07979" );
     }
      @FXML
-    void OnDragExitVerPerfil(MouseDragEvent event) {
-         btnVerperfil.setStyle("-fx-background-color:  DBA5A5" );
+    void OnDragExitVerPerfil(MouseEvent event) {
+         btnVerPerfil.setStyle("-fx-background-color:  DBA5A5" );
     }
 //**********************************
     
@@ -157,13 +157,16 @@ public class TelaPrincipalAdministradorController {
             Stage stageVerPerfil = new Stage();
         
             VerPerfilAdministradorController vpac = loader.getController();    
-            //tnc.setStage(stageCadastroADM);
+            vpac.setStage(stageVerPerfil);
+            vpac.setAdministrador(adm);
+            stageVerPerfil.setMaximized(true);
         
             Scene cena = new Scene(root);
             stageVerPerfil.setTitle("Perfil administrador");
             stageVerPerfil.setScene(cena);
             
             stageVerPerfil.show();
+            stageADM.close();
             
     }
     
@@ -183,7 +186,7 @@ public class TelaPrincipalAdministradorController {
             stageCadastroNoticia.setScene(cena);
             
             stageCadastroNoticia.show();
-            
+            stageADM.close();
     }
     
      private void abrirTelaAtualizar() throws MalformedURLException, IOException{
@@ -252,26 +255,24 @@ public class TelaPrincipalAdministradorController {
             stageADM.close();
     }
     
-    private void abrirTelaPrincipal() throws IOException{
-     URL url = new File("src/main/java/view/TelaPrincipalAdministrador.fxml").toURI().toURL();
+    private void abrirTelaLogin() throws IOException{
+        
+         URL url = new File("src/main/java/view/TelaLogin.fxml").toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
         
-            Stage stagePrincipal = new Stage();
+            Stage stageLogin = new Stage();
         
-            TelaPrincipalAdministradorController tpa = loader.getController();    
-            tpa.setStage(stagePrincipal);
-            
-           stagePrincipal.setOnShown(evento -> {
-            tpa.ajustarElementosJanela(adm);});
+            TelaLoginController tlc = loader.getController();  
+            tlc.setStage(stageLogin);
         
             Scene cena = new Scene(root);
-            stagePrincipal.setTitle("Tela principal Administrador");
-            stagePrincipal.setScene(cena);
+            stageLogin.setTitle("Tela Login");
+            stageLogin.setScene(cena);
             //deixa a tela maximizada
-            stagePrincipal.setMaximized(true);
+            stageLogin.setMaximized(true);
             
-            stagePrincipal.show();
+            stageLogin.show();
             stageADM.close();
     }
     
@@ -279,11 +280,14 @@ public class TelaPrincipalAdministradorController {
         this.stageADM = stage;
     }
     
+    void setADM(Administrador adm) {
+        this.adm = adm;
+    }
+    
     void ajustarElementosJanela(Administrador adm) {
         this.adm=adm;
         
-        System.out.println("Aqui chegam os parâmetros do login "
-                + adm.getNome() + " - " + "ATIVA: " + adm.getAtiva());
+        System.out.println("Aqui chegam os parâmetros do login " + adm.getNome() + " - " + "ATIVA: " + adm.getAtiva());
         //txtNomeUsuario.setText(adm.getNome());
 
         

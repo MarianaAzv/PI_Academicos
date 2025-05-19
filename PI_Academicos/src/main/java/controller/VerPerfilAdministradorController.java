@@ -157,14 +157,6 @@ public class VerPerfilAdministradorController  {
         
     }
 
-    @FXML
-    void OnDragEnterVerPerfil(MouseDragEvent event) {
-         btnVerperfil.setStyle("-fx-background-color:  DBA5A5" );
-    }
-     @FXML
-    void OnDragExitVerPerfil(MouseDragEvent event) {
-         btnVerperfil.setStyle("-fx-background-color:  DBA5A5" );
-    }
 //**********************************
     
     @FXML
@@ -288,9 +280,10 @@ public class VerPerfilAdministradorController  {
         
             TelaPrincipalAdministradorController tpa = loader.getController();    
             tpa.setStage(stagePrincipal);
-            
+            tpa.setADM(adm);
            stagePrincipal.setOnShown(evento -> {
             tpa.ajustarElementosJanela(adm);});
+           
         
             Scene cena = new Scene(root);
             stagePrincipal.setTitle("Tela principal Administrador");
