@@ -350,6 +350,27 @@ public class CriarProjetoController {
    public  void setCoordenador(Coordenador coordenador) {
         this.coordenador = coordenador;
     }
+   
+   public void abrirJanelaMaisBolsista() throws IOException{
+       URL url = new File("src/main/java/view/MaisBolsista.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage stageMaisBolsista = new Stage();
+            
+            MaisBolsistaController mbc = loader.getController();
+            //mbc.setCoordenador(coordenador);
+            mbc.setProjeto(projeto);
+            mbc.setStage(stageMaisBolsista);
+        
+            Scene cena = new Scene(root);
+            stageMaisBolsista.setTitle("Adicionar bolsistas");
+            stageMaisBolsista.setScene(cena);
+            //deixa a tela maximizada
+            
+            stageMaisBolsista.show();
+            stageCriarProjeto.close();
+   }
 
 }
 
