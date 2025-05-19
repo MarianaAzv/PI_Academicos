@@ -24,6 +24,13 @@ public class Solicitacao {
         this.anexo=anexo;
         
     }
+     
+          public Solicitacao( Usuario usuario, String descricao, File anexo){
+              this.usuario=usuario;
+              this.descricao=descricao;
+              this.anexo=anexo;
+        
+    }
     public void setIdSolicitacao(int idSolicitacao) {
         this.idSolicitacao = idSolicitacao;
     }

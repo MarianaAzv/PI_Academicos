@@ -12,33 +12,12 @@ import java.time.format.DateTimeFormatter;
 
 public class SolicitacaoDAO extends GenericDAO{
     
-    public void cadastrarSolicitacao(Solicitacao solicitacao) throws SQLException, FileNotFoundException{
-    
-        Connection con = conectarDAO();
-        
-        String sql = "INSERT INTO solicitacoes (idUsuario, data, descricao, aceitacao, anexo) VALUES (?, ?, ?, ?, ?)";
-        
-        /*try{
-             PreparedStatement stmt = con.prepareStatement(sql);
-             FileInputStream fis = new FileInputStream(solicitacao.getAnexo()) {
-        
-           
-            stmt.setInt(1, solicitacao.getUsuario().getId());
-            stmt.setBinaryStream(5, fis, (int) selectedFile.length());
-
-            int rowsAffected = stmt.executeUpdate();
-            System.out.println("PDF saved successfully. Rows affected: " + rowsAffected);
-             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
-    }
     
     public void salvarPDF (Solicitacao solicitacao) throws IOException{
         
         Connection con = conectarDAO();
         
-        String sql = "INSERT INTO solicitacoes (idUsuario, anexo) VALUES (?, ?)";
+        String sql = "INSERT INTO solicitacoes (idUsuario, descricao, aceitacao, anexo) VALUES (?, ?, 0, ?)";
 
         try {
              PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -46,7 +25,8 @@ public class SolicitacaoDAO extends GenericDAO{
             byte[] conteudoPDF = Files.readAllBytes(solicitacao.getAnexo().toPath());
 
             stmt.setInt(1, solicitacao.getUsuario().getId());
-            stmt.setBytes(2, conteudoPDF);
+            stmt.setString(2, solicitacao.getDescricao());
+            stmt.setBytes(3, conteudoPDF);
             stmt.executeUpdate();
             
             ResultSet keys = stmt.getGeneratedKeys();
@@ -62,7 +42,28 @@ public class SolicitacaoDAO extends GenericDAO{
         }
     }
     
-    
+    public byte[] carregarConteudoPDF(int idSolicitacao) {
+        
+        Connection con = conectarDAO();
+        
+        String sql = "SELECT anexo FROM solicitacoes WHERE idSolicitacao = ?";
+        byte[] conteudoPDF = null;
+        
+        
+        try {
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setInt(1, idSolicitacao);
+        ResultSet rs = stmt.executeQuery();
+        
+        if (rs.next()) {
+                conteudoPDF = rs.getBytes("anexo");
+            }
+        
+        } catch (SQLException e) {
+            System.err.println("Erro ao salvar o PDF no banco de dados: " + e.getMessage());
+        }
+        return conteudoPDF;
+    }
     
     
     

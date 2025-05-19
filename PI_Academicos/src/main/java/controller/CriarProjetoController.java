@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,6 +29,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
@@ -48,8 +51,16 @@ import static util.AlertaUtil.mostrarConfirmacao;
 public class CriarProjetoController {
     
     private Stage stageCriarProjeto;
-    File arquivoPDF=null;
     Coordenador coordenador;
+    File arquivoPDF = null;
+    private final String DIRETORIO_PDFS = Paths.get(System.getProperty("user.home"), "pdfs_baixados").toString();
+    
+      public void initialize() {
+        File diretorio = new File(DIRETORIO_PDFS);
+        if (!diretorio.exists()) {
+            diretorio.mkdirs();
+        }
+      }
     
      @FXML
     private ComboBox<Campus> CBcampus;
@@ -80,6 +91,9 @@ public class CriarProjetoController {
 
     @FXML
     private ImageView imgLogo;
+    
+    @FXML
+    private Label lblAbrirArquivo;
 
     @FXML
     private Label lblBolsista;
@@ -168,20 +182,21 @@ public class CriarProjetoController {
           mostrarAviso("Falha","O formato da data de inicio ou de Fim nao esta no padrao normal");
      }
 
+       enviarSolicitacao();
     }
     
     @FXML
     void OnClickNaoBolsista(ActionEvent event) {
         // Mudar a cor do botao
- System.out.print("Nao ha Bolsista");
- // Se o usuario clicou no outro botao entao muda a cor para normal 
- btnnaoBolsista.setStyle("-fx-text-fill: gray; -fx-background-color: DBA5A5;");
+        System.out.print("Nao ha Bolsista");
+        // Se o usuario clicou no outro botao entao muda a cor para normal 
+        btnnaoBolsista.setStyle("-fx-text-fill: gray; -fx-background-color: DBA5A5;");
     }
 
     @FXML
     void OnClickNaoCocoordenador(ActionEvent event) {
-System.out.print("Nao ha cordenador");
- btnNaococoordenador.setStyle("-fx-text-fill: gray; -fx-background-color: DBA5A5;");
+        System.out.print("Nao ha cordenador");
+        btnNaococoordenador.setStyle("-fx-text-fill: gray; -fx-background-color: DBA5A5;");
 
     }
 
@@ -191,40 +206,40 @@ System.out.print("Nao ha cordenador");
         //adicao de janela para escolher arquivo pdf 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
-        fileChooser.getExtensionFilters().addAll(
-        new ExtensionFilter("Text Files", "*.pdf"));
-        //arquivoPDF = fileChooser.showOpenDialog(stageCriarProjeto); 
+        fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.pdf"));
         arquivoPDF = fileChooser.showOpenDialog(btnPDF.getScene().getWindow());
-        /*if (arquivoPDF != null) {
-            Desktop.getDesktop().open(arquivoPDF);
-                System.out.println(arquivoPDF.getPath());
-                String caminhoArquivo = arquivoPDF.getPath();
-                FileInputStream fileInputStream = new FileInputStream(caminhoArquivo);
-                
-                 byte[] conteudoPDF = fileInputStream.readAllBytes();
-                 
-                 //instrucao.setString(1, "nome_do_arquivo.pdf"); // Substitui por um nome de arquivo válido
-                 //instrucao.setBytes(2, conteudoPDF);
-            }*/
-        
+        lblAbrirArquivo.setText(arquivoPDF.getName());
+  
+    }
+    
+    @FXML
+    void onMouseEnterAbrirArquivo(MouseEvent event) {
+        lblAbrirArquivo.setStyle("text-decoration: underline;");
+    }
+
+    @FXML
+    void onMouseExitedAbrirArquivo(MouseEvent event) {
+
+    }
+    
+    
+    @FXML
+    void onClickAbrirArquivo(MouseEvent event) {
+
         if (arquivoPDF != null) {
             try {
-               // byte[] conteudoPDF = Files.readAllBytes(arquivoPDF.toPath());
-                //String nomeArquivo = arquivoPDF.getName();
-                
-                Usuario usuario = new Usuario();
-                usuario.setId(coordenador.getId());
-                Solicitacao solicitacao = new Solicitacao(usuario, arquivoPDF);
-                new SolicitacaoDAO().salvarPDF(solicitacao);
-                System.out.println("Arquivo PDF salvo no banco de dados.");
-                // Adicione aqui feedback para o usuário (ex: um Label informando o sucesso)
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().open(arquivoPDF);
+                } else {
+                    System.err.println("A funcionalidade de desktop não é suportada.");
+                }
             } catch (IOException e) {
-                System.err.println("Erro ao ler o arquivo PDF: " + e.getMessage());
-                // Adicione aqui tratamento de erro para o usuário
+                System.err.println("Erro ao abrir o arquivo: " + e.getMessage());
             }
+        } else {
+            System.out.println("Nenhum arquivo selecionado para abrir.");
         }
-        
-        
+    
     }
 
     @FXML
@@ -255,7 +270,7 @@ System.out.print("Nao ha cordenador");
     @FXML
     void OnClickSimCocoordenador(ActionEvent event) throws MalformedURLException, IOException {
         
-URL url = new File("src/main/java/view/CadastroCocoordenadorCoordenador.fxml").toURI().toURL();
+            URL url = new File("src/main/java/view/CadastroCocoordenadorCoordenador.fxml").toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
         
@@ -293,7 +308,7 @@ URL url = new File("src/main/java/view/CadastroCocoordenadorCoordenador.fxml").t
         mostrarAviso("Banco de Dados","A falha de comunicação entre o sistema e o Banco");
   }
    }
- void incluir(String titulo,String resumo, Campus campus, String edital,LocalDate dataInicio,LocalDate dataFim,LocalDate prorrogacao, boolean emAndamento,int id) throws SQLException {
+ public void incluir(String titulo,String resumo, Campus campus, String edital,LocalDate dataInicio,LocalDate dataFim,LocalDate prorrogacao, boolean emAndamento,int id) throws SQLException {
        Projeto projeto = new Projeto(titulo,resumo,campus,edital,dataInicio,dataFim,prorrogacao,emAndamento);
       
     projeto.setEmAndamento(true);
@@ -306,8 +321,26 @@ URL url = new File("src/main/java/view/CadastroCocoordenadorCoordenador.fxml").t
        
     }
  
- void enviarSolicitacao(){
+ public void enviarSolicitacao(){
      
+     if (arquivoPDF != null) {
+            try {
+                
+                Usuario usuario = new Usuario();
+                usuario.setId(coordenador.getId());
+               
+                String descricao = "Nome do projeto: "+ txtNomedoProjeto.getText()
+                        + "\nCoordenador: " + coordenador.getNome() 
+                        + ", SIAPE: " + coordenador.getSiape() 
+                        + ", e-mail: " + coordenador.getEmail();
+                Solicitacao solicitacao = new Solicitacao(usuario, descricao, arquivoPDF);
+                new SolicitacaoDAO().salvarPDF(solicitacao);
+                System.out.println("Arquivo PDF salvo no banco de dados.");
+                
+            } catch (IOException e) {
+                System.err.println("Erro ao ler o arquivo PDF: " + e.getMessage());
+            }
+        }
  }
    public  void setCoordenador(Coordenador coordenador) {
         this.coordenador = coordenador;
