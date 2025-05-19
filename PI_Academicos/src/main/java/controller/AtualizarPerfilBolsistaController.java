@@ -56,7 +56,7 @@ public class AtualizarPerfilBolsistaController {
             txtEmail.setText(bolsista.getEmail());
             txtMatricula.setText(String.valueOf(bolsista.getMatricula()));
 
-            // **Correção:** Evitar erro ao acessar valores NULL
+            //  Evitar erro ao acessar valores NULL
             txtDataInicio.setText(bolsista.getDataInicio() != null ? bolsista.getDataInicio().toString() : "Data não cadastrada");
             txtDataFim.setText(bolsista.getDataFim() != null ? bolsista.getDataFim().toString() : "Data não cadastrada");
 
@@ -89,7 +89,7 @@ public class AtualizarPerfilBolsistaController {
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-            // **Correção:** Tratar valores NULL antes de converter para LocalDate
+            //  Tratar valores NULL antes de converter para LocalDate
             LocalDate dataInicio = txtDataInicio.getText().isEmpty() ? null : LocalDate.parse(txtDataInicio.getText(), formatter);
             LocalDate dataFim = txtDataFim.getText().isEmpty() ? null : LocalDate.parse(txtDataFim.getText(), formatter);
 
