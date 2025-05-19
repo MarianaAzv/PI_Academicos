@@ -10,6 +10,7 @@ public class Bolsista extends Usuario {
     private LocalDate dataFim;
     private boolean acessoPostagens;
     private boolean acessoArtigos;
+    private int idProjeto;
 
     //Todos os atributos
     public Bolsista(int id, long cpf, String nome, String apelido, String email, String senha, boolean ativa, 
@@ -105,4 +106,11 @@ public class Bolsista extends Usuario {
     public void setAcessoArtigos(boolean acessoArtigos) {
         this.acessoArtigos = acessoArtigos;
     }
+
+  public void setIdProjeto(int idProjeto) {
+    this.idProjeto = idProjeto; // Retorna corretamente o ID do projeto do bolsista
+    }
+  public int getIdProjeto() {
+    return idProjeto; // Retorna corretamente o ID do projeto do bolsista
+}
 }

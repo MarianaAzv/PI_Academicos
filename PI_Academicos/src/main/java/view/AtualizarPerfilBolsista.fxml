@@ -232,7 +232,7 @@
                               <Font name="Courier New Bold" size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="txtInicioBolsa" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                        <TextField fx:id="txtDataInicio" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP">
                            <font>
                               <Font name="Courier New Bold" size="18.0" />
                            </font>
@@ -243,7 +243,7 @@
                               <Insets top="10.0" />
                            </GridPane.margin>
                         </TextField>
-                        <TextField fx:id="txtFimBolsa" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                        <TextField fx:id="txtDataFim" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.valignment="TOP">
                            <font>
                               <Font name="Courier New Bold" size="18.0" />
                            </font>
