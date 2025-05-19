@@ -100,7 +100,7 @@ public class ProjetoDAO extends GenericDAO{
          
           Connection con = conectarDAO();
           
-        String sql = "SELECT p.* FROM PROJETOS as p inner join coordenadores_projetos as cp on p.idProjeto = cp.idProjeto where cp.idUsuario=?";
+        String sql = "SELECT p.*, c.* FROM PROJETOS as p inner join coordenadores_projetos as cp on p.idProjeto = cp.idProjeto inner join campus  as c on p.idCampus = c.idCampus where cp.idUsuario=?";
         
         try(con ){
              PreparedStatement stmtProjeto = con.prepareStatement(sql);
@@ -111,6 +111,8 @@ public class ProjetoDAO extends GenericDAO{
         while (rs.next()) {
             Campus campus = new Campus();
             campus.setIdCampus(rs.getInt("idCampus"));
+            campus.setNomeCampus(rs.getString("nomeCampus"));
+            campus.setLocalCampus(rs.getString("localCampus"));
 
             Projeto projeto = new Projeto(
                 rs.getString("tituloProjeto"),
