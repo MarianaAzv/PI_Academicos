@@ -17,7 +17,7 @@ public class ProjetoDAO extends GenericDAO{
         
         String queryProjeto = "INSERT INTO projetos(tituloProjeto,resumo,idCampus,edital,dataInicio,dataFim,prorrogacao,emAndamento) VALUES(?,?,?,?,?,?,?,?)";
         String queryCoordenadorProjeto = "Insert into coordenadores_projetos(idUsuario,idProjeto,dataInicio,dataFim) values(?,?,?,?)";
-    //    String queryAreasProjeto = "Insert into areas_projetos(idArea,idProjeto) values(?,?)";
+
         
         try  (con){
          PreparedStatement stmtProjeto = con.prepareStatement(queryProjeto, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -57,15 +57,7 @@ public class ProjetoDAO extends GenericDAO{
    
  
         
-   // PreparedStatement stmtAreasProjeto = con.prepareStatement(queryAreasProjeto, PreparedStatement.RETURN_GENERATED_KEYS);
-   
-     //stmtAreasProjeto.setInt(1, projeto.getAreaConhecimento().getIdArea());
-     //stmtAreasProjeto.setInt(2,projeto.getIdProjeto());
  
-
-    //linhasAfetadas =  stmtAreasProjeto.executeUpdate();
-      //      System.out.println(linhasAfetadas + "linhas afetadas");
-     // System.out.println("ID do coordenador "+ id);
       
 
   }  catch (SQLException e) {
@@ -149,7 +141,26 @@ public class ProjetoDAO extends GenericDAO{
         }
         return projetos;
         }
-    
+  //  public void AreaProjeto(Projeto projeto,AreasConhecimento AreasConhecimento){
+        
+       //     Connection con = conectarDAO();
+            
+         //     String queryAreasProjeto = "Insert into areas_projetos(idArea,idProjeto) values(?,?)";
+              
+          //    try(con){
+           //    PreparedStatement stmtAreasProjeto = con.prepareStatement(queryAreasProjeto, PreparedStatement.RETURN_GENERATED_KEYS);
+   
+   // stmtAreasProjeto.setInt(1, projeto.getAreaConhecimento().getIdArea());
+   // stmtAreasProjeto.setInt(2,projeto.getIdProjeto());
+ 
+
+// int linhasAfetadas =  stmtAreasProjeto.executeUpdate();
+     //     System.out.println(linhasAfetadas + "linhas afetadas");
+      //    System.out.println("ID do coordenador ");
+       //       } catch(SQLException e){
+        //        e.printStackTrace();
+        //      }
+  //  }
     }
 
 

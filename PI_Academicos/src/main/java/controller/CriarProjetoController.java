@@ -109,8 +109,7 @@ public class CriarProjetoController {
     @FXML
     private Label lblCocoordenador;
 
-    @FXML
-    private Label lblCoordenador;
+ 
 
     @FXML
     private Label lblDatadeFim;
@@ -128,8 +127,7 @@ public class CriarProjetoController {
     private Label lbltitulocriarprojeto;
 
  
-    @FXML
-    private TextField txtCoordenador;
+    
 
     @FXML
     private TextField txtDatadeFim;
@@ -151,6 +149,9 @@ public class CriarProjetoController {
         this.stageCriarProjeto = telaCriarProjeto;
     }
     
+      public  void setCoordenador(Coordenador coordenador) {
+        this.coordenador = coordenador;
+    }
      @FXML
     void OnClickEnviar(ActionEvent event) throws ParseException, IOException {
         //Para o combo box é pelo dao na inicializacao
@@ -160,7 +161,7 @@ public class CriarProjetoController {
         //LocalDate;
        try{ 
         
-       if(txtNomedoProjeto.getText().isEmpty() || txtResumo.getText().isEmpty() ||txtEdital.getText().isEmpty() || txtCoordenador.getText().isEmpty() || txtDatadeInicio.getText().isEmpty() || txtDatadeFim.getText().isEmpty() ||  CBcampus.getValue() == null || CBcategoria.getValue() == null  ){
+       if(txtNomedoProjeto.getText().isEmpty() || txtResumo.getText().isEmpty() ||txtEdital.getText().isEmpty() || txtDatadeInicio.getText().isEmpty() || txtDatadeFim.getText().isEmpty() ||  CBcampus.getValue() == null || CBcategoria.getValue() == null  ){
            mostrarAviso("Falta informacao","Por favor inserir todos os dados corretamente");
            
            return;
@@ -174,6 +175,8 @@ public class CriarProjetoController {
             return;
         } else{
             Campus campusnomeSelecionado = CBcampus.getValue();
+            AreasConhecimento areacnhecimentoselecionado = CBcategoria.getValue();
+            this.areasconhecimento= areacnhecimentoselecionado;
             
             incluir(txtNomedoProjeto.getText(),txtResumo.getText(),campusnomeSelecionado,txtEdital.getText(),dI,dF,null,true,coordenador.getId());
         }
@@ -189,20 +192,7 @@ public class CriarProjetoController {
        abrirJanelaMaisBolsista();
     }
     
-    @FXML
-    void OnClickNaoBolsista(ActionEvent event) {
-        // Mudar a cor do botao
-        System.out.print("Nao ha Bolsista");
-        // Se o usuario clicou no outro botao entao muda a cor para normal 
-        btnnaoBolsista.setStyle("-fx-text-fill: gray; -fx-background-color: DBA5A5;");
-    }
-
-    @FXML
-    void OnClickNaoCocoordenador(ActionEvent event) {
-        System.out.print("Nao ha cordenador");
-        btnNaococoordenador.setStyle("-fx-text-fill: gray; -fx-background-color: DBA5A5;");
-
-    }
+  
 
     @FXML
     void OnClickPDF(ActionEvent event) throws IOException {
@@ -246,53 +236,9 @@ public class CriarProjetoController {
     
     }
 
-    @FXML
-    void OnClickSimBolsista(ActionEvent event) throws MalformedURLException, IOException {
-        
-        
-            URL url = new File("src/main/java/view/CadastroBolsistaCoodernador.fxml").toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-        
-            Stage TelaCadastroBolsistaCoordenador = new Stage();
-            
-            CadastroBolsistaCoordenadorController cbcc = loader.getController();
-            
-           cbcc.setStage(TelaCadastroBolsistaCoordenador); 
-          
-        
-            Scene cena = new Scene(root);
-            TelaCadastroBolsistaCoordenador.setTitle("Cadastro Bolsista");
-            TelaCadastroBolsistaCoordenador.setScene(cena);
-           
-            
-           TelaCadastroBolsistaCoordenador.show();
-           btnSimBolsista.setStyle("-fx-text-fill: gray; -fx-background-color: DBA5A5;");
-           
-    }
+  
 
-    @FXML
-    void OnClickSimCocoordenador(ActionEvent event) throws MalformedURLException, IOException {
-        
-            URL url = new File("src/main/java/view/CadastroCocoordenadorCoordenador.fxml").toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-        
-            Stage TelaCadastroCocoordenadorCoordenador = new Stage();
-            
-            CadastroCocoordenadorCoordenadorController cccc = loader.getController();
-            
-           cccc.setStage(TelaCadastroCocoordenadorCoordenador); 
-          
-        
-            Scene cena = new Scene(root);
-            TelaCadastroCocoordenadorCoordenador.setTitle("Cadastro Cocoordenador");
-            TelaCadastroCocoordenadorCoordenador.setScene(cena);
-           
-            
-        TelaCadastroCocoordenadorCoordenador.show();
-           
-    }
+    
     
  public void ajustarElementosJanela(){
   //ArrayList para set dos nomes dos campus no combo box de campus
@@ -316,10 +262,12 @@ public class CriarProjetoController {
        projeto = new Projeto(titulo,resumo,campus,edital,dataInicio,dataFim,prorrogacao,emAndamento);
       
       
+      
     projeto.setEmAndamento(true);
       
         ProjetoDAO pdao =new ProjetoDAO();
         pdao.cadastraprojeto(projeto,id);
+        pdao.AreaProjeto(projeto, areasconhecimento);
        
         mostrarConfirmacao("Projeto cadastrado","O projeto foi registrado no sistema com sucesso!");
         stageCriarProjeto.close();
@@ -347,9 +295,7 @@ public class CriarProjetoController {
             }
         }
  }
-   public  void setCoordenador(Coordenador coordenador) {
-        this.coordenador = coordenador;
-    }
+ 
    
    public void abrirJanelaMaisBolsista() throws IOException{
        URL url = new File("src/main/java/view/MaisBolsista.fxml").toURI().toURL();
