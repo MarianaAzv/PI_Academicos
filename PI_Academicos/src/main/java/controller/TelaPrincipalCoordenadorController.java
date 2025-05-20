@@ -231,6 +231,7 @@ public class TelaPrincipalCoordenadorController {
          CriarProjetoController tpc = loader.getController();
        
         tpc.setStage(telaCriarProjeto);
+        tpc.setCoordenador(coordenador);
         
          telaCriarProjeto.setOnShown(evento -> {
         tpc.ajustarElementosJanela();

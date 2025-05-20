@@ -141,26 +141,26 @@ public class ProjetoDAO extends GenericDAO{
         }
         return projetos;
         }
-  //  public void AreaProjeto(Projeto projeto,AreasConhecimento AreasConhecimento){
+   public void AreaProjeto(Projeto projeto,AreasConhecimento AreasConhecimento){
         
-       //     Connection con = conectarDAO();
+            Connection con = conectarDAO();
             
-         //     String queryAreasProjeto = "Insert into areas_projetos(idArea,idProjeto) values(?,?)";
+              String queryAreasProjeto = "Insert into areas_projetos(idArea,idProjeto) values(?,?)";
               
-          //    try(con){
-           //    PreparedStatement stmtAreasProjeto = con.prepareStatement(queryAreasProjeto, PreparedStatement.RETURN_GENERATED_KEYS);
+              try(con){
+               PreparedStatement stmtAreasProjeto = con.prepareStatement(queryAreasProjeto, PreparedStatement.RETURN_GENERATED_KEYS);
    
-   // stmtAreasProjeto.setInt(1, projeto.getAreaConhecimento().getIdArea());
-   // stmtAreasProjeto.setInt(2,projeto.getIdProjeto());
+    stmtAreasProjeto.setInt(1, projeto.getAreaConhecimento().getIdArea());
+    stmtAreasProjeto.setInt(2,projeto.getIdProjeto());
  
 
-// int linhasAfetadas =  stmtAreasProjeto.executeUpdate();
-     //     System.out.println(linhasAfetadas + "linhas afetadas");
-      //    System.out.println("ID do coordenador ");
-       //       } catch(SQLException e){
-        //        e.printStackTrace();
-        //      }
-  //  }
+ int linhasAfetadas =  stmtAreasProjeto.executeUpdate();
+          System.out.println(linhasAfetadas + "linhas afetadas");
+          System.out.println("ID do coordenador ");
+              } catch(SQLException e){
+                e.printStackTrace();
+              }
+    }
     }
 
 
