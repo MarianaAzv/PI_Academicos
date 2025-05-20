@@ -230,6 +230,7 @@ private void abrirTelaPrincipalBolsista(Bolsista bolsista) throws MalformedURLEx
         
             TelaPrincipalAdministradorController tpa = loader.getController();    
             tpa.setStage(stagePrincipal);
+            tpa.setAdministrador(adm);
             
            stagePrincipal.setOnShown(evento -> {
             tpa.ajustarElementosJanela(adm);

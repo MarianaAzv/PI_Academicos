@@ -178,6 +178,7 @@ public class VerPerfilAdministradorController  {
     public void setAdministrador(Administrador adm) {
        this.adm = adm;
        lblNomeR.setText(adm.getNome());
+       lblNomeAdm.setText(adm.getNome());
        lblUsuarioR.setText(adm.getApelido());
        String cpf = String.valueOf(adm.getCpf());
        lblCPFR.setText(cpf);
@@ -280,7 +281,7 @@ public class VerPerfilAdministradorController  {
         
             TelaPrincipalAdministradorController tpa = loader.getController();    
             tpa.setStage(stagePrincipal);
-            tpa.setADM(adm);
+            tpa.setAdministrador(adm);
            stagePrincipal.setOnShown(evento -> {
             tpa.ajustarElementosJanela(adm);});
            

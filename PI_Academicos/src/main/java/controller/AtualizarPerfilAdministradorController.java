@@ -276,7 +276,7 @@ public class AtualizarPerfilAdministradorController {
             stageCadastroNoticia.setScene(cena);
             
             stageCadastroNoticia.show();
-            stageAtualizarADM.close();
+            
     }
     
      private void abrirTelaAtualizar() throws MalformedURLException, IOException{
@@ -374,7 +374,7 @@ public class AtualizarPerfilAdministradorController {
         
             TelaPrincipalAdministradorController tpa = loader.getController();    
             tpa.setStage(stagePrincipal);
-            tpa.setADM(adm);
+            tpa.setAdministrador(adm);
            stagePrincipal.setOnShown(evento -> {
             tpa.ajustarElementosJanela(adm);});
            
@@ -396,6 +396,7 @@ public class AtualizarPerfilAdministradorController {
     public void setAdministrador(Administrador adm) {
        this.adm = adm;
        txtNome.setText(adm.getNome());
+       lblNomeAdm.setText(adm.getNome());
        txtUsuario.setText(adm.getApelido());
        String cpf = String.valueOf(adm.getCpf());
        txtCPF.setText(cpf);

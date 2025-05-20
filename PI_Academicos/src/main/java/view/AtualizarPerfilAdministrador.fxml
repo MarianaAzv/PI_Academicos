@@ -145,7 +145,7 @@
                   <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
                </GridPane.margin>
                <font>
-                  <Font name="Courier New Bold" size="35.0" />
+                  <Font name="Courier New Bold" size="24.0" />
                </font>
             </Label>
          </children>
@@ -177,10 +177,13 @@
                         <Font name="Courier New Bold" size="14.0" />
                      </font>
                   </Text>
-                  <Label fx:id="lblNomeAdm" contentDisplay="CENTER" prefHeight="115.0" prefWidth="174.0" textAlignment="RIGHT" textFill="#840d0b" wrapText="true" GridPane.valignment="CENTER">
+                  <Label fx:id="lblNomeAdm" contentDisplay="CENTER" prefHeight="115.0" prefWidth="174.0" textAlignment="CENTER" textFill="#840d0b" wrapText="true" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Courier New Bold" size="20.0" />
                      </font>
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
                   </Label>
                </children>
             </GridPane>
@@ -207,7 +210,7 @@
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnSair" mnemonicParsing="false" onAction="#onClickSair" onMouseEntered="#OnDragEnterSair" onMouseExited="#OnDragExitSair" prefHeight="60.0" prefWidth="280.0" style="-fx-background-color: DBA5A5;" text="Sair" textFill="#840d0b" GridPane.rowIndex="5">
+                  <Button fx:id="btnSair" mnemonicParsing="false" onAction="#onClickSair" onMouseEntered="#OnDragEnterSair" onMouseExited="#OnDragExitSair" prefHeight="60.0" prefWidth="280.0" style="-fx-background-color: DBA5A5;" text="Início" textFill="#840d0b" GridPane.rowIndex="5">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>

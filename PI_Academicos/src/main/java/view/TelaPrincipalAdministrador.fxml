@@ -117,7 +117,7 @@
                   </GridPane>
                </children>
             </GridPane>
-            <Label text=" ----------- Notícias  -  Solicitações -----------" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+            <Label text="---------------- Publicações ----------------" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                <font>
                   <Font name="Courier New Bold" size="18.0" />
                </font></Label>
@@ -161,10 +161,16 @@
                         <Font name="Courier New Bold" size="14.0" />
                      </font>
                   </Text>
-                  <Label fx:id="lblNomeAdm" contentDisplay="CENTER" prefHeight="115.0" prefWidth="174.0" textAlignment="RIGHT" textFill="#840d0b" wrapText="true" GridPane.valignment="CENTER">
+                  <Label fx:id="lblNomeAdm" contentDisplay="CENTER" prefHeight="115.0" prefWidth="174.0" textAlignment="CENTER" textFill="#840d0b" wrapText="true" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Courier New Bold" size="20.0" />
                      </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
                   </Label>
                </children>
             </GridPane>

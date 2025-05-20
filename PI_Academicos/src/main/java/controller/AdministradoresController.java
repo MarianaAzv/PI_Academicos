@@ -25,8 +25,9 @@ public class AdministradoresController {
     private Stage stageADMS;
     private Administrador adm;
 
-    public void setAdministrador(Administrador adm) {
+   public void setAdministrador(Administrador adm) {
         this.adm = adm;
+        lblNomeAdm.setText(adm.getNome());
     }
 
     public void setStage(Stage stageADMS) {
@@ -286,7 +287,7 @@ public class AdministradoresController {
         
             TelaPrincipalAdministradorController tpa = loader.getController();    
             tpa.setStage(stagePrincipal);
-            tpa.setADM(adm);
+            tpa.setAdministrador(adm);
            stagePrincipal.setOnShown(evento -> {
             tpa.ajustarElementosJanela(adm);});
            
@@ -300,5 +301,8 @@ public class AdministradoresController {
             stagePrincipal.show();
             stageADMS.close();
     }
+    
+     
+    
     
 }

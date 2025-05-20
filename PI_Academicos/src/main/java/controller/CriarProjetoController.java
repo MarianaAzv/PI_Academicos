@@ -267,7 +267,7 @@ public class CriarProjetoController {
       
         ProjetoDAO pdao =new ProjetoDAO();
         pdao.cadastraprojeto(projeto,id);
-        pdao.AreaProjeto(projeto, areasconhecimento);
+        //pdao.AreaProjeto(projeto, areasconhecimento);
        
         mostrarConfirmacao("Projeto cadastrado","O projeto foi registrado no sistema com sucesso!");
         stageCriarProjeto.close();

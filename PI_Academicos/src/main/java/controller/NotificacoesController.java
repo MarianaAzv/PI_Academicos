@@ -23,8 +23,10 @@ public class NotificacoesController {
     private Stage stageNotificacoes;
     private Administrador adm;
     
-     public void setAdministrador(Administrador adm) {
+     
+    public void setAdministrador(Administrador adm) {
         this.adm = adm;
+        lblNomeAdm.setText(adm.getNome());
     }
 
     public void setStage(Stage stageNotificacoes) {
@@ -231,7 +233,7 @@ public class NotificacoesController {
             stageADMS.setMaximized(true);
             
             stageADMS.show();
-            stageADMS.close();
+            stageNotificacoes.close();
     }
     
     private void abrirTelaNotificacoes() throws IOException{
@@ -285,7 +287,7 @@ public class NotificacoesController {
         
             TelaPrincipalAdministradorController tpa = loader.getController();    
             tpa.setStage(stagePrincipal);
-            tpa.setADM(adm);
+            tpa.setAdministrador(adm);
            stagePrincipal.setOnShown(evento -> {
             tpa.ajustarElementosJanela(adm);});
            

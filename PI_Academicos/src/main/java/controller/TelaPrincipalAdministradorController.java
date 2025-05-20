@@ -55,6 +55,7 @@ public class TelaPrincipalAdministradorController {
     @FXML
     private Label lblNomeAdm;
     
+    
 
      @FXML
     void onClickAtualizarPerfil(ActionEvent event) throws IOException {  
@@ -186,7 +187,7 @@ public class TelaPrincipalAdministradorController {
             stageCadastroNoticia.setScene(cena);
             
             stageCadastroNoticia.show();
-            stageADM.close();
+            
     }
     
      private void abrirTelaAtualizar() throws MalformedURLException, IOException{
@@ -280,9 +281,12 @@ public class TelaPrincipalAdministradorController {
         this.stageADM = stage;
     }
     
-    void setADM(Administrador adm) {
+    public void setAdministrador(Administrador adm) {
         this.adm = adm;
+        lblNomeAdm.setText(adm.getNome());
     }
+    
+    
     
     void ajustarElementosJanela(Administrador adm) {
         this.adm=adm;
