@@ -76,12 +76,12 @@ public class ProjetoDAO extends GenericDAO{
   
         Connection con = conectarDAO();
         
-        String queryUsuario = "UPDATE projetos SET tituloProjeto = ?, resumo = ?, idCampus = ?, edital = ?, dataInicio = ?, dataFim = ?,prorrogacao = ?, emAndamento = ? WHERE IdProjeto = ?";
+        String queryProjeto = "UPDATE projetos SET tituloProjeto = ?, resumo = ?, idCampus = ?, edital = ?, dataInicio = ?, dataFim = ?,prorrogacao = ?, emAndamento = ? WHERE IdProjeto = ?";
        
 
     try (con) {
     
-   PreparedStatement stmtProjeto = con.prepareStatement(queryUsuario, PreparedStatement.RETURN_GENERATED_KEYS);
+   PreparedStatement stmtProjeto = con.prepareStatement(queryProjeto, PreparedStatement.RETURN_GENERATED_KEYS);
    stmtProjeto.setString(1, projeto.getTitulo());
    stmtProjeto.setString(2, projeto.getResumo());
   
@@ -108,7 +108,7 @@ public class ProjetoDAO extends GenericDAO{
          
           Connection con = conectarDAO();
           
-        String sql = "SELECT p.*, c.* FROM PROJETOS as p inner join coordenadores_projetos as cp on p.idProjeto = cp.idProjeto inner join campus  as c on p.idCampus = c.idCampus where cp.idUsuario=?";
+        String sql = "SELECT p.*, c.*, ap.* FROM PROJETOS as p inner join coordenadores_projetos as cp on p.idProjeto = cp.idProjeto inner join campus  as c on p.idCampus = c.idCampus inner join areas_projetos as ap on ap.idProjeto = p.idProjeto where cp.idUsuario=?";
         
         try(con ){
              PreparedStatement stmtProjeto = con.prepareStatement(sql);
@@ -121,6 +121,10 @@ public class ProjetoDAO extends GenericDAO{
             campus.setIdCampus(rs.getInt("idCampus"));
             campus.setNomeCampus(rs.getString("nomeCampus"));
             campus.setLocalCampus(rs.getString("localCampus"));
+            
+            AreasConhecimento areasconhecimento = new AreasConhecimento();
+            areasconhecimento.setIdArea(rs.getInt("idArea"));
+            areasconhecimento.setNomeArea(rs.getString("idProjeto")); 
 
             Projeto projeto = new Projeto(
                 rs.getString("tituloProjeto"),
@@ -161,6 +165,29 @@ public class ProjetoDAO extends GenericDAO{
                 e.printStackTrace();
               }
     }
+   
+    public void AtualizarAreaProjeto(Projeto projeto,AreasConhecimento AreasConhecimento){
+        
+            Connection con = conectarDAO();
+            
+              String queryAreasProjeto = "update areas_projetos set idArea = ? idProjeto = ? ";
+              
+              try(con){
+               PreparedStatement stmtAreasProjeto = con.prepareStatement(queryAreasProjeto, PreparedStatement.RETURN_GENERATED_KEYS);
+   
+    stmtAreasProjeto.setInt(1, projeto.getAreaConhecimento().getIdArea());
+    stmtAreasProjeto.setInt(2,projeto.getIdProjeto());
+    stmtAreasProjeto.executeUpdate();
+
+ int linhasAfetadas =  stmtAreasProjeto.executeUpdate();
+          System.out.println(linhasAfetadas + "linhas afetadas");
+          System.out.println("ID do coordenador ");
+              } catch(SQLException e){
+                e.printStackTrace();
+              }
+    }
+   
+      
     }
 
 

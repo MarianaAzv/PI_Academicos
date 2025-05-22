@@ -133,6 +133,8 @@ public class AtualizarProjetoController {
          LocalDate PR= LocalDate.parse(txtProrrogacao.getText(), formatter);
          
            Campus campusnomeSelecionado = CBcampus.getValue();
+           AreasConhecimento areacnhecimentoselecionado = CBcategoria.getValue();
+            this.areaconhecimento= areacnhecimentoselecionado;
           
           
         
@@ -168,9 +170,12 @@ public class AtualizarProjetoController {
        txtNomedoProjeto.setText(projeto.getTitulo());
        txtResumo.setText(projeto.getResumo());
        txtEdital.setText(projeto.getEdital());
-      String DataInicio = String.valueOf(projeto.getDataInicio());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+      String DataInicio = projeto.getDataInicio().format(formatter);
       txtDatadeInicio.setText(DataInicio);
-       String DataFim = String.valueOf(projeto.getDataFim());
+     
+
+       String DataFim = projeto.getDataFim().format(formatter);
       txtDatadeFim.setText(DataFim);
       String prorroga = String.valueOf(projeto.getProrroacao());
       txtProrrogacao.setText(prorroga);
@@ -181,12 +186,17 @@ public class AtualizarProjetoController {
         CBcampus.setValue(projeto.getCampus());
         System.out.print("Set campus atualizar");
     }
+        if(projeto.getAreaConhecimento() !=null){
+              CBcategoria.setValue(areaconhecimento);
+        }
+      
       
     }
   void atualizarProjeto(int idProjeto,String titulo,String resumo, Campus campus, String edital,LocalDate dataInicio,LocalDate dataFim,LocalDate prorrogacao ) throws SQLException{
         
          ProjetoDAO pdao =new ProjetoDAO();
         pdao.atualizarProjeto(projeto);
+       pdao.AtualizarAreaProjeto(projeto, areaconhecimento);
        mostrarConfirmacao("Projeto alterado","O projeto foi alterado com sucesso!");
         
   }
@@ -202,6 +212,11 @@ public class AtualizarProjetoController {
       if (projeto != null && projeto.getCampus() != null) {
             CBcampus.setValue(projeto.getCampus());
             System.out.print("Set atualizar");
+        }
+      
+      if (projeto != null && projeto.getAreaConhecimento()!= null) {
+           CBcategoria.setValue(projeto.getAreaConhecimento());
+            System.out.print("Set atualizar area de conhecimento");
         }
        AreasConhecimentoDAO acdao = new AreasConhecimentoDAO();
      List<AreasConhecimento> listCategorias = acdao.buscarCategorias();

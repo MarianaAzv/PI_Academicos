@@ -260,14 +260,15 @@ public class CriarProjetoController {
    }
  public void incluir(String titulo,String resumo, Campus campus, String edital,LocalDate dataInicio,LocalDate dataFim,LocalDate prorrogacao, boolean emAndamento,int id) throws SQLException {
        projeto = new Projeto(titulo,resumo,campus,edital,dataInicio,dataFim,prorrogacao,emAndamento);
+      projeto.setAreaConhecimento(areasconhecimento);
       
-      
-      
+      AreasConhecimento areacnhecimentoselecionado = CBcategoria.getValue();
+            this.areasconhecimento= areacnhecimentoselecionado;
     projeto.setEmAndamento(true);
       
         ProjetoDAO pdao =new ProjetoDAO();
         pdao.cadastraprojeto(projeto,id);
-        //pdao.AreaProjeto(projeto, areasconhecimento);
+        pdao.AreaProjeto(projeto, areasconhecimento);
        
         mostrarConfirmacao("Projeto cadastrado","O projeto foi registrado no sistema com sucesso!");
         stageCriarProjeto.close();
