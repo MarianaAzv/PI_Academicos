@@ -92,6 +92,38 @@ public class ProjetoDAO extends GenericDAO{
     stmtProjeto.setDate(6,Date.valueOf(projeto.getDataFim()) ); 
   stmtProjeto.setDate(7, projeto.getProrroacao() != null ? java.sql.Date.valueOf(projeto.getProrroacao()) : null);
    stmtProjeto.setBoolean(8, projeto.isEmAndamento());  
+   stmtProjeto.setInt(9,projeto.getIdProjeto());
+   stmtProjeto.executeUpdate();
+
+
+
+        
+
+  System.out.println("Projeto atualizado com ID: " + projeto.getIdProjeto());
+ }
+}
+    
+      public void atualizarProjetoSEmProrrogacao(Projeto projeto) throws SQLException {
+  
+        Connection con = conectarDAO();
+        
+        String queryProjeto = "UPDATE projetos SET tituloProjeto = ?, resumo = ?, idCampus = ?, edital = ?, dataInicio = ?, dataFim = ?, emAndamento = ? WHERE IdProjeto = ?";
+       
+
+    try (con) {
+    
+   PreparedStatement stmtProjeto = con.prepareStatement(queryProjeto, PreparedStatement.RETURN_GENERATED_KEYS);
+   stmtProjeto.setString(1, projeto.getTitulo());
+   stmtProjeto.setString(2, projeto.getResumo());
+  
+   stmtProjeto.setInt(3, projeto.getCampus().getIdCampus());
+ 
+    stmtProjeto.setString(4, projeto.getEdital());
+    stmtProjeto.setDate(5, Date.valueOf(projeto.getDataInicio()));  
+    stmtProjeto.setDate(6,Date.valueOf(projeto.getDataFim()) ); 
+ 
+   stmtProjeto.setBoolean(7, projeto.isEmAndamento());  
+   stmtProjeto.setInt(8,projeto.getIdProjeto());
    stmtProjeto.executeUpdate();
 
 
@@ -108,7 +140,7 @@ public class ProjetoDAO extends GenericDAO{
          
           Connection con = conectarDAO();
           
-        String sql = "SELECT p.*, c.*, ap.* FROM PROJETOS as p inner join coordenadores_projetos as cp on p.idProjeto = cp.idProjeto inner join campus  as c on p.idCampus = c.idCampus inner join areas_projetos as ap on ap.idProjeto = p.idProjeto where cp.idUsuario=?";
+        String sql = "SELECT p.*, c.*, ap.*, ac.* FROM PROJETOS as p inner join coordenadores_projetos as cp on p.idProjeto = cp.idProjeto inner join campus  as c on p.idCampus = c.idCampus inner join areas_projetos as ap on ap.idProjeto = p.idProjeto inner join areasdeconhecimento as ac on ac.idArea = ap.idArea where cp.idUsuario=?";
         
         try(con ){
              PreparedStatement stmtProjeto = con.prepareStatement(sql);
@@ -124,7 +156,7 @@ public class ProjetoDAO extends GenericDAO{
             
             AreasConhecimento areasconhecimento = new AreasConhecimento();
             areasconhecimento.setIdArea(rs.getInt("idArea"));
-            areasconhecimento.setNomeArea(rs.getString("idProjeto")); 
+            areasconhecimento.setNomeArea(rs.getString("nomeArea")); 
 
             Projeto projeto = new Projeto(
                 rs.getString("tituloProjeto"),
@@ -136,6 +168,7 @@ public class ProjetoDAO extends GenericDAO{
                 rs.getDate("prorrogacao") != null ? rs.getDate("prorrogacao").toLocalDate() : null,
                 rs.getBoolean("emAndamento")
             );
+            projeto.setAreaConhecimento(areasconhecimento);
         
 
        projeto.setIdProjeto(rs.getInt("idProjeto"));
