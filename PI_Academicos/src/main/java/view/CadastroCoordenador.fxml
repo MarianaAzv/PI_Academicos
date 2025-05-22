@@ -137,8 +137,8 @@
             <GridPane prefHeight="130.0" prefWidth="1248.0">
               <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="414.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="138.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="810.0" minWidth="0.0" prefWidth="164.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="181.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="810.0" minWidth="0.0" prefWidth="82.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="10.0" prefWidth="175.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="414.0" />
               </columnConstraints>
@@ -148,11 +148,21 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="btnSubmeter" mnemonicParsing="false" onAction="#OnClickSubmeter" prefHeight="39.0" prefWidth="125.0" style="-fx-background-color: #840d0b;" text="Submeter" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <Button fx:id="btnSubmeter" mnemonicParsing="false" onAction="#OnClickSubmeter" prefHeight="39.0" prefWidth="125.0" style="-fx-background-color: #840d0b;" text="Submeter" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
+                  <Button fx:id="btnPDF" layoutX="542.0" layoutY="53.0" mnemonicParsing="false" onAction="#onClickPDF" prefHeight="39.0" prefWidth="125.0" style="-fx-background-color: #840d0b;" text="PDF" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Courier New Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="lblAbrirArquivo" onMouseClicked="#onClickAbrirArquivo" text="Label" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                     <padding>
+                        <Insets right="20.0" />
+                     </padding>
+                  </Label>
                </children>
             </GridPane>
             <GridPane prefHeight="175.0" prefWidth="1264.0">

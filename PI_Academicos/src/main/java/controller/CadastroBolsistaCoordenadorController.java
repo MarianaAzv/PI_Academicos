@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.File;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import javafx.event.ActionEvent;
@@ -20,7 +22,11 @@ import model.Usuario;
 public class CadastroBolsistaCoordenadorController {
 
      private Stage stageCadastrarBolsistaCoordenador;
+     File arquivoPDF = null;
+     private final String DIRETORIO_PDFS = Paths.get(System.getProperty("user.home"), "pdfs_baixados").toString();
      Projeto projeto;
+     Bolsista bolsista;
+     Usuario usuario;
      
     @FXML
     private DatePicker DataFimdaBolsa;
@@ -88,17 +94,7 @@ public class CadastroBolsistaCoordenadorController {
     @FXML
     private TextField txtUsuario;
 
-  //  @FXML
-  //  void OnClickEnviar(ActionEvent event) {
-     //    try{
-      //  Long cpf = Long.parseLong(txtCPF.getText());
-      //  Long matricula = Long.parseLong(txtMatricula.getText());
-      //  incluir(cpf,txtNomeCompleto.getText(),txtUsuario.getText(),txtEmail.getText(),txtSenha.getText(), matricula, txtCurso.getText());
-      //  }catch(NumberFormatException n){
-        //    mostrarAviso("CPF ou Matricula inválidos","Os valores inseridos para CPF e Matricula do bolsista devem ser apenas números");
-      //  }
 
-  //  }
     @FXML
     void OnClickEnviar(ActionEvent event) throws SQLException {
         try {
