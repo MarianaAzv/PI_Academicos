@@ -219,6 +219,51 @@ public class ProjetoDAO extends GenericDAO{
                 e.printStackTrace();
               }
     }
+
+    public List<Projeto> selecionarProjeto( Bolsista bolsista) throws SQLException {
+         List<Projeto> projetos = new ArrayList<>();
+         
+          Connection con = conectarDAO();
+          
+        String sql = "SELECT p.*, c.*, ap.* FROM PROJETOS as p inner join coordenadores_projetos as cp on p.idProjeto = cp.idProjeto inner join campus  as c on p.idCampus = c.idCampus inner join areas_projetos as ap on ap.idProjeto = p.idProjeto where cp.idUsuario=?";
+        
+        try(con ){
+             PreparedStatement stmtProjeto = con.prepareStatement(sql);
+             stmtProjeto.setInt(1,bolsista.getId());
+              ResultSet rs = stmtProjeto.executeQuery();
+              
+              
+        while (rs.next()) {
+            Campus campus = new Campus();
+            campus.setIdCampus(rs.getInt("idCampus"));
+            campus.setNomeCampus(rs.getString("nomeCampus"));
+            campus.setLocalCampus(rs.getString("localCampus"));
+            
+            AreasConhecimento areasconhecimento = new AreasConhecimento();
+            areasconhecimento.setIdArea(rs.getInt("idArea"));
+            areasconhecimento.setNomeArea(rs.getString("idProjeto")); 
+
+            Projeto projeto = new Projeto(
+                rs.getString("tituloProjeto"),
+                rs.getString("resumo"),
+                campus,
+                rs.getString("edital"),
+                rs.getDate("dataInicio").toLocalDate(),
+                rs.getDate("dataFim").toLocalDate(),
+                rs.getDate("prorrogacao") != null ? rs.getDate("prorrogacao").toLocalDate() : null,
+                rs.getBoolean("emAndamento")
+            );
+        
+
+       projeto.setIdProjeto(rs.getInt("idProjeto"));
+
+            projetos.add(projeto);
+        }
+        }
+        return projetos;
+        
+        
+    }
    
       
     }

@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Bolsista;
+import model.Projeto;
 import model.Usuario;
 import util.AlertaUtil;
 
@@ -25,6 +26,8 @@ public class TelaPrincipalBolsistaController {
     private Connection conexao;
     private final Usuario dao = new Usuario();
     private Bolsista bolsista;
+        private Projeto projeto;//hj
+
 
     @FXML
     private Text TxtNomeUsuario, TxtNomeProjetoBarra;
@@ -62,6 +65,9 @@ public class TelaPrincipalBolsistaController {
     private Text txtProrrogacao;
     @FXML
     private Label lblNomeBolsista, lblNomeCocoordenador, lblNomeCoordenador, lblResumo;
+    
+    @FXML
+    private Text txtResumo;
 
     public void setStage(Stage stage) {
         this.stageTelaPrincipalBolsista = stage;
@@ -150,20 +156,46 @@ void onClickVerPerfil(ActionEvent event) throws IOException {
     }
 
     @FXML
-    void onClickVerProjeto(ActionEvent event) {
-        System.out.println("Ver Projeto clicado!");
+    void onClickVerProjeto(ActionEvent event) throws IOException {
+        URL url = new File("src/main/java/view/TelaPrincipalBolsista.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stage = new Stage();
+        TelaPrincipalBolsistaController tpb = loader.getController();
+        tpb.setStagePrincipal(stage);
+
+        Scene cena = new Scene(root);
+        stage.setTitle("Tela Principal Bolsista");
+        stage.setScene(cena);
+        stage.setMaximized(true);
+
+        stage.show();
+        stageTelaPrincipalBolsista.close();
     }
 
     public void setStagePrincipal(Stage telaPrincipalBolsista) {
         this.stageTelaPrincipalBolsista = telaPrincipalBolsista;
     }
 
-    void ajustarElementosJanela(Bolsista bolsista) {
+    void ajustarElementosJanela(Bolsista bolsista, Projeto projeto) {
         this.bolsista = bolsista;
+        this.projeto = projeto;
         System.out.println("Aqui chegam os parâmetros do login " + bolsista.getNome() + " - " + bolsista.getMatricula() + " ATIVA: " + bolsista.getAtiva());
         TxtNomeUsuario.setText(bolsista.getNome());
-        String matricula = String.valueOf(bolsista.getMatricula());
-        textNomeProjeto.setText(matricula);
-        TxtNomeProjetoBarra.setText(matricula);
+       // String matricula = String.valueOf(bolsista.getMatricula());
+        textNomeProjeto.setText(projeto.getTitulo());
+        TxtNomeProjetoBarra.setText(projeto.getTitulo());
+      //  txtNomeCoordenador.setText();
+      //txtNomeBolsita.setText();
+      //txtNomeCocoordenador.setText();
+      //txtInicio
+      //txtFim
+      //txtProrrogacao
+      //txtResumo
+      //txtCampus
+      
     }
+
+    
 }
