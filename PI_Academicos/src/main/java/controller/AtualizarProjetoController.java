@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,7 +15,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import model.AreasConhecimento;
+import model.AreasConhecimentoDAO;
 import model.Campus;
+import model.CampusDAO;
+import model.Coordenador;
 import model.Projeto;
 import model.ProjetoDAO;
 import static util.AlertaUtil.mostrarAviso;
@@ -23,6 +27,10 @@ import static util.AlertaUtil.mostrarConfirmacao;
 public class AtualizarProjetoController {
 
      private Stage stageAtualizarProjeto;
+     Projeto projeto;
+     Campus campus;
+     AreasConhecimento areaconhecimento;
+     
         @FXML
     private ComboBox<Campus> CBcampus;
     @FXML
@@ -116,25 +124,32 @@ public class AtualizarProjetoController {
 
     @FXML
     void OnClickAtualizar(ActionEvent event) {
-     //  try{
-      
-        //    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-     //   LocalDate dI = LocalDate.parse(txtDatadeInicio.getText(), formatter);
-     //   LocalDate dF= LocalDate.parse(txtDatadeFim.getText(), formatter);
-      //   LocalDate PR= LocalDate.parse(txtProrrogacao.getText(), formatter);
-         
-       //    Campus campusnomeSelecionado = CBcampus.getValue();
-          // Projeto.setIdProjeto(IdProjeto);
         
-   //  atualizarProjeto(Projeto.getid,txtNomedoProjeto.getText(),txtResumo.getText(),campusnomeSelecionado,txtEdital.getText(),dI,dF,PR);
+       try{
+      
+           //IF da prorrogacao e atualizar a area 
+           DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+       LocalDate dI = LocalDate.parse(txtDatadeInicio.getText(), formatter);
+       LocalDate dF= LocalDate.parse(txtDatadeFim.getText(), formatter);
+         LocalDate PR= LocalDate.parse(txtProrrogacao.getText(), formatter);
+         
+           Campus campusnomeSelecionado = CBcampus.getValue();
+           AreasConhecimento areacnhecimentoselecionado = CBcategoria.getValue();
+            this.areaconhecimento= areacnhecimentoselecionado;
+          
+          
+        if(txtProrrogacao.getText() != null){
+     atualizarProjeto(projeto.getIdProjeto(),txtNomedoProjeto.getText(),txtResumo.getText(),campusnomeSelecionado,txtEdital.getText(),dI,dF,PR);
+        } else {
+            atualizarProjetoSEmProrrogacao(projeto.getIdProjeto(),txtNomedoProjeto.getText(),txtResumo.getText(),campusnomeSelecionado,txtEdital.getText(),dI,dF);
+        }
      
-     
-   //    } catch(SQLException e){
-    //      mostrarAviso("Falha","A falha em atuaizar esse projeto");
-   //  } 
-  //     catch(DateTimeParseException e){
-  //        mostrarAviso("Falha","O formato da data de inicio ou de Fim nao esta no padrao normal");
-  //   }
+      } catch(SQLException e){
+         mostrarAviso("Falha","A falha em atuaizar esse projeto");
+     } 
+       catch(DateTimeParseException e){
+         mostrarAviso("Falha","O formato da data de inicio ou de Fim nao esta no padrao normal");
+    }
     }
     
 
@@ -150,12 +165,85 @@ public class AtualizarProjetoController {
     
      public void setStage(Stage telaAtualizarProjeto){
         this.stageAtualizarProjeto = telaAtualizarProjeto;
+        
+    }
+     
+     public void setProjeto(Projeto pro) {
+       this.projeto = pro;
+       txtNomedoProjeto.setText(projeto.getTitulo());
+       txtResumo.setText(projeto.getResumo());
+       txtEdital.setText(projeto.getEdital());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+      String DataInicio = projeto.getDataInicio().format(formatter);
+      txtDatadeInicio.setText(DataInicio);
+     
+
+       String DataFim = projeto.getDataFim().format(formatter);
+      txtDatadeFim.setText(DataFim);
+      String prorroga = String.valueOf(projeto.getProrroacao());
+      txtProrrogacao.setText(prorroga);
+      txtCoordenador.setText(projeto.getCocoordenadores());
+      //Falta combo box
+      
+        if (projeto.getCampus() != null) {
+        CBcampus.setValue(projeto.getCampus());
+        System.out.print("Set campus atualizar");
+    }
+        if(projeto.getAreaConhecimento() !=null){
+              CBcategoria.setValue(areaconhecimento);
+        }
+      
+      
     }
   void atualizarProjeto(int idProjeto,String titulo,String resumo, Campus campus, String edital,LocalDate dataInicio,LocalDate dataFim,LocalDate prorrogacao ) throws SQLException{
         
-       //  ProjetoDAO pdao =new ProjetoDAO();
-      //  pdao.atualizarProjeto(Projeto);
-      // mostrarConfirmacao("Projeto alterado","O projeto foi alterado com sucesso!");
+         ProjetoDAO pdao =new ProjetoDAO();
+        pdao.atualizarProjeto(projeto);
+        
+       pdao.AtualizarAreaProjeto(projeto, areaconhecimento);
+       
+       mostrarConfirmacao("Projeto alterado","O projeto foi alterado com sucesso!");
         
   }
+  
+  void atualizarProjetoSEmProrrogacao(int idProjeto,String titulo,String resumo, Campus campus, String edital,LocalDate dataInicio,LocalDate dataFim) throws SQLException{
+   
+      ProjetoDAO pdao =new ProjetoDAO();
+        pdao.atualizarProjetoSEmProrrogacao(projeto);
+        
+       pdao.AtualizarAreaProjeto(projeto, areaconhecimento);
+       
+       mostrarConfirmacao("Projeto alterado","O projeto foi alterado com sucesso!");
+      
+  }
+  
+  public void ajustarElementosJanela(){
+  //ArrayList para set dos nomes dos campus no combo box de campus
+  try{
+      CampusDAO cdao = new CampusDAO();
+     List<Campus> listCampus = cdao.buscarCampus();
+    
+     CBcampus.getItems().addAll(listCampus);
+     
+      if (projeto != null && projeto.getCampus() != null) {
+            CBcampus.setValue(projeto.getCampus());
+            System.out.print("Set atualizar");
+        }
+      
+     
+       AreasConhecimentoDAO acdao = new AreasConhecimentoDAO();
+     List<AreasConhecimento> listCategorias = acdao.buscarCategorias();
+    
+    CBcategoria.getItems().addAll(listCategorias);
+    
+     if (projeto != null && projeto.getAreaConhecimento()!= null) {
+           CBcategoria.setValue(projeto.getAreaConhecimento());
+            System.out.print("Set atualizar area de conhecimento");
+        }
+    
+  } catch(SQLException e){
+    
+        mostrarAviso("Banco de Dados","A falha de comunicação entre o sistema e o Banco");
+  }
+   }
 }

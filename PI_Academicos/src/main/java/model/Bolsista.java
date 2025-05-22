@@ -10,6 +10,7 @@ public class Bolsista extends Usuario {
     private LocalDate dataFim;
     private boolean acessoPostagens;
     private boolean acessoArtigos;
+    private int idProjeto;
 
     //Todos os atributos
     public Bolsista(int id, long cpf, String nome, String apelido, String email, String senha, boolean ativa, 
@@ -19,8 +20,8 @@ public class Bolsista extends Usuario {
         this.curso = curso;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
-        this.acessoPostagens = acessoPostagens;
-        this.acessoArtigos = acessoArtigos;
+        //this.acessoPostagens = acessoPostagens;
+        //this.acessoArtigos = acessoArtigos;
     }
 
     // Construtor sem ID para INSERIR novo bolsista)
@@ -50,6 +51,11 @@ public class Bolsista extends Usuario {
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
 
+    }
+//11-05
+    Bolsista(long aLong, String string) {
+        this.matricula = matricula;
+        this.curso = curso;
     }
 
     // GetSet ok
@@ -100,4 +106,5 @@ public class Bolsista extends Usuario {
     public void setAcessoArtigos(boolean acessoArtigos) {
         this.acessoArtigos = acessoArtigos;
     }
+
 }

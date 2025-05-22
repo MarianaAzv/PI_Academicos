@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="634.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="contrller.CadastroCocoordenadorCoordenadorController">
+<GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="634.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CadastroCocoordenadorCoordenadorController">
   <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="30.0" prefWidth="17.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="1282.0" minWidth="10.0" prefWidth="1256.0" />

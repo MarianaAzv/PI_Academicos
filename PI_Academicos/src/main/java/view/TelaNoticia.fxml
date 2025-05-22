@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -24,11 +25,11 @@
    <children>
       <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="20.0" GridPane.columnIndex="1">
          <children>
-            <Label fx:id="lblTituloNoticia" alignment="BOTTOM_LEFT" maxWidth="1920.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="28.0" prefWidth="291.0" text="Titulo noticia" textFill="#840d0b" VBox.vgrow="ALWAYS">
+            <TextField fx:id="tfTituloNoticia" promptText="Titulo da notícia">
                <font>
-                  <Font name="Courier New Bold" size="17.0" />
+                  <Font name="Courier New Bold" size="18.0" />
                </font>
-            </Label>
+            </TextField>
             <TextArea fx:id="txtLegenda" prefHeight="200.0" prefWidth="200.0" promptText="Legenda" VBox.vgrow="ALWAYS" />
             <Button fx:id="btnPostar" alignment="BOTTOM_RIGHT" mnemonicParsing="false" onAction="#onClickPostar" style="-fx-background-color: #840d0b;" text="POSTAR" textFill="WHITE">
                <font>

@@ -18,6 +18,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Bolsista;
 import model.BolsistaDAO;
+import model.Projeto;
 import util.AlertaUtil;
 import static util.AlertaUtil.mostrarAviso;
 import static util.AlertaUtil.mostrarConfirmacao;
@@ -26,7 +27,8 @@ public class AtualizarPerfilBolsistaController {
 
     private Stage stageAtualizarBolsista;
     private Bolsista bolsista;
-   private BolsistaDAO bolsistaDAO = new BolsistaDAO();
+    Projeto projeto;
+    private BolsistaDAO bolsistaDAO = new BolsistaDAO();
     private boolean ativa = true;
 
     @FXML
@@ -40,7 +42,6 @@ public class AtualizarPerfilBolsistaController {
 
     @FXML
     private TextField txtCPF, txtCurso, txtEmail, txtMatricula, txtNome, txtSenha, txtUsuario, txtDataInicio, txtDataFim;
-
 
     public void setStage(Stage stageAtualizarBolsista) {
         this.stageAtualizarBolsista = stageAtualizarBolsista;
@@ -56,43 +57,46 @@ public class AtualizarPerfilBolsistaController {
             txtSenha.setText(bolsista.getSenha());
             txtEmail.setText(bolsista.getEmail());
             txtMatricula.setText(String.valueOf(bolsista.getMatricula()));
-            txtDataInicio.setText(bolsista.getDataInicio().toString());
-            txtDataFim.setText(bolsista.getDataFim().toString());
+
+            //  Evitar erro ao acessar valores NULL
+            txtDataInicio.setText(bolsista.getDataInicio() != null ? bolsista.getDataInicio().toString() : "Data não cadastrada");
+            txtDataFim.setText(bolsista.getDataFim() != null ? bolsista.getDataFim().toString() : "Data não cadastrada");
+
+            System.out.println("Data Início carregada: " + bolsista.getDataInicio());
+            System.out.println("Data Fim carregada: " + bolsista.getDataFim());
         } else {
             mostrarAviso("Erro", "Bolsista não encontrado.");
         }
     }
 
-    void atualizarBolsista(int id, long cpf, String nome, String apelido, String email, String senha, boolean ativa, long matricula, String curso, LocalDate dataInicio, LocalDate dataFim) throws SQLException {// LocalDate dataInicio, LocalDate dataFim, boolean acessoPostagens, boolean acessoArtigos
+    void atualizarBolsista(int id, long cpf, String nome, String apelido, String email, String senha, boolean ativa,
+                           long matricula, String curso, LocalDate dataInicio, LocalDate dataFim) throws SQLException {
         Bolsista bolsista = new Bolsista(id, cpf, nome, apelido, email, senha, ativa, matricula, curso, dataInicio, dataFim);
 
-        
         int repetido = bolsistaDAO.validarApelido(apelido, id);
 
         if (repetido > 0) {
             mostrarAviso("Nome de usuário indisponível", "Este nome de usuário já está sendo usado.");
         } else {
-            
-         bolsistaDAO.atualizarBolsista(bolsista);
-        mostrarConfirmacao("Usuário alterado","O usuário foi alterado com sucesso!");
+            bolsistaDAO.atualizarBolsista(bolsista, projeto);
+            mostrarConfirmacao("Usuário alterado", "O usuário foi alterado com sucesso!");
         }
-        
     }
 
     @FXML
     void onClickAtualizar(ActionEvent event) throws SQLException {
-        try {          
-
+        try {
             Long cpf = Long.parseLong(txtCPF.getText());
             Long matricula = Long.parseLong(txtMatricula.getText());
-      
-            atualizarBolsista(
-                bolsista.getId(),cpf,txtNome.getText(),txtUsuario.getText(),txtEmail.getText(),txtSenha.getText(),ativa,matricula,txtCurso.getText());
-               //    LocalDate dataInicio = LocalDate.parse(txtDataInicio.getText());
-              //     LocalDate dataFim = LocalDate.parse(txtDataFim.getText());
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate dI = LocalDate.parse(txtDataInicio.getText(), formatter);
-        LocalDate dF= LocalDate.parse(txtDataFim.getText(), formatter);
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+            //  Tratar valores NULL antes de converter para LocalDate
+            LocalDate dataInicio = txtDataInicio.getText().isEmpty() ? null : LocalDate.parse(txtDataInicio.getText(), formatter);
+            LocalDate dataFim = txtDataFim.getText().isEmpty() ? null : LocalDate.parse(txtDataFim.getText(), formatter);
+
+            atualizarBolsista(bolsista.getId(), cpf, txtNome.getText(), txtUsuario.getText(), txtEmail.getText(),
+                              txtSenha.getText(), ativa, matricula, txtCurso.getText(), dataInicio, dataFim);
         } catch (NumberFormatException e) {
             mostrarAviso("Erro", "CPF, matrícula e datas devem estar em formatos válidos.");
         }
@@ -100,10 +104,6 @@ public class AtualizarPerfilBolsistaController {
 
     @FXML
     void onClickSair(ActionEvent event) throws IOException {
-      //  System.out.println("Fechando a tela...");
-       // if (stageAtualizarBolsista != null) {
-          //  stageAtualizarBolsista.close();
-        //   Bolsista bolsista = null;
         if (bolsista != null) {
             URL url = new File("src/main/java/view/TelaPrincipalBolsista.fxml").toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
@@ -118,51 +118,33 @@ public class AtualizarPerfilBolsistaController {
             stage.setMaximized(true);
             stage.show();
             stageAtualizarBolsista.close();
-
         } else {
             AlertaUtil.mostrarErro("Erro", "Usuário não encontrado ou inválido.");
         }
-   // }
-     //   }
     }
-    
-    
 
     @FXML
     void onClickVerPerfil(ActionEvent event) {
-
     }
-    
-    
 
     @FXML
     void onClickAtualizarPerfil(ActionEvent event) {
-
     }
-    
-      @FXML
+
+    @FXML
     void onClickArtigo(ActionEvent event) {
-
     }
-
 
     @FXML
     void onClickOutrosProjetos(ActionEvent event) {
-
     }
 
     @FXML
     void onClickPublicacao(ActionEvent event) {
-
     }
-
 
     @FXML
     void onClickVerProjeto(ActionEvent event) {
-
     }
-
-   
-    
 
 }

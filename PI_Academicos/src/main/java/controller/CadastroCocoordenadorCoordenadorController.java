@@ -79,8 +79,8 @@ public class CadastroCocoordenadorCoordenadorController {
 
     }
     
-    void setStage(Stage telaCadastroCoordenador){
-        this.stageCadastroCocoordenador = telaCadastroCoordenador;     
+    void setStage(Stage  TelaCadastroCocoordenadorCoordenador){
+        this.stageCadastroCocoordenador =  TelaCadastroCocoordenadorCoordenador;     
     }
     
      void cadastrar(Long cpf, String nome, String apelido, String email, String senha, int siape, String formacao) throws SQLException {

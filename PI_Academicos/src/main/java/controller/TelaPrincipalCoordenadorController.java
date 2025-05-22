@@ -20,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Coordenador;
+import model.Projeto;
 //import model.Coordenador;
 import model.Usuario;
 
@@ -30,6 +31,15 @@ public class TelaPrincipalCoordenadorController {
     private final Usuario dao = new Usuario();
  
     private Coordenador coordenador;
+    Projeto projeto;
+    
+    public void setStage(Stage stage){
+    this.stagePrincipalCoordenador = stage;
+    }
+    
+    public void setStagePrincipal(Stage stagePrincipalCoordenador){
+    this.stagePrincipalCoordenador = stagePrincipalCoordenador;
+   }
     
 
     @FXML
@@ -45,9 +55,6 @@ public class TelaPrincipalCoordenadorController {
     private Button btnAtualizarProjeto;
 
     @FXML
-    private Button btnCriarProjeto;
-
-    @FXML
     private Button btnOutrosProjetos;
 
     @FXML
@@ -57,13 +64,13 @@ public class TelaPrincipalCoordenadorController {
     private Button btnSair;
 
     @FXML
-    private Button btnVerProjeto;
-
-   @FXML
     private Button btnVerPerfil;
 
     @FXML
     private ImageView imgLogo;
+
+    @FXML
+    private ImageView imgPerfil;
 
     @FXML
     private ImageView imgPerfilProjeto;
@@ -110,20 +117,103 @@ public class TelaPrincipalCoordenadorController {
     @FXML
     private Text txtProrrogacao;
     
-    
-   
-    
-    public void setStage(Stage stage){
-        this.stagePrincipalCoordenador = stage;
-        
-        
+    //******************* OnClicks ***************************************
+    @FXML
+    void onClickAdicionarArtigo(ActionEvent event) {
+
+    }
+     @FXML
+    void OnEnterArtigo(MouseEvent event) {
+        btnArtigo.setStyle("-fx-background-color: D07979" );
+    }
+     @FXML
+    void OnExitArtigo(MouseEvent event) {
+        btnArtigo.setStyle("-fx-background-color:  DBA5A5" );
+    }
+    //******************************************************************
+    @FXML
+    void onClickAtualizarPerfil(ActionEvent event) throws IOException {
+        AbrirTelaAtualizarPerfil();
+    }
+    @FXML
+    void OnEnterAtualizarPerfil(MouseEvent event) {
+        btnAtualizarPerfil.setStyle("-fx-background-color: D07979" );
+    }
+     @FXML
+    void OnExitAtualizarPerfil(MouseEvent event) {
+        btnAtualizarPerfil.setStyle("-fx-background-color:  DBA5A5" );
+    }
+    //******************************************************************
+     @FXML
+    void onClickAtualizarProjeto(ActionEvent event) throws IOException {
+        abrirTelaAtualizarProjeto();
+    }
+    @FXML
+    void OnEnterAtualizarProjeto(MouseEvent event) {
+        btnAtualizarProjeto.setStyle("-fx-background-color: D07979" );
+    }
+     @FXML
+    void OnExitAtualizarProjeto(MouseEvent event) {
+        btnAtualizarProjeto.setStyle("-fx-background-color:  DBA5A5" );
+    }
+    //******************************************************************
+    @FXML
+    void onClickOutrosProjetos(ActionEvent event) {
         
     }
+    @FXML
+    void OnEnterOutrosProjetos(MouseEvent event) {
+        btnOutrosProjetos.setStyle("-fx-background-color: D07979" );
+    }
+    @FXML
+    void OnExitOutrosProjetos(MouseEvent event) {
+        btnOutrosProjetos.setStyle("-fx-background-color:  DBA5A5" );
+    }
+    //******************************************************************
+    @FXML
+    void onClickAdicionarPublicacao(ActionEvent event) {
 
+    }
+    @FXML
+    void OnEnterPublicacao(MouseEvent event) {
+        btnPublicacao.setStyle("-fx-background-color: D07979" );
+    }
+    @FXML
+    void OnExitPublicacao(MouseEvent event) {
+        btnPublicacao.setStyle("-fx-background-color:  DBA5A5" );
+    }
+    //******************************************************************
+    @FXML
+    void onClickSair(ActionEvent event) throws IOException {
+        AbrirTelaLogin();
+    }
+    @FXML
+    void OnEnterSair(MouseEvent event) {
+        btnSair.setStyle("-fx-background-color: D07979" );
+    }
+     @FXML
+    void OnExitSair(MouseEvent event) {
+        btnSair.setStyle("-fx-background-color:  DBA5A5" );
+    }
+    //******************************************************************
     @FXML
     void onClickVerPerfil(ActionEvent event) throws IOException {
-
-            
+        abrirTelaVerPerfil();
+    }
+    @FXML
+    void OnEnterVerPerfil(MouseEvent event) {
+        btnVerPerfil.setStyle("-fx-background-color: D07979" );
+    }
+    @FXML
+    void OnExitVerPerfil(MouseEvent event) {
+        btnVerPerfil.setStyle("-fx-background-color:  DBA5A5" );
+    }
+    
+//******************* MÉTODOS ***************************************
+    
+    
+    private void abrirTelaVerPerfil() throws IOException{
+ 
             URL url = new File("src/main/java/view/VerPerfilCoordenador.fxml").toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
@@ -131,7 +221,8 @@ public class TelaPrincipalCoordenadorController {
             Stage stageVerPerfil = new Stage();
             
             VerPerfilCoordenadorController vpf = loader.getController();
-            vpf.setCoordenador(coordenador); 
+            vpf.setCoordenador(coordenador);
+            vpf.setProjeto(projeto);
             vpf.setStage(stageVerPerfil);
         
             Scene cena = new Scene(root);
@@ -143,12 +234,10 @@ public class TelaPrincipalCoordenadorController {
             stageVerPerfil.show();
             stagePrincipalCoordenador.close();
             
-            
-}
-   
-    
-    @FXML
-    void onClickAtualizarPerfil(ActionEvent event) throws IOException {
+    }
+
+
+    private void AbrirTelaAtualizarPerfil() throws IOException {
 
         URL url = new File("src/main/java/view/AtualizarPerfilCoordenador.fxml").toURI().toURL();       
         FXMLLoader loader = new FXMLLoader(url);
@@ -170,83 +259,33 @@ public class TelaPrincipalCoordenadorController {
                
     } 
 
-    @FXML
-    void onClickAdicionarArtigo(ActionEvent event) {
-        
-        
-        
-    }
-
-    @FXML
-    void onClickAdicionarPublicacao(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onClickAtualizarProjeto(ActionEvent event) throws MalformedURLException, IOException {
- //URL url = new File("src/main/java/view/AtualizarProjeto.fxml").toURI().toURL();       
-   //     FXMLLoader loader = new FXMLLoader(url);
-   //     
-    //    Parent root = loader.load();
-        
-     //   Stage stageAtualizarProjeto = new Stage();
-        
-      //  AtualizarProjetoController apc = loader.getController();
-        
-     //   apc.setStage(stageAtualizarProjeto);
-        
-    //    Scene cena = new Scene(root);
-    //    stageAtualizarProjeto.setTitle("Atualizar Projeto");
-    //    stageAtualizarProjeto.setMaximized(true);
-    //    stageAtualizarProjeto.setScene(cena);
-     //   stageAtualizarProjeto.show();
-     //   stagePrincipalCoordenador.close();
-
-    }
-
-    
-    @FXML
-    void onClickCriarProjeto(ActionEvent event) throws IOException, MalformedURLException {
-
-         if(coordenador.getAtiva()==true){
-                 
-         URL url = new File("src/main/java/view/CriarProjeto.fxml").toURI().toURL();
-        
-        FXMLLoader loader = new FXMLLoader(url);
-        
-        Parent root = loader.load();
-        //Comunicar com o combo box com o DAO
-        
-        
-        Stage telaCriarProjeto = new Stage();
-        
-         CriarProjetoController tpc = loader.getController();
+    private void abrirTelaAtualizarProjeto() throws MalformedURLException, IOException {
+        URL url = new File("src/main/java/view/AtualizarProjeto.fxml").toURI().toURL();       
+      FXMLLoader loader = new FXMLLoader(url);
        
-        tpc.setStage(telaCriarProjeto);
+      Parent root = loader.load();
         
-         telaCriarProjeto.setOnShown(evento -> {
-        tpc.ajustarElementosJanela();
+     Stage stageAtualizarProjeto = new Stage();
+        
+       AtualizarProjetoController apc = loader.getController();
+        
+        apc.setStage(stageAtualizarProjeto);
+        apc.setProjeto(projeto);
+        
+          stageAtualizarProjeto.setOnShown(evento -> {
+        apc.ajustarElementosJanela();
       });
         
-          Scene cena = new Scene(root);
-           telaCriarProjeto.setTitle("Tela Criar Projeto");
-            telaCriarProjeto.setMaximized(true);
-        telaCriarProjeto.setScene(cena);
-        telaCriarProjeto.show();
-        
-         }
-        
-        
-       
-    }
-
-    @FXML
-    void onClickOutrosProjetos(ActionEvent event) {
+      Scene cena = new Scene(root);
+       stageAtualizarProjeto.setTitle("Atualizar Projeto");
+       stageAtualizarProjeto.setMaximized(true);
+        stageAtualizarProjeto.setScene(cena);
+       stageAtualizarProjeto.show();
+        stagePrincipalCoordenador.close();
 
     }
 
-    @FXML
-    void onClickSair(ActionEvent event) throws IOException {
+    private void AbrirTelaLogin() throws IOException {
 
          URL url = new File("src/main/java/view/TelaLogin.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
@@ -269,41 +308,29 @@ public class TelaPrincipalCoordenadorController {
 
     }
 
-
-    @FXML
-    void onClickVerProjeto(ActionEvent event) {
-
-    }    
-            
-     
-     public void setStagePrincipal(Stage stagePrincipalCoordenador){
-      this.stagePrincipalCoordenador = stagePrincipalCoordenador;
-   }
-
-       
-    
-    void ajustarElementosJanela(Coordenador coordenador) {
+    void ajustarElementosJanela(Coordenador coordenador, Projeto projeto) {
         this.coordenador=coordenador;
+        this.projeto=projeto;
         
         System.out.println("Aqui chegam os parâmetros do login "
                 + coordenador.getNome() + " - " + coordenador.getSiape() + "ATIVA: " + coordenador.getAtiva());
         txtNomeCoordenador.setText(coordenador.getNome());
         String siape = String.valueOf(coordenador.getSiape());
-        textNomeProjeto.setText(siape);
+        textNomeProjeto.setText(projeto.getTitulo());
         
         if(coordenador.getAtiva()==false){
         
-        btnArtigo.setStyle("-fx-text-fill: gray; -fx-background-color: DBA5A5;");
-        btnPublicacao.setStyle("-fx-text-fill: gray; -fx-background-color: DBA5A5;");
-        btnCriarProjeto.setStyle("-fx-text-fill: gray; -fx-background-color: DBA5A5;");
-        btnAtualizarProjeto.setStyle("-fx-text-fill: gray; -fx-background-color: DBA5A5;");
+        
         }
        
     }
-    
-    //public void setCoordenador(Coordenador coord) {
-      // this.coordenador = coord;
-    //}
+   
+    public void setCoordenador(Coordenador coord) {
+       this.coordenador = coord;
+    }
+    public void setProjeto(Projeto projeto) {
+       this.projeto = projeto;
+    }
     
     
     

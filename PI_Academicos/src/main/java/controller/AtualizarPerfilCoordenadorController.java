@@ -205,7 +205,7 @@ public class AtualizarPerfilCoordenadorController {
         tpc.setStagePrincipal(stagePrincipal);
 
         stagePrincipal.setOnShown(evento -> {
-        tpc.ajustarElementosJanela(coordenador);
+//        tpc.ajustarElementosJanela(coordenador, projeto);
         });
 
         Scene cena = new Scene(root);

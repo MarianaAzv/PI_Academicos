@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 public class TelaNoticiaController {
@@ -16,7 +17,7 @@ public class TelaNoticiaController {
     private Label lblImagem;
 
     @FXML
-    private Label lblTituloNoticia;
+    private TextField tfTituloNoticia;
 
     @FXML
     private TextArea txtLegenda;
@@ -32,4 +33,3 @@ public class TelaNoticiaController {
     }
 
 }
-
