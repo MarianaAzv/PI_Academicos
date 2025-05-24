@@ -1,6 +1,8 @@
 package controller;
 
+import java.awt.Desktop;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -10,12 +12,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import static util.AlertaUtil.mostrarAviso;
 import static util.AlertaUtil.mostrarConfirmacao;
 import javafx.stage.Stage;
 import model.Bolsista;
 import model.BolsistaDAO;
 import model.Projeto;
+import model.Solicitacao;
+import model.SolicitacaoDAO;
 import model.Usuario;
 
 
@@ -39,6 +45,9 @@ public class CadastroBolsistaCoordenadorController {
 
     @FXML
     private Button btnPDF;
+    
+    @FXML
+    private Label lblAbrirArquivo;
 
     @FXML
     private Label lblCPF;
@@ -114,22 +123,44 @@ public class CadastroBolsistaCoordenadorController {
         } catch (NumberFormatException n) {
             mostrarAviso("CPF ou Matrícula inválidos", "Os valores inseridos para CPF e Matrícula devem ser apenas números.");
         }
+        
+        enviarSolicitacao();
     }
 
 
     @FXML
     void OnClickPDF(ActionEvent event) {
 
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Text Files", "*.pdf"));
+        arquivoPDF = fileChooser.showOpenDialog(btnPDF.getScene().getWindow());
+        lblAbrirArquivo.setText(arquivoPDF.getName());
+    }
+    
+    @FXML
+    void onClickAbrirArquivo(MouseEvent event) {
+        
+        if (arquivoPDF != null) {
+            try {
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().open(arquivoPDF);
+                } else {
+                    System.err.println("A funcionalidade de desktop não é suportada.");
+                }
+            } catch (IOException e) {
+                System.err.println("Erro ao abrir o arquivo: " + e.getMessage());
+            }
+        } else {
+            System.out.println("Nenhum arquivo selecionado para abrir.");
+        }
+
     }
     
     
-
-    //private void incluir(Long cpf, String text, String text0, String text1, String text2, Long matricula, String text3, LocalDate dataInicio, LocalDate dataFim) {
-        
-   // }
-     void incluir(Long cpf, String nome, String apelido, String email, String senha, Long matricula, String curso, LocalDate dataInicio, LocalDate dataFim) throws SQLException {
-        Usuario usuario = new Usuario(cpf, nome, apelido, email, senha);
-        Bolsista bolsista = new Bolsista(matricula, curso, dataInicio, dataFim);
+    void incluir(Long cpf, String nome, String apelido, String email, String senha, Long matricula, String curso, LocalDate dataInicio, LocalDate dataFim) throws SQLException {
+         usuario = new Usuario(cpf, nome, apelido, email, senha);
+         bolsista = new Bolsista(matricula, curso, dataInicio, dataFim);
         int repetido = new BolsistaDAO().validarApelido(apelido, 0);
 
         if (repetido > 0) {
@@ -150,6 +181,31 @@ public class CadastroBolsistaCoordenadorController {
      public void setProjeto(Projeto projeto){
         this.projeto = projeto;
     }
+     
+     public void enviarSolicitacao(){
+     
+     if (arquivoPDF != null) {
+            try {
+          
+                usuario.setId(bolsista.getId());
+                
+                String descricao = "Solicitação para cadastro de bolsista de projeto: "
+                        + "\nNome completo: " + txtNomeCompleto.getText() 
+                        + "\nNome de usuário: " + txtUsuario.getText() 
+                        + "\nCPF: " + txtCPF.getText()
+                        + "\nCurso: " + txtCurso.getText()
+                        + "\nMatrícula: " + txtMatricula.getText()
+                        + "\nE-mail: " + txtEmail.getText();
+                Solicitacao solicitacao = new Solicitacao(usuario, descricao, arquivoPDF);
+                new SolicitacaoDAO().salvarPDF(solicitacao);
+                System.out.println("Arquivo PDF salvo no banco de dados.");
+                
+            } catch (IOException e) {
+                System.err.println("Erro ao ler o arquivo PDF: " + e.getMessage());
+            }
+        }
+     
+ }
     
    
 
