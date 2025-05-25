@@ -25,7 +25,7 @@
    <children>
       <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="20.0" GridPane.columnIndex="1">
          <children>
-            <TextField fx:id="tfTituloNoticia" promptText="Titulo da notícia">
+            <TextField fx:id="txtTituloNoticia" promptText="Titulo da notícia">
                <font>
                   <Font name="Courier New Bold" size="18.0" />
                </font>
@@ -79,6 +79,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
+                        <Label fx:id="lblCaminhoArquivo" text="Link da foto:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                      <opaqueInsets>
                         <Insets />

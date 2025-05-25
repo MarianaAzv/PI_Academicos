@@ -1,5 +1,9 @@
 package controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -7,29 +11,77 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import model.Administrador;
+import model.Noticia;
+import model.NoticiaDAO;
 
 public class TelaNoticiaController {
+    
+    private Stage stageNoticia;
+    private Administrador adm;
+    NoticiaDAO noticiaDAO;
+    private File arquivoSelecionado;
+    
+    public TelaNoticiaController() {
+        noticiaDAO = new NoticiaDAO();
+   }
 
     @FXML
     private Button btnPostar;
 
     @FXML
+    private Label lblCaminhoArquivo;
+    
+    @FXML
     private Label lblImagem;
 
     @FXML
-    private TextField tfTituloNoticia;
+    private TextField txtTituloNoticia;
 
     @FXML
     private TextArea txtLegenda;
 
     @FXML
     void onClickImagem(MouseEvent event) {
-
+        
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Selecionar Imagem");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Arquivos de Imagem", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+        arquivoSelecionado = fileChooser.showOpenDialog(lblImagem.getScene().getWindow());
+        
+        if(arquivoSelecionado!=null){
+             lblCaminhoArquivo.setText(arquivoSelecionado.getAbsolutePath());
+        }
+        else{
+            lblCaminhoArquivo.setText("Nenhum arquivo foi selecionado");
+        }
+        
+        
+        
     }
 
     @FXML
     void onClickPostar(ActionEvent event) {
-
+        
+        String link = arquivoSelecionado.toURI().toString();
+        Noticia noticia = new Noticia(adm.getId(), txtTituloNoticia.getText(), txtLegenda.getText(), link);
+        
+        try{
+            noticiaDAO.cadastrarNoticia(noticia);
+        } catch (IOException ex) {
+            Logger.getLogger(TelaNoticiaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        stageNoticia.close();
+    }
+    
+    public void setStage (Stage stageNoticia){
+        this.stageNoticia=stageNoticia;
+    }
+    
+    public void setAdministrador(Administrador adm) {
+        this.adm = adm;
     }
 
 }

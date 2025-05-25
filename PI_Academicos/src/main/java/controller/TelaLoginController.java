@@ -99,7 +99,8 @@ public class TelaLoginController {
                             } else if (user instanceof Administrador) {//login adm
                                 Administrador a = (Administrador) user;
                                 System.out.println("Abrindo tela de Administrador...");
-
+                                
+                                abrirTelaPrincipalAdministradorTeste(a);
                                 abrirTelaPrincipalAdministrador(a);
                             }
                 
@@ -200,7 +201,7 @@ private void abrirTelaPrincipalBolsista(Bolsista bolsista) throws MalformedURLEx
 
     }
 
-    private void abrirTelaPrincipalAdministrador(Administrador adm) throws MalformedURLException, IOException{
+   private void abrirTelaPrincipalAdministrador(Administrador adm) throws MalformedURLException, IOException{
         
          URL url = new File("src/main/java/view/TelaPrincipalAdministrador.fxml").toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
@@ -224,5 +225,35 @@ private void abrirTelaPrincipalBolsista(Bolsista bolsista) throws MalformedURLEx
             
             stagePrincipal.show();
             stageLogin.close();
+            
+            
+    }
+    
+    private void abrirTelaPrincipalAdministradorTeste(Administrador adm) throws MalformedURLException, IOException{
+        
+         URL url = new File("src/main/java/view/TelaPrincipalAdministradorTeste.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage stagePrincipal = new Stage();
+        
+            TelaPrincipalAdministradorController tpa = loader.getController();    
+            tpa.setStage(stagePrincipal);
+            tpa.setAdministrador(adm);
+            
+           stagePrincipal.setOnShown(evento -> {
+            tpa.ajustarElementosJanela(adm);
+       });
+        
+            Scene cena = new Scene(root);
+            stagePrincipal.setTitle("Tela principal Administrador Teste");
+            stagePrincipal.setScene(cena);
+            //deixa a tela maximizada
+            stagePrincipal.setMaximized(true);
+            
+            stagePrincipal.show();
+            
+            
+            
     }
 }

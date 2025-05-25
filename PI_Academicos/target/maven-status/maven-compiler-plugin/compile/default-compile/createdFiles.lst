@@ -38,9 +38,11 @@ model\BolsistaDAO.class
 controller\MaisCoCoordenadorController.class
 controller\CadastroCoordenadorController.class
 model\AreasConhecimento.class
+model\Noticia.class
 controller\VerPerfilCoordenadorController.class
 principal\App.class
 dal\ConexaoBD.class
+model\NoticiaDAO.class
 model\Administrador.class
 controller\TelaPrincipalAdministradorController.class
 controller\BolsistaDesativarCoordenadorController.class
