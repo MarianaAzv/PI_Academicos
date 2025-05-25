@@ -26,7 +26,7 @@ public class TelaPrincipalBolsistaController {
     private Connection conexao;
     private final Usuario dao = new Usuario();
     private Bolsista bolsista;
-        private Projeto projeto;//hj
+    private Projeto projeto;//hj
 
 
     @FXML
@@ -72,6 +72,8 @@ public class TelaPrincipalBolsistaController {
     public void setStage(Stage stage) {
         this.stageTelaPrincipalBolsista = stage;
     }
+   
+     
 
    @FXML
 void onClickVerPerfil(ActionEvent event) throws IOException {
@@ -181,6 +183,7 @@ void onClickVerPerfil(ActionEvent event) throws IOException {
     void ajustarElementosJanela(Bolsista bolsista, Projeto projeto) {
         this.bolsista = bolsista;
         this.projeto = projeto;
+        
         System.out.println("Aqui chegam os parâmetros do login " + bolsista.getNome() + " - " + bolsista.getMatricula() + " ATIVA: " + bolsista.getAtiva());
         TxtNomeUsuario.setText(bolsista.getNome());
        // String matricula = String.valueOf(bolsista.getMatricula());
@@ -197,5 +200,14 @@ void onClickVerPerfil(ActionEvent event) throws IOException {
       
     }
 
+    void setBolsista(Bolsista bol) {
+        this.bolsista = bol;
+    }
+
+    void setProjeto(Projeto projeto) {
+       this.projeto = projeto;
+    }
+ 
+    
     
 }

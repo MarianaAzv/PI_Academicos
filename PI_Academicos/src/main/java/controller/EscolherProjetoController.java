@@ -116,52 +116,44 @@ if(coordenador.getAtiva()==true){
   
    
  
- public void OnClickProjeto() throws SQLException{
- //Esse botao abre o projeto escolhido  
- 
-  vboxbutton.getChildren().clear();
+ public void OnClickProjeto() throws SQLException { 
+    vboxbutton.getChildren().clear(); // Limpa os botões antes de adicionar novos
 
-try{
-  if(user instanceof Coordenador){
-       ProjetoDAO dao = new ProjetoDAO();
-        List<Projeto> projetos = dao.selecionarProjeto(coordenador);
-        
-    for (Projeto projeto : projetos) {
+    try {
+        ProjetoDAO dao = new ProjetoDAO();
+        List<Projeto> projetos;
+
+        if (coordenador != null) {
+            projetos = dao.selecionarProjeto(coordenador);
+            System.out.println("Projetos do Coordenador encontrados: " + projetos.size());
+        } else if (bolsista != null) {
+            projetos = dao.selecionarProjetoB(bolsista);
+            System.out.println("Projetos do Bolsista encontrados: " + projetos.size());
+        } else {
+            System.out.println("Erro: Usuário não é Coordenador nem Bolsista.");
+            return;
+        }
+
+        for (Projeto projeto : projetos) {
             Button btn = new Button(projeto.getTitulo());
             btn.setOnAction(event -> {
                 try {
-                    abriProjeto(projeto);
+                    if (coordenador != null) {
+                        abriProjeto(projeto);
+                    } else if (bolsista != null) {
+                        abriProjetoB(projeto);
+                    }
                 } catch (IOException e) {
-                    mostrarAviso("Erro","Erro ao carregar projeto");
+                    mostrarAviso("Erro", "Erro ao carregar projeto");
                 }
             });
             vboxbutton.getChildren().add(btn);
         }
-      
-  }else{
-      if(user instanceof Bolsista){
-           ProjetoDAO dao = new ProjetoDAO();
-        List<Projeto> projetos = dao.selecionarProjeto(bolsista);
-        
-    for (Projeto projeto : projetos) {
-            Button btn = new Button(projeto.getTitulo());
-            btn.setOnAction(event -> {
-                try {
-                    abriProjetoB(projeto);
-                } catch (IOException e) {
-                    mostrarAviso("Erro","Erro ao carregar projeto");
-                }
-            });
-            vboxbutton.getChildren().add(btn);
-        }
-          
-      }
-  }
- 
-}catch(SQLException e){
-    mostrarAviso("Erro","Erro ao carregar os projeto");
+    } catch (SQLException e) {
+        mostrarAviso("Erro", "Erro ao carregar os projetos");
+        e.printStackTrace();
+    }
 }
- }
 
  private void abriProjeto(Projeto projeto) throws MalformedURLException, IOException{
     URL url = new File("src/main/java/view/TelaPrincipalCoordenador.fxml").toURI().toURL();

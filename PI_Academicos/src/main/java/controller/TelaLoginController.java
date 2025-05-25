@@ -218,7 +218,7 @@ public void abrirTelaPrincipalBolsista(Bolsista bolsista) throws MalformedURLExc
         });
 
         Scene cena = new Scene(root);
-        stagePrincipal.setTitle("Tela Principal Bolsista");
+        stagePrincipal.setTitle("Tela Escolher Projeto Bolsista");
         stagePrincipal.setMaximized(true);
          stagePrincipal.setScene(cena);
         stagePrincipal.show();

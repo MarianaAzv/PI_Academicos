@@ -220,14 +220,14 @@ public class ProjetoDAO extends GenericDAO{
               }
     }
 
-    public List<Projeto> selecionarProjeto( Bolsista bolsista) throws SQLException {
+    public List<Projeto> selecionarProjetoB( Bolsista bolsista) throws SQLException {
          List<Projeto> projetos = new ArrayList<>();
          
           Connection con = conectarDAO();
           
-        String sql = "SELECT p.*, c.*, ap.* FROM PROJETOS as p inner join coordenadores_projetos as cp on p.idProjeto = cp.idProjeto inner join campus  as c on p.idCampus = c.idCampus inner join areas_projetos as ap on ap.idProjeto = p.idProjeto where cp.idUsuario=?";
-        
-        try(con ){
+      //  String sql = "SELECT p.*, b.*, ap.* FROM PROJETOS as p inner join bolsistas_projetos as bp on p.idProjeto = bp.idProjeto inner join campus  as b on p.idCampus = b.idCampus inner join areas_projetos as ap on ap.idProjeto = p.idProjeto where bp.idUsuario=?";
+      //  String sql = "SELECT p.*, c.*, ap.*, ac.* FROM PROJETOS as p inner join coordenadores_projetos as cp on p.idProjeto = cp.idProjeto inner join campus  as c on p.idCampus = c.idCampus inner join areas_projetos as ap on ap.idProjeto = p.idProjeto inner join areasdeconhecimento as ac on ac.idArea = ap.idArea where cp.idUsuario=?";
+          String sql = "SELECT p.*, c.*, ap.*, ac.* FROM PROJETOS as p INNER JOIN bolsistas_projetos as bp on p.idProjeto = bp.idProjeto INNER JOIN campus as c on p.idCampus = c.idCampus INNER JOIN areas_projetos as ap on ap.idProjeto = p.idProjeto INNER JOIN areasdeconhecimento as ac on ac.idArea = ap.idArea WHERE bp.idUsuario = ?";
              PreparedStatement stmtProjeto = con.prepareStatement(sql);
              stmtProjeto.setInt(1,bolsista.getId());
               ResultSet rs = stmtProjeto.executeQuery();
@@ -259,16 +259,9 @@ public class ProjetoDAO extends GenericDAO{
 
             projetos.add(projeto);
         }
+                        return projetos;
+
         }
-        return projetos;
         
         
-    }
-   
-      
-    }
-
-
-    
-
-
+    } 
