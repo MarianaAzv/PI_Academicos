@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Connection;
+import java.time.format.DateTimeFormatter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -189,14 +190,18 @@ void onClickVerPerfil(ActionEvent event) throws IOException {
        // String matricula = String.valueOf(bolsista.getMatricula());
         textNomeProjeto.setText(projeto.getTitulo());
         TxtNomeProjetoBarra.setText(projeto.getTitulo());
-      //  txtNomeCoordenador.setText();
-      //txtNomeBolsita.setText();
-      //txtNomeCocoordenador.setText();
-      //txtInicio
+     //   txtNomeCoordenador.setText();
+     // txtNomeBolsita.setText();
+     // txtNomeCocoordenador.setText();
+      //txtInicio.
       //txtFim
       //txtProrrogacao
-      //txtResumo
-      //txtCampus
+     // txtResumo.setText(projeto.getResumo());
+    //  txtCampus.setText(projeto.getCampus());
+     //    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+     // String dInicio = projeto.getDataInicio().format(formatter);
+     // txtInicio.setText(dInicio);
+
       
     }
 

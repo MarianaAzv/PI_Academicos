@@ -78,7 +78,7 @@ public class AtualizarPerfilBolsistaController {
         if (repetido > 0) {
             mostrarAviso("Nome de usuário indisponível", "Este nome de usuário já está sendo usado.");
         } else {
-            bolsistaDAO.atualizarBolsista(bolsista, projeto);
+            bolsistaDAO.atualizarBolsista(bolsista);
             mostrarConfirmacao("Usuário alterado", "O usuário foi alterado com sucesso!");
         }
     }

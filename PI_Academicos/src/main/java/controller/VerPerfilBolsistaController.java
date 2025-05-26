@@ -54,7 +54,7 @@ public class VerPerfilBolsistaController {
 
     public void setBolsista(Bolsista bol) {
         this.bolsista = bol;
-        if (bolsista != null) { // Garantindo que bolsista não seja null antes de atribuir os valores
+          if (bolsista != null) { // Garantindo que bolsista não seja null antes de atribuir os valores
             lblNomeBol.setText(bolsista.getNome());
             lblUsuarioBolsista.setText(bolsista.getApelido());
             lblCPFBolsista.setText(String.valueOf(bolsista.getCpf()));
@@ -62,11 +62,30 @@ public class VerPerfilBolsistaController {
             lblSenhaBolsista.setText(bolsista.getSenha());
             lblEmailBolsista.setText(bolsista.getEmail());
             lblMatriculaBols.setText(String.valueOf(bolsista.getMatricula()));
+            
+           //  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    // String DataInicio = bolsista.getDataInicio().format(formatter);
+    // lblDataInicioBols.setText(DataInicio);
+     
+
+    //   String DataFim = bolsista.getDataFim().format(formatter);
+    //  lblDataFimBols.setText(DataFim);
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+              System.out.println(bolsista.getDataInicio());
             lblDataInicioBols.setText(bolsista.getDataInicio() != null ? bolsista.getDataInicio().format(formatter) : "Data não disponível");
-            lblDataFimBols.setText(bolsista.getDataFim() != null ? bolsista.getDataFim().format(formatter) : "Data não disponível");
+             System.out.println(bolsista.getDataInicio().format(formatter));
+           lblDataFimBols.setText(bolsista.getDataFim() != null ? bolsista.getDataFim().format(formatter) : "Data não disponível");
+            
+            
+      
+      
+      
+      
+      
+      
+      
         }
     }
 

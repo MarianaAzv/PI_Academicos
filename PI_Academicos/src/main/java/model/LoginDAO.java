@@ -42,7 +42,22 @@ public class LoginDAO extends GenericDAO {
 
                                 }
                                 else if(rs.getString("curso") != null){
-                                    usuario = new Bolsista(rs.getLong("matricula"), rs.getString("curso"));
+                                    Bolsista b = new Bolsista(rs.getLong("matricula"), rs.getString("curso"));
+                                    b.setCurso(rs.getString("curso"));
+                                 //   b.setCPF(rs.getLong("cpf"));
+                                    b.setApelido(rs.getString("apelido"));
+                                    b.setNome(rs.getString("nome"));
+                                    b.setEmail(rs.getString("email"));
+                                    b.setMatricula(rs.getLong("matricula"));
+                             //       b.setDataInicio(rs.getLocalDate("dataInicio"));
+                            //        b.setDataFim(rs.getLocalDate("dataFim"));
+//        public Bolsista(int id, long cpf, String nome, String apelido, String email, String senha, boolean ativa, long matricula, String curso, LocalDate dataInicio, LocalDate dataFim){
+
+                                            //bolsista.setDataInicio(rs.getDate);
+                                    //b.set
+                                   // usuario = b;
+                                    
+                                    
 
                                 } else {
                                    usuario = new Administrador(); 
