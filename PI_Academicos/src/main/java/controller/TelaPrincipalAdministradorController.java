@@ -47,14 +47,11 @@ public class TelaPrincipalAdministradorController {
     
     @FXML
     public void initialize() {
-        //Chamado automaticamente após o FXML ser carregado
-      // Platform.runLater(this::carregarFotos); // Garante que a UI esteja pronta
-      
 
-       Platform.runLater(() -> {
-            System.out.println("GaleriaController: carregarFotos() chamado via Platform.runLater.");
+       Platform.runLater(() -> {//esse método permite que a tela inicialize sem depender de uma operação mais demorada           
             carregarFotos();
         });
+
     }
     
     @FXML
@@ -104,12 +101,18 @@ public class TelaPrincipalAdministradorController {
 
             }
             for (Noticia noticia : noticias) {
+                if(noticia.getLinkImagem()!=null){
                 adicionarNoticiaFeed(noticia);
-                
-                             
-                //ImageView imageView = new ImageView(new Image( noticia.getLinkImagem()));
-                //tilePaneGaleria.getChildren().add(imageView);
-                //tilePaneGaleria.requestLayout(); // Atualiza o layout
+                }
+                else{ // caso o link da foto estiver com problema uma outra foto substitui ela
+                    ImageView imageView = new ImageView();
+                    imageView.setFitWidth(270);
+                    imageView.setFitHeight(270);
+                    imageView.setPreserveRatio(true);
+                    tilePaneGaleria.getChildren().add(imageView);
+                    Image image = new Image("https://developers.google.com/static/maps/documentation/streetview/images/error-image-generic.png", true);
+                    imageView.setImage(image);
+                }
 
             }
         } catch (SQLException e) {
@@ -128,58 +131,21 @@ public class TelaPrincipalAdministradorController {
         
         try {
             Image image = new Image(noticia.getLinkImagem(), true);
-            
-            // Adicionar um listener para quando a imagem for carregada
-        image.progressProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal.doubleValue() == 1.0) { // Imagem totalmente carregada
-                Platform.runLater(() -> { // Garantir que a atualização da UI ocorra no thread da aplicação
-                    double imageWidth = image.getWidth();
-                    double imageHeight = image.getHeight();
-                    double imageViewWidth = imageView.getFitWidth();
-                    double imageViewHeight = imageView.getFitHeight();
-
-                    double ratioImage = imageWidth / imageHeight;
-                    double ratioView = imageViewWidth / imageViewHeight;
-
-                    // Calcular o viewport para preencher o espaço sem distorção
-                    Rectangle2D viewport;
-                    if (ratioImage > ratioView) {
-                        // Imagem é mais larga que o ImageView. Cortar laterais.
-                        double newImageWidth = imageHeight * ratioView;
-                        double xOffset = (imageWidth - newImageWidth) / 2;
-                        viewport = new Rectangle2D(xOffset, 0, newImageWidth, imageHeight);
-                    } else {
-                        // Imagem é mais alta que o ImageView. Cortar superior/inferior.
-                        double newImageHeight = imageWidth / ratioView;
-                        double yOffset = (imageHeight - newImageHeight) / 2;
-                        viewport = new Rectangle2D(0, yOffset, imageWidth, newImageHeight);
-                    }
-                    imageView.setViewport(viewport);
-                    imageView.setImage(image); // Definir a imagem após configurar o viewport
-                    System.out.println("TelaPrincipal: Imagem carregada e viewport ajustado para: " + noticia.getLinkImagem());
-                });
-            }
-        });
-        //////
-            
-            
+           
+            redimensionarFotos(image,imageView, noticia);//método para deixar fotos quadradas
+                  
             System.out.println("Caminho da imagem: " + noticia.getLinkImagem());
-
-            image.errorProperty().addListener((obs, oldVal, newVal) -> {
-                if (newVal) {
-                    System.err.println("Erro ao carregar imagem: " + noticia.getLinkImagem());
-                    imageView.setImage(new Image(getClass().getResourceAsStream("/src/main/resources/Variant3.png")));
-                }
-            });
-            
-             // Listener para confirmar que a imagem foi carregada com sucesso (ou indicar que está carregando)
-            image.progressProperty().addListener((obs, oldVal, newVal) -> {
-                if (newVal.doubleValue() == 1.0) {
-                    System.out.println("TelaPrincipal: Imagem carregada com sucesso: " + noticia.getLinkImagem());
-                }
-            });
             
             imageView.setImage(image);
+            
+
+            imageView.setOnMouseClicked(event -> {
+                try {
+                abrirTelaNoticia(); //tela teste, posteriormente será passada uma tela que mostre os detalhes da noticia
+                } catch (IOException e) {
+                System.err.println("Erro ao abrir tela de detalhes da notícia: " + e.getMessage());
+                }
+            });
             
             
         } catch (IllegalArgumentException e) {
@@ -187,13 +153,6 @@ public class TelaPrincipalAdministradorController {
             imageView.setImage(new Image(getClass().getResourceAsStream("/src/main/resources/Variant3.png")));
         }
         
-         //inserindo data das publicacoes na tela
-        /*Label dataCadastroLabel = new Label();
-        if (noticia.getData() != null) {
-            dataCadastroLabel.setText("Data: " + noticia.getData().format(FORMATTER));
-        } else {
-            dataCadastroLabel.setText("Data: N/A"); // Caso a data não esteja disponível
-        }*/
     }
     
 
@@ -440,6 +399,40 @@ public class TelaPrincipalAdministradorController {
         
         }
        
+    }
+    
+    private void redimensionarFotos(Image image, ImageView imageView, Noticia noticia){
+        
+        image.progressProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal.doubleValue() == 1.0) { // Imagem totalmente carregada
+                Platform.runLater(() -> { // Garantir que a atualização da UI ocorra no thread da aplicação
+                    double imageWidth = image.getWidth();
+                    double imageHeight = image.getHeight();
+                    double imageViewWidth = imageView.getFitWidth();
+                    double imageViewHeight = imageView.getFitHeight();
+
+                    double ratioImage = imageWidth / imageHeight;
+                    double ratioView = imageViewWidth / imageViewHeight;
+
+                    // Calcular o viewport para preencher o espaço sem distorção
+                    Rectangle2D viewport;
+                    if (ratioImage > ratioView) {
+                        // Imagem é mais larga que o ImageView. Cortar laterais.
+                        double newImageWidth = imageHeight * ratioView;
+                        double xOffset = (imageWidth - newImageWidth) / 2;
+                        viewport = new Rectangle2D(xOffset, 0, newImageWidth, imageHeight);
+                    } else {
+                        // Imagem é mais alta que o ImageView. Cortar superior/inferior.
+                        double newImageHeight = imageWidth / ratioView;
+                        double yOffset = (imageHeight - newImageHeight) / 2;
+                        viewport = new Rectangle2D(0, yOffset, imageWidth, newImageHeight);
+                    }
+                    imageView.setViewport(viewport);
+                    imageView.setImage(image); // Definir a imagem após configurar o viewport
+                    System.out.println("Noticia " + noticia.getLinkImagem());
+                });
+            }
+        });
     }
     
 }
