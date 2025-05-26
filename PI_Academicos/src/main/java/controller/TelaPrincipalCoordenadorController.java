@@ -2,11 +2,15 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.ModuleLayer.Controller;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -78,14 +82,14 @@ public class TelaPrincipalCoordenadorController {
     @FXML
     private ImageView imgProjeto;
 
-    @FXML
-    private Label lblNomeBolsista;
-
-    @FXML
-    private Label lblNomeCocoordenador;
-
-    @FXML
-    private Label lblNomeCoordenador;
+//    @FXML
+//    private Label lblNomeBolsista;
+//
+//    @FXML
+//    private Label lblNomeCocoordenador;
+//
+//    @FXML
+//    private Label lblNomeCoordenador;
 
     @FXML
     private Label lblResumo;
@@ -119,8 +123,8 @@ public class TelaPrincipalCoordenadorController {
     
     //******************* OnClicks ***************************************
     @FXML
-    void onClickAdicionarArtigo(ActionEvent event) {
-
+    void onClickAdicionarArtigo(ActionEvent event) throws IOException {
+        abrirTelaArtigos();
     }
      @FXML
     void OnEnterArtigo(MouseEvent event) {
@@ -158,8 +162,8 @@ public class TelaPrincipalCoordenadorController {
     }
     //******************************************************************
     @FXML
-    void onClickOutrosProjetos(ActionEvent event) {
-        
+    void onClickOutrosProjetos(ActionEvent event) throws IOException {
+        abrirTelaOutrosProjetos();
     }
     @FXML
     void OnEnterOutrosProjetos(MouseEvent event) {
@@ -171,8 +175,8 @@ public class TelaPrincipalCoordenadorController {
     }
     //******************************************************************
     @FXML
-    void onClickAdicionarPublicacao(ActionEvent event) {
-
+    void onClickAdicionarPublicacao(ActionEvent event) throws IOException {
+        abrirTelaPublicacao();
     }
     @FXML
     void OnEnterPublicacao(MouseEvent event) {
@@ -307,6 +311,63 @@ public class TelaPrincipalCoordenadorController {
         
 
     }
+    
+    public void abrirTelaArtigos() throws IOException{
+        URL url = new File("src/main/java/view/CadastrarArtigo.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stageArtigo = new Stage();
+        CadastrarArtigoController cab = loader.getController();
+        cab.setStage(stageArtigo);
+
+        Scene cena = new Scene(root);
+        stageArtigo.setTitle("Cadastro Artigo");
+        stageArtigo.setMaximized(false);
+        stageArtigo.setScene(cena);
+        stageArtigo.show();
+    }
+    
+    public void abrirTelaPublicacao() throws IOException{
+        URL url = new File("src/main/java/view/CadastrarPostagem.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stagePostagem = new Stage();
+        CadastrarPostagemController cpb = loader.getController();
+        cpb.setStage(stagePostagem);
+
+        Scene cena = new Scene(root);
+        stagePostagem.setTitle("Cadastro Postagem");
+        stagePostagem.setMaximized(false);
+        stagePostagem.setScene(cena);
+        stagePostagem.show();
+    }
+    
+    public void abrirTelaOutrosProjetos() throws IOException{
+        URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
+         FXMLLoader loader = new FXMLLoader(url);
+          Parent root = loader.load();
+        
+           Stage stageProjetos = new Stage();
+        
+          EscolherProjetoController tpc = loader.getController();  
+          tpc.setCoordenador(coordenador);
+          tpc.setStage(stageProjetos);
+          
+         Scene cena = new Scene(root);
+        stageProjetos.setTitle("Outros projetos");
+        stageProjetos.setMaximized(false);
+        stageProjetos.setScene(cena);
+        stageProjetos.show();
+        stageProjetos.setOnShown(evento -> {
+             try {
+                 tpc.OnClickProjeto();
+             } catch (SQLException ex) {
+                 Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+             }
+      });
+    }
 
     void ajustarElementosJanela(Coordenador coordenador, Projeto projeto) {
         this.coordenador=coordenador;
@@ -327,9 +388,25 @@ public class TelaPrincipalCoordenadorController {
    
     public void setCoordenador(Coordenador coord) {
        this.coordenador = coord;
+       TxtNomeUsuario.setText(coord.getNome());
     }
     public void setProjeto(Projeto projeto) {
        this.projeto = projeto;
+       //lblNomeCoordenador.setText(projeto.getCoordenador());
+       lblResumo.setText(projeto.getResumo());
+       //txtCampus.setText(projeto.getCampus());
+       txtNomeProjeto.setText(projeto.getTitulo());
+       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+       String DataInicio = projeto.getDataInicio().format(formatter);
+       txtInicio.setText(DataInicio);
+
+       String DataFim = projeto.getDataFim().format(formatter);
+       txtFim.setText(DataFim);
+       String prorroga = String.valueOf(projeto.getProrroacao());
+       txtProrrogacao.setText(prorroga);
+       txtNomeCoordenador.setText(projeto.getCocoordenadores());
+       
+       
     }
     
     
