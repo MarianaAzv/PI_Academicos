@@ -15,9 +15,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import model.AdministradorDAO;
 
 
 public class AdministradoresController {
@@ -65,7 +67,7 @@ public class AdministradoresController {
     private Label lblNomeAdm;
 
     @FXML
-    private ListView<?> lvADMS;
+    private TableView<Administrador> tabelaADMS;
 
     @FXML
     void onClickAtualizarPerfil(ActionEvent event) throws IOException {  
@@ -150,6 +152,15 @@ public class AdministradoresController {
     
     
 //**********************************    
+     private void carregarTabelaADM(){
+         lista = FXCollections.observableArrayList(listarUsuarios());
+     }
+    
+     private ObservableList<Administrador> listarADMS() throws SQLException {
+        AdministradorDAO admDAO = new AdministradorDAO();
+        return admDAO.listarAdministradores();
+    }
+    
     
      private void abrirTelaVerPerfil() throws MalformedURLException, IOException{
         

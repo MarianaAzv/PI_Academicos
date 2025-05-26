@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class AdministradorDAO extends GenericDAO {
     
@@ -111,6 +113,35 @@ public class AdministradorDAO extends GenericDAO {
     stmtUsuario.executeUpdate();
     }
    }
+    
+    public ObservableList<Administrador> listarAdministradores(Usuario usuario, Administrador administrador){
+        
+        Connection con = conectarDAO();
+        
+        ObservableList<Administrador> lista = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM usuarios right join administradores on usuarios.idUsuario = administradores.idUsuario";
+        
+        try {
+             PreparedStatement stmt = con.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery();
+             
+             while(rs.next()){
+                 Administrador adm = new Administrador();
+                 adm.setId(rs.getInt("idUsuario"));
+                 adm.setCpf(rs.getLong("cpf"));
+                 adm.setNome(rs.getString("nome"));
+                 adm.setApelido(rs.getString("apelido"));
+                 adm.setEmail(rs.getString("email"));
+                 adm.setAtiva(rs.getBoolean("ativa"));
+
+                 lista.add(adm);
+                    
+                 }
+        }catch(SQLException s){
+            s.printStackTrace();
+        }
+        return lista;
+    }
     
     
     
