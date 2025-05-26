@@ -101,6 +101,8 @@ public class ProjetoDAO extends GenericDAO{
         
 
   System.out.println("Projeto atualizado com ID: " + projeto.getIdProjeto());
+ }catch(Exception e){
+     e.printStackTrace();
  }
 }
     
