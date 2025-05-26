@@ -131,19 +131,22 @@ public class AtualizarProjetoController {
            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
        LocalDate dI = LocalDate.parse(txtDatadeInicio.getText(), formatter);
        LocalDate dF= LocalDate.parse(txtDatadeFim.getText(), formatter);
-         LocalDate PR= LocalDate.parse(txtProrrogacao.getText(), formatter);
+       
          
            Campus campusnomeSelecionado = CBcampus.getValue();
            AreasConhecimento areacnhecimentoselecionado = CBcategoria.getValue();
             this.areaconhecimento= areacnhecimentoselecionado;
           
           
-        if(txtProrrogacao.getText() != null){
-     atualizarProjeto(projeto.getIdProjeto(),txtNomedoProjeto.getText(),txtResumo.getText(),campusnomeSelecionado,txtEdital.getText(),dI,dF,PR);
-        } else {
-            atualizarProjetoSEmProrrogacao(projeto.getIdProjeto(),txtNomedoProjeto.getText(),txtResumo.getText(),campusnomeSelecionado,txtEdital.getText(),dI,dF);
-        }
      
+          
+        
+        if(!txtProrrogacao.getText().isEmpty()){
+             LocalDate PR= LocalDate.parse(txtProrrogacao.getText(), formatter);
+     atualizarProjeto(projeto.getIdProjeto(),txtNomedoProjeto.getText(),txtResumo.getText(),campusnomeSelecionado,txtEdital.getText(),dI,dF,PR,areaconhecimento);
+        } else {
+            atualizarProjetoSEmProrrogacao(projeto.getIdProjeto(),txtNomedoProjeto.getText(),txtResumo.getText(),campusnomeSelecionado,txtEdital.getText(),dI,dF,areaconhecimento);
+        }
       } catch(SQLException e){
          mostrarAviso("Falha","A falha em atuaizar esse projeto");
      } 
@@ -195,23 +198,23 @@ public class AtualizarProjetoController {
       
       
     }
-  void atualizarProjeto(int idProjeto,String titulo,String resumo, Campus campus, String edital,LocalDate dataInicio,LocalDate dataFim,LocalDate prorrogacao ) throws SQLException{
+  void atualizarProjeto(int idProjeto,String titulo,String resumo, Campus campus, String edital,LocalDate dataInicio,LocalDate dataFim,LocalDate prorrogacao,AreasConhecimento areaconhecimento  ) throws SQLException{
         
          ProjetoDAO pdao =new ProjetoDAO();
         pdao.atualizarProjeto(projeto);
         
-       pdao.AtualizarAreaProjeto(projeto, areaconhecimento);
+      // pdao.AtualizarAreaProjeto(projeto);
        
        mostrarConfirmacao("Projeto alterado","O projeto foi alterado com sucesso!");
         
   }
   
-  void atualizarProjetoSEmProrrogacao(int idProjeto,String titulo,String resumo, Campus campus, String edital,LocalDate dataInicio,LocalDate dataFim) throws SQLException{
+  void atualizarProjetoSEmProrrogacao(int idProjeto,String titulo,String resumo, Campus campus, String edital,LocalDate dataInicio,LocalDate dataFim,AreasConhecimento areaconhecimento) throws SQLException{
    
       ProjetoDAO pdao =new ProjetoDAO();
         pdao.atualizarProjetoSEmProrrogacao(projeto);
         
-       pdao.AtualizarAreaProjeto(projeto, areaconhecimento);
+     //  pdao.AtualizarAreaProjeto(projeto);
        
        mostrarConfirmacao("Projeto alterado","O projeto foi alterado com sucesso!");
       
