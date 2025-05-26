@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `academicos` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+USE `academicos`;
 -- MySQL dump 10.13  Distrib 8.0.15, for Win64 (x86_64)
 --
 -- Host: localhost    Database: academicos
@@ -62,6 +64,7 @@ CREATE TABLE `areas_projetos` (
 
 LOCK TABLES `areas_projetos` WRITE;
 /*!40000 ALTER TABLE `areas_projetos` DISABLE KEYS */;
+INSERT INTO `areas_projetos` VALUES (1,2),(1,3),(1,4),(1,5),(1,16);
 /*!40000 ALTER TABLE `areas_projetos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -76,7 +79,7 @@ CREATE TABLE `areasdeconhecimento` (
   `idArea` int(11) NOT NULL AUTO_INCREMENT,
   `nomeArea` varchar(100) NOT NULL,
   PRIMARY KEY (`idArea`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -85,7 +88,7 @@ CREATE TABLE `areasdeconhecimento` (
 
 LOCK TABLES `areasdeconhecimento` WRITE;
 /*!40000 ALTER TABLE `areasdeconhecimento` DISABLE KEYS */;
-INSERT INTO `areasdeconhecimento` VALUES (1,'matematica');
+INSERT INTO `areasdeconhecimento` VALUES (1,'matematica'),(2,'genetica');
 /*!40000 ALTER TABLE `areasdeconhecimento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -246,7 +249,7 @@ CREATE TABLE `coordenadores` (
 
 LOCK TABLES `coordenadores` WRITE;
 /*!40000 ALTER TABLE `coordenadores` DISABLE KEYS */;
-INSERT INTO `coordenadores` VALUES (1,66666,'fghcjjvv'),(2,11111,'anne'),(3,333344,'Mestrado em Química');
+INSERT INTO `coordenadores` VALUES (1,66666,'fghcjjvv'),(2,11111,'anne'),(3,333344,'Mestrado em Química'),(12,123455,'genetica');
 /*!40000 ALTER TABLE `coordenadores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -275,7 +278,7 @@ CREATE TABLE `coordenadores_projetos` (
 
 LOCK TABLES `coordenadores_projetos` WRITE;
 /*!40000 ALTER TABLE `coordenadores_projetos` DISABLE KEYS */;
-INSERT INTO `coordenadores_projetos` VALUES (2,2,'2024-02-11','2025-02-11'),(2,3,'2019-04-12','2025-04-12'),(2,4,'2024-06-11','2025-06-11'),(2,5,'2021-04-12','2026-04-12'),(2,7,'2024-02-12','2026-02-12'),(2,8,'2023-05-12','2025-05-12'),(2,9,'2024-03-12','2026-03-12'),(2,10,'2024-07-12','2026-07-12'),(2,11,'2024-09-12','2027-09-12'),(2,12,'2022-08-12','2025-08-12'),(2,13,'2024-02-06','2026-02-06'),(3,6,'2023-03-12','2026-04-23'),(3,14,'2024-10-12','2025-10-12'),(3,15,'2024-06-30','2025-06-30');
+INSERT INTO `coordenadores_projetos` VALUES (2,2,'2024-02-11','2025-02-11'),(2,3,'2019-04-12','2025-04-12'),(2,4,'2024-06-11','2025-06-11'),(2,5,'2021-04-12','2026-04-12'),(2,7,'2024-02-12','2026-02-12'),(2,8,'2023-05-12','2025-05-12'),(2,9,'2024-03-12','2026-03-12'),(2,10,'2024-07-12','2026-07-12'),(2,11,'2024-09-12','2027-09-12'),(2,12,'2022-08-12','2025-08-12'),(2,13,'2024-02-06','2026-02-06'),(3,6,'2023-03-12','2026-04-23'),(3,14,'2024-10-12','2025-10-12'),(3,15,'2024-06-30','2025-06-30'),(12,16,'2006-01-09','2006-12-09');
 /*!40000 ALTER TABLE `coordenadores_projetos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -404,7 +407,7 @@ CREATE TABLE `projetos` (
   PRIMARY KEY (`idProjeto`),
   KEY `idCampus` (`idCampus`),
   CONSTRAINT `projetos_ibfk_1` FOREIGN KEY (`idCampus`) REFERENCES `campus` (`idCampus`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -413,7 +416,7 @@ CREATE TABLE `projetos` (
 
 LOCK TABLES `projetos` WRITE;
 /*!40000 ALTER TABLE `projetos` DISABLE KEYS */;
-INSERT INTO `projetos` VALUES (1,'60+','projeto de idosos',1,'122333','2023-04-12','2024-04-12',NULL,1),(2,'Ifsc 60+','1',1,'1','2024-02-11','2025-02-11',NULL,1),(3,'Elas Digitais','Mulheres na STEM',1,'2019','2019-04-12','2025-04-12',NULL,1),(4,'Etnomatemática','Etnomatemática e possibilidade de utilização de jogos africanos',1,'2024','2024-06-11','2025-06-11',NULL,1),(5,'NEABI','Núcleo de Ensino e Pesquisa Afro-Brasileiro e Indígena',1,'2021','2021-04-12','2026-04-12',NULL,1),(6,'Clube de Mídia','Clube de fotografia e pesquisa',1,'2023','2023-03-12','2026-04-23',NULL,1),(7,'Libras','Libras',1,'12','2024-02-12','2026-02-12',NULL,1),(8,'Geografia','123',1,'12','2023-05-12','2025-05-12',NULL,1),(9,'Arduíno','ee',1,'12','2024-03-12','2026-03-12',NULL,1),(10,'Filosofia','Uhul',1,'12','2024-07-12','2026-07-12',NULL,1),(11,'História','História',1,'12','2024-09-12','2027-09-12',NULL,1),(12,'uu','ee',1,'16','2022-08-12','2025-08-12',NULL,1),(13,'eee','eee',1,'17','2024-02-06','2026-02-06',NULL,1),(14,'Biologia','eeeeee',1,'10','2024-10-12','2025-10-12',NULL,1),(15,'Ambiental','eeeeee',1,'12','2024-06-30','2025-06-30',NULL,1);
+INSERT INTO `projetos` VALUES (1,'60+','projeto de idosos',1,'122333','2023-04-12','2024-04-12',NULL,1),(2,'Ifsc 60+','1',1,'1','2024-02-11','2025-02-11',NULL,1),(3,'Elas Digitais','Mulheres na STEM',1,'2019','2019-04-12','2025-04-12',NULL,1),(4,'Etnomatemática','Etnomatemática e possibilidade de utilização de jogos africanos',1,'2024','2024-06-11','2025-06-11',NULL,1),(5,'NEABI','Núcleo de Ensino e Pesquisa Afro-Brasileiro e Indígena',1,'2021','2021-04-12','2026-04-12',NULL,1),(6,'Clube de Mídia','Clube de fotografia e pesquisa',1,'2023','2023-03-12','2026-04-23',NULL,1),(7,'Libras','Libras',1,'12','2024-02-12','2026-02-12',NULL,1),(8,'Geografia','123',1,'12','2023-05-12','2025-05-12',NULL,1),(9,'Arduíno','ee',1,'12','2024-03-12','2026-03-12',NULL,1),(10,'Filosofia','Uhul',1,'12','2024-07-12','2026-07-12',NULL,1),(11,'História','História',1,'12','2024-09-12','2027-09-12',NULL,1),(12,'uu','ee',1,'16','2022-08-12','2025-08-12',NULL,1),(13,'eee','eee',1,'17','2024-02-06','2026-02-06',NULL,1),(14,'Biologia','eeeeee',1,'10','2024-10-12','2025-10-12',NULL,1),(15,'Ambiental','eeeeee',1,'12','2024-06-30','2025-06-30',NULL,1),(16,'aa','aaa',1,'aaa','2006-01-09','2006-12-09',NULL,1);
 /*!40000 ALTER TABLE `projetos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -463,7 +466,7 @@ CREATE TABLE `usuarios` (
   `email` varchar(50) DEFAULT NULL,
   `ativa` tinyint(1) NOT NULL,
   PRIMARY KEY (`idUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -472,7 +475,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,6666666666,'thjcgjcc','cfjjf','uhkjkv','fxgjghcj',1),(2,11111,'anne','anne','anne','anne',1),(3,33333333333,'Lucia Burkhardt','lucia','123','lucia@gmail.com',1),(4,2222222,'fer','fer','123','fer',0),(5,11111,'mari','mariazevedo','123','kcuk',1),(6,2222222,'jaqueline','jaque','123','jaque@gmail.com',1),(7,111111,'leonardo','fernandes','123','111111',1),(8,1,'marcela','marcela','123','marcela@gmail.com',1),(9,126666,'Amábile Burkhardt Junkes','mabi','123','mabi@gmail.com',1),(10,111111,'Fabiano Marcelo Junkes Júnior','xui','123','xui@gmail.com',1),(11,9999999,'Maria Eduarda Zimmermann','duda','123','duda@gmail.com',1);
+INSERT INTO `usuarios` VALUES (1,6666666666,'thjcgjcc','cfjjf','uhkjkv','fxgjghcj',1),(2,11111,'anne','anne','anne','anne',1),(3,33333333333,'Lucia Burkhardt','lucia','123','lucia@gmail.com',1),(4,2222222,'fer','fer','123','fer',0),(5,11111,'mari','mariazevedo','123','kcuk',1),(6,2222222,'jaqueline','jaque','123','jaque@gmail.com',1),(7,111111,'leonardo','fernandes','123','111111',1),(8,1,'marcela','marcela','123','marcela@gmail.com',1),(9,126666,'Amábile Burkhardt Junkes','mabi','123','mabi@gmail.com',1),(10,111111,'Fabiano Marcelo Junkes Júnior','xui','123','xui@gmail.com',1),(11,9999999,'Maria Eduarda Zimmermann','duda','123','duda@gmail.com',1),(12,12345678,'ma','m','123','m@',1);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -485,4 +488,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-19 11:53:57
+-- Dump completed on 2025-05-26 11:13:00

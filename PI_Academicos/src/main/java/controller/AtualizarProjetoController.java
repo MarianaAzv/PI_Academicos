@@ -139,7 +139,7 @@ public class AtualizarProjetoController {
           
           
      
-          
+          //Rever o null e o set em prorrogacao
         
         if(!txtProrrogacao.getText().isEmpty()){
              LocalDate PR= LocalDate.parse(txtProrrogacao.getText(), formatter);
@@ -183,8 +183,16 @@ public class AtualizarProjetoController {
 
        String DataFim = projeto.getDataFim().format(formatter);
       txtDatadeFim.setText(DataFim);
-      String prorroga = String.valueOf(projeto.getProrroacao());
+      //IF se a prorrogacao for null le nao set
+      
+      
+    String p = String.valueOf(projeto.getProrroacao());
+      
+      if(p != "null"){
+              String prorroga = projeto.getProrroacao().format(formatter);  
       txtProrrogacao.setText(prorroga);
+      }
+      
       txtCoordenador.setText(projeto.getCocoordenadores());
       //Falta combo box
       
@@ -201,6 +209,16 @@ public class AtualizarProjetoController {
   void atualizarProjeto(int idProjeto,String titulo,String resumo, Campus campus, String edital,LocalDate dataInicio,LocalDate dataFim,LocalDate prorrogacao,AreasConhecimento areaconhecimento  ) throws SQLException{
         
          ProjetoDAO pdao =new ProjetoDAO();
+         //Falta SET AQUI para enviar para o banco de dados 
+         projeto.setTitulo(titulo);
+         projeto.setResumo(resumo);
+         projeto.setCampus(campus);
+         projeto.setEdital(edital);
+         projeto.setDataInicio(dataInicio);
+         projeto.setDataFim(dataFim);
+         projeto.setProrroacao(prorrogacao);
+         projeto.setAreaConhecimento(areaconhecimento);
+         
         pdao.atualizarProjeto(projeto);
         
       // pdao.AtualizarAreaProjeto(projeto);
@@ -212,6 +230,14 @@ public class AtualizarProjetoController {
   void atualizarProjetoSEmProrrogacao(int idProjeto,String titulo,String resumo, Campus campus, String edital,LocalDate dataInicio,LocalDate dataFim,AreasConhecimento areaconhecimento) throws SQLException{
    
       ProjetoDAO pdao =new ProjetoDAO();
+      
+      projeto.setTitulo(titulo);
+      projeto.setResumo(resumo);
+      projeto.setCampus(campus);
+      projeto.setEdital(edital);
+      projeto.setDataInicio(dataInicio);
+      projeto.setDataFim(dataFim);
+      projeto.setAreaConhecimento(areaconhecimento);
         pdao.atualizarProjetoSEmProrrogacao(projeto);
         
      //  pdao.AtualizarAreaProjeto(projeto);
