@@ -36,6 +36,7 @@ module-info.class
 controller\NotificacoesController.class
 model\BolsistaDAO.class
 controller\MaisCoCoordenadorController.class
+controller\AtualizarNoticiaController.class
 controller\CadastroCoordenadorController.class
 model\AreasConhecimento.class
 model\Noticia.class

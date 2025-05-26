@@ -36,7 +36,6 @@ public class TelaPrincipalAdministradorController {
     private Administrador adm;
     private NoticiaDAO noticiaDAO;
     private Stage stageADM;
-    
 
     // Formatador para a data e hora
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
@@ -141,7 +140,7 @@ public class TelaPrincipalAdministradorController {
 
             imageView.setOnMouseClicked(event -> {
                 try {
-                abrirTelaNoticia(); //tela teste, posteriormente será passada uma tela que mostre os detalhes da noticia
+                abrirTelaAtualizarNoticia(noticia); //tela teste, posteriormente será passada uma tela que mostre os detalhes da noticia
                 } catch (IOException e) {
                 System.err.println("Erro ao abrir tela de detalhes da notícia: " + e.getMessage());
                 }
@@ -356,6 +355,27 @@ public class TelaPrincipalAdministradorController {
             stageADM.close();
     }
     
+    private void abrirTelaAtualizarNoticia(Noticia noticia) throws MalformedURLException, IOException{
+        
+         URL url = new File("src/main/java/view/AtualizarNoticia.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage stageAtualizarNoticia = new Stage();
+        
+            AtualizarNoticiaController anc = loader.getController();    
+            anc.setStage(stageAtualizarNoticia);
+            anc.setAdministrador(adm);
+            anc.setNoticia(noticia);
+        
+            Scene cena = new Scene(root);
+            stageAtualizarNoticia.setTitle("Tela Atualizar Noticia");
+            stageAtualizarNoticia.setScene(cena);
+            
+            stageAtualizarNoticia.show();
+            
+    }
+    
     private void abrirTelaLogin() throws IOException{
         
          URL url = new File("src/main/java/view/TelaLogin.fxml").toURI().toURL();
@@ -376,6 +396,7 @@ public class TelaPrincipalAdministradorController {
             stageLogin.show();
             stageADM.close();
     }
+    
     
     public void setStage(Stage stage){
         this.stageADM = stage;
