@@ -4,24 +4,7 @@ import java.time.LocalDate;
 
 public class Projeto {
 
-    /**
-     * @return the campus
-     */
-    public Campus getCampus() {
-        return campus;
-    }
-
-    /**
-     * @param campus the campus to set
-     */
-    public void setCampus(Campus campus) {
-        this.campus = campus;
-    }
-
-    
-    
-    
-     private int idProjeto;
+    private int idProjeto;
     private String titulo;
     private AreasConhecimento areaConhecimento;
     private String resumo;
@@ -32,31 +15,27 @@ public class Projeto {
     private boolean emAndamento;
     private String cocoordenadores;
     private Campus campus;
-      
-    
-    
-    
-    public Projeto(String titulo , String resumo, Campus campus, String edital, LocalDate dataInicio, LocalDate dataFim,LocalDate prorrogacao, boolean emAndamento) {
+
+    public Projeto(String titulo, String resumo, Campus campus, String edital, LocalDate dataInicio, LocalDate dataFim, LocalDate prorrogacao, boolean emAndamento) {
         this.titulo = titulo;
-       
-    this.resumo = resumo;
-    this.campus = campus;
-    this.edital = edital;
-    this.dataInicio = dataInicio;
-    this.dataFim = dataFim;
-    this.prorrogacao = prorrogacao; 
-    this.emAndamento = emAndamento;    
+
+        this.resumo = resumo;
+        this.campus = campus;
+        this.edital = edital;
+        this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
+        this.prorrogacao = prorrogacao;
+        this.emAndamento = emAndamento;
     }
-    
+
     public int getIdProjeto() {
         return idProjeto;
     }
 
-    
     public void setIdProjeto(int idProjeto) {
         this.idProjeto = idProjeto;
     }
-    
+
     /**
      * @return the titulo
      */
@@ -175,6 +154,20 @@ public class Projeto {
     public String getCocoordenadores() {
         return cocoordenadores;
     }
+    
+     /**
+     * @return the campus
+     */
+    public Campus getCampus() {
+        return campus;
+    }
+
+    /**
+     * @param campus the campus to set
+     */
+    public void setCampus(Campus campus) {
+        this.campus = campus;
+    }
 
     /**
      * @param cocoordenadores the cocoordenadores to set
@@ -182,12 +175,8 @@ public class Projeto {
     public void setCocoordenadores(String cocoordenadores) {
         this.cocoordenadores = cocoordenadores;
     }
-    
-     //public void setAreasConhecimento(AreasConhecimento areasconhecimento) {
-       // this.areaConhecimento = areasconhecimento;
-    //}
-    
-   public Projeto(){
-       
-   }
+
+    public Projeto() {
+
+    }
 }
