@@ -69,8 +69,7 @@ public class AtualizarProjetoController {
     @FXML
     private Label lblCocoordenador;
 
-    @FXML
-    private Label lblCoordenador;
+
 
     @FXML
     private Label lblDatadeFim;
@@ -91,8 +90,7 @@ public class AtualizarProjetoController {
     private Label lbltitulocriarprojeto;
 
  
-    @FXML
-    private TextField txtCoordenador;
+  
 
     @FXML
     private TextField txtDatadeFim;
@@ -140,13 +138,18 @@ public class AtualizarProjetoController {
           
      
           //Rever o null e o set em prorrogacao
-        
-        if(!txtProrrogacao.getText().isEmpty()){
-             LocalDate PR= LocalDate.parse(txtProrrogacao.getText(), formatter);
-     atualizarProjeto(projeto.getIdProjeto(),txtNomedoProjeto.getText(),txtResumo.getText(),campusnomeSelecionado,txtEdital.getText(),dI,dF,PR,areaconhecimento);
-        } else {
-            atualizarProjetoSEmProrrogacao(projeto.getIdProjeto(),txtNomedoProjeto.getText(),txtResumo.getText(),campusnomeSelecionado,txtEdital.getText(),dI,dF,areaconhecimento);
-        }
+         LocalDate prorrogacao = null;
+if (!txtProrrogacao.getText().isEmpty()) {
+    prorrogacao = LocalDate.parse(txtProrrogacao.getText(), formatter);
+}
+
+atualizarProjeto(projeto.getIdProjeto(), txtNomedoProjeto.getText(), txtResumo.getText(),
+                 campusnomeSelecionado, txtEdital.getText(), dI, dF, prorrogacao, areaconhecimento);
+        //else {
+//            atualizarProjetoSEmProrrogacao(projeto.getIdProjeto(),txtNomedoProjeto.getText(),txtResumo.getText(),campusnomeSelecionado,txtEdital.getText(),dI,dF,areaconhecimento);
+//        }
+
+
       } catch(SQLException e){
          mostrarAviso("Falha","A falha em atuaizar esse projeto");
      } 
@@ -186,11 +189,13 @@ public class AtualizarProjetoController {
       //IF se a prorrogacao for null le nao set
       
       
-    String p = String.valueOf(projeto.getProrroacao());
+  //  String p = String.valueOf(projeto.getProrroacao());
       
-      if(p != "null"){
+      if(projeto.getProrroacao() != null){
               String prorroga = projeto.getProrroacao().format(formatter);  
       txtProrrogacao.setText(prorroga);
+      } else {
+          txtProrrogacao.clear();
       }
       
       txtCoordenador.setText(projeto.getCocoordenadores());
@@ -227,24 +232,24 @@ public class AtualizarProjetoController {
         
   }
   
-  void atualizarProjetoSEmProrrogacao(int idProjeto,String titulo,String resumo, Campus campus, String edital,LocalDate dataInicio,LocalDate dataFim,AreasConhecimento areaconhecimento) throws SQLException{
-   
-      ProjetoDAO pdao =new ProjetoDAO();
-      
-      projeto.setTitulo(titulo);
-      projeto.setResumo(resumo);
-      projeto.setCampus(campus);
-      projeto.setEdital(edital);
-      projeto.setDataInicio(dataInicio);
-      projeto.setDataFim(dataFim);
-      projeto.setAreaConhecimento(areaconhecimento);
-        pdao.atualizarProjetoSEmProrrogacao(projeto);
-        
-     //  pdao.AtualizarAreaProjeto(projeto);
-       
-       mostrarConfirmacao("Projeto alterado","O projeto foi alterado com sucesso!");
-      
-  }
+//  void atualizarProjetoSEmProrrogacao(int idProjeto,String titulo,String resumo, Campus campus, String edital,LocalDate dataInicio,LocalDate dataFim,AreasConhecimento areaconhecimento) throws SQLException{
+//   
+//      ProjetoDAO pdao =new ProjetoDAO();
+//      
+//      projeto.setTitulo(titulo);
+//      projeto.setResumo(resumo);
+//      projeto.setCampus(campus);
+//      projeto.setEdital(edital);
+//      projeto.setDataInicio(dataInicio);
+//      projeto.setDataFim(dataFim);
+//      projeto.setAreaConhecimento(areaconhecimento);
+//        pdao.atualizarProjetoSEmProrrogacao(projeto);
+//        
+//     //  pdao.AtualizarAreaProjeto(projeto);
+//       
+//       mostrarConfirmacao("Projeto alterado","O projeto foi alterado com sucesso!");
+//      
+//  }
   
   public void ajustarElementosJanela(){
   //ArrayList para set dos nomes dos campus no combo box de campus
