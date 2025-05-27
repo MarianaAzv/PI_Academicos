@@ -1,53 +1,53 @@
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\VerPerfilCoordenadorController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\model\BolsistaDAO.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\model\LoginDAO.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\TelaNoticiaController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\model\Solicitacao.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarPerfilBolsistaController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\model\Administrador.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\AdministradoresController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\TelaPrincipalCoordenadorController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\dal\ConexaoBD.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\NotificacoesController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarPerfilCoordenadorController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\CadastroCoordenadorController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\RecuperarSenhaNovaSenhaController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\VerPerfilAdministradorController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\model\Usuario.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\model\Bolsista.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\model\ProjetoDAO.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\model\CoordenadorDAO.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\TelaLoginController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\model\GenericDAO.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\model\Projeto.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\CadastrarArtigoController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\RecuperarSenhaController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\MaisBolsistaController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\CadastroBolsistaCoordenadorController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\BolsistaDesativarCoordenadorController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\TelaPrincipalAdministradorController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\util\AlertaUtil.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\VerPerfilBolsistaController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\model\SolicitacaoDAO.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\module-info.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\model\Coordenador.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\model\CampusDAO.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\MaisCoCoordenadorController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\TelaPrincipalBolsistaController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\model\AdministradorDAO.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\model\Noticia.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\EscolherProjetoController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\CocoordenadorDesativarCoordenadorController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\model\AreasConhecimentoDAO.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarProjetoController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\CriarProjetoController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\CadastrarAdministradorController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\model\NoticiaDAO.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\model\Campus.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarNoticiaController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\CadastroCocoordenadorCoordenadorController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\RecuperarSenhaCodigoController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarPerfilAdministradorController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\controller\CadastrarPostagemController.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\principal\App.java
-C:\Users\anneb\OneDrive\햞ea de Trabalho\Github\PI_Academicos\PI_Academicos\src\main\java\model\AreasConhecimento.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\principal\App.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarPerfilBolsistaController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarPerfilCoordenadorController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\TelaLoginController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\dal\ConexaoBD.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\NoticiaDAO.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Projeto.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CocoordenadorDesativarCoordenadorController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\TelaNoticiaController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\RecuperarSenhaNovaSenhaController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CadastroCoordenadorController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarProjetoController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\RecuperarSenhaCodigoController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\VerPerfilCoordenadorController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\MaisBolsistaController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Coordenador.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\util\AlertaUtil.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\EscolherProjetoController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\CampusDAO.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CriarProjetoController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\module-info.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Solicitacao.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Campus.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CadastrarArtigoController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\AdministradoresController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\LoginDAO.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CadastrarPostagemController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Noticia.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\RecuperarSenhaController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\TelaPrincipalBolsistaController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\BolsistaDesativarCoordenadorController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarPerfilAdministradorController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\MaisCoCoordenadorController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\AreasConhecimento.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CadastrarAdministradorController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Usuario.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\VerPerfilBolsistaController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CadastroCocoordenadorCoordenadorController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Bolsista.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Administrador.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\NotificacoesController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\GenericDAO.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\VerPerfilAdministradorController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\AreasConhecimentoDAO.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CadastroBolsistaCoordenadorController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\CoordenadorDAO.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\SolicitacaoDAO.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarNoticiaController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\AdministradorDAO.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\BolsistaDAO.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\TelaPrincipalAdministradorController.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\ProjetoDAO.java
+C:\Users\Aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\TelaPrincipalCoordenadorController.java

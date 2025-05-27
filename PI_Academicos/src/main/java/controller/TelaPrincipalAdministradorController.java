@@ -105,8 +105,8 @@ public class TelaPrincipalAdministradorController {
                 }
                 else{ // caso o link da foto estiver com problema uma outra foto substitui ela
                     ImageView imageView = new ImageView();
-                    imageView.setFitWidth(270);
-                    imageView.setFitHeight(270);
+                    imageView.setFitWidth(320);
+                    imageView.setFitHeight(320);
                     imageView.setPreserveRatio(true);
                     tilePaneGaleria.getChildren().add(imageView);
                     Image image = new Image("https://developers.google.com/static/maps/documentation/streetview/images/error-image-generic.png", true);
@@ -121,8 +121,8 @@ public class TelaPrincipalAdministradorController {
     
     private void adicionarNoticiaFeed(Noticia noticia) {
         ImageView imageView = new ImageView();
-        imageView.setFitWidth(270);
-        imageView.setFitHeight(270);
+        imageView.setFitWidth(320);
+        imageView.setFitHeight(320);
         imageView.setPreserveRatio(true);
 
         tilePaneGaleria.getChildren().add(imageView);

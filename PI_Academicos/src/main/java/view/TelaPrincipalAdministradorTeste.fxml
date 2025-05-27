@@ -39,7 +39,7 @@
                </font></Label>
             <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <content>
-                  <TilePane fx:id="tilePaneGaleria" hgap="10.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="857.0" vgap="10.0">
+                  <TilePane fx:id="tilePaneGaleria" hgap="10.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="572.0" prefWidth="1008.0" vgap="10.0">
                      <children>
                         <ImageView fitHeight="270.0" fitWidth="270.0" pickOnBounds="true" preserveRatio="true" />
                         <ImageView fitHeight="270.0" fitWidth="270.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" />

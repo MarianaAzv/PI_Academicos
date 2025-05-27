@@ -5,40 +5,41 @@ import java.time.LocalDateTime;
 public class Noticia {
     
     private int id;
-    private int idAdministrador; 
+    private int idAdministrador;
+    private int idFoto;
     private String titulo;
     private String texto;
     private LocalDateTime data;
-    private String linkImagem;
+    
 
     //construtor com todos os atributos
-    public Noticia(int id, int idAdministrador, String titulo, String texto, String linkImagem, LocalDateTime data) {
+    public Noticia(int id, int idAdministrador, int idFoto, String titulo, String texto, LocalDateTime data) {
         this.id = id;
         this.idAdministrador = idAdministrador;
+        this.idFoto = idFoto;
         this.titulo = titulo;
         this.texto = texto;
         this.data = data;
-        this.linkImagem = linkImagem;
     }
 
     //construtor sem id
-    public Noticia(int idAdministrador, String titulo, String texto, String linkImagem, LocalDateTime data) {
+    public Noticia(int idAdministrador,  int idFoto, String titulo, String texto, String linkImagem, LocalDateTime data) {
         this.idAdministrador = idAdministrador;
+        this.idFoto = idFoto;
         this.titulo = titulo;
         this.texto = texto;
         this.data = data;
-        this.linkImagem = linkImagem;
     }
     
     //construtor sem id e data
-    public Noticia(int idAdministrador, String titulo, String texto, String linkImagem) {
+    public Noticia(int idAdministrador,  int idFoto, String titulo, String texto) {
         this.idAdministrador = idAdministrador;
+        this.idFoto = idFoto;
         this.titulo = titulo;
         this.texto = texto;
-        this.linkImagem = linkImagem;
     }
-    public Noticia(String linkImagem) {
-        this.linkImagem = linkImagem;
+    public Noticia(int idFoto) {
+        this.idFoto = idFoto;
     }
 
     public void setId(int id) {
@@ -65,8 +66,8 @@ public class Noticia {
         this.data = data;
     }
 
-    public void setLinkImagem(String linkImagem) {
-        this.linkImagem = linkImagem;
+    public void setIdFoto(int idFoto) {
+        this.idFoto = idFoto;
     }
 
     public int getId() {
@@ -86,15 +87,15 @@ public class Noticia {
         return data;
     }
 
-    public String getLinkImagem() {
-        return linkImagem;
+    public int getIdFoto() {
+        return idFoto;
     }
     
     @Override
     public String toString() {
         return "Foto{" +
                "id=" + id +
-               ", link='" + linkImagem + '\'' +
+               ", idFoto='" + idFoto + '\'' +
                 ", data=" + data +
                '}';
     }
