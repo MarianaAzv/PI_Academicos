@@ -49,22 +49,22 @@ import static util.AlertaUtil.mostrarAviso;
 import static util.AlertaUtil.mostrarConfirmacao;
 
 public class CriarProjetoController {
-    
+
     private Stage stageCriarProjeto;
     Coordenador coordenador;
     Projeto projeto;
     AreasConhecimento areasconhecimento;
     File arquivoPDF = null;
     private final String DIRETORIO_PDFS = Paths.get(System.getProperty("user.home"), "pdfs_baixados").toString();
-    
-      public void initialize() {
+
+    public void initialize() {
         File diretorio = new File(DIRETORIO_PDFS);
         if (!diretorio.exists()) {
             diretorio.mkdirs();
         }
-      }
-    
-     @FXML
+    }
+
+    @FXML
     private ComboBox<Campus> CBcampus;
 
     @FXML
@@ -93,7 +93,7 @@ public class CriarProjetoController {
 
     @FXML
     private ImageView imgLogo;
-    
+
     @FXML
     private Label lblAbrirArquivo;
 
@@ -108,8 +108,6 @@ public class CriarProjetoController {
 
     @FXML
     private Label lblCocoordenador;
-
- 
 
     @FXML
     private Label lblDatadeFim;
@@ -126,9 +124,6 @@ public class CriarProjetoController {
     @FXML
     private Label lbltitulocriarprojeto;
 
- 
-    
-
     @FXML
     private TextField txtDatadeFim;
 
@@ -144,55 +139,49 @@ public class CriarProjetoController {
     @FXML
     private TextArea txtResumo;
 
-    
-    public void setStage(Stage telaCriarProjeto){
+    public void setStage(Stage telaCriarProjeto) {
         this.stageCriarProjeto = telaCriarProjeto;
     }
-    
-      public  void setCoordenador(Coordenador coordenador) {
+
+    public void setCoordenador(Coordenador coordenador) {
         this.coordenador = coordenador;
     }
-     @FXML
-    void OnClickEnviar(ActionEvent event) throws ParseException, IOException {
-        //Para o combo box é pelo dao na inicializacao
-        
-        //Pois o metodo é so para cadastrar
-      // Localdate para data
-        //LocalDate;
-       try{ 
-        
-       if(txtNomedoProjeto.getText().isEmpty() || txtResumo.getText().isEmpty() ||txtEdital.getText().isEmpty() || txtDatadeInicio.getText().isEmpty() || txtDatadeFim.getText().isEmpty() ||  CBcampus.getValue() == null || CBcategoria.getValue() == null  ){
-           mostrarAviso("Falta informacao","Por favor inserir todos os dados corretamente");
-           
-           return;
-       } else{
-       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate dI = LocalDate.parse(txtDatadeInicio.getText(), formatter);
-        LocalDate dF= LocalDate.parse(txtDatadeFim.getText(), formatter);
-       
-        if(dI.isAfter(dF)){
-            mostrarAviso("Datas","A data do final do projeto esta menor que a data de inicio do projeto");
-            return;
-        } else{
-            Campus campusnomeSelecionado = CBcampus.getValue();
-            AreasConhecimento areacnhecimentoselecionado = CBcategoria.getValue();
-            this.areasconhecimento= areacnhecimentoselecionado;
-            
-            incluir(txtNomedoProjeto.getText(),txtResumo.getText(),campusnomeSelecionado,txtEdital.getText(),dI,dF,null,true,coordenador.getId());
-        }
-       }
-     } catch(SQLException e){
-          mostrarAviso("Falha","A falha em cadastrar esse projeto");
-     } catch(DateTimeParseException e){
-          mostrarAviso("Falha","O formato da data de inicio ou de Fim nao esta no padrao normal");
-     }
 
-       enviarSolicitacao();
-       
-       abrirJanelaMaisBolsista();
+    @FXML
+    void OnClickEnviar(ActionEvent event) throws ParseException, IOException {
+
+        try {
+
+            if (txtNomedoProjeto.getText().isEmpty() || txtResumo.getText().isEmpty() || txtEdital.getText().isEmpty() || txtDatadeInicio.getText().isEmpty() || txtDatadeFim.getText().isEmpty() || CBcampus.getValue() == null || CBcategoria.getValue() == null) {
+                mostrarAviso("Falta informacao", "Por favor inserir todos os dados corretamente");
+
+                return;
+            } else {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate dI = LocalDate.parse(txtDatadeInicio.getText(), formatter);
+                LocalDate dF = LocalDate.parse(txtDatadeFim.getText(), formatter);
+
+                if (dI.isAfter(dF)) {
+                    mostrarAviso("Datas", "A data do final do projeto esta menor que a data de inicio do projeto");
+                    return;
+                } else {
+                    Campus campusnomeSelecionado = CBcampus.getValue();
+                    AreasConhecimento areacnhecimentoselecionado = CBcategoria.getValue();
+                    this.areasconhecimento = areacnhecimentoselecionado;
+
+                    incluir(txtNomedoProjeto.getText(), txtResumo.getText(), campusnomeSelecionado, txtEdital.getText(), dI, dF, null, true, coordenador.getId());
+                }
+            }
+        } catch (SQLException e) {
+            mostrarAviso("Falha", "A falha em cadastrar esse projeto");
+        } catch (DateTimeParseException e) {
+            mostrarAviso("Falha", "O formato das datas nao esta como o esperado");
+        }
+
+        enviarSolicitacao();
+
+        abrirJanelaMaisBolsista();
     }
-    
-  
 
     @FXML
     void OnClickPDF(ActionEvent event) throws IOException {
@@ -203,9 +192,9 @@ public class CriarProjetoController {
         fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.pdf"));
         arquivoPDF = fileChooser.showOpenDialog(btnPDF.getScene().getWindow());
         lblAbrirArquivo.setText(arquivoPDF.getName());
-  
+
     }
-    
+
     @FXML
     void onMouseEnterAbrirArquivo(MouseEvent event) {
         lblAbrirArquivo.setStyle("text-decoration: underline;");
@@ -215,8 +204,7 @@ public class CriarProjetoController {
     void onMouseExitedAbrirArquivo(MouseEvent event) {
 
     }
-    
-    
+
     @FXML
     void onClickAbrirArquivo(MouseEvent event) {
 
@@ -233,93 +221,86 @@ public class CriarProjetoController {
         } else {
             System.out.println("Nenhum arquivo selecionado para abrir.");
         }
-    
+
     }
 
-  
+    public void ajustarElementosJanela() {
+        //ArrayList para set dos nomes dos campus no combo box de campus
+        try {
+            CampusDAO cdao = new CampusDAO();
+            List<Campus> listCampus = cdao.buscarCampus();
+            CBcampus.getItems().clear();
+            CBcampus.getItems().addAll(listCampus);
 
-    
-    
- public void ajustarElementosJanela(){
-  //ArrayList para set dos nomes dos campus no combo box de campus
-  try{
-      CampusDAO cdao = new CampusDAO();
-     List<Campus> listCampus = cdao.buscarCampus();
-     CBcampus.getItems().clear();
-     CBcampus.getItems().addAll(listCampus);
-     
-       AreasConhecimentoDAO acdao = new AreasConhecimentoDAO();
-     List<AreasConhecimento> listCategorias = acdao.buscarCategorias();
-     CBcategoria.getItems().clear();
-    CBcategoria.getItems().addAll(listCategorias);
-    
-  } catch(SQLException e){
-    
-        mostrarAviso("Banco de Dados","A falha de comunicação entre o sistema e o Banco");
-  }
-   }
- public void incluir(String titulo,String resumo, Campus campus, String edital,LocalDate dataInicio,LocalDate dataFim,LocalDate prorrogacao, boolean emAndamento,int id) throws SQLException {
-       projeto = new Projeto(titulo,resumo,campus,edital,dataInicio,dataFim,prorrogacao,emAndamento);
-      projeto.setAreaConhecimento(areasconhecimento);
-      
-      AreasConhecimento areacnhecimentoselecionado = CBcategoria.getValue();
-            this.areasconhecimento= areacnhecimentoselecionado;
-    projeto.setEmAndamento(true);
-      
-        ProjetoDAO pdao =new ProjetoDAO();
-        pdao.cadastraprojeto(projeto,id);
+            AreasConhecimentoDAO acdao = new AreasConhecimentoDAO();
+            List<AreasConhecimento> listCategorias = acdao.buscarCategorias();
+            CBcategoria.getItems().clear();
+            CBcategoria.getItems().addAll(listCategorias);
+
+        } catch (SQLException e) {
+
+            mostrarAviso("Banco de Dados", "A falha de comunicação entre o sistema e o Banco");
+        }
+    }
+
+    public void incluir(String titulo, String resumo, Campus campus, String edital, LocalDate dataInicio, LocalDate dataFim, LocalDate prorrogacao, boolean emAndamento, int id) throws SQLException {
+        projeto = new Projeto(titulo, resumo, campus, edital, dataInicio, dataFim, prorrogacao, emAndamento);
+        projeto.setAreaConhecimento(areasconhecimento);
+
+        AreasConhecimento areacnhecimentoselecionado = CBcategoria.getValue();
+        this.areasconhecimento = areacnhecimentoselecionado;
+        projeto.setEmAndamento(true);
+
+        ProjetoDAO pdao = new ProjetoDAO();
+        pdao.cadastraprojeto(projeto, id);
         pdao.AreaProjeto(projeto, areasconhecimento);
-       
-        mostrarConfirmacao("Projeto cadastrado","O projeto foi registrado no sistema com sucesso!");
+
+        mostrarConfirmacao("Projeto cadastrado", "O projeto foi registrado no sistema com sucesso!");
         stageCriarProjeto.close();
-       
+
     }
- 
- public void enviarSolicitacao(){
-     
-     if (arquivoPDF != null) {
+
+    public void enviarSolicitacao() {
+
+        if (arquivoPDF != null) {
             try {
-                
+
                 Usuario usuario = new Usuario();
                 usuario.setId(coordenador.getId());
-               
-                String descricao = "Nome do projeto: "+ txtNomedoProjeto.getText()
-                        + "\nCoordenador: " + coordenador.getNome() 
-                        + ", SIAPE: " + coordenador.getSiape() 
+
+                String descricao = "Nome do projeto: " + txtNomedoProjeto.getText()
+                        + "\nCoordenador: " + coordenador.getNome()
+                        + ", SIAPE: " + coordenador.getSiape()
                         + ", e-mail: " + coordenador.getEmail();
                 Solicitacao solicitacao = new Solicitacao(usuario, descricao, arquivoPDF);
                 new SolicitacaoDAO().salvarPDF(solicitacao);
                 System.out.println("Arquivo PDF salvo no banco de dados.");
-                
+
             } catch (IOException e) {
                 System.err.println("Erro ao ler o arquivo PDF: " + e.getMessage());
             }
         }
- }
- 
-   
-   public void abrirJanelaMaisBolsista() throws IOException{
-       URL url = new File("src/main/java/view/MaisBolsista.fxml").toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-        
-            Stage stageMaisBolsista = new Stage();
-            
-            MaisBolsistaController mbc = loader.getController();
-            //mbc.setCoordenador(coordenador);
-            mbc.setProjeto(projeto);
-            mbc.setStage(stageMaisBolsista);
-        
-            Scene cena = new Scene(root);
-            stageMaisBolsista.setTitle("Adicionar bolsistas");
-            stageMaisBolsista.setScene(cena);
-            //deixa a tela maximizada
-            
-            stageMaisBolsista.show();
-            stageCriarProjeto.close();
-   }
+    }
+
+    public void abrirJanelaMaisBolsista() throws IOException {
+        URL url = new File("src/main/java/view/MaisBolsista.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stageMaisBolsista = new Stage();
+
+        MaisBolsistaController mbc = loader.getController();
+        //mbc.setCoordenador(coordenador);
+        mbc.setProjeto(projeto);
+        mbc.setStage(stageMaisBolsista);
+
+        Scene cena = new Scene(root);
+        stageMaisBolsista.setTitle("Adicionar bolsistas");
+        stageMaisBolsista.setScene(cena);
+        //deixa a tela maximizada
+
+        stageMaisBolsista.show();
+        stageCriarProjeto.close();
+    }
 
 }
-
-
-
