@@ -195,7 +195,7 @@ public class VerPerfilCoordenadorController {
     //******************************************************************
     @FXML
     void onClickSair(ActionEvent event) throws IOException {
-        abrirTelaVerPerfil();
+        AbrirTelaPrincipal();
     }
     @FXML
     void OnEnterSair(MouseEvent event) {
@@ -258,6 +258,7 @@ public class VerPerfilCoordenadorController {
         
         AtualizarPerfilCoordenadorController apcc = loader.getController();
         apcc.setCoordenador(coordenador); 
+        apcc.setProjeto(projeto);
         apcc.setStage(stageAtualizar);
         
         Scene cena = new Scene(root);
@@ -304,7 +305,9 @@ public class VerPerfilCoordenadorController {
         Stage stageLogin = new Stage();
 
         TelaPrincipalCoordenadorController tpcc = loader.getController();
-        tpcc.setStage(stageLogin);     
+        tpcc.setStage(stageLogin);
+        tpcc.setCoordenador(coordenador);
+        tpcc.setProjeto(projeto);
 
         Scene cena = new Scene(root);
         stageLogin.setTitle("Tela de principal");
@@ -326,6 +329,7 @@ public class VerPerfilCoordenadorController {
         Stage stageArtigo = new Stage();
         CadastrarArtigoController cab = loader.getController();
         cab.setStage(stageArtigo);
+        cab.setProjeto(projeto);
 
         Scene cena = new Scene(root);
         stageArtigo.setTitle("Cadastro Artigo");
@@ -342,6 +346,7 @@ public class VerPerfilCoordenadorController {
         Stage stagePostagem = new Stage();
         CadastrarPostagemController cpb = loader.getController();
         cpb.setStage(stagePostagem);
+        cpb.setProjeto(projeto);
 
         Scene cena = new Scene(root);
         stagePostagem.setTitle("Cadastro Postagem");

@@ -8,8 +8,20 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Bolsista;
+import model.Projeto;
 
 public class CadastrarPostagemController {
+    
+    Stage stagePostagem;
+
+    void setStage(Stage stagePostagem) {
+        this.stagePostagem = stagePostagem;
+    }
+    Projeto projeto;
+    
+     public void setProjeto(Projeto projeto) {
+       this.projeto = projeto;
+    }
 
     @FXML
     private Button btnPostar;
@@ -31,11 +43,6 @@ public class CadastrarPostagemController {
     @FXML
     void onClickPostar(ActionEvent event) {
 
-    }
-
-   
-
-    void setStage(Stage stagePostagem) {
     }
    
     

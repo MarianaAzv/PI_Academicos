@@ -301,7 +301,7 @@
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnSair" mnemonicParsing="false" onAction="#onClickSair" onMouseEntered="#OnEnterSair" onMouseExited="#OnExitSair" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: DBA5A5;" text="Sair" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                  <Button fx:id="btnSair" mnemonicParsing="false" onAction="#onClickSair" onMouseEntered="#OnEnterSair" onMouseExited="#OnExitSair" prefHeight="60.0" prefWidth="300.0" style="-fx-background-color: DBA5A5;" text="Início" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>

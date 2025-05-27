@@ -248,17 +248,18 @@ public class TelaPrincipalCoordenadorController {
         
         Parent root = loader.load();
         
-        Stage stageAtualizar = new Stage();
+        Stage stageAtualizarCoordenador = new Stage();
         
         AtualizarPerfilCoordenadorController apcc = loader.getController();
         apcc.setCoordenador(coordenador); 
-        apcc.setStage(stageAtualizar);
+        apcc.setProjeto(projeto);
+        apcc.setStage(stageAtualizarCoordenador);
         
         Scene cena = new Scene(root);
-        stageAtualizar.setTitle("Atualizar Perfil Coordenador");
-        stageAtualizar.setMaximized(true);
-        stageAtualizar.setScene(cena);
-        stageAtualizar.show();
+        stageAtualizarCoordenador.setTitle("Atualizar Perfil Coordenador");
+        stageAtualizarCoordenador.setMaximized(true);
+        stageAtualizarCoordenador.setScene(cena);
+        stageAtualizarCoordenador.show();
         stagePrincipalCoordenador.close();
                
     } 
@@ -320,6 +321,7 @@ public class TelaPrincipalCoordenadorController {
         Stage stageArtigo = new Stage();
         CadastrarArtigoController cab = loader.getController();
         cab.setStage(stageArtigo);
+        cab.setProjeto(projeto);
 
         Scene cena = new Scene(root);
         stageArtigo.setTitle("Cadastro Artigo");
@@ -336,6 +338,7 @@ public class TelaPrincipalCoordenadorController {
         Stage stagePostagem = new Stage();
         CadastrarPostagemController cpb = loader.getController();
         cpb.setStage(stagePostagem);
+        cpb.setProjeto(projeto);
 
         Scene cena = new Scene(root);
         stagePostagem.setTitle("Cadastro Postagem");
@@ -394,7 +397,7 @@ public class TelaPrincipalCoordenadorController {
        this.projeto = projeto;
        //lblNomeCoordenador.setText(projeto.getCoordenador());
        lblResumo.setText(projeto.getResumo());
-       //txtCampus.setText(projeto.getCampus());
+       txtCampus.setText(projeto.getCampus().getNomeCampus());
        txtNomeProjeto.setText(projeto.getTitulo());
        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
        String DataInicio = projeto.getDataInicio().format(formatter);
@@ -405,6 +408,7 @@ public class TelaPrincipalCoordenadorController {
        String prorroga = String.valueOf(projeto.getProrroacao());
        txtProrrogacao.setText(prorroga);
        txtNomeCoordenador.setText(projeto.getCocoordenadores());
+       //txtNomeBolsitas.setText(projeto.get);
        
        
     }

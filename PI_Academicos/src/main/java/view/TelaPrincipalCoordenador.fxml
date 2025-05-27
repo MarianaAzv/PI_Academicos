@@ -214,7 +214,7 @@
                         <RowConstraints maxHeight="137.66668701171875" minHeight="10.0" prefHeight="59.666656494140625" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label fx:id="lblResumo" prefHeight="26.0" prefWidth="124.0" textAlignment="JUSTIFY" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP">
+                        <Label fx:id="lblResumo" contentDisplay="TOP" prefHeight="63.0" prefWidth="409.0" textAlignment="JUSTIFY" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP">
                            <font>
                               <Font name="Courier New" size="14.0" />
                            </font></Label>
