@@ -55,6 +55,9 @@ public class VerPerfilBolsistaController {
     private Projeto projeto;
 
     public void setBolsista(Bolsista bol) {
+        
+
+        
         this.bolsista = bol;
           if (bolsista != null) { // Garantindo que bolsista não seja null antes de atribuir os valores
             lblNomeBol.setText(bolsista.getNome());
