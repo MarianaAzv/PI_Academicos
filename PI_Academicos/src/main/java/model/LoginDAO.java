@@ -42,20 +42,25 @@ public class LoginDAO extends GenericDAO {
 
                                 }
                                 else if(rs.getString("curso") != null){
-                                    Bolsista b = new Bolsista(rs.getLong("matricula"), rs.getString("curso"));
-                                    b.setCurso(rs.getString("curso"));
-                                 //   b.setCPF(rs.getLong("cpf"));
-                                    b.setApelido(rs.getString("apelido"));
-                                    b.setNome(rs.getString("nome"));
-                                    b.setEmail(rs.getString("email"));
-                                    b.setMatricula(rs.getLong("matricula"));
-                             //       b.setDataInicio(rs.getLocalDate("dataInicio"));
-                            //        b.setDataFim(rs.getLocalDate("dataFim"));
-//        public Bolsista(int id, long cpf, String nome, String apelido, String email, String senha, boolean ativa, long matricula, String curso, LocalDate dataInicio, LocalDate dataFim){
+                                    Bolsista bolsista = new Bolsista(rs.getLong("matricula"), rs.getString("curso"),
+                                    rs.getInt("idUsuario"),  // ID do bolsista
+                                    rs.getLong("cpf"), 
+                                    rs.getString("nome"), 
+                                    rs.getString("apelido"), 
+                                    rs.getString("email"), 
+                                    rs.getString("senha"), 
+                                    rs.getBoolean("ativa"), 
+                                    rs.getLong("matricula"), 
+                                    rs.getString("curso"), 
+                                    rs.getBoolean("acessoPostagens"), 
+                                    rs.getBoolean("acessoArtigos"), 
+                                    rs.getDate("dataInicio") != null ? rs.getDate("dataInicio").toLocalDate() : null, 
+                                    rs.getDate("dataFim") != null ? rs.getDate("dataFim").toLocalDate() : null,
+                                    rs.getInt("idProjeto")
+);
 
-                                            //bolsista.setDataInicio(rs.getDate);
-                                    //b.set
-                                   // usuario = b;
+    usuario = bolsista;
+
                                     
                                     
 

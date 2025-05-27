@@ -1,0 +1,16 @@
+controller\AtualizarPerfilAdministradorController.class
+model\AreasConhecimento.class
+model\Projeto.class
+controller\CriarProjetoController.class
+model\Usuario.class
+controller\CadastrarArtigoController.class
+model\CampusDAO.class
+controller\TelaNoticiaController.class
+model\GenericDAO.class
+model\Administrador.class
+model\Campus.class
+controller\TelaLoginController.class
+module-info.class
+model\Coordenador.class
+controller\AtualizarProjetoController.class
+util\AlertaUtil.class
