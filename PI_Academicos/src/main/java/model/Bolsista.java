@@ -52,23 +52,32 @@ public class Bolsista extends Usuario {
         this.dataFim = dataFim;
 
     }
-        //autenticar bolsista logindao
-        public Bolsista(int id, long cpf, String nome, String apelido, String email, String senha, boolean ativa, 
-                long matricula, String curso, boolean acessoPostagens, boolean acessoArtigos, LocalDate dataInicio, LocalDate dataFim, int idProjeto) {
-    super(id, cpf, nome, apelido, email, senha, ativa);
-    this.matricula = matricula;
-    this.curso = curso;
-    this.dataInicio = dataInicio;
-    this.dataFim = dataFim;
-    this.acessoPostagens = acessoPostagens;
-    this.acessoArtigos = acessoArtigos;
-    this.idProjeto = idProjeto;  // Adicionando id do projeto
-}
+        //autenticar bolsista logindao ERRADO
+     //   public Bolsista(int id, long cpf, String nome, String apelido, String email, String senha, boolean ativa, 
+      //          long matricula, String curso, boolean acessoPostagens, boolean acessoArtigos, LocalDate dataInicio, LocalDate dataFim, int idProjeto) {
+    //super(id, cpf, nome, apelido, email, senha, ativa);
+    //this.matricula = matricula;
+    //this.curso = curso;
+    // this.acessoPostagens = acessoPostagens;
+    //this.acessoArtigos = acessoArtigos;
+   // this.dataInicio = dataInicio;
+   // this.dataFim = dataFim;
+   
+   // this.idProjeto = idProjeto;  // Adicionando id do projeto
+//}
 
 //11-05
     Bolsista(long aLong, String string) {
         this.matricula = matricula;
         this.curso = curso;
+    }
+//CERTO LOGIN
+    Bolsista(long matricula, String curso, LocalDate dataInicio, LocalDate dataFim, int idProjeto) {
+        this.matricula = matricula;
+        this.curso = curso;
+        this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
+
     }
 
     // GetSet ok
