@@ -86,6 +86,7 @@ void onClickVerPerfil(ActionEvent event) throws IOException {
 
     VerPerfilBolsistaController vpb = loader.getController();
     vpb.setBolsista(bolsista);
+    vpb.setProjeto(projeto);
     vpb.setStage(stageVerPerfil); // Correção: Garantir que a nova tela tenha controle sobre seu próprio Stage
 
     Scene cena = new Scene(root);

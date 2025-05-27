@@ -194,7 +194,7 @@ if(coordenador.getAtiva()==true){
         
             TelaPrincipalBolsistaController tpb = loader.getController();    
             tpb.setStagePrincipal(stagePrincipal);
-            tpb.setBolsista(bolsista);//hj
+            tpb.setBolsista(bolsista);
             tpb.setProjeto(projeto);
             
             stagePrincipal.setOnShown(evento -> {
@@ -202,7 +202,7 @@ if(coordenador.getAtiva()==true){
         });
         
             Scene cena = new Scene(root);
-            stagePrincipal.setTitle("Tela principal Coordenador");
+            stagePrincipal.setTitle("Tela principal bolsista");
             stagePrincipal.setScene(cena);
             //deixa a tela maximizada
             stagePrincipal.setMaximized(true);
