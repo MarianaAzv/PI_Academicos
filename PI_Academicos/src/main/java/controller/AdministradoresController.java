@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.SQLException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import model.Administrador;
 import javafx.event.ActionEvent;
@@ -15,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -26,6 +30,7 @@ public class AdministradoresController {
     
     private Stage stageADMS;
     private Administrador adm;
+    ObservableList<Administrador> lista;
 
    public void setAdministrador(Administrador adm) {
         this.adm = adm;
@@ -152,13 +157,51 @@ public class AdministradoresController {
     
     
 //**********************************    
-     private void carregarTabelaADM(){
-         lista = FXCollections.observableArrayList(listarUsuarios());
+     private void carregarTabelaADMS() throws SQLException{
+         lista = FXCollections.observableArrayList(listarADMS());
+         if(!lista.isEmpty()){
+             tabelaADMS.getColumns().clear();
+             
+            TableColumn<Administrador, Number> colunaID = new TableColumn<>("ID");
+            colunaID.setCellValueFactory(u -> u.getValue().idProperty());
+            colunaID.setStyle("-fx-alignment: CENTER;");
+            colunaID.setPrefWidth(100);
+            
+            // para inserir um long precisa fazer essa transformação para object
+            TableColumn<Administrador, Long> colunaCPF = new TableColumn<>("CPF"); 
+            colunaCPF.setCellValueFactory(u -> u.getValue().cpfProperty().asObject());
+            colunaCPF.setStyle("-fx-alignment: CENTER;");
+            colunaCPF.setPrefWidth(250);
+            
+            TableColumn<Administrador, String> colunaNome = new TableColumn<>("Nome");
+            colunaNome.setCellValueFactory(u -> u.getValue().nomeProperty());
+            colunaNome.setStyle("-fx-alignment: CENTER;");
+            colunaNome.setPrefWidth(250);
+            
+            TableColumn<Administrador, String> colunaApelido = new TableColumn<>("Usuário");
+            colunaApelido.setCellValueFactory(u -> u.getValue().apelidoProperty());
+            colunaApelido.setStyle("-fx-alignment: CENTER;");
+            colunaApelido.setPrefWidth(250);
+            
+            TableColumn<Administrador, String> colunaEmail = new TableColumn<>("Email");
+            colunaEmail.setCellValueFactory(u -> u.getValue().emailProperty());
+            colunaEmail.setStyle("-fx-alignment: CENTER;");
+            colunaEmail.setPrefWidth(250);
+           
+            
+            tabelaADMS.getColumns().addAll(colunaID, colunaCPF, colunaNome, colunaApelido, colunaEmail);
+            
+            tabelaADMS.setItems(lista);
+         }
      }
+     
+     void ajustarElementosJanela() throws SQLException {
+        carregarTabelaADMS();
+    }
     
      private ObservableList<Administrador> listarADMS() throws SQLException {
         AdministradorDAO admDAO = new AdministradorDAO();
-        return admDAO.listarAdministradores();
+        return admDAO.listarAdministradores(adm);
     }
     
     

@@ -114,7 +114,7 @@ public class AdministradorDAO extends GenericDAO {
     }
    }
     
-    public ObservableList<Administrador> listarAdministradores(Usuario usuario, Administrador administrador){
+    public ObservableList<Administrador> listarAdministradores(Administrador administrador){
         
         Connection con = conectarDAO();
         
