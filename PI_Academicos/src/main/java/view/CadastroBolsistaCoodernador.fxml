@@ -103,6 +103,7 @@
                      <font>
                         <Font name="Courier New Bold" size="14.0" />
                      </font></Button>
+                  <Label fx:id="lblAbrirArquivo" onMouseClicked="#onClickAbrirArquivo" text="arquivo.pdf" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                </children>
             </GridPane>
             <GridPane>

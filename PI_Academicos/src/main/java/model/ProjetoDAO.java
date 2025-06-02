@@ -76,7 +76,7 @@ public class ProjetoDAO extends GenericDAO{
   
         Connection con = conectarDAO();
         
-        String queryProjeto = "UPDATE projetos SET tituloProjeto = ?, resumo = ?, idCampus = ?, edital = ?, dataInicio = ?, dataFim = ?,prorrogacao = ?, emAndamento = ? WHERE IdProjeto = ?";
+        String queryProjeto = "UPDATE projetos p join areas_projetos ap  on p.IdProjeto= ap.idProjeto  SET p.tituloProjeto = ?, p.resumo = ?, p.idCampus = ?, p.edital = ?, p.dataInicio = ?, p.dataFim = ?,p.prorrogacao = ?, p.emAndamento = ?, ap.idArea = ? WHERE p.IdProjeto = ?";
        
 
     try (con) {
@@ -92,7 +92,8 @@ public class ProjetoDAO extends GenericDAO{
     stmtProjeto.setDate(6,Date.valueOf(projeto.getDataFim()) ); 
   stmtProjeto.setDate(7, projeto.getProrroacao() != null ? java.sql.Date.valueOf(projeto.getProrroacao()) : null);
    stmtProjeto.setBoolean(8, projeto.isEmAndamento());  
-   stmtProjeto.setInt(9,projeto.getIdProjeto());
+   stmtProjeto.setInt(9,projeto.getAreaConhecimento().getIdArea());
+   stmtProjeto.setInt(10,projeto.getIdProjeto());
    stmtProjeto.executeUpdate();
 
 
@@ -100,6 +101,8 @@ public class ProjetoDAO extends GenericDAO{
         
 
   System.out.println("Projeto atualizado com ID: " + projeto.getIdProjeto());
+ }catch(Exception e){
+     e.printStackTrace();
  }
 }
     
@@ -107,7 +110,7 @@ public class ProjetoDAO extends GenericDAO{
   
         Connection con = conectarDAO();
         
-        String queryProjeto = "UPDATE projetos SET tituloProjeto = ?, resumo = ?, idCampus = ?, edital = ?, dataInicio = ?, dataFim = ?, emAndamento = ? WHERE IdProjeto = ?";
+        String queryProjeto = "UPDATE projetos p JOIN areas_projetos ap ON p.IdProjeto = ap.idProjeto SET   p.tituloProjeto = ?,   p.resumo = ?,  p.idCampus = ?, p.edital = ?, p.dataInicio = ?,  p.dataFim = ?, p.emAndamento = ?, ap.idArea = ?WHERE p.IdProjeto = ?";
        
 
     try (con) {
@@ -122,8 +125,9 @@ public class ProjetoDAO extends GenericDAO{
     stmtProjeto.setDate(5, Date.valueOf(projeto.getDataInicio()));  
     stmtProjeto.setDate(6,Date.valueOf(projeto.getDataFim()) ); 
  
-   stmtProjeto.setBoolean(7, projeto.isEmAndamento());  
-   stmtProjeto.setInt(8,projeto.getIdProjeto());
+   stmtProjeto.setBoolean(7, projeto.isEmAndamento()); 
+    stmtProjeto.setInt(8,projeto.getAreaConhecimento().getIdArea());
+   stmtProjeto.setInt(9,projeto.getIdProjeto());
    stmtProjeto.executeUpdate();
 
 
@@ -199,14 +203,26 @@ public class ProjetoDAO extends GenericDAO{
               }
     }
    
-    public void AtualizarAreaProjeto(Projeto projeto,AreasConhecimento AreasConhecimento){
-        
-            Connection con = conectarDAO();
-            
-              String queryAreasProjeto = "update areas_projetos set idArea = ? idProjeto = ? ";
-              
-              try(con){
-               PreparedStatement stmtAreasProjeto = con.prepareStatement(queryAreasProjeto, PreparedStatement.RETURN_GENERATED_KEYS);
+//    public void AtualizarAreaProjeto(Projeto projeto,AreasConhecimento AreasConhecimento){
+//        
+//            Connection con = conectarDAO();
+//            
+//              String queryAreasProjeto = "update areas_projetos set idArea = ? idProjeto = ? ";
+//              
+//              try(con){
+//               PreparedStatement stmtAreasProjeto = con.prepareStatement(queryAreasProjeto, PreparedStatement.RETURN_GENERATED_KEYS);
+//   
+//    stmtAreasProjeto.setInt(1, projeto.getAreaConhecimento().getIdArea());
+//    stmtAreasProjeto.setInt(2,projeto.getIdProjeto());
+//    stmtAreasProjeto.executeUpdate();
+//
+// int linhasAfetadas =  stmtAreasProjeto.executeUpdate();
+//          System.out.println(linhasAfetadas + "linhas afetadas");
+//          System.out.println("ID do coordenador ");
+//              } catch(SQLException e){
+//                e.printStackTrace();
+//              }
+//    }
    
     stmtAreasProjeto.setInt(1, projeto.getAreaConhecimento().getIdArea());
     stmtAreasProjeto.setInt(2,projeto.getIdProjeto());

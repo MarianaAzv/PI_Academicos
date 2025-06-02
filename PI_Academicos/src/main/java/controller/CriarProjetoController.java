@@ -267,11 +267,12 @@ public class CriarProjetoController {
 
                 Usuario usuario = new Usuario();
                 usuario.setId(coordenador.getId());
-
-                String descricao = "Nome do projeto: " + txtNomedoProjeto.getText()
-                        + "\nCoordenador: " + coordenador.getNome()
-                        + ", SIAPE: " + coordenador.getSiape()
-                        + ", e-mail: " + coordenador.getEmail();
+               
+                String descricao = "Solicitação para cadstro de projeto:"
+                        + "\nNome do projeto: "+ txtNomedoProjeto.getText()
+                        + "\nCoordenador: " + coordenador.getNome() 
+                        + "\nSIAPE: " + coordenador.getSiape() 
+                        + "\ne-mail: " + coordenador.getEmail();
                 Solicitacao solicitacao = new Solicitacao(usuario, descricao, arquivoPDF);
                 new SolicitacaoDAO().salvarPDF(solicitacao);
                 System.out.println("Arquivo PDF salvo no banco de dados.");

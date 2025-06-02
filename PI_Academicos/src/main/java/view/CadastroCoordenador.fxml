@@ -158,7 +158,7 @@
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Label fx:id="lblAbrirArquivo" onMouseClicked="#onClickAbrirArquivo" text="Label" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                  <Label fx:id="lblAbrirArquivo" onMouseClicked="#onClickAbrirArquivo" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <padding>
                         <Insets right="20.0" />
                      </padding>

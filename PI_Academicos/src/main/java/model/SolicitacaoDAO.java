@@ -68,6 +68,7 @@ public class SolicitacaoDAO extends GenericDAO{
         }
         return conteudoPDF;
     }
+       
     
     public ObservableList<Solicitacao> listarSolicitacoes() throws SQLException, FileNotFoundException, IOException{
         
