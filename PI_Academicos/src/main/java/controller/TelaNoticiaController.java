@@ -2,6 +2,8 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -14,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Administrador;
+import model.Foto;
 import model.Noticia;
 import model.NoticiaDAO;
 
@@ -22,7 +25,7 @@ public class TelaNoticiaController {
     private Stage stageNoticia;
     private Administrador adm;
     NoticiaDAO noticiaDAO;
-    private File arquivoSelecionado;
+    private File arquivoSelecionado=null;
     
     public TelaNoticiaController() {
         noticiaDAO = new NoticiaDAO();
@@ -63,13 +66,15 @@ public class TelaNoticiaController {
     }
 
     @FXML
-    void onClickPostar(ActionEvent event) {
+    void onClickPostar(ActionEvent event) throws SQLException, IOException {
         
-        String link = arquivoSelecionado.toURI().toString();
-        Noticia noticia = new Noticia(adm.getId(), txtTituloNoticia.getText(), txtLegenda.getText(), link);
+        //String link = arquivoSelecionado.toURI().toString();
+        byte[] conteudoImagem = Files.readAllBytes(arquivoSelecionado.toPath());
+        Foto foto = new Foto(conteudoImagem);
+        Noticia noticia = new Noticia(adm.getId(), foto, txtTituloNoticia.getText(), txtLegenda.getText());
         
         try{
-            noticiaDAO.cadastrarNoticia(noticia);
+            noticiaDAO.cadastrarNoticia(noticia, foto);
         } catch (IOException ex) {
             Logger.getLogger(TelaNoticiaController.class.getName()).log(Level.SEVERE, null, ex);
         }

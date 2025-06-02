@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.ByteArrayInputStream;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -61,7 +62,15 @@ public class AtualizarNoticiaController {
     
     public void setNoticia(Noticia noticia){
         this.noticia = noticia;
-        Image image = new Image(noticia.getLinkImagem());
+        byte[] conteudoFoto = noticia.getFoto().getDadosImagem();
+                if(conteudoFoto!=null){
+                   try (ByteArrayInputStream bis = new ByteArrayInputStream(conteudoFoto)) {
+                            image = new Image(bis); // Converte byte[] para Image AQUI
+                        } catch (Exception e) {
+                            System.err.println("Erro ao converter bytes para Image: " + e.getMessage());
+                            // precisa definir uma imagem padrao de erro
+                        }
+                }
         imageViewFoto.setImage(image);
         txtTituloNoticia.setText(noticia.getTitulo());
         txtLegenda.setText(noticia.getTexto());

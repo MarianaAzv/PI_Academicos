@@ -1,7 +1,12 @@
 package model;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.Files;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -15,19 +20,20 @@ import java.util.List;
 
 public class NoticiaDAO extends GenericDAO{
     
+    private File outputFile;
+    
     public void cadastrarNoticia (Noticia noticia, Foto foto) throws IOException, SQLException{
         
         Connection con = conectarDAO();
         
         
-        String sqlNoticia = "INSERT INTO noticiasgerais (idAdministrador, idFoto, titulo, texto) VALUES (?, ?, ?)";
-        String sqlFoto = "INSERT INTO fotos (arquivoFoto) VALUES (?, ?)";
+        String sqlNoticia = "INSERT INTO noticiasgerais (idAdministrador, titulo, texto) VALUES (?, ?, ?)";
+        String sqlFoto = "INSERT INTO fotos (arquivoFoto, idNoticia) VALUES (?, ?)";
 
         try {
              PreparedStatement stmtNoticia = con.prepareStatement(sqlNoticia, PreparedStatement.RETURN_GENERATED_KEYS);
   
             stmtNoticia.setInt(1, noticia.getIdAdministrador());
-            //stmtNoticia.setInt(2, noticia.getIdFoto());
             stmtNoticia.setString(2, noticia.getTitulo());
             stmtNoticia.setString(3, noticia.getTexto());
             stmtNoticia.executeUpdate();
@@ -39,8 +45,8 @@ public class NoticiaDAO extends GenericDAO{
                
             PreparedStatement stmtFoto = con.prepareStatement(sqlFoto, PreparedStatement.RETURN_GENERATED_KEYS);
             
-            byte[] conteudoArquivo = Files.readAllBytes(foto.getArquivo().toPath());
-            stmtFoto.setBytes(1, conteudoArquivo);
+            
+            stmtFoto.setBytes(1, foto.getDadosImagem());
             stmtFoto.setInt(2, idGerado);
             stmtFoto.executeUpdate();
             
@@ -58,9 +64,9 @@ public class NoticiaDAO extends GenericDAO{
         }
     }
     
-    public List<Noticia> listarNoticias() throws SQLException {
+    public List<Noticia> listarNoticias() throws SQLException, IOException {
         List<Noticia> noticias = new ArrayList<>();
-        String sql = "SELECT idNoticia, idAdministrador, idFoto titulo, texto, dataPublicacao FROM noticiasgerais;";
+        String sql = "select noticiasgerais.idNoticia, idAdministrador, titulo, texto, dataPublicacao, idFoto, arquivoFoto, fotos.idNoticia from noticiasgerais left join fotos on noticiasgerais.idNoticia = fotos.idNoticia;";
         
         Connection con = conectarDAO();
         ResultSet rs = null;
@@ -74,17 +80,21 @@ public class NoticiaDAO extends GenericDAO{
             while (rs.next()) {
                 int idNoticia = rs.getInt("idNoticia");
                 int idAdministrador = rs.getInt("idAdministrador");
-                int idFoto = rs.getInt("idFoto");
                 String titulo = rs.getString("titulo");
                 String texto = rs.getString("texto");
                 Timestamp timestamp = rs.getTimestamp("dataPublicacao"); 
                 LocalDateTime data = timestamp.toLocalDateTime(); // convert timestamp pra localdatetime
+                int idFoto = rs.getInt("idFoto");
+                byte[] dadosImagem = rs.getBytes("arquivoFoto");
                 //noticias.add(new Noticia(idNoticia, idAdministrador, titulo, texto, imagem, data));
-                Noticia noticia = new Noticia(idNoticia, idAdministrador, idFoto, titulo, texto, data);
+                Foto foto = new Foto(idFoto, dadosImagem);
+                Noticia noticia = new Noticia(idNoticia, idAdministrador, foto, titulo, texto, data);
                 noticias.add(noticia);
                 System.out.println("DAO: noticia carregada: " + noticia); // Imprime a foto carregada
                 cont++;
-            }
+  
+        }
+        
             
             System.out.println("DAO: Total de noticias carregadas do BD: " + cont);
             
@@ -92,11 +102,12 @@ public class NoticiaDAO extends GenericDAO{
             
                 rs.close();
             
-            
-
         }
         }
+    
         return noticias;
+        
+    
     }
     
     

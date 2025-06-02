@@ -5,45 +5,35 @@ import java.io.File;
 public class Foto {
     
     private int id;
-    private File arquivo;
-    private int idPostagem;
+    private byte[] dadosImagem;
+
     
-    public Foto(int id, File arquivo, int idPostagem){
+    public Foto(int id, byte[] dadosImagem){
         this.id = id;
-        this.arquivo = arquivo;
-        this.idPostagem = idPostagem;    
+        this.dadosImagem = dadosImagem;   
     }
     
-    public Foto( File arquivo, int idPostagem){
-        this.arquivo = arquivo;
-        this.idPostagem = idPostagem;    
+    public Foto(byte[] arquivo){
+        this.dadosImagem = arquivo;
+  
     }
 
     public int getId() {
         return id;
     }
 
-    public File getArquivo() {
-        return arquivo;
+    public byte[] getDadosImagem() {
+        return dadosImagem;
     }
 
-    public int getIdPostagem() {
-        return idPostagem;
-    }
+
     
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setArquivo(File arquivo) {
-        this.arquivo = arquivo;
+    public void setDadosImagem(byte[] dadosImagem) {
+        this.dadosImagem = dadosImagem;
     }
-
-    public void setIdPostagem(int idPostagem) {
-        this.idPostagem = idPostagem;
-    }
-    
-    
-    
-    
+      
 }

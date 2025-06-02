@@ -6,40 +6,40 @@ public class Noticia {
     
     private int id;
     private int idAdministrador;
-    private int idFoto;
+    private Foto foto;
     private String titulo;
     private String texto;
     private LocalDateTime data;
     
 
     //construtor com todos os atributos
-    public Noticia(int id, int idAdministrador, int idFoto, String titulo, String texto, LocalDateTime data) {
+    public Noticia(int id, int idAdministrador, Foto foto, String titulo, String texto, LocalDateTime data) {
         this.id = id;
         this.idAdministrador = idAdministrador;
-        this.idFoto = idFoto;
+        this.foto = foto;
         this.titulo = titulo;
         this.texto = texto;
         this.data = data;
     }
 
     //construtor sem id
-    public Noticia(int idAdministrador,  int idFoto, String titulo, String texto, String linkImagem, LocalDateTime data) {
+    public Noticia(int idAdministrador,  Foto foto, String titulo, String texto, LocalDateTime data) {
         this.idAdministrador = idAdministrador;
-        this.idFoto = idFoto;
+        this.foto = foto;
         this.titulo = titulo;
         this.texto = texto;
         this.data = data;
     }
     
     //construtor sem id e data
-    public Noticia(int idAdministrador,  int idFoto, String titulo, String texto) {
+    public Noticia(int idAdministrador,  Foto foto, String titulo, String texto) {
         this.idAdministrador = idAdministrador;
-        this.idFoto = idFoto;
+        this.foto = foto;
         this.titulo = titulo;
         this.texto = texto;
     }
-    public Noticia(int idFoto) {
-        this.idFoto = idFoto;
+    public Noticia(Foto foto) {
+        this.foto = foto;
     }
 
     public void setId(int id) {
@@ -66,8 +66,8 @@ public class Noticia {
         this.data = data;
     }
 
-    public void setIdFoto(int idFoto) {
-        this.idFoto = idFoto;
+    public void setIdFoto(Foto foto) {
+        this.foto = foto;
     }
 
     public int getId() {
@@ -87,15 +87,14 @@ public class Noticia {
         return data;
     }
 
-    public int getIdFoto() {
-        return idFoto;
+    public Foto getFoto() {
+        return foto;
     }
     
-    @Override
-    public String toString() {
+    public String mensagem() {
         return "Foto{" +
                "id=" + id +
-               ", idFoto='" + idFoto + '\'' +
+               ", idFoto='" + foto + '\'' +
                 ", data=" + data +
                '}';
     }
