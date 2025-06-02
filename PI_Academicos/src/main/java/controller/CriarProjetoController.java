@@ -138,6 +138,8 @@ public class CriarProjetoController {
 
     @FXML
     private TextArea txtResumo;
+    
+    //------------------*SETs*-----------------//
 
     public void setStage(Stage telaCriarProjeto) {
         this.stageCriarProjeto = telaCriarProjeto;
@@ -147,6 +149,7 @@ public class CriarProjetoController {
         this.coordenador = coordenador;
     }
 
+    //---------------*OnClicks*----------------//
     @FXML
     void OnClickEnviar(ActionEvent event) throws ParseException, IOException {
 
@@ -195,15 +198,7 @@ public class CriarProjetoController {
 
     }
 
-    @FXML
-    void onMouseEnterAbrirArquivo(MouseEvent event) {
-        lblAbrirArquivo.setStyle("text-decoration: underline;");
-    }
-
-    @FXML
-    void onMouseExitedAbrirArquivo(MouseEvent event) {
-
-    }
+   
 
     @FXML
     void onClickAbrirArquivo(MouseEvent event) {
@@ -223,6 +218,20 @@ public class CriarProjetoController {
         }
 
     }
+    
+    //-----------------*OnMouse*--------------
+    
+     @FXML
+    void onMouseEnterAbrirArquivo(MouseEvent event) {
+        lblAbrirArquivo.setStyle("text-decoration: underline;");
+    }
+
+    @FXML
+    void onMouseExitedAbrirArquivo(MouseEvent event) {
+
+    }
+    
+    //------------*Metodos*-------------
 
     public void ajustarElementosJanela() {
         //ArrayList para set dos nomes dos campus no combo box de campus
