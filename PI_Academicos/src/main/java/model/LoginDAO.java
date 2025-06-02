@@ -25,8 +25,8 @@ public class LoginDAO extends GenericDAO {
 		String sql =   "select * from usuarios left join coordenadores  ON coordenadores.idUsuario"
                     + "= usuarios.idUsuario left join bolsistas ON bolsistas.idUsuario = usuarios.idUsuario"
                     + "  left join administradores on administradores.idUsuario=usuarios.idUsuario "
-                    + "inner join bolsistas_projetos bp on usuarios.idUsuario=bp.idUsuario "
-                    + "inner join projetos p on bp.idProjeto= p.idProjeto"
+                    + "left join bolsistas_projetos bp on usuarios.idUsuario=bp.idUsuario "
+                    + "left join projetos p on bp.idProjeto= p.idProjeto"
                     + " WHERE apelido= ? AND senha=?";
                 
 		Usuario usuario = null;
