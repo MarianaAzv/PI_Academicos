@@ -1,5 +1,11 @@
 package controller;
  
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Projeto;
 
@@ -16,6 +22,36 @@ public class CadastrarArtigoController {
        this.projeto = projeto;
     }
      
+      @FXML
+    private Button btnPDF;
+
+    @FXML
+    private Button btnPostar;
+
+    @FXML
+    private DatePicker dataPublicacao;
+
+    @FXML
+    private TextArea txtAutores;
+
+    @FXML
+    private TextField txtNOmeArtigo;
+
+    @FXML
+    private TextArea txtPalavrasChave;
+
+    @FXML
+    private TextArea txtResumo;
+
+    @FXML
+    void onClickPDF(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onClickPostar(ActionEvent event) {
+
+    }
     
 
     
