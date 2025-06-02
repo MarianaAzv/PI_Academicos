@@ -99,7 +99,8 @@ public class TelaLoginController {
                             } else if (user instanceof Administrador) {//login adm
                                 Administrador a = (Administrador) user;
                                 System.out.println("Abrindo tela de Administrador...");
-
+                                
+                                abrirTelaPrincipalAdministradorTeste(a);
                                 abrirTelaPrincipalAdministrador(a);
                             }
                 
@@ -151,27 +152,7 @@ public class TelaLoginController {
     
     public void abrirTelaPrincipalCoordenador(Coordenador coordenador) throws MalformedURLException, IOException{
         
-         //   URL url = new File("src/main/java/view/TelaPrincipalCoordenador.fxml").toURI().toURL();
-         //   FXMLLoader loader = new FXMLLoader(url);
-         //   Parent root = loader.load();
         
-        //   Stage stagePrincipal = new Stage();
-        
-        //   TelaPrincipalCoordenadorController tpc = loader.getController();    
-        //    tpc.setStagePrincipal(stagePrincipal);
-        //    //tpc.setCoordenador(coordenador);
-            
-       //    stagePrincipal.setOnShown(evento -> {
-        //    tpc.ajustarElementosJanela(coordenador);
-     //  });
-        
-          //  Scene cena = new Scene(root);
-          //  stagePrincipal.setTitle("Tela principal Coordenador");
-          //  stagePrincipal.setScene(cena);
-           // deixa a tela maximizada
-         //  stagePrincipal.setMaximized(true);
-            
-         //   stagePrincipal.show();
          
          URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
          FXMLLoader loader = new FXMLLoader(url);
@@ -226,7 +207,7 @@ public void abrirTelaPrincipalBolsista(Bolsista bolsista) throws MalformedURLExc
 
     }
 
-    private void abrirTelaPrincipalAdministrador(Administrador adm) throws MalformedURLException, IOException{
+   private void abrirTelaPrincipalAdministrador(Administrador adm) throws MalformedURLException, IOException{
         
          URL url = new File("src/main/java/view/TelaPrincipalAdministrador.fxml").toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
@@ -250,5 +231,35 @@ public void abrirTelaPrincipalBolsista(Bolsista bolsista) throws MalformedURLExc
             
             stagePrincipal.show();
             stageLogin.close();
+            
+            
+    }
+    
+    private void abrirTelaPrincipalAdministradorTeste(Administrador adm) throws MalformedURLException, IOException{
+        
+         URL url = new File("src/main/java/view/TelaPrincipalAdministradorTeste.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage stagePrincipal = new Stage();
+        
+            TelaPrincipalAdministradorController tpa = loader.getController();    
+            tpa.setStage(stagePrincipal);
+            tpa.setAdministrador(adm);
+            
+           stagePrincipal.setOnShown(evento -> {
+            tpa.ajustarElementosJanela(adm);
+       });
+        
+            Scene cena = new Scene(root);
+            stagePrincipal.setTitle("Tela principal Administrador Teste");
+            stagePrincipal.setScene(cena);
+            //deixa a tela maximizada
+            stagePrincipal.setMaximized(true);
+            
+            stagePrincipal.show();
+            
+            
+            
     }
 }
