@@ -177,7 +177,7 @@ public class TelaLoginController {
            stagePrincipal.setTitle("Tela principal Coordenador");
            stagePrincipal.setScene(cena);
            stagePrincipal.show();
-            stageLogin.close();
+           stageLogin.close();
     }
 public void abrirTelaPrincipalBolsista(Bolsista bolsista) throws MalformedURLException, IOException {
         URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
@@ -200,7 +200,7 @@ public void abrirTelaPrincipalBolsista(Bolsista bolsista) throws MalformedURLExc
 
         Scene cena = new Scene(root);
         stagePrincipal.setTitle("Tela Escolher Projeto Bolsista");
-        stagePrincipal.setMaximized(true);
+        
          stagePrincipal.setScene(cena);
         stagePrincipal.show();
         stageLogin.close();
