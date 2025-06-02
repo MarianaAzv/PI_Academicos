@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Bolsista;
@@ -17,11 +18,19 @@ public class CadastrarPostagemController {
     void setStage(Stage stagePostagem) {
         this.stagePostagem = stagePostagem;
     }
-    Projeto projeto;
     
+    Projeto projeto;
+     
      public void setProjeto(Projeto projeto) {
        this.projeto = projeto;
+       lblNomeProjeto.setText(projeto.getTitulo());
     }
+      
+    @FXML
+    private ImageView btnCortarFoto;
+
+    @FXML
+    private ImageView btnMaisFotos;
 
     @FXML
     private Button btnPostar;
@@ -36,7 +45,17 @@ public class CadastrarPostagemController {
     private TextArea txtLegenda;
 
     @FXML
+    void onClickCortarFotos(MouseEvent event) {
+
+    }
+
+    @FXML
     void onClickImagem(MouseEvent event) {
+
+    }
+
+    @FXML
+    void onClickMaisFotos(MouseEvent event) {
 
     }
 
