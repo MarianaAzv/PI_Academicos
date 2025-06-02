@@ -1,5 +1,9 @@
 package controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -7,6 +11,9 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -29,6 +36,7 @@ public class AtualizarProjetoController {
     private Stage stageAtualizarProjeto;
     Projeto projeto;
     Campus campus;
+    Coordenador coordenador;
     AreasConhecimento areaconhecimento;
 
     @FXML
@@ -112,12 +120,12 @@ public class AtualizarProjetoController {
     }
 
     @FXML
-    void OnClickAdicionarCocoordenador(ActionEvent event) {
-
+    void OnClickAdicionarCocoordenador(ActionEvent event) throws IOException {
+   AdicionarBolsista();
     }
 
     @FXML
-    void OnClickAtualizar(ActionEvent event) {
+    void OnClickAtualizar(ActionEvent event) throws IOException {
 
         try {
 
@@ -132,8 +140,12 @@ public class AtualizarProjetoController {
             LocalDate prorrogacao = null;
             if (!txtProrrogacao.getText().isEmpty()) {
                 prorrogacao = LocalDate.parse(txtProrrogacao.getText(), formatter);
+                 if (!prorrogacao.isAfter(dF)) {
+                mostrarAviso("Data inválida", "A data de prorrogação deve ser posterior à data de fim.");
+                return;
             }
-//            if(dF.isAfter(prorrogacao)){
+            }
+//       
 
             atualizarProjeto(projeto.getIdProjeto(), txtNomedoProjeto.getText(), txtResumo.getText(), campusnomeSelecionado, txtEdital.getText(), dI, dF, prorrogacao, areaconhecimento);
 //            } 
@@ -142,6 +154,8 @@ public class AtualizarProjetoController {
         } catch (DateTimeParseException e) {
             mostrarAviso("Falha", "O formato das datas nao esta como o esperado");
         }
+        //Depois que as coisas tiverem setads na tela do coordenador, testar se esta atualizando
+        voltarapaginainicial();
     }
 
     @FXML
@@ -235,5 +249,46 @@ public class AtualizarProjetoController {
 
             mostrarAviso("Banco de Dados", "A falha de comunicação entre o sistema e o Banco");
         }
+    }
+    
+    public void voltarapaginainicial() throws MalformedURLException, IOException {
+          URL url = new File("src/main/java/view/TelaPrincipalCoordenador.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage stagePrincipal = new Stage();
+        
+            TelaPrincipalCoordenadorController tpc = loader.getController();    
+            tpc.setStagePrincipal(stagePrincipal);
+            
+            Scene cena = new Scene(root);
+            stagePrincipal.setTitle("Tela principal Coordenador");
+            stagePrincipal.setScene(cena);
+            //deixa a tela maximizada
+            stagePrincipal.setMaximized(true);
+            
+            stagePrincipal.show();
+           stageAtualizarProjeto.close();
+    }
+    
+    public void AdicionarBolsista() throws IOException{
+         URL url = new File("src/main/java/view/MaisBolsista.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stageMaisBolsista = new Stage();
+
+        MaisBolsistaController mbc = loader.getController();
+        //mbc.setCoordenador(coordenador);
+        mbc.setProjeto(projeto);
+        mbc.setStage(stageMaisBolsista);
+
+        Scene cena = new Scene(root);
+        stageMaisBolsista.setTitle("Adicionar bolsistas");
+        stageMaisBolsista.setScene(cena);
+        //deixa a tela maximizada
+
+        stageMaisBolsista.show();
+       stageAtualizarProjeto.close();
     }
 }
