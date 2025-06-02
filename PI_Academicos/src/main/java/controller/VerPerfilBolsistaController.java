@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Bolsista;
+import model.Projeto;
 
 public class VerPerfilBolsistaController {
     
@@ -51,10 +52,14 @@ public class VerPerfilBolsistaController {
     private Label lblSenhaBolsista;
         @FXML
     private Label lblCursoBolsista;
+    private Projeto projeto;
 
     public void setBolsista(Bolsista bol) {
+        
+
+        
         this.bolsista = bol;
-        if (bolsista != null) { // Garantindo que bolsista não seja null antes de atribuir os valores
+          if (bolsista != null) { // Garantindo que bolsista não seja null antes de atribuir os valores
             lblNomeBol.setText(bolsista.getNome());
             lblUsuarioBolsista.setText(bolsista.getApelido());
             lblCPFBolsista.setText(String.valueOf(bolsista.getCpf()));
@@ -62,11 +67,30 @@ public class VerPerfilBolsistaController {
             lblSenhaBolsista.setText(bolsista.getSenha());
             lblEmailBolsista.setText(bolsista.getEmail());
             lblMatriculaBols.setText(String.valueOf(bolsista.getMatricula()));
+            
+           //  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    // String DataInicio = bolsista.getDataInicio().format(formatter);
+    // lblDataInicioBols.setText(DataInicio);
+     
+
+    //   String DataFim = bolsista.getDataFim().format(formatter);
+    //  lblDataFimBols.setText(DataFim);
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+              System.out.println(bolsista.getDataInicio());
             lblDataInicioBols.setText(bolsista.getDataInicio() != null ? bolsista.getDataInicio().format(formatter) : "Data não disponível");
-            lblDataFimBols.setText(bolsista.getDataFim() != null ? bolsista.getDataFim().format(formatter) : "Data não disponível");
+             System.out.println(bolsista.getDataInicio().format(formatter));
+           lblDataFimBols.setText(bolsista.getDataFim() != null ? bolsista.getDataFim().format(formatter) : "Data não disponível");
+            
+            
+      
+      
+      
+      
+      
+      
+      
         }
     }
 
@@ -97,22 +121,48 @@ public class VerPerfilBolsistaController {
 
     @FXML
     void onClickSair(ActionEvent event) throws IOException {
-        URL url = new File("src/main/java/view/TelaPrincipalBolsista.fxml").toURI().toURL();
-        FXMLLoader loader = new FXMLLoader(url);
-        Parent root = loader.load();
+       // URL url = new File("src/main/java/view/TelaPrincipalBolsista.fxml").toURI().toURL();
+      //  FXMLLoader loader = new FXMLLoader(url);
+      //  Parent root = loader.load();
 
-        Stage stagePrincipalBolsista = new Stage();
+       // Stage stagePrincipalBolsista = new Stage();
 
-        TelaPrincipalBolsistaController tpb = loader.getController();
-        tpb.setStagePrincipal(stagePrincipalBolsista);
+       // TelaPrincipalBolsistaController tpb = loader.getController();
+       // tpb.setStagePrincipal(stagePrincipalBolsista);
 
-        Scene cena = new Scene(root);
-        stagePrincipalBolsista.setTitle("Tela Principal Bolsista");
-        stagePrincipalBolsista.setScene(cena);
-        stagePrincipalBolsista.setMaximized(true);
+       // Scene cena = new Scene(root);
+       // stagePrincipalBolsista.setTitle("Tela Principal Bolsista");
+       // stagePrincipalBolsista.setScene(cena);
+       // stagePrincipalBolsista.setMaximized(true);
 
-        stagePrincipalBolsista.show();
-        stageVerPerfil.close();
+       // stagePrincipalBolsista.show();
+       // stageVerPerfil.close();
+   // }
+   
+   
+    URL url = new File("src/main/java/view/TelaPrincipalBolsista.fxml").toURI().toURL();
+         FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage stagePrincipal = new Stage();
+        
+            TelaPrincipalBolsistaController tpb = loader.getController();    
+            tpb.setStagePrincipal(stagePrincipal);
+            tpb.setBolsista(bolsista);
+            tpb.setProjeto(projeto);
+            
+            stagePrincipal.setOnShown(evento -> {
+            tpb.ajustarElementosJanela(bolsista,projeto);
+        });
+        
+            Scene cena = new Scene(root);
+            stagePrincipal.setTitle("Tela principal bolsista");
+            stagePrincipal.setScene(cena);
+            //deixa a tela maximizada
+            stagePrincipal.setMaximized(true);
+            
+            stagePrincipal.show();
+            stageVerPerfil.close();
     }
 
     @FXML
@@ -193,6 +243,10 @@ void onClickArtigo(ActionEvent event) throws IOException {
 }
 
 
+
+    void setProjeto(Projeto projeto) {
+       this.projeto = projeto;
+    }
 
 
 }

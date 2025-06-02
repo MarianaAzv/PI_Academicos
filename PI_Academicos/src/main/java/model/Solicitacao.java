@@ -7,6 +7,8 @@ public class Solicitacao {
     
     private int idSolicitacao;
     private Usuario usuario;
+    private int idUsuario;
+
     private LocalDateTime data;
     private String descricao;
     private boolean aceitacao;
@@ -18,9 +20,22 @@ public class Solicitacao {
         this.anexo=anexo;
         
     }
+    //id
+    public Solicitacao(int idSolicitacao, int idUsuario, File anexo){
+        this.idSolicitacao=idSolicitacao;
+        this.idUsuario=idUsuario;
+        this.anexo=anexo;
+        
+    }
     
      public Solicitacao( Usuario usuario, File anexo){
         this.usuario=usuario;
+        this.anexo=anexo;
+        
+    }
+     //id
+     public Solicitacao( int idUsuario, File anexo){
+        this.idUsuario=idUsuario;
         this.anexo=anexo;
         
     }
@@ -31,12 +46,31 @@ public class Solicitacao {
               this.anexo=anexo;
         
     }
+    //id      
+    public Solicitacao(int idUsuario, String descricao, File anexo){
+              this.idUsuario=idUsuario;
+              this.descricao=descricao;
+              this.anexo=anexo;
+        
+    }
+          
+     public Solicitacao(){
+        
+    }
     public void setIdSolicitacao(int idSolicitacao) {
         this.idSolicitacao = idSolicitacao;
     }
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+    
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
     }
 
     public void setData(LocalDateTime data) {

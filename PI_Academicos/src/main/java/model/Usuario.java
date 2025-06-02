@@ -1,6 +1,15 @@
 
 package model;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.LongProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Usuario {
     
         private int id;
@@ -127,6 +136,58 @@ public class Usuario {
         this.ativa = ativa;
     }
     
-	
+    private transient IntegerProperty idProperty;
+
+    public IntegerProperty idProperty() {
+        if (idProperty == null) {
+            idProperty = new SimpleIntegerProperty(id);
+        }
+        return idProperty;
+    }
+
+    private transient LongProperty cpfProperty;
+
+    public LongProperty cpfProperty() {
+        if (cpfProperty == null) {
+            cpfProperty = new SimpleLongProperty(cpf);
+        }
+        return cpfProperty;
+    }
     
+    private transient StringProperty nomeProperty;
+
+    public StringProperty nomeProperty() {
+        if (nomeProperty == null) {
+            nomeProperty = new SimpleStringProperty(nome);
+        }
+        return nomeProperty;
+    }
+    
+    private transient StringProperty apelidoProperty;
+    
+    public StringProperty apelidoProperty() {
+        if (apelidoProperty == null) {
+            apelidoProperty = new SimpleStringProperty(apelido);
+        }
+        return apelidoProperty;
+    }
+    
+    private transient StringProperty emailProperty;
+    
+    public StringProperty emailProperty() {
+        if (emailProperty == null) {
+            emailProperty = new SimpleStringProperty(email);
+        }
+        return emailProperty;
+    }
+   
+    private transient BooleanProperty ativaProperty;
+    
+    public BooleanProperty ativaProperty() {
+        if (ativaProperty == null) {
+            ativaProperty = new SimpleBooleanProperty(ativa);
+        }
+        return ativaProperty;
+    }
+    	   
 }

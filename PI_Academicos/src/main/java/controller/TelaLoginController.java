@@ -198,21 +198,27 @@ public class TelaLoginController {
            stagePrincipal.show();
             stageLogin.close();
     }
-private void abrirTelaPrincipalBolsista(Bolsista bolsista) throws MalformedURLException, IOException {
- URL url = new File("src/main/java/view/TelaPrincipalBolsista.fxml").toURI().toURL();
+public void abrirTelaPrincipalBolsista(Bolsista bolsista) throws MalformedURLException, IOException {
+        URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
 
         Stage stagePrincipal = new Stage();
-        TelaPrincipalBolsistaController tpb = loader.getController();
-        tpb.setStage(stagePrincipal);
+        EscolherProjetoController epb = loader.getController();
+        epb.setBolsista(bolsista);
+        epb.setStage(stagePrincipal);
 
         stagePrincipal.setOnShown(evento -> {
-            tpb.ajustarElementosJanela(bolsista);
+             try {
+                 epb.OnClickProjeto();
+             } catch (SQLException ex) {
+                  Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+             }              
+           // tpb.ajustarElementosJanela(bolsista);
         });
 
         Scene cena = new Scene(root);
-        stagePrincipal.setTitle("Tela Principal Bolsista");
+        stagePrincipal.setTitle("Tela Escolher Projeto Bolsista");
         stagePrincipal.setMaximized(true);
          stagePrincipal.setScene(cena);
         stagePrincipal.show();
