@@ -60,11 +60,13 @@ public class BolsistaDAO extends GenericDAO {
 
         String queryUsuario = "UPDATE USUARIOS SET cpf = ?, nome = ?, apelido = ?, senha = ?, email = ? WHERE idUsuario = ?";
         String queryBolsista = "UPDATE BOLSISTAS SET matricula = ?, curso = ? WHERE idUsuario = ?";
-        String queryBolsistaProjetos = "UPDATE BOLSISTAS_PROJETOS SET idProjeto = ?, dataInicio = ?, dataFim = ? WHERE idUsuario = ?";
+        String queryBolsistaProjetos = "UPDATE BOLSISTAS_PROJETOS SET  dataInicio = ?, dataFim = ? WHERE idUsuario = ? and idProjeto = ?";
 
         try (con) {
             // Atualiza USUARIOS
+            con.setAutoCommit(false);
             PreparedStatement stmtUsuario = con.prepareStatement(queryUsuario);
+            
             stmtUsuario.setLong(1, bolsista.getCpf());
             stmtUsuario.setString(2, bolsista.getNome());
             stmtUsuario.setString(3, bolsista.getApelido());
@@ -84,12 +86,14 @@ public class BolsistaDAO extends GenericDAO {
 
             // Atualiza BOLSISTAS_PROJETOS (mantendo funcionalidade exclusiva do bolsista)
             PreparedStatement stmtProjeto = con.prepareStatement(queryBolsistaProjetos);
-            stmtProjeto.setInt(1, projeto.getIdProjeto()); // Mantendo a lógica do projeto do bolsista
-            stmtProjeto.setDate(2, bolsista.getDataInicio() != null ? Date.valueOf(bolsista.getDataInicio()) : null);
-            stmtProjeto.setDate(3, bolsista.getDataFim() != null ? Date.valueOf(bolsista.getDataFim()) : null);
-            stmtProjeto.setInt(4, bolsista.getId());
+            stmtProjeto.setDate(1, bolsista.getDataInicio() != null ? Date.valueOf(bolsista.getDataInicio()) : null);
+            stmtProjeto.setDate(2, bolsista.getDataFim() != null ? Date.valueOf(bolsista.getDataFim()) : null);
+            stmtProjeto.setInt(3, bolsista.getId());
+            stmtProjeto.setInt(4, projeto.getIdProjeto()); // Mantendo a lógica do projeto do bolsista
+
             int linhasProjeto = stmtProjeto.executeUpdate();
             System.out.println("Linhas afetadas em BOLSISTAS_PROJETOS: " + linhasProjeto);
+            con.commit();
         }
     }
 
@@ -114,6 +118,5 @@ public class BolsistaDAO extends GenericDAO {
         
     }
 
-    public void atualizarBolsista(Bolsista bolsista) {
-    }
+ 
 }

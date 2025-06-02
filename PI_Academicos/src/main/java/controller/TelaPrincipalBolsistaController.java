@@ -5,7 +5,10 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +22,6 @@ import javafx.stage.Stage;
 import model.Bolsista;
 import model.Projeto;
 import model.Usuario;
-import util.AlertaUtil;
 
 public class TelaPrincipalBolsistaController {
 
@@ -107,6 +109,7 @@ void onClickVerPerfil(ActionEvent event) throws IOException {
         Stage stageAtualizar = new Stage();
         AtualizarPerfilBolsistaController apb = loader.getController();
         apb.setBolsista(bolsista);
+        apb.setProjeto(projeto);
 
         Scene cena = new Scene(root);
         stageAtualizar.setTitle("Atualizar Perfil Bolsista");
@@ -123,6 +126,7 @@ void onClickVerPerfil(ActionEvent event) throws IOException {
 
         Stage stagePostagem = new Stage();
         CadastrarPostagemController cpb = loader.getController();
+       // cpb.setBolsista(bolsista);
         cpb.setStage(stagePostagem);
 
         Scene cena = new Scene(root);
@@ -140,6 +144,7 @@ void onClickVerPerfil(ActionEvent event) throws IOException {
 
         Stage stageArtigo = new Stage();
         CadastrarArtigoController cab = loader.getController();
+      //  cab.setBolsista(bolsista);
         cab.setStage(stageArtigo);
 
         Scene cena = new Scene(root);
@@ -150,8 +155,33 @@ void onClickVerPerfil(ActionEvent event) throws IOException {
     }
 
     @FXML
-    void onClickOutrosProjetos(ActionEvent event) {
+    void onClickOutrosProjetos(ActionEvent event) throws MalformedURLException, IOException {
         System.out.println("Outros Projetos clicado!");
+URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stagePrincipal = new Stage();
+        EscolherProjetoController epb = loader.getController();
+        epb.setBolsista(bolsista);
+        epb.setStage(stagePrincipal);
+
+        stagePrincipal.setOnShown(evento -> {
+             try {
+                 epb.OnClickProjeto();
+             } catch (SQLException ex) {
+                  Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+             }              
+           // tpb.ajustarElementosJanela(bolsista);
+        });
+
+        Scene cena = new Scene(root);
+        stagePrincipal.setTitle("Tela Escolher Projeto Bolsista");
+        stagePrincipal.setMaximized(true);
+        stagePrincipal.setScene(cena);
+        stagePrincipal.show();
+        stageTelaPrincipalBolsista.close();
+
     }
 
     @FXML
@@ -167,6 +197,7 @@ void onClickVerPerfil(ActionEvent event) throws IOException {
 
         Stage stage = new Stage();
         TelaPrincipalBolsistaController tpb = loader.getController();
+        tpb.setBolsista(bolsista);
         tpb.setStagePrincipal(stage);
 
         Scene cena = new Scene(root);
@@ -191,18 +222,7 @@ void onClickVerPerfil(ActionEvent event) throws IOException {
        // String matricula = String.valueOf(bolsista.getMatricula());
         textNomeProjeto.setText(projeto.getTitulo());
         TxtNomeProjetoBarra.setText(projeto.getTitulo());
-     //   txtNomeCoordenador.setText();
-     // txtNomeBolsita.setText();
-     // txtNomeCocoordenador.setText();
-      //txtInicio.
-      //txtFim
-      //txtProrrogacao
-     // txtResumo.setText(projeto.getResumo());
-    //  txtCampus.setText(projeto.getCampus());
-     //    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-     // String dInicio = projeto.getDataInicio().format(formatter);
-     // txtInicio.setText(dInicio);
-
+     
       
     }
 
@@ -212,8 +232,28 @@ void onClickVerPerfil(ActionEvent event) throws IOException {
 
     void setProjeto(Projeto projeto) {
        this.projeto = projeto;
+       //PRECISA FAZER LISTA DE BOLSISTAS E COORDENADORES
+       txtNomeCoordenador.setText(projeto.getCocoordenadores());
+     //  txtNomeBolsista.setText(projeto.getBolistas)
+       txtNomeCocoordenador.setText(projeto.getCocoordenadores());
+       
+       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+       
+       String DataInicio = projeto.getDataInicio().format(formatter);
+       txtInicio.setText(DataInicio);
+
+       String DataFim = projeto.getDataFim().format(formatter);
+       txtFim.setText(DataFim);
+       
+       String prorroga = String.valueOf(projeto.getProrroacao());
+       txtProrrogacao.setText(prorroga);
+
+       txtResumo.setText(projeto.getResumo());
+       
+       txtCampus.setText(projeto.getCampus().getNomeCampus());
+       
+       //txtNomeBolsitas.setText(projeto.get);
+       
+       
     }
- 
-    
-    
-}
+    }
