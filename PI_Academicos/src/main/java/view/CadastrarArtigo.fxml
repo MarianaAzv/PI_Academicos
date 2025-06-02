@@ -5,9 +5,9 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -22,6 +22,18 @@
     <RowConstraints maxHeight="900.0" minHeight="330.0" prefHeight="330.0" vgrow="ALWAYS" />
   </rowConstraints>
    <children>
+      <Pane prefHeight="55.0" prefWidth="607.0" style="-fx-background-color: FFFF; -fx-background-radius: 12;" GridPane.columnIndex="1">
+         <GridPane.margin>
+            <Insets bottom="3.0" left="15.0" right="15.0" top="15.0" />
+         </GridPane.margin>
+         <children>
+            <Label layoutX="14.0" layoutY="13.0" text="Nome do artigo *****************************" textFill="#840d0b">
+               <font>
+                  <Font name="Courier New Bold" size="22.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
       <GridPane maxHeight="900.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
         <columnConstraints>
           <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="260.0" />
@@ -38,14 +50,14 @@
                         <Font name="Courier New Bold" size="15.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="txtResumo" prefHeight="352.0" prefWidth="490.0" promptText="Insira o resumo aqui" style="-fx-border-color: ffff;">
+                  <TextArea prefHeight="352.0" prefWidth="490.0" promptText="Insira o resumo aqui" style="-fx-border-color: ffff;">
                      <font>
                         <Font name="Courier New" size="15.0" />
                      </font>
                      <VBox.margin>
                         <Insets />
                      </VBox.margin></TextArea>
-                  <Button fx:id="btnPostar" alignment="CENTER" mnemonicParsing="false" prefWidth="80.0" style="-fx-background-color: #840d0b;" text="POSTAR" textFill="WHITE">
+                  <Button alignment="CENTER" mnemonicParsing="false" prefWidth="80.0" style="-fx-background-color: #840d0b;" text="POSTAR" textFill="WHITE">
                      <font>
                         <Font name="Courier New Bold" size="14.0" />
                      </font>
@@ -74,7 +86,7 @@
                         <Font name="Courier New Bold" size="15.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="txtAutores" prefHeight="157.0" prefWidth="356.0" promptText="Insira aqui o nome dos autores separados por ponto (Ex: Anne Junkes. Fernanda Serafim. Jaqueline Brandão. Mariana de Azevedo" style="-fx-border-color: ffff;" wrapText="true">
+                  <TextArea prefHeight="157.0" prefWidth="356.0" promptText="Insira aqui o nome dos autores separados por ponto (Ex: Anne Junkes. Fernanda Serafim. Jaqueline Brandão. Mariana de Azevedo" style="-fx-border-color: ffff;" wrapText="true">
                      <font>
                         <Font name="Courier New" size="15.0" />
                      </font>
@@ -87,7 +99,7 @@
                         <Font name="Courier New Bold" size="15.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="txtPalavrasChave" layoutX="10.0" layoutY="39.0" prefHeight="118.0" prefWidth="356.0" promptText="Insira as palavras-chave separadas por ponto (Ex: Matemática. Educação.  " style="-fx-border-color: ffff;" wrapText="true">
+                  <TextArea layoutX="10.0" layoutY="39.0" prefHeight="118.0" prefWidth="356.0" promptText="Insira as palavras-chave separadas por ponto (Ex: Matemática. Educação.  " style="-fx-border-color: ffff;" wrapText="true">
                      <font>
                         <Font name="Courier New" size="15.0" />
                      </font>
@@ -101,7 +113,7 @@
                      </font>
                   </Label>
                   <DatePicker fx:id="dataPublicacao" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="365.0" style="-fx-border-color: ffff;" />
-                  <Button fx:id="btnPDF" alignment="CENTER" minWidth="-Infinity" mnemonicParsing="false" prefHeight="15.0" prefWidth="80.0" style="-fx-background-color: #840d0b;" text="PDF" textFill="WHITE">
+                  <Button alignment="CENTER" minWidth="-Infinity" mnemonicParsing="false" prefHeight="15.0" prefWidth="80.0" style="-fx-background-color: #840d0b;" text="PDF" textFill="WHITE">
                      <font>
                         <Font name="Courier New" size="14.0" />
                      </font>
@@ -122,13 +134,5 @@
             <Insets right="15.0" />
          </GridPane.margin>
       </GridPane>
-      <TextField fx:id="txtNomeArtigo" promptText="Nome do artigo" GridPane.columnIndex="1">
-         <font>
-            <Font name="Courier New Bold" size="24.0" />
-         </font>
-         <GridPane.margin>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </GridPane.margin>
-      </TextField>
    </children>
 </GridPane>
