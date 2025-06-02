@@ -94,18 +94,13 @@ public class TelaNoticiaController {
             Logger.getLogger(TelaNoticiaController.class.getName()).log(Level.SEVERE, null, ex);
         }
         stageNoticia.close();
+    }
+    @FXML
     void onClickMaisFotos(MouseEvent event) {
 
     }
 
-    @FXML
-    void onClickPostar(ActionEvent event) {
 
-    }
-    
-    public void setStage (Stage stageNoticia){
-        this.stageNoticia=stageNoticia;
-    }
     
     public void setAdministrador(Administrador adm) {
         this.adm = adm;

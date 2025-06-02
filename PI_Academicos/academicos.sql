@@ -65,7 +65,6 @@ CREATE TABLE `areas_projetos` (
 LOCK TABLES `areas_projetos` WRITE;
 /*!40000 ALTER TABLE `areas_projetos` DISABLE KEYS */;
 INSERT INTO `areas_projetos` VALUES (1,2),(1,3),(1,4),(1,5),(2,16),(2,17);
-INSERT INTO `areas_projetos` VALUES (1,16);
 /*!40000 ALTER TABLE `areas_projetos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -170,7 +169,7 @@ CREATE TABLE `bolsistas` (
 
 LOCK TABLES `bolsistas` WRITE;
 /*!40000 ALTER TABLE `bolsistas` DISABLE KEYS */;
-INSERT INTO `bolsistas` VALUES (8,1,'informática'),(9,22222,'Química'),(10,111111,'Telecomunicações'),(11,999999,'Química'),(12,1234,'patota');
+INSERT INTO `bolsistas` VALUES (8,1,'informática'),(9,22222,'Química'),(10,111111,'Telecomunicações'),(11,999999,'Química');
 /*!40000 ALTER TABLE `bolsistas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -199,7 +198,7 @@ CREATE TABLE `bolsistas_projetos` (
 
 LOCK TABLES `bolsistas_projetos` WRITE;
 /*!40000 ALTER TABLE `bolsistas_projetos` DISABLE KEYS */;
-INSERT INTO `bolsistas_projetos` VALUES (8,1,'2024-03-14','2024-12-11'),(10,14,'2025-05-13','2026-05-22'),(11,15,'2025-05-22','2026-05-23'),(12,16,'2025-05-06','2028-05-13');
+INSERT INTO `bolsistas_projetos` VALUES (8,1,'2024-03-14','2024-12-11'),(10,14,'2025-05-13','2026-05-22'),(11,15,'2025-05-22','2026-05-23');
 /*!40000 ALTER TABLE `bolsistas_projetos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -279,7 +278,7 @@ CREATE TABLE `coordenadores_projetos` (
 
 LOCK TABLES `coordenadores_projetos` WRITE;
 /*!40000 ALTER TABLE `coordenadores_projetos` DISABLE KEYS */;
-INSERT INTO `coordenadores_projetos` VALUES (2,2,'2024-02-11','2025-02-11'),(2,3,'2019-04-12','2025-04-12'),(2,4,'2024-06-11','2025-06-11'),(2,5,'2021-04-12','2026-04-12'),(2,7,'2024-02-12','2026-02-12'),(2,8,'2023-05-12','2025-05-12'),(2,9,'2024-03-12','2026-03-12'),(2,10,'2024-07-12','2026-07-12'),(2,11,'2024-09-12','2027-09-12'),(2,12,'2022-08-12','2025-08-12'),(2,13,'2024-02-06','2026-02-06'),(2,16,'2002-02-12','2034-07-13'),(3,6,'2023-03-12','2026-04-23'),(3,14,'2024-10-12','2025-10-12'),(3,15,'2024-06-30','2025-06-30');
+INSERT INTO `coordenadores_projetos` VALUES (2,2,'2024-02-11','2025-02-11'),(2,3,'2019-04-12','2025-04-12'),(2,4,'2024-06-11','2025-06-11'),(2,5,'2021-04-12','2026-04-12'),(2,7,'2024-02-12','2026-02-12'),(2,8,'2023-05-12','2025-05-12'),(2,9,'2024-03-12','2026-03-12'),(2,10,'2024-07-12','2026-07-12'),(2,11,'2024-09-12','2027-09-12'),(2,12,'2022-08-12','2025-08-12'),(2,13,'2024-02-06','2026-02-06'),(3,6,'2023-03-12','2026-04-23'),(3,14,'2024-10-12','2025-10-12'),(3,15,'2024-06-30','2025-06-30'),(12,16,'2006-01-09','2006-12-09'),(12,17,'2007-07-09','2009-08-09');
 /*!40000 ALTER TABLE `coordenadores_projetos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -411,7 +410,6 @@ CREATE TABLE `projetos` (
   PRIMARY KEY (`idProjeto`),
   KEY `idCampus` (`idCampus`),
   CONSTRAINT `projetos_ibfk_1` FOREIGN KEY (`idCampus`) REFERENCES `campus` (`idCampus`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -493,4 +491,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-06-01 23:02:55
+-- Dump completed on 2025-06-02 11:05:29
