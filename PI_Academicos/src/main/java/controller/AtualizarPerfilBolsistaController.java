@@ -58,12 +58,20 @@ public class AtualizarPerfilBolsistaController {
             txtEmail.setText(bolsista.getEmail());
             txtMatricula.setText(String.valueOf(bolsista.getMatricula()));
 
-            //  Evitar erro ao acessar valores NULL
-            txtDataInicio.setText(bolsista.getDataInicio() != null ? bolsista.getDataInicio().toString() : "Data não cadastrada");
-            txtDataFim.setText(bolsista.getDataFim() != null ? bolsista.getDataFim().toString() : "Data não cadastrada");
+            
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-            System.out.println("Data Início carregada: " + bolsista.getDataInicio());
-            System.out.println("Data Fim carregada: " + bolsista.getDataFim());
+              System.out.println(bolsista.getDataInicio());
+            txtDataInicio.setText(bolsista.getDataInicio() != null ? bolsista.getDataInicio().format(formatter) : "Data não disponível");
+             System.out.println(bolsista.getDataInicio().format(formatter));
+           txtDataFim.setText(bolsista.getDataFim() != null ? bolsista.getDataFim().format(formatter) : "Data não disponível");
+            
+            //  Evitar erro ao acessar valores NULL
+          //  txtDataInicio.setText(bolsista.getDataInicio() != null ? bolsista.getDataInicio().toString() : "Data não cadastrada");
+          //  txtDataFim.setText(bolsista.getDataFim() != null ? bolsista.getDataFim().toString() : "Data não cadastrada");
+
+           // System.out.println("Data Início carregada: " + bolsista.getDataInicio());
+          //  System.out.println("Data Fim carregada: " + bolsista.getDataFim());
         } else {
             mostrarAviso("Erro", "Bolsista não encontrado.");
         }
@@ -78,7 +86,7 @@ public class AtualizarPerfilBolsistaController {
         if (repetido > 0) {
             mostrarAviso("Nome de usuário indisponível", "Este nome de usuário já está sendo usado.");
         } else {
-            bolsistaDAO.atualizarBolsista(bolsista, projeto);
+            bolsistaDAO.atualizarBolsista(bolsista);
             mostrarConfirmacao("Usuário alterado", "O usuário foi alterado com sucesso!");
         }
     }

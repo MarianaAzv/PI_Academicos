@@ -20,9 +20,11 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Bolsista;
 import model.Coordenador;
 import model.Projeto;
 import model.ProjetoDAO;
+import model.Usuario;
 import static util.AlertaUtil.mostrarAviso;
 
    //Toda vez que clicar num botao ele abre a tela principal do cordenador que esta logado com o 
@@ -30,6 +32,7 @@ public class EscolherProjetoController {
 
     private Stage stageEscolherProjeto; 
          Coordenador coordenador;
+         Bolsista bolsista;
          Projeto projeto;
          
         @FXML
@@ -51,6 +54,7 @@ public class EscolherProjetoController {
 
     @FXML
     private VBox vboximg;
+    private Usuario user;
 
     
            public void setStage(Stage stageEscolherProjeto){
@@ -112,31 +116,44 @@ if(coordenador.getAtiva()==true){
   
    
  
- public void OnClickProjeto() throws SQLException{
- //Esse botao abre o projeto escolhido  
- 
-  vboxbutton.getChildren().clear();
+ public void OnClickProjeto() throws SQLException { 
+    vboxbutton.getChildren().clear(); // Limpa os botões antes de adicionar novos
 
-try{
-  
-  ProjetoDAO dao = new ProjetoDAO();
-        List<Projeto> projetos = dao.selecionarProjeto(coordenador);
-        
-    for (Projeto projeto : projetos) {
+    try {
+        ProjetoDAO dao = new ProjetoDAO();
+        List<Projeto> projetos;
+
+        if (coordenador != null) {
+            projetos = dao.selecionarProjeto(coordenador);
+            System.out.println("Projetos do Coordenador encontrados: " + projetos.size());
+        } else if (bolsista != null) {
+            projetos = dao.selecionarProjetoB(bolsista);
+            System.out.println("Projetos do Bolsista encontrados: " + projetos.size());
+        } else {
+            System.out.println("Erro: Usuário não é Coordenador nem Bolsista.");
+            return;
+        }
+
+        for (Projeto projeto : projetos) {
             Button btn = new Button(projeto.getTitulo());
             btn.setOnAction(event -> {
                 try {
-                    abriProjeto(projeto);
+                    if (coordenador != null) {
+                        abriProjeto(projeto);
+                    } else if (bolsista != null) {
+                        abriProjetoB(projeto);
+                    }
                 } catch (IOException e) {
-                    mostrarAviso("Erro","Erro ao carregar projeto");
+                    mostrarAviso("Erro", "Erro ao carregar projeto");
                 }
             });
             vboxbutton.getChildren().add(btn);
         }
-}catch(SQLException e){
-    mostrarAviso("Erro","Erro ao carregar os projeto");
+    } catch (SQLException e) {
+        mostrarAviso("Erro", "Erro ao carregar os projetos");
+        e.printStackTrace();
+    }
 }
- }
 
  private void abriProjeto(Projeto projeto) throws MalformedURLException, IOException{
     URL url = new File("src/main/java/view/TelaPrincipalCoordenador.fxml").toURI().toURL();
@@ -168,6 +185,34 @@ try{
         this.coordenador = coordenador;
     }
 
+    private void abriProjetoB(Projeto projeto) throws MalformedURLException, IOException {
+        URL url = new File("src/main/java/view/TelaPrincipalBolsista.fxml").toURI().toURL();
+         FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage stagePrincipal = new Stage();
+        
+            TelaPrincipalBolsistaController tpb = loader.getController();    
+            tpb.setStagePrincipal(stagePrincipal);
+            tpb.setBolsista(bolsista);
+            tpb.setProjeto(projeto);
+            
+            stagePrincipal.setOnShown(evento -> {
+            tpb.ajustarElementosJanela(bolsista,projeto);
+        });
+        
+            Scene cena = new Scene(root);
+            stagePrincipal.setTitle("Tela principal bolsista");
+            stagePrincipal.setScene(cena);
+            //deixa a tela maximizada
+            stagePrincipal.setMaximized(true);
+            
+            stagePrincipal.show();
+            stageEscolherProjeto.close();
+    }
+   public void setBolsista(Bolsista bolsista) {
+        this.bolsista = bolsista;
+    }
 }
     
 
