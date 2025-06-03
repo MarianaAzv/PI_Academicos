@@ -1,36 +1,32 @@
 package controller;
 
-<<<<<<< Updated upstream
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-=======
+
 import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
->>>>>>> Stashed changes
-
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Projeto;
-<<<<<<< Updated upstream
-=======
 import model.ProjetoDAO;
->>>>>>> Stashed changes
+import static util.AlertaUtil.mostrarErro;
+
 
 public class BolsistaDesativarCoordenadorController {
 
     private Stage stageBolsistaDesativar;
     Projeto projeto;
-<<<<<<< Updated upstream
-=======
+
     
     private List<CheckBox> checkboxes = new ArrayList<>();
->>>>>>> Stashed changes
+
 
     @FXML
     private Button btnConcluido;
@@ -63,16 +59,15 @@ public class BolsistaDesativarCoordenadorController {
     //--------------*Metodos*-------------//
     
     public void SetarBolsistas(){
-<<<<<<< Updated upstream
-        
-        
-=======
-    
+
+    try{
         ProjetoDAO dao = new  ProjetoDAO();
         
   
->>>>>>> Stashed changes
-        
+
+    }catch(Exception e){
+        mostrarErro("Erro","Erro ao carregar bolsista");
+    } 
           
     }
     
