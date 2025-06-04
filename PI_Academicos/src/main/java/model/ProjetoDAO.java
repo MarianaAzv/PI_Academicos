@@ -265,20 +265,36 @@ public class ProjetoDAO extends GenericDAO{
         ResultSet rs = stmtProjetobolsista.executeQuery();
 
         while (rs.next()) {
-            Bolsista b = new Bolsista();
-           b.setIdBolsista(rs.getInt("idUsuario")); // ou outro campo se houver idBolsista separado
+                Bolsista b = new Bolsista(
+                rs.getLong("matricula"),
+                rs.getString("curso"),
+                rs.getDate("dataInicio").toLocalDate(),
+                rs.getDate("dataFim") != null ? rs.getDate("dataFim").toLocalDate() : null,
+                idProjeto 
+            );
+
+          
+            b.setId(rs.getInt("idUsuario"));
             b.setNome(rs.getString("nome"));
-            b.setMatricula(rs.getString("matricula")); // certifique-se que este campo existe
 
             bolsistas.add(b);
         }
-     }
-             return bolsistas;
-    }
-   
-      
-    }
+    } 
 
+    return bolsistas;
+}
+    
+    public void Destivar(int idUsuario, int idProjeto) throws SQLException {
+    String sql = "DELETE FROM bolsistas_projetos WHERE idUsuario = ? AND idProjeto = ?";
+
+    try (Connection con = conectarDAO();
+         PreparedStatement stmt = con.prepareStatement(sql)) {
+        stmt.setInt(1, idUsuario);
+        stmt.setInt(2, idProjeto);
+        stmt.executeUpdate();
+    }
+}
+}
 
     
 
