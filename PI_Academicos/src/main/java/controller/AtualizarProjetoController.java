@@ -299,10 +299,10 @@ DesativarBolsista();
 
         Stage stageBolsistaDesativar = new Stage();
 
-        MaisBolsistaController mbc = loader.getController();
+        BolsistaDesativarCoordenadorController bdcc = loader.getController();
         //mbc.setCoordenador(coordenador);
-        mbc.setProjeto(projeto);
-        mbc.setStage(stageBolsistaDesativar);
+        bdcc.setProjeto(projeto);
+        bdcc.setStage(stageBolsistaDesativar);
 
         Scene cena = new Scene(root);
         stageBolsistaDesativar.setTitle("Desativar bolsistas");
