@@ -60,7 +60,7 @@ public class BolsistaDAO extends GenericDAO {
 
         String queryUsuario = "UPDATE USUARIOS SET cpf = ?, nome = ?, apelido = ?, senha = ?, email = ? WHERE idUsuario = ?";
         String queryBolsista = "UPDATE BOLSISTAS SET matricula = ?, curso = ? WHERE idUsuario = ?";
-        String queryProjeto = "UPDATE BOLSISTAS_PROJETOS SET idProjeto = ?, dataInicio = ?, dataFim = ? WHERE idUsuario = ?";
+        String queryBolsistaProjetos = "UPDATE BOLSISTAS_PROJETOS SET idProjeto = ?, dataInicio = ?, dataFim = ? WHERE idUsuario = ?";
 
         try (con) {
             // Atualiza USUARIOS
@@ -83,7 +83,7 @@ public class BolsistaDAO extends GenericDAO {
             System.out.println("Linhas afetadas em BOLSISTAS: " + linhasBolsista);
 
             // Atualiza BOLSISTAS_PROJETOS (mantendo funcionalidade exclusiva do bolsista)
-            PreparedStatement stmtProjeto = con.prepareStatement(queryProjeto);
+            PreparedStatement stmtProjeto = con.prepareStatement(queryBolsistaProjetos);
             stmtProjeto.setInt(1, projeto.getIdProjeto()); // Mantendo a lógica do projeto do bolsista
             stmtProjeto.setDate(2, bolsista.getDataInicio() != null ? Date.valueOf(bolsista.getDataInicio()) : null);
             stmtProjeto.setDate(3, bolsista.getDataFim() != null ? Date.valueOf(bolsista.getDataFim()) : null);
@@ -109,5 +109,11 @@ public class BolsistaDAO extends GenericDAO {
             System.out.println("Total de linhas retornadas: " + rowCount);
         }
         return rowCount;
+    }
+    public void buscarDados(Bolsista bolsista, Projeto projeto){
+        
+    }
+
+    public void atualizarBolsista(Bolsista bolsista) {
     }
 }

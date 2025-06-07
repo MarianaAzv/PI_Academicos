@@ -82,14 +82,6 @@
                </rowConstraints>
                <children>
                   <TextField fx:id="txtEdital" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                  <Label fx:id="lblCoordenador" text="Coordenador:" textFill="#840d0b" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
-                     <font>
-                        <Font name="Courier New Bold" size="20.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets right="5.0" />
-                     </GridPane.margin>
-                  </Label>
                   <Label fx:id="lblCampus" text="Câmpus:" textFill="#840d0b" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <font>
                         <Font name="Courier New Bold" size="20.0" />
@@ -106,7 +98,6 @@
                         <Insets right="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <TextField fx:id="txtCoordenador" prefHeight="25.0" prefWidth="932.0" GridPane.columnIndex="2" />
                   <TextField fx:id="txtDatadeInicio" prefHeight="25.0" prefWidth="249.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                   <Label fx:id="lblCategoria" text="Categoria:" textFill="#840d0b" GridPane.columnIndex="3" GridPane.halignment="RIGHT">
                      <font>

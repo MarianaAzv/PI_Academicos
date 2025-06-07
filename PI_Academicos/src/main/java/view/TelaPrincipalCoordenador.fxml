@@ -151,7 +151,10 @@
                                           <Font name="Courier New Bold" size="18.0" />
                                        </font>
                                     </Label>
-                                    <Text fx:id="txtNomeCoordenador" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
+                                    <Text fx:id="txtNomeCoordenador" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="554.0" GridPane.columnIndex="1" GridPane.halignment="LEFT">
+                                       <font>
+                                          <Font name="Courier New" size="18.0" />
+                                       </font></Text>
                                  </children>
                               </GridPane>
                               <GridPane GridPane.rowIndex="2">
@@ -168,7 +171,10 @@
                                           <Font name="Courier New Bold" size="18.0" />
                                        </font>
                                     </Label>
-                                    <Text fx:id="txtNomeBolsitas" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
+                                    <Text fx:id="txtNomeBolsitas" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.halignment="LEFT">
+                                       <font>
+                                          <Font name="Courier New" size="18.0" />
+                                       </font></Text>
                                  </children>
                               </GridPane>
                               <GridPane GridPane.rowIndex="3">
@@ -185,7 +191,10 @@
                                           <Font name="Courier New Bold" size="18.0" />
                                        </font>
                                     </Label>
-                                    <Text fx:id="txtNomeCocoordenador" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
+                                    <Text fx:id="txtNomeCocoordenador" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="524.0" GridPane.columnIndex="1" GridPane.halignment="LEFT">
+                                       <font>
+                                          <Font name="Courier New" size="18.0" />
+                                       </font></Text>
                                  </children>
                               </GridPane>
                            </children>
@@ -205,9 +214,9 @@
                         <RowConstraints maxHeight="137.66668701171875" minHeight="10.0" prefHeight="59.666656494140625" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label fx:id="lblResumo" prefHeight="26.0" prefWidth="124.0" textFill="#840d0b" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                        <Label fx:id="lblResumo" contentDisplay="TOP" prefHeight="63.0" prefWidth="409.0" textAlignment="JUSTIFY" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP">
                            <font>
-                              <Font name="Courier New" size="12.0" />
+                              <Font name="Courier New" size="14.0" />
                            </font></Label>
                         <GridPane>
                           <columnConstraints>
@@ -226,7 +235,10 @@
                                     <Insets left="30.0" />
                                  </GridPane.margin>
                               </Label>
-                              <Text fx:id="txtInicio" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="46.13671875" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
+                              <Text fx:id="txtInicio" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="292.13671875" GridPane.columnIndex="1" GridPane.halignment="LEFT">
+                                 <font>
+                                    <Font name="Courier New" size="18.0" />
+                                 </font></Text>
                            </children>
                         </GridPane>
                         <GridPane GridPane.rowIndex="1">
@@ -246,7 +258,10 @@
                                     <Insets left="30.0" />
                                  </GridPane.margin>
                               </Label>
-                              <Text fx:id="txtFim" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
+                              <Text fx:id="txtFim" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="331.0" GridPane.columnIndex="1" GridPane.halignment="LEFT">
+                                 <font>
+                                    <Font name="Courier New" size="18.0" />
+                                 </font></Text>
                            </children>
                         </GridPane>
                         <GridPane GridPane.rowIndex="2">
@@ -266,7 +281,10 @@
                                     <Insets left="30.0" />
                                  </GridPane.margin>
                               </Label>
-                              <Text fx:id="txtProrrogacao" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="30.13671875" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
+                              <Text fx:id="txtProrrogacao" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="256.13671875" GridPane.columnIndex="1" GridPane.halignment="LEFT">
+                                 <font>
+                                    <Font name="Courier New" size="18.0" />
+                                 </font></Text>
                            </children>
                         </GridPane>
                         <GridPane prefHeight="28.0" prefWidth="244.0" GridPane.rowIndex="4">
@@ -306,7 +324,10 @@
                                     <Font name="Courier New Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Text fx:id="txtCampus" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
+                              <Text fx:id="txtCampus" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="315.0" GridPane.columnIndex="1" GridPane.halignment="LEFT">
+                                 <font>
+                                    <Font name="Courier New" size="18.0" />
+                                 </font></Text>
                            </children>
                         </GridPane>
                      </children>
@@ -352,10 +373,13 @@
                <children>
 
                   <ImageView fx:id="imgPerfil" fitHeight="87.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                  <Text fx:id="TxtNomeUsuario" fill="#840d0b" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Text fx:id="TxtNomeUsuario" fill="#840d0b" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="144.0">
                      <font>
-                        <Font name="Courier New Bold" size="14.0" />
+                        <Font name="Courier New Bold" size="18.0" />
                      </font>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </GridPane.margin>
                   </Text>
 
                </children>
@@ -371,10 +395,13 @@
                </rowConstraints>
                <children>
                   <ImageView fx:id="imgProjeto" fitHeight="87.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                  <Text fx:id="txtNomeProjeto" fill="#840d0b" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Text fx:id="txtNomeProjeto" fill="#840d0b" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="144.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
-                        <Font name="Courier New Bold" size="14.0" />
+                        <Font name="Courier New Bold" size="18.0" />
                      </font>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </GridPane.margin>
                   </Text>
                </children>
             </GridPane>

@@ -1,27 +1,13 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Projeto {
 
-    /**
-     * @return the campus
-     */
-    public Campus getCampus() {
-        return campus;
-    }
-
-    /**
-     * @param campus the campus to set
-     */
-    public void setCampus(Campus campus) {
-        this.campus = campus;
-    }
-
-    
-    
-    
-     private int idProjeto;
+  
+    private int idProjeto;
     private String titulo;
     private AreasConhecimento areaConhecimento;
     private String resumo;
@@ -32,31 +18,31 @@ public class Projeto {
     private boolean emAndamento;
     private String cocoordenadores;
     private Campus campus;
-      
-    
-    
-    
-    public Projeto(String titulo , String resumo, Campus campus, String edital, LocalDate dataInicio, LocalDate dataFim,LocalDate prorrogacao, boolean emAndamento) {
+    private List<Bolsista> bolsistas = new ArrayList<>();
+
+
+
+
+    public Projeto(String titulo, String resumo, Campus campus, String edital, LocalDate dataInicio, LocalDate dataFim, LocalDate prorrogacao, boolean emAndamento) {
         this.titulo = titulo;
-       
-    this.resumo = resumo;
-    this.campus = campus;
-    this.edital = edital;
-    this.dataInicio = dataInicio;
-    this.dataFim = dataFim;
-    this.prorrogacao = prorrogacao; 
-    this.emAndamento = emAndamento;    
+
+        this.resumo = resumo;
+        this.campus = campus;
+        this.edital = edital;
+        this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
+        this.prorrogacao = prorrogacao;
+        this.emAndamento = emAndamento;
     }
-    
+
     public int getIdProjeto() {
         return idProjeto;
     }
 
-    
     public void setIdProjeto(int idProjeto) {
         this.idProjeto = idProjeto;
     }
-    
+
     /**
      * @return the titulo
      */
@@ -175,6 +161,20 @@ public class Projeto {
     public String getCocoordenadores() {
         return cocoordenadores;
     }
+    
+     /**
+     * @return the campus
+     */
+    public Campus getCampus() {
+        return campus;
+    }
+
+    /**
+     * @param campus the campus to set
+     */
+    public void setCampus(Campus campus) {
+        this.campus = campus;
+    }
 
     /**
      * @param cocoordenadores the cocoordenadores to set
@@ -183,11 +183,24 @@ public class Projeto {
         this.cocoordenadores = cocoordenadores;
     }
     
-     //public void setAreasConhecimento(AreasConhecimento areasconhecimento) {
-       // this.areaConhecimento = areasconhecimento;
-    //}
+      /**
+     * @return the bolsistas
+     */
+    public List<Bolsista> getBolsistas() {
+        return bolsistas;
+    }
+
+    /**
+     * @param bolsistas the bolsistas to set
+     */
+    public void setBolsistas(List<Bolsista> bolsistas) {
+        this.bolsistas = bolsistas;
+    }
+
+
+    public Projeto() {
+
+    }
     
-   public Projeto(){
-       
-   }
+    
 }

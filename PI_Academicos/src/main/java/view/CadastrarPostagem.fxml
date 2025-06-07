@@ -57,15 +57,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
                     </rowConstraints>
                      <children>
-                        <ImageView fitHeight="22.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
-                           <image>
-                              <Image url="@../../resources/imagens/Component%207.png" />
-                           </image>
-                           <GridPane.margin>
-                              <Insets bottom="10.0" left="10.0" />
-                           </GridPane.margin>
-                        </ImageView>
-                        <ImageView fitHeight="21.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                        <ImageView fx:id="btnMaisFotos" fitHeight="21.0" fitWidth="26.0" onMouseClicked="#onClickMaisFotos" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                            <image>
                               <Image url="@../../resources/imagens/Component%204.png" />
                            </image>

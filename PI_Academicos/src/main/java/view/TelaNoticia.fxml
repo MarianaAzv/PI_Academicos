@@ -25,7 +25,7 @@
    <children>
       <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="20.0" GridPane.columnIndex="1">
          <children>
-            <TextField fx:id="tfTituloNoticia" promptText="Titulo da notícia">
+            <TextField fx:id="txtTituloNoticia" promptText="Titulo da notícia">
                <font>
                   <Font name="Courier New Bold" size="18.0" />
                </font>
@@ -58,15 +58,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
                     </rowConstraints>
                      <children>
-                        <ImageView fitHeight="22.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" GridPane.vgrow="ALWAYS">
-                           <image>
-                              <Image url="@../../resources/imagens/Component%207.png" />
-                           </image>
-                           <GridPane.margin>
-                              <Insets bottom="10.0" left="10.0" />
-                           </GridPane.margin>
-                        </ImageView>
-                        <ImageView fitHeight="21.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                        <ImageView fx:id="btnMaisFotos" fitHeight="21.0" fitWidth="26.0" onMouseClicked="#onClickMaisFotos" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                            <image>
                               <Image url="@../../resources/imagens/Component%204.png" />
                            </image>
@@ -79,6 +71,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
+                        <Label fx:id="lblCaminhoArquivo" text="Link da foto:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                      <opaqueInsets>
                         <Insets />

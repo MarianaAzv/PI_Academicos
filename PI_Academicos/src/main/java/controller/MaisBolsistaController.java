@@ -34,7 +34,7 @@ public class MaisBolsistaController {
 
     @FXML
     void OnClickNao(ActionEvent event) {
-
+        stageMaisBolsista.close();
     }
 
     @FXML
