@@ -159,8 +159,8 @@ public class AtualizarProjetoController {
     }
 
     @FXML
-    void OnClickDesativarBolsista(ActionEvent event) {
-
+    void OnClickDesativarBolsista(ActionEvent event) throws IOException {
+DesativarBolsista();
     }
 
     @FXML
@@ -291,4 +291,25 @@ public class AtualizarProjetoController {
         stageMaisBolsista.show();
        stageAtualizarProjeto.close();
     }
+    
+   public void DesativarBolsista() throws IOException{
+    URL url = new File("src/main/java/view/BolsistaDesativarCoordenador.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stageBolsistaDesativar = new Stage();
+
+        BolsistaDesativarCoordenadorController bdcc = loader.getController();
+        //mbc.setCoordenador(coordenador);
+        bdcc.setProjeto(projeto);
+        bdcc.setStage(stageBolsistaDesativar);
+
+        Scene cena = new Scene(root);
+        stageBolsistaDesativar.setTitle("Desativar bolsistas");
+        stageBolsistaDesativar.setScene(cena);
+      
+
+       stageBolsistaDesativar.show();
+       stageAtualizarProjeto.close();
+   }
 }

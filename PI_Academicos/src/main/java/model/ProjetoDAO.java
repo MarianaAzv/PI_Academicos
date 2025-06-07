@@ -251,10 +251,50 @@ public class ProjetoDAO extends GenericDAO{
         
         
     }
-   
-      
-    }
+    
+    public List<Bolsista> selecioBolPProj(int idProjeto) throws SQLException{
+         List<Bolsista> bolsistas = new ArrayList<>();
+    Connection con = conectarDAO();
 
+    
+    String sql = "Select bp.*,b.*,u.* from bolsistas_projetos bp inner join bolsistas b on b.idUsuario=bp.idUsuario inner join usuarios u  on b.idUsuario=u.idUsuario where bp.idProjeto = ?";
+    
+     try(con) {
+             PreparedStatement stmtProjetobolsista = con.prepareStatement(sql);
+              stmtProjetobolsista.setInt(1, idProjeto);
+        ResultSet rs = stmtProjetobolsista.executeQuery();
+
+        while (rs.next()) {
+                Bolsista b = new Bolsista(
+                rs.getLong("matricula"),
+                rs.getString("curso"),
+                rs.getDate("dataInicio").toLocalDate(),
+                rs.getDate("dataFim") != null ? rs.getDate("dataFim").toLocalDate() : null,
+                idProjeto 
+            );
+
+          
+            b.setId(rs.getInt("idUsuario"));
+            b.setNome(rs.getString("nome"));
+
+            bolsistas.add(b);
+        }
+    } 
+
+    return bolsistas;
+}
+    
+    public void Destivar(int idUsuario, int idProjeto) throws SQLException {
+    String sql = "DELETE FROM bolsistas_projetos WHERE idUsuario = ? AND idProjeto = ?";
+
+    try (Connection con = conectarDAO();
+         PreparedStatement stmt = con.prepareStatement(sql)) {
+        stmt.setInt(1, idUsuario);
+        stmt.setInt(2, idProjeto);
+        stmt.executeUpdate();
+    }
+}
+}
 
     
 

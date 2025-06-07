@@ -1,9 +1,12 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Projeto {
 
+  
     private int idProjeto;
     private String titulo;
     private AreasConhecimento areaConhecimento;
@@ -15,6 +18,10 @@ public class Projeto {
     private boolean emAndamento;
     private String cocoordenadores;
     private Campus campus;
+    private List<Bolsista> bolsistas = new ArrayList<>();
+
+
+
 
     public Projeto(String titulo, String resumo, Campus campus, String edital, LocalDate dataInicio, LocalDate dataFim, LocalDate prorrogacao, boolean emAndamento) {
         this.titulo = titulo;
@@ -175,8 +182,25 @@ public class Projeto {
     public void setCocoordenadores(String cocoordenadores) {
         this.cocoordenadores = cocoordenadores;
     }
+    
+      /**
+     * @return the bolsistas
+     */
+    public List<Bolsista> getBolsistas() {
+        return bolsistas;
+    }
+
+    /**
+     * @param bolsistas the bolsistas to set
+     */
+    public void setBolsistas(List<Bolsista> bolsistas) {
+        this.bolsistas = bolsistas;
+    }
+
 
     public Projeto() {
 
     }
+    
+    
 }
