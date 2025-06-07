@@ -13,9 +13,11 @@ controller\TelaPrincipalCoordenadorController.class
 controller\MaisBolsistaController.class
 controller\CadastrarArtigoController.class
 model\CampusDAO.class
+model\FotoDAO.class
 controller\CadastroCocoordenadorCoordenadorController.class
 model\ProjetoDAO.class
 model\Bolsista.class
+model\Foto.class
 controller\AtualizarPerfilBolsistaController.class
 controller\VerPerfilBolsistaController.class
 controller\RecuperarSenhaNovaSenhaController.class
@@ -36,11 +38,14 @@ module-info.class
 controller\NotificacoesController.class
 model\BolsistaDAO.class
 controller\MaisCoCoordenadorController.class
+controller\AtualizarNoticiaController.class
 controller\CadastroCoordenadorController.class
 model\AreasConhecimento.class
+model\Noticia.class
 controller\VerPerfilCoordenadorController.class
 principal\App.class
 dal\ConexaoBD.class
+model\NoticiaDAO.class
 model\Administrador.class
 controller\TelaPrincipalAdministradorController.class
 controller\BolsistaDesativarCoordenadorController.class

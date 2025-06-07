@@ -245,40 +245,38 @@
             </ImageView>
          </children>
       </GridPane>
-      <GridPane style="-fx-background-color: DBA5A5; -fx-background-radius: 12;" GridPane.columnIndex="1">
+      <GridPane maxWidth="280.0" style="-fx-background-color: DBA5A5; -fx-background-radius: 12;" GridPane.columnIndex="1">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="300.0" />
+            <ColumnConstraints hgrow="NEVER" maxWidth="280.0" minWidth="10.0" prefWidth="280.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="1.0" prefHeight="5.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="190.0" minHeight="10.0" prefHeight="180.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="300.0" minHeight="10.0" prefHeight="211.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="235.0" minHeight="10.0" prefHeight="157.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="160.0" minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="110.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="160.0" minHeight="10.0" prefHeight="157.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="353.0" minHeight="10.0" prefHeight="349.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="1.0" prefHeight="5.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <GridPane GridPane.rowIndex="1">
+            <GridPane maxWidth="280.0" prefWidth="280.0" GridPane.rowIndex="1">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="183.0" minWidth="10.0" prefWidth="178.0" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" prefWidth="122.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="1.0" prefWidth="1.0" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="190.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ImageView fx:id="imgPerfil" fitHeight="87.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
-                  <Text fx:id="TxtNomeUsuario" fill="#840d0b" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <ImageView fx:id="imgPerfil" fitHeight="87.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Text fx:id="TxtNomeUsuario" fill="#840d0b" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="156.20001202821732" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
-                        <Font name="Courier New Bold" size="14.0" />
+                        <Font name="Courier New Bold" size="18.0" />
                      </font>
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
                   </Text>
-                  <Label fx:id="lblNomeBolsista" contentDisplay="CENTER" prefHeight="115.0" prefWidth="174.0" textAlignment="RIGHT" textFill="#840d0b" wrapText="true" GridPane.valignment="BOTTOM">
-                     <font>
-                        <Font name="Courier New Bold" size="20.0" />
-                     </font>
-                  </Label>
                </children>
             </GridPane>
             <GridPane GridPane.rowIndex="3">
@@ -291,12 +289,15 @@
                   <RowConstraints maxHeight="190.0" minHeight="10.0" prefHeight="184.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ImageView fx:id="imgProjeto" fitHeight="87.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
-                  <Label fx:id="lblNomeProjeto" contentDisplay="CENTER" prefHeight="115.0" prefWidth="174.0" textAlignment="RIGHT" textFill="#840d0b" wrapText="true" GridPane.valignment="BOTTOM">
+                  <ImageView fx:id="imgProjetoBarra" fitHeight="87.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Text fx:id="TxtNomeProjetoBarra" fill="#840d0b" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="149.19995141029358" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
-                        <Font name="Courier New Bold" size="20.0" />
+                        <Font name="Courier New Bold" size="18.0" />
                      </font>
-                  </Label>
+                     <GridPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </GridPane.margin>
+                  </Text>
                </children>
             </GridPane>
             <GridPane prefHeight="174.0" prefWidth="275.0" GridPane.rowIndex="2">
@@ -306,21 +307,14 @@
                <rowConstraints>
                   <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="btnVerPerfil" mnemonicParsing="false" onAction="#onClickVerPerfil" style="-fx-background-color: DBA5A5;" text="- Ver perfil" textFill="#840d0b" GridPane.halignment="CENTER">
+                  <Button fx:id="btnVerPerfil" maxHeight="54.0" maxWidth="280.0" mnemonicParsing="false" onAction="#onClickVerPerfil" onMouseEntered="#onEnterVerPerfil" onMouseExited="#onExitVerPerfil" prefHeight="54.0" prefWidth="280.0" style="-fx-background-color: D07979;" text="Ver perfil" textFill="#840d0b" GridPane.halignment="CENTER">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnAtualizarPerfil" mnemonicParsing="false" onAction="#onClickAtualizarPerfil" style="-fx-background-color: DBA5A5;" text="- Atualizar perfil" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="Courier New Bold" size="18.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="btnSair" mnemonicParsing="false" onAction="#onClickSair" style="-fx-background-color: DBA5A5;" text="- Sair" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                  <Button fx:id="btnAtualizarPerfil" maxHeight="54.0" maxWidth="280.0" mnemonicParsing="false" onAction="#onClickAtualizarPerfil" onMouseEntered="#onEnterAtualizarPerfil" onMouseExited="#onExitAtualizarPerfil" prefHeight="54.0" prefWidth="280.0" style="-fx-background-color: DBA5A5;" text="Atualizar perfil" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
@@ -336,25 +330,26 @@
                   <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="77.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="btnPublicacao" mnemonicParsing="false" onAction="#onClickPublicacao" style="-fx-background-color: DBA5A5;" text="+ Publicação" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                  <Button fx:id="btnPublicacao" maxHeight="54.0" maxWidth="280.0" mnemonicParsing="false" onAction="#onClickPublicacao" onMouseEntered="#onEnterPublicacao" onMouseExited="#onExitPublicacao" prefHeight="54.0" prefWidth="280.0" style="-fx-background-color: DBA5A5;" text="+ Publicação" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnArtigo" mnemonicParsing="false" onAction="#onClickArtigo" style="-fx-background-color: DBA5A5;" text="+ Artigo" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                  <Button fx:id="btnArtigo" maxHeight="54.0" maxWidth="280.0" mnemonicParsing="false" onAction="#onClickArtigo" onMouseEntered="#onEnterArtigo" onMouseExited="#onExitArtigo" prefHeight="54.0" prefWidth="280.0" style="-fx-background-color: DBA5A5;" text="+ Artigo" textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnOutrosProjetos" mnemonicParsing="false" onAction="#onClickOutrosProjetos" style="-fx-background-color: DBA5A5;" text="- Outros projetos" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP">
+                  <Button fx:id="btnOutrosProjetos" maxHeight="54.0" maxWidth="280.0" mnemonicParsing="false" onAction="#onClickOutrosProjetos" onMouseEntered="#onEnterOutrosProjeto" onMouseExited="#onExitOutrosProjeto" prefHeight="54.0" prefWidth="280.0" style="-fx-background-color: DBA5A5;" text="Outros projetos" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnVerProjeto" mnemonicParsing="false" onAction="#onClickVerProjeto" style="-fx-background-color: DBA5A5;" text="- Ver projeto" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                  <Button fx:id="btnSair" maxHeight="54.0" maxWidth="280.0" mnemonicParsing="false" onAction="#onClickSair" onMouseEntered="#onEnterSair" onMouseExited="#onExitSair" prefHeight="54.0" prefWidth="280.0" style="-fx-background-color: DBA5A5;" text="Início" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                      <font>
                         <Font name="Courier New Bold" size="18.0" />
                      </font>
