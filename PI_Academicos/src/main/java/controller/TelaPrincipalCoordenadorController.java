@@ -213,6 +213,31 @@ public class TelaPrincipalCoordenadorController {
         btnVerPerfil.setStyle("-fx-background-color:  DBA5A5" );
     }
     
+    //------------------*SETs*----------------------//
+    public void setCoordenador(Coordenador coord) {
+       this.coordenador = coord;
+       TxtNomeUsuario.setText(coord.getNome());
+    }
+    public void setProjeto(Projeto projeto) {
+       this.projeto = projeto;
+       //lblNomeCoordenador.setText(projeto.getCoordenador());
+       lblResumo.setText(projeto.getResumo());
+       txtCampus.setText(projeto.getCampus().getNomeCampus());
+       txtNomeProjeto.setText(projeto.getTitulo());
+       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+       String DataInicio = projeto.getDataInicio().format(formatter);
+       txtInicio.setText(DataInicio);
+
+       String DataFim = projeto.getDataFim().format(formatter);
+       txtFim.setText(DataFim);
+       String prorroga = String.valueOf(projeto.getProrroacao());
+       txtProrrogacao.setText(prorroga);
+       txtNomeCoordenador.setText(projeto.getCocoordenadores());
+       //txtNomeBolsitas.setText(projeto.get);
+       
+       
+    }
+    
 //******************* MÉTODOS ***************************************
     
     
@@ -275,7 +300,9 @@ public class TelaPrincipalCoordenadorController {
        AtualizarProjetoController apc = loader.getController();
         
         apc.setStage(stageAtualizarProjeto);
+        apc.setCoordenador(coordenador);
         apc.setProjeto(projeto);
+        
         
           stageAtualizarProjeto.setOnShown(evento -> {
         apc.ajustarElementosJanela();
@@ -372,7 +399,7 @@ public class TelaPrincipalCoordenadorController {
       });
     }
 
-    void ajustarElementosJanela(Coordenador coordenador, Projeto projeto) {
+   public void ajustarElementosJanela(Coordenador coordenador, Projeto projeto) {
         this.coordenador=coordenador;
         this.projeto=projeto;
         
@@ -389,29 +416,7 @@ public class TelaPrincipalCoordenadorController {
        
     }
    
-    public void setCoordenador(Coordenador coord) {
-       this.coordenador = coord;
-       TxtNomeUsuario.setText(coord.getNome());
-    }
-    public void setProjeto(Projeto projeto) {
-       this.projeto = projeto;
-       //lblNomeCoordenador.setText(projeto.getCoordenador());
-       lblResumo.setText(projeto.getResumo());
-       txtCampus.setText(projeto.getCampus().getNomeCampus());
-       txtNomeProjeto.setText(projeto.getTitulo());
-       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-       String DataInicio = projeto.getDataInicio().format(formatter);
-       txtInicio.setText(DataInicio);
-
-       String DataFim = projeto.getDataFim().format(formatter);
-       txtFim.setText(DataFim);
-       String prorroga = String.valueOf(projeto.getProrroacao());
-       txtProrrogacao.setText(prorroga);
-       txtNomeCoordenador.setText(projeto.getCocoordenadores());
-       //txtNomeBolsitas.setText(projeto.get);
-       
-       
-    }
+    
     
     
     

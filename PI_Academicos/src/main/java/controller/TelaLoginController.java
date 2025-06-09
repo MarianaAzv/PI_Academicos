@@ -178,6 +178,7 @@ public class TelaLoginController {
            stagePrincipal.setScene(cena);
            stagePrincipal.show();
            stageLogin.close();
+           System.out.println("Coordenador ao clicar em Criar Projeto: " + coordenador);
     }
 public void abrirTelaPrincipalBolsista(Bolsista bolsista) throws MalformedURLException, IOException {
         URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();

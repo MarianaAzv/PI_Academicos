@@ -63,10 +63,11 @@ public class EscolherProjetoController {
         
            }
     
-    //Abre essa tela antes da tela da tela principal, esta precisa criar projeto e 
-    //mostrar quais projeto ja existem no sistema relacionados ao id da pessoa ou em quais ela ja esta cadastrada
     
-
+    
+  public void setCoordenador(Coordenador coordenador) {
+        this.coordenador = coordenador;
+    }
               @FXML
     void OnClickCriarProjeto(ActionEvent event) throws MalformedURLException, MalformedURLException, IOException {
         try{
@@ -100,6 +101,7 @@ if(coordenador.getAtiva()==true){
     }catch (IOException e) {
         mostrarAviso("Erro","Falha ao abrir a tela de criação de projeto");
     }
+        System.out.println("Coordenador ao clicar em Criar Projeto: " + coordenador);
     }
          
   
@@ -114,7 +116,7 @@ if(coordenador.getAtiva()==true){
     }
     }
   
-   
+  
  
  public void OnClickProjeto() throws SQLException { 
     vboxbutton.getChildren().clear(); // Limpa os botões antes de adicionar novos
@@ -181,9 +183,7 @@ if(coordenador.getAtiva()==true){
             stageEscolherProjeto.close();
  }
 
-    void setCoordenador(Coordenador coordenador) {
-        this.coordenador = coordenador;
-    }
+    
 
     private void abriProjetoB(Projeto projeto) throws MalformedURLException, IOException {
         URL url = new File("src/main/java/view/TelaPrincipalBolsista.fxml").toURI().toURL();

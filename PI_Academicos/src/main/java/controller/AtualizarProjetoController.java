@@ -30,6 +30,7 @@ import model.Projeto;
 import model.ProjetoDAO;
 import static util.AlertaUtil.mostrarAviso;
 import static util.AlertaUtil.mostrarConfirmacao;
+import util.Origem;
 
 public class AtualizarProjetoController {
 
@@ -115,13 +116,13 @@ public class AtualizarProjetoController {
 
     //------------------------*Clicks*----------------------------------//
     @FXML
-    void OnClickAdicionarBolsista(ActionEvent event) {
-
+    void OnClickAdicionarBolsista(ActionEvent event) throws IOException {
+   AdicionarBolsista();
     }
 
     @FXML
     void OnClickAdicionarCocoordenador(ActionEvent event) throws IOException {
-   AdicionarBolsista();
+
     }
 
     @FXML
@@ -174,6 +175,9 @@ DesativarBolsista();
         this.stageAtualizarProjeto = telaAtualizarProjeto;
 
     }
+    public void setCoordenador(Coordenador coord) {
+    this.coordenador = coord;
+}
 
     public void setProjeto(Projeto pro) {
         this.projeto = pro;
@@ -260,6 +264,7 @@ DesativarBolsista();
         
             TelaPrincipalCoordenadorController tpc = loader.getController();    
             tpc.setStagePrincipal(stagePrincipal);
+            tpc.setCoordenador(coordenador);
             
             Scene cena = new Scene(root);
             stagePrincipal.setTitle("Tela principal Coordenador");
@@ -282,6 +287,7 @@ DesativarBolsista();
         //mbc.setCoordenador(coordenador);
         mbc.setProjeto(projeto);
         mbc.setStage(stageMaisBolsista);
+        mbc.setOrigem(Origem.atualizar_projeto);
 
         Scene cena = new Scene(root);
         stageMaisBolsista.setTitle("Adicionar bolsistas");
