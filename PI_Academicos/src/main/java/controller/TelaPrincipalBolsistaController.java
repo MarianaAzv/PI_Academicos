@@ -259,7 +259,7 @@ public class TelaPrincipalBolsistaController {
         apb.setProjeto(projeto);
         
         stageAtualizar.setOnShown(evento -> {//hj
-            apb.ajustarElementosJanela(bolsista,projeto);
+            //apb.ajustarElementosJanela(bolsista,projeto);
         });
 
         Scene cena = new Scene(root);
@@ -307,9 +307,9 @@ public class TelaPrincipalBolsistaController {
     }
 
     @FXML
-    void onClickOutrosProjetos(ActionEvent event) throws MalformedURLException, IOException {
+    public void outrosProjetos() throws MalformedURLException, IOException {
         System.out.println("Outros Projetos clicado!");
-URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
+        URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
 
@@ -329,7 +329,7 @@ URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
 
         Scene cena = new Scene(root);
         stagePrincipal.setTitle("Tela Escolher Projeto Bolsista");
-        stagePrincipal.setMaximized(true);
+        stagePrincipal.setMaximized(false);
         stagePrincipal.setScene(cena);
         stagePrincipal.show();
         stageTelaPrincipalBolsista.close();
@@ -384,37 +384,13 @@ URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
 
     Stage stageAlerta = new Stage();
 
-    void setProjeto(Projeto projeto) {
-       this.projeto = projeto;
-       //PRECISA FAZER LISTA DE BOLSISTAS E COORDENADORES
-       txtNomeCoordenador.setText(projeto.getCocoordenadores());
-      // txtNomeBolsista.setText(projeto.getBolistas)
-       txtNomeCocoordenador.setText(projeto.getCocoordenadores());
-       
-       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-       
-       String DataInicio = projeto.getDataInicio().format(formatter);
-       txtInicio.setText(DataInicio);
 
-       String DataFim = projeto.getDataFim().format(formatter);
-       txtFim.setText(DataFim);
-       
-       String prorroga = String.valueOf(projeto.getProrroacao());
-       txtProrrogacao.setText(prorroga);
-
-       txtResumo.setText(projeto.getResumo());
-       
-       txtCampus.setText(projeto.getCampus().getNomeCampus());
-       
-       
-       
+//     void carregarUsuariosDoProjeto(Projeto projeto) {
+//        this.projeto = projeto;
+//        System.out.println("Coordenadores do Projeto: " + projeto.getCocoordenadores());
+//        System.out.println("Bolsistas do Projeto: " + projeto.getBolsistas());
+//        txtNomeBolsista.setText(projeto.getBolsistas());
+//       txtNomeCoordenador.setText(projeto.getCocoordenadores());
+//    }
     }
-
-     void carregarUsuariosDoProjeto(Projeto projeto) {
-        this.projeto = projeto;
-        System.out.println("Coordenadores do Projeto: " + projeto.getCocoordenadores());
-System.out.println("Bolsistas do Projeto: " + projeto.getBolsistas());
-        txtNomeBolsista.setText(projeto.getBolsistas());
-       txtNomeCoordenador.setText(projeto.getCocoordenadores());
-    }
-    }
+}

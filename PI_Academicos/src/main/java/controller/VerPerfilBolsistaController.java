@@ -277,10 +277,8 @@ public class VerPerfilBolsistaController {
         apb.setBolsista(bolsista);
         apb.setProjeto(projeto);
 
-        vpb.setBolsista(bolsista); // Garantindo que os dados sejam passados corretamente
-        vpb.setProjeto(projeto);
-        stage.setOnShown(evento -> {
-            vpb.ajustarElementosJanela(bolsista,projeto);
+            stageAtualizar.setOnShown(evento -> {
+            //apb.ajustarElementosJanela(bolsista,projeto);
         });
 
         Scene cena = new Scene(root);
@@ -324,10 +322,7 @@ public class VerPerfilBolsistaController {
         stageArtigo.setScene(cena);
         stageArtigo.show();
     }
-    @FXML
-void onClickOutrosProjetos(ActionEvent event) {
-    System.out.println("Outros Projetos click");
-}
+
 
     
     public void outrosProjetos() throws MalformedURLException, IOException {
@@ -381,7 +376,7 @@ void onClickOutrosProjetos(ActionEvent event) {
       void ajustarElementosJanela(Bolsista bolsista, Projeto projeto) {
         this.bolsista = bolsista;
         this.projeto = projeto;
-                 txtNomeUsuario.setText(bolsista.getNome());//falta foto
+        
       }
 
 }

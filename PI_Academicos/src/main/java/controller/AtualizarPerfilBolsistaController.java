@@ -201,10 +201,14 @@ public class AtualizarPerfilBolsistaController {
 
             atualizarBolsista(bolsista.getId(), cpf, txtNome.getText(), txtUsuario.getText(), txtEmail.getText(),
                               txtSenha.getText(), ativa, matricula, txtCurso.getText(), dataInicio, dataFim);
+
+
         } catch (NumberFormatException e) {
             mostrarAviso("Erro", "CPF, matrícula e datas devem estar em formatos válidos.");
         }
     }
+
+    
 
     //******************* OnClicks ***************************************
 
@@ -237,32 +241,7 @@ public class AtualizarPerfilBolsistaController {
     //******************************************************************
      @FXML
     void onClickOutrosProjetos(ActionEvent event) throws MalformedURLException, IOException {
-        System.out.println("Outros Projetos clicado!");
-URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
-        FXMLLoader loader = new FXMLLoader(url);
-        Parent root = loader.load();
-
-        Stage stagePrincipal = new Stage();
-        EscolherProjetoController epb = loader.getController();
-        epb.setBolsista(bolsista);
-        epb.setStage(stagePrincipal);
-
-        stagePrincipal.setOnShown(evento -> {
-             try {
-                 epb.OnClickProjeto();
-             } catch (SQLException ex) {
-                  Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
-             }              
-           // tpb.ajustarElementosJanela(bolsista);
-        });
-
-        Scene cena = new Scene(root);
-        stagePrincipal.setTitle("Tela Escolher Projeto Bolsista");
-        stagePrincipal.setMaximized(true);
-        stagePrincipal.setScene(cena);
-        stagePrincipal.show();
-        stageAtualizarBolsista.close();
-
+        outrosProjetos();
     }
     @FXML
     void onEnterOutrosProjeto(MouseEvent event) {
@@ -314,19 +293,23 @@ URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
         btnVerPerfil.setStyle("-fx-background-color:  DBA5A5" );
     }
    
-    void setProjeto(Projeto projeto) {
-       this.projeto = projeto;
-       //PRECISA FAZER LISTA DE BOLSISTAS E COORDENADORES
-     //  txtNomeBolsista.setText(projeto.getBolistas)
-     txtNomeProjeto.setText(projeto.getTitulo());//falta foto
-     
-    }
     
-     void atualizarBolsista(int id, long cpf, String nome, String apelido, String email, String senha, boolean ativa,
+
+    //******************* MÉTODOS ***************************************
+
+    void atualizarBolsista(int id, long cpf, String nome, String apelido, String email, String senha, boolean ativa,
                            long matricula, String curso, LocalDate dataInicio, LocalDate dataFim) throws SQLException {
         Bolsista bolsista = new Bolsista(id, cpf, nome, apelido, email, senha, ativa, matricula, curso, dataInicio, dataFim);
 
-    //******************* MÉTODOS ***************************************
+        int repetido = bolsistaDAO.validarApelido(apelido, id);
+
+        if (repetido > 0) {
+            mostrarAviso("Nome de usuário indisponível", "Este nome de usuário já está sendo usado.");
+        } else {
+            bolsistaDAO.atualizarBolsista(bolsista, projeto);
+            mostrarConfirmacao("Usuário alterado", "O usuário foi alterado com sucesso!");
+        }
+    }
     
     public void abrirVerPerfil() throws IOException {
         URL url = new File("src/main/java/view/VerPerfilBolsista.fxml").toURI().toURL();
@@ -404,28 +387,31 @@ URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
 
     
     public void outrosProjetos() throws MalformedURLException, IOException {
+        System.out.println("Outros Projetos clicado!");
         URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
-        
-        Stage stageProjetos = new Stage();
-        
-        EscolherProjetoController tpc = loader.getController();  
-        tpc.setBolsista(bolsista);
-        tpc.setStage(stageProjetos);
-          
-        Scene cena = new Scene(root);
-        stageProjetos.setTitle("Outros projetos");
-        stageProjetos.setMaximized(false);
-        stageProjetos.setScene(cena);
-        stageProjetos.show();
-        stageProjetos.setOnShown(evento -> {
+
+        Stage stagePrincipal = new Stage();
+        EscolherProjetoController epb = loader.getController();
+        epb.setBolsista(bolsista);
+        epb.setStage(stagePrincipal);
+
+        stagePrincipal.setOnShown(evento -> {
              try {
-                 tpc.OnClickProjeto();
+                 epb.OnClickProjeto();
              } catch (SQLException ex) {
-                 Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
-             }
-      });
+                  Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+             }              
+           // tpb.ajustarElementosJanela(bolsista);
+        });
+
+        Scene cena = new Scene(root);
+        stagePrincipal.setTitle("Tela Escolher Projeto Bolsista");
+        stagePrincipal.setMaximized(false);
+        stagePrincipal.setScene(cena);
+        stagePrincipal.show();
+        stageAtualizarBolsista.close();
     }
 
     
@@ -452,19 +438,5 @@ URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
 
     }
 
-        int repetido = bolsistaDAO.validarApelido(apelido, id);
-
-        if (repetido > 0) {
-            mostrarAviso("Nome de usuário indisponível", "Este nome de usuário já está sendo usado.");
-        } else {
-            bolsistaDAO.atualizarBolsista(bolsista, projeto);
-            mostrarConfirmacao("Usuário alterado", "O usuário foi alterado com sucesso!");
-        }
-    }
-      void ajustarElementosJanela(Bolsista bolsista, Projeto projeto) {
-        this.bolsista = bolsista;
-        this.projeto = projeto;
-                 txtNomeUsuario.setText(bolsista.getNome());//falta foto
-      }
      
 }
