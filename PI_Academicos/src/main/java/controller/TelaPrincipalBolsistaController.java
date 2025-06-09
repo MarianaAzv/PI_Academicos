@@ -369,4 +369,23 @@ public class TelaPrincipalBolsistaController {
       
     }
     
+    public void alerta() throws IOException{
+        URL url = new File("src/main/java/view/AlertGenerico.fxml").toURI().toURL();
+    FXMLLoader loader = new FXMLLoader(url);
+    Parent root = loader.load();
+
+    Stage stageAlerta = new Stage();
+
+    AlertGenericoController vpb = loader.getController();
+    vpb.setMsg("Oi fernanda!");
+    vpb.setStage(stageAlerta); // Correção: Garantir que a nova tela tenha controle sobre seu próprio Stage
+
+    Scene cena = new Scene(root);
+    stageAlerta.setTitle("Alerta fernanda");
+    stageAlerta.setScene(cena);
+    
+
+    stageAlerta.show();
+    }
+    
 }
