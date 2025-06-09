@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import model.Postagem;
 import model.PostagemDAO;
 import model.Projeto;
+import static util.AlertaUtil.mostrarConfirmacao;
 
 public class AtualizarPostagemController {
     
@@ -48,6 +49,8 @@ public class AtualizarPostagemController {
         
         PostagemDAO postagemDAO = new PostagemDAO();
         postagemDAO.deletarPostagem(postagem);
+        mostrarConfirmacao("Postagem excluída","A postagem foi excluída.");
+        stageAtualizarPostagem.close();
 
     }
 
@@ -56,7 +59,7 @@ public class AtualizarPostagemController {
 
     }
     
-    public void setStage(Stage stageAtualizarNoticia){
+    public void setStage(Stage stageAtualizarPostagem){
         this.stageAtualizarPostagem = stageAtualizarPostagem;
     }
     
