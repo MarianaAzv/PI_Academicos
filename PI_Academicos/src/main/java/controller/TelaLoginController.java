@@ -101,7 +101,7 @@ public class TelaLoginController {
                                 System.out.println("Abrindo tela de Administrador...");
                                 
                                 abrirTelaPrincipalAdministradorTeste(a);
-                                abrirTelaPrincipalAdministrador(a);
+                                //abrirTelaPrincipalAdministrador(a);
                             }
                 
                 

@@ -1,10 +1,12 @@
 
 package controller;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.sql.SQLException;
 import java.util.Optional;
 import javafx.event.ActionEvent;
@@ -16,13 +18,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Administrador;
 import model.AdministradorDAO;
+import model.Foto;
 import static util.AlertaUtil.mostrarAviso;
 import static util.AlertaUtil.mostrarConfirmacao;
 
@@ -30,6 +35,7 @@ public class AtualizarPerfilAdministradorController {
     
     private Administrador adm;
     private Stage stageAtualizarADM;
+    private File arquivoSelecionado=null;
     
      @FXML
     private Text TxtNomeUsuario;
@@ -106,7 +112,7 @@ public class AtualizarPerfilAdministradorController {
 
         try{
         Long cpf = Long.parseLong(txtCPF.getText());
-        atualizarAdministrador(adm.getId(),cpf,txtNome.getText(),txtUsuario.getText(),txtEmail.getText(),txtSenha.getText());
+        atualizarAdministrador(adm.getId(),cpf,txtNome.getText(),txtUsuario.getText(),txtEmail.getText(),txtSenha.getText(), adm.getAtiva());
         }catch(NumberFormatException n){
             mostrarAviso("CPF inválido","O valor inserido para CPF deve ser apenas números");
         }
@@ -157,6 +163,25 @@ public class AtualizarPerfilAdministradorController {
         stagePrincipal.show();
         stageAtualizarADM.close();
         
+    }
+    
+    @FXML
+    void onClickFotoPerfil(MouseEvent event) throws MalformedURLException {
+        
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Selecionar Imagem");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Arquivos de Imagem", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+        arquivoSelecionado = fileChooser.showOpenDialog(imgFotoAdministrador.getScene().getWindow());
+        
+        if(arquivoSelecionado!=null){
+             String urlImagem = arquivoSelecionado.toURI().toURL().toString();            
+             Image fotoEscolhida = new Image(urlImagem);
+             imgFotoAdministrador.setImage(fotoEscolhida);
+        }
+        else{
+            System.out.println("Nenhum arquivo foi selecionado");
+        }
+
     }
 
      @FXML
@@ -366,7 +391,7 @@ public class AtualizarPerfilAdministradorController {
             stageAtualizarADM.close();
     }
     private void abrirTelaPrincipal() throws IOException{
-     URL url = new File("src/main/java/view/TelaPrincipalAdministrador.fxml").toURI().toURL();
+     URL url = new File("src/main/java/view/TelaPrincipalAdministradorTeste.fxml").toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
         
@@ -403,12 +428,35 @@ public class AtualizarPerfilAdministradorController {
        txtSenha.setText(adm.getSenha());
        txtEmail.setText(adm.getEmail());
        
+       Image image = null;
+       byte[] conteudoFoto = adm.getFotoPerfil().getDadosImagem();
+            if(conteudoFoto!=null){
+                try (ByteArrayInputStream bis = new ByteArrayInputStream(conteudoFoto)) {
+                    image = new Image(bis); // Converte byte[] para Image AQUI
+                } catch (Exception e) {
+                    System.err.println("Erro ao converter bytes para Image: " + e.getMessage());
+                            // precisa definir uma imagem padrao de erro
+                        }
+                }
+       imgFotoAdministrador.setImage(image);
+       
     }
     
-    void atualizarAdministrador(int id,long cpf, String nome, String apelido,String email,String senha) throws SQLException, IOException{
+    void atualizarAdministrador(int id,long cpf, String nome, String apelido,String email,String senha, boolean ativa) throws SQLException, IOException{
+        
+        Foto fotoPerfil = new Foto();
+        if(arquivoSelecionado==null){// caso o adm não queira alterar foto
+            fotoPerfil.setDadosImagem(adm.getFotoPerfil().getDadosImagem());
+        }
+        else{
+        byte[] conteudoImagem = Files.readAllBytes(arquivoSelecionado.toPath());
+        fotoPerfil.setDadosImagem(conteudoImagem);
+        }
+        
+        Administrador adm = new Administrador(id, cpf, nome, apelido, email, senha, ativa, fotoPerfil);
         
         
-        Administrador adm = new Administrador(id, cpf, nome, apelido, email, senha);
+        
         int repetido = new AdministradorDAO().validarApelido(apelido,id);
         if(repetido>0){
             mostrarAviso("Nome de usuário indisponível","Este nome de usuário já está sendo usado");
@@ -417,6 +465,7 @@ public class AtualizarPerfilAdministradorController {
         else{
         new AdministradorDAO().atualizarAdministrador(adm);
         mostrarConfirmacao("Usuário alterado","O usuário foi alterado com sucesso!");
+        setAdministrador(adm);
         abrirTelaPrincipal();
         }
     }

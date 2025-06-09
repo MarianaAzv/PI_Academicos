@@ -26,7 +26,8 @@ public class LoginDAO extends GenericDAO {
                     + "= usuarios.idUsuario left join bolsistas ON bolsistas.idUsuario = usuarios.idUsuario"
                     + "  left join administradores on administradores.idUsuario=usuarios.idUsuario "
                     + "left join bolsistas_projetos bp on usuarios.idUsuario=bp.idUsuario "
-                    + "left join projetos p on bp.idProjeto= p.idProjeto"
+                    + "left join projetos p on bp.idProjeto= p.idProjeto "
+                    + "left join fotos_perfil_usuario on usuarios.idUsuario = fotos_perfil_usuario.idUsuario"
                     + " WHERE apelido= ? AND senha=?";
                 
 		Usuario usuario = null;
@@ -80,6 +81,10 @@ public class LoginDAO extends GenericDAO {
 				usuario.setEmail(rs.getString("email"));
 				usuario.setSenha(rs.getString("senha"));
 				usuario.setAtiva(rs.getBoolean("ativa"));
+                                int idFoto = rs.getInt("idFoto");
+                                byte[] dadosImagem = rs.getBytes("arquivoFoto");
+                                Foto foto = new Foto(idFoto, dadosImagem);
+                                usuario.setFotoPerfil(foto);
                                 
 			}
                            

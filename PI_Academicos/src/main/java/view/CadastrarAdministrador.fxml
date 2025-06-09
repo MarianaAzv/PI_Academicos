@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -116,10 +117,13 @@
                   </GridPane>
                </children>
             </VBox>
-            <ImageView fx:id="imgFotoAdministrador" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <ImageView fx:id="imgFotoAdministrador" fitHeight="120.0" fitWidth="129.0" onMouseClicked="#onClickAdicionarFoto" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="20.0" />
                </GridPane.margin>
+               <image>
+                  <Image url="@../../../../../../../../Documentos/IFSC/PI/elementos-tela-desktop/FotoPerfilDefault.png" />
+               </image>
             </ImageView>
             <Label text="Cadastrar Administrador" textAlignment="CENTER" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                <GridPane.margin>

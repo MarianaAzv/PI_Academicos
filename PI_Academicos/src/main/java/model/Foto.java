@@ -17,6 +17,10 @@ public class Foto {
         this.dadosImagem = arquivo;
   
     }
+    
+    public Foto(){
+  
+    }
 
     public int getId() {
         return id;

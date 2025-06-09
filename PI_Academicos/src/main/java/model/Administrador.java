@@ -12,6 +12,11 @@ public class Administrador extends Usuario {
     public Administrador(int id, long cpf, String nome, String apelido, String email, String senha) {
         super(id, cpf, nome, apelido, email, senha);
     }
+    
+    //metodo construtor com foto
+    public Administrador(int id, long cpf, String nome, String apelido, String email, String senha, boolean ativa, Foto fotoPerfil) {
+        super(id, cpf, nome, apelido, email, senha, ativa, fotoPerfil);
+    }
 
     public Administrador(long cpf, String nome, String apelido, String email, String senha, Boolean ativa) {
         super(cpf, nome, apelido, email, senha, ativa);

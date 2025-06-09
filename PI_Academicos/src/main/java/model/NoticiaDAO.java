@@ -28,7 +28,7 @@ public class NoticiaDAO extends GenericDAO{
         
         
         String sqlNoticia = "INSERT INTO noticiasgerais (idAdministrador, titulo, texto) VALUES (?, ?, ?)";
-        String sqlFoto = "INSERT INTO fotos (arquivoFoto, idNoticia) VALUES (?, ?)";
+        String sqlFoto = "INSERT INTO fotos_noticias (arquivoFoto, idNoticia) VALUES (?, ?)";
 
         try {
              PreparedStatement stmtNoticia = con.prepareStatement(sqlNoticia, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -64,9 +64,11 @@ public class NoticiaDAO extends GenericDAO{
         }
     }
     
-    public List<Noticia> listarNoticias() throws SQLException, IOException {
+    public List<Noticia> listarNoticias(Administrador adm) throws SQLException, IOException {
         List<Noticia> noticias = new ArrayList<>();
-        String sql = "select noticiasgerais.idNoticia, idAdministrador, titulo, texto, dataPublicacao, idFoto, arquivoFoto, fotos.idNoticia from noticiasgerais left join fotos on noticiasgerais.idNoticia = fotos.idNoticia;";
+        String sql = "select noticiasgerais.idNoticia, idAdministrador, titulo, texto, dataPublicacao, idFoto," +
+                     "arquivoFoto, fotos_noticias.idNoticia from noticiasgerais left join fotos_noticias " +
+                     "on noticiasgerais.idNoticia = fotos_noticias.idNoticia WHERE idAdministrador = ?;";
         
         Connection con = conectarDAO();
         ResultSet rs = null;
@@ -74,6 +76,7 @@ public class NoticiaDAO extends GenericDAO{
         if(con!=null){
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, adm.getId());
             rs = stmt.executeQuery();
 
             int cont=0;
