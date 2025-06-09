@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Bolsista;
@@ -25,41 +26,101 @@ public class VerPerfilBolsistaController {
     
     private Stage stageVerPerfil;
     private Bolsista bolsista;
+    
+    Projeto projeto;
+    void setProjeto(Projeto projeto) {
+       this.projeto = projeto;
+    }
 
     @FXML
-    private Text txtNomeUsuario;
+    private Text TxtNomeProjetoBarra;
+
+    @FXML
+    private Text TxtNomeUsuario;
 
     @FXML
     private Button btnArtigo;
+
     @FXML
     private Button btnAtualizarPerfil;
+
     @FXML
     private Button btnOutrosProjetos;
+
     @FXML
     private Button btnPublicacao;
+
     @FXML
-    private Button btnSair; 
+    private Button btnSair;
+
     @FXML
     private Button btnVerPerfil;
-    @FXML
-    private Button btnVerProjeto;
 
     @FXML
-    private ImageView imgFotoBolsista, imgPerfil, imgProjeto;
+    private ImageView imgFotoBolsista;
 
     @FXML
-    private Label lblCPF, lblCPFBolsista, lblCurso, lblDataFimBols, 
-                  lblDataInicioBols, lblEmail, lblEmailBolsista, lblMatricula, lblMatriculaBols, 
-                  lblNomeBol, lblUsuarioBolsista;
-    
-    @FXML
-    private Label lblNomeProjeto;
+    private ImageView imgPerfil;
 
-      @FXML
-    private Label lblSenhaBolsista;
-        @FXML
+    @FXML
+    private ImageView imgProjetoBarra;
+
+    @FXML
+    private Label lblCPF;
+
+    @FXML
+    private Label lblCPFBolsista;
+
+    @FXML
+    private Label lblCurso;
+
+    @FXML
     private Label lblCursoBolsista;
-    private Projeto projeto;
+
+    @FXML
+    private Label lblData;
+
+    @FXML
+    private Label lblDataFimBols;
+
+    @FXML
+    private Label lblDataInicioBols;
+
+    @FXML
+    private Label lblEmail;
+
+    @FXML
+    private Label lblEmailBolsista;
+
+    @FXML
+    private Label lblFimDaBolsa;
+
+    @FXML
+    private Label lblInicioDaBolsa;
+
+    @FXML
+    private Label lblMatricula;
+
+    @FXML
+    private Label lblMatriculaBols;
+
+    @FXML
+    private Label lblNome;
+
+    @FXML
+    private Label lblNomeBol;
+
+    @FXML
+    private Label lblSenha;
+
+    @FXML
+    private Label lblSenhaBolsista;
+
+    @FXML
+    private Label lblUsuario;
+
+    @FXML
+    private Label lblUsuarioBolsista;
 
     public void setBolsista(Bolsista bol) {
         
@@ -90,104 +151,131 @@ public class VerPerfilBolsistaController {
              System.out.println(bolsista.getDataInicio().format(formatter));
            lblDataFimBols.setText(bolsista.getDataFim() != null ? bolsista.getDataFim().format(formatter) : "Data não disponível");
             
-            
-      
-      
-      
-      
-      
-      
-      
         }
     }
 
     public void setStage(Stage stage) {
         this.stageVerPerfil = stage;
     }
+    
+    //******************* OnClicks ***************************************
 
     @FXML
-    void onClickAtualizarPerfil(ActionEvent event) throws MalformedURLException, IOException {
-        URL url = new File("src/main/java/view/AtualizarPerfilBolsista.fxml").toURI().toURL();
-        FXMLLoader loader = new FXMLLoader(url);
-        Parent root = loader.load();
-
-        Stage stage = new Stage();
-
-        AtualizarPerfilBolsistaController apb = loader.getController();
-        apb.setBolsista(bolsista); // Passando o bolsista corretamente para a tela de atualização
-        apb.setStage(stage);
-        
-         apb.setProjeto(projeto);
-        
-        stage.setOnShown(evento -> {//hj
-            apb.ajustarElementosJanela(bolsista,projeto);
-        });
-
-
-        Scene cena = new Scene(root);
-        stage.setTitle("Atualizar Perfil Bolsista");
-        stage.setScene(cena);
-        stage.setMaximized(true);
-
-        stage.show();
-        stageVerPerfil.close();
+    void onClickArtigo(ActionEvent event) throws IOException {
+        abrirArtigo();
     }
+    @FXML
+    void onEnterArtigo(MouseEvent event) {
+        btnArtigo.setStyle("-fx-background-color: D07979" );
+    }
+    @FXML
+    void onExitArtigo(MouseEvent event) {
+        btnArtigo.setStyle("-fx-background-color:  DBA5A5" );
+    }
+     //******************************************************************
+
+    @FXML
+    void onClickAtualizarPerfil(ActionEvent event) throws IOException {
+        abrirAtualizarPerfil();
+    }
+    @FXML
+    void onEnterAtualizarPerfil(MouseEvent event) {
+        btnAtualizarPerfil.setStyle("-fx-background-color: D07979" );
+    }
+    @FXML
+    void onExitAtualizarPerfil(MouseEvent event) {
+        btnAtualizarPerfil.setStyle("-fx-background-color:  DBA5A5" );
+    }
+    //******************************************************************
+
+    @FXML
+    void onClickOutrosProjetos(ActionEvent event) throws IOException, IOException {
+        outrosProjetos();
+    }
+    @FXML
+    void onEnterOutrosProjeto(MouseEvent event) {
+        btnOutrosProjetos.setStyle("-fx-background-color: D07979" );
+    }
+    @FXML
+    void onExitOutrosProjeto(MouseEvent event) {
+        btnOutrosProjetos.setStyle("-fx-background-color:  DBA5A5" );
+    }
+    //******************************************************************
+
+    @FXML
+    void onClickPublicacao(ActionEvent event) throws IOException {
+        abrirPublicacao();
+    }
+     @FXML
+    void onEnterPublicacao(MouseEvent event) {
+        btnPublicacao.setStyle("-fx-background-color: D07979" );
+    }
+    @FXML
+    void onExitPublicacao(MouseEvent event) {
+        btnPublicacao.setStyle("-fx-background-color:  DBA5A5" );
+    }
+    //******************************************************************
 
     @FXML
     void onClickSair(ActionEvent event) throws IOException {
-       // URL url = new File("src/main/java/view/TelaPrincipalBolsista.fxml").toURI().toURL();
-      //  FXMLLoader loader = new FXMLLoader(url);
-      //  Parent root = loader.load();
-
-       // Stage stagePrincipalBolsista = new Stage();
-
-       // TelaPrincipalBolsistaController tpb = loader.getController();
-       // tpb.setStagePrincipal(stagePrincipalBolsista);
-
-       // Scene cena = new Scene(root);
-       // stagePrincipalBolsista.setTitle("Tela Principal Bolsista");
-       // stagePrincipalBolsista.setScene(cena);
-       // stagePrincipalBolsista.setMaximized(true);
-
-       // stagePrincipalBolsista.show();
-       // stageVerPerfil.close();
-   // }
-   
-   
-    URL url = new File("src/main/java/view/TelaPrincipalBolsista.fxml").toURI().toURL();
-         FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-        
-            Stage stagePrincipal = new Stage();
-        
-            TelaPrincipalBolsistaController tpb = loader.getController();    
-            tpb.setStagePrincipal(stagePrincipal);
-            tpb.setBolsista(bolsista);
-            tpb.setProjeto(projeto);
-            
-            stagePrincipal.setOnShown(evento -> {
-            tpb.ajustarElementosJanela(bolsista,projeto);
-        });
-        
-            Scene cena = new Scene(root);
-            stagePrincipal.setTitle("Tela principal bolsista");
-            stagePrincipal.setScene(cena);
-            //deixa a tela maximizada
-            stagePrincipal.setMaximized(true);
-            
-            stagePrincipal.show();
-            stageVerPerfil.close();
+        abrirTelaPrincipal();
     }
-
+    @FXML
+    void onEnterSair(MouseEvent event) {
+        btnSair.setStyle("-fx-background-color: D07979" );
+    }
+    @FXML
+    void onExitSair(MouseEvent event) {
+        btnSair.setStyle("-fx-background-color:  DBA5A5" );
+    }
+    //******************************************************************
     @FXML
     void onClickVerPerfil(ActionEvent event) throws IOException {
+        //abrirVerPerfil();
+    }
+    @FXML
+    void onEnterVerPerfil(MouseEvent event) {
+        //btnVerPerfil.setStyle("-fx-background-color: D07979" );
+    }
+    @FXML
+    void onExitVerPerfil(MouseEvent event) {
+        //btnVerPerfil.setStyle("-fx-background-color:  DBA5A5" );
+    }
+   
+
+    //******************* MÉTODOS ***************************************
+    
+    public void abrirVerPerfil() throws IOException {
         URL url = new File("src/main/java/view/VerPerfilBolsista.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
 
-        Stage stage = new Stage();
+        Stage stageVerPerfil = new Stage();
+
         VerPerfilBolsistaController vpb = loader.getController();
-        vpb.setStage(stage);
+        vpb.setBolsista(bolsista);
+        vpb.setProjeto(projeto);
+        vpb.setStage(stageVerPerfil); 
+
+        Scene cena = new Scene(root);
+        stageVerPerfil.setTitle("Perfil Bolsista");
+        stageVerPerfil.setScene(cena);
+        stageVerPerfil.setMaximized(true);
+
+        stageVerPerfil.show();
+        stageVerPerfil.close(); 
+    }
+
+    
+    public void abrirAtualizarPerfil() throws IOException {
+        URL url = new File("src/main/java/view/AtualizarPerfilBolsista.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stageAtualizar = new Stage();
+        AtualizarPerfilBolsistaController apb = loader.getController();
+        apb.setBolsista(bolsista);
+        apb.setProjeto(projeto);
 
         vpb.setBolsista(bolsista); // Garantindo que os dados sejam passados corretamente
         vpb.setProjeto(projeto);
@@ -196,105 +284,98 @@ public class VerPerfilBolsistaController {
         });
 
         Scene cena = new Scene(root);
-        stage.setTitle("Ver Perfil Bolsista");
-        stage.setScene(cena);
-        stage.setMaximized(true);
-
-        stage.show();
+        stageAtualizar.setTitle("Atualizar Perfil Bolsista");
+        stageAtualizar.setMaximized(true);
+        stageAtualizar.setScene(cena);
+        stageAtualizar.show();
         stageVerPerfil.close();
     }
 
+    
+    public void abrirPublicacao() throws MalformedURLException, IOException {
+        URL url = new File("src/main/java/view/CadastrarPostagem.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stagePostagem = new Stage();
+        CadastrarPostagemController cpb = loader.getController();
+        cpb.setStage(stagePostagem);
+
+        Scene cena = new Scene(root);
+        stagePostagem.setTitle("Bolsista Cadastro Postagem");
+        stagePostagem.setMaximized(false);
+        stagePostagem.setScene(cena);
+        stagePostagem.show();
+    }
+
+   
+    public void abrirArtigo() throws MalformedURLException, IOException {
+        URL url = new File("src/main/java/view/CadastrarArtigo.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stageArtigo = new Stage();
+        CadastrarArtigoController cab = loader.getController();
+        cab.setStage(stageArtigo);
+
+        Scene cena = new Scene(root);
+        stageArtigo.setTitle("Bolsista Cadastro Artigo");
+        stageArtigo.setMaximized(false);
+        stageArtigo.setScene(cena);
+        stageArtigo.show();
+    }
     @FXML
-    void onClickVerProjeto(ActionEvent event) throws IOException {
+void onClickOutrosProjetos(ActionEvent event) {
+    System.out.println("Outros Projetos click");
+}
+
+    
+    public void outrosProjetos() throws MalformedURLException, IOException {
+        URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+        
+        Stage stageProjetos = new Stage();
+        
+        EscolherProjetoController tpc = loader.getController();  
+        tpc.setBolsista(bolsista);
+        tpc.setStage(stageProjetos);
+          
+        Scene cena = new Scene(root);
+        stageProjetos.setTitle("Outros projetos");
+        stageProjetos.setMaximized(false);
+        stageProjetos.setScene(cena);
+        stageProjetos.show();
+        stageProjetos.setOnShown(evento -> {
+             try {
+                 tpc.OnClickProjeto();
+             } catch (SQLException ex) {
+                 Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+             }
+      });
+    }
+
+    
+    private void abrirTelaPrincipal() throws IOException {
+
         URL url = new File("src/main/java/view/TelaPrincipalBolsista.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
 
-        Stage stage = new Stage();
+        Stage stagePrincipalBolsista = new Stage();
+
         TelaPrincipalBolsistaController tpb = loader.getController();
-        tpb.setStagePrincipal(stage);
-        
+        tpb.setStagePrincipal(stagePrincipalBolsista);
+        tpb.setProjeto(projeto);
         tpb.setBolsista(bolsista);
-        tpb.setStagePrincipal(stage);
-        stage.setOnShown(evento -> {//hj
-            tpb.ajustarElementosJanela(bolsista,projeto);
-        }); 
-        
-        Scene cena = new Scene(root);
-        stage.setTitle("Tela Principal Bolsista");
-        stage.setScene(cena);
-        stage.setMaximized(true);
 
-        stage.show();
+        Scene cena = new Scene(root);
+        stagePrincipalBolsista.setTitle("Tela Principal Bolsista");
+        stagePrincipalBolsista.setScene(cena);
+        stagePrincipalBolsista.setMaximized(true);
+
+        stagePrincipalBolsista.show();
         stageVerPerfil.close();
-    }
-    @FXML
-    void onClickOutrosProjetos(ActionEvent event) throws MalformedURLException, IOException {
-        System.out.println("Outros Projetos clicado!");
-        URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
-        FXMLLoader loader = new FXMLLoader(url);
-        Parent root = loader.load();
-
-        Stage stagePrincipal = new Stage();
-        EscolherProjetoController epb = loader.getController();
-        epb.setBolsista(bolsista);
-        epb.setStage(stagePrincipal);
-
-        stagePrincipal.setOnShown(evento -> {
-             try {
-                 epb.OnClickProjeto();
-             } catch (SQLException ex) {
-                  Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
-             }              
-           // tpb.ajustarElementosJanela(bolsista);
-        });
-
-        Scene cena = new Scene(root);
-        stagePrincipal.setTitle("Tela Escolher Projeto Bolsista");
-        stagePrincipal.setMaximized(true);
-        stagePrincipal.setScene(cena);
-        stagePrincipal.show();
-        stageVerPerfil.close();}
-
-
-   @FXML
-void onClickPublicacao(ActionEvent event) throws IOException {
-    URL url = new File("src/main/java/view/CadastrarPostagem.fxml").toURI().toURL();
-    FXMLLoader loader = new FXMLLoader(url);
-    Parent root = loader.load();
-
-    Stage stagePublicacao = new Stage();
-    CadastrarPostagemController cpb = loader.getController();
-    cpb.setStage(stagePublicacao);
-
-    Scene cena = new Scene(root);
-    stagePublicacao.setTitle("Cadastro de Publicação");
-    stagePublicacao.setMaximized(true);
-    stagePublicacao.setScene(cena);
-    stagePublicacao.show();
-}
-@FXML
-void onClickArtigo(ActionEvent event) throws IOException {
-    URL url = new File("src/main/java/view/CadastrarArtigo.fxml").toURI().toURL();
-    FXMLLoader loader = new FXMLLoader(url);
-    Parent root = loader.load();
-
-    Stage stageArtigo = new Stage();
-    CadastrarArtigoController cab = loader.getController();
-    cab.setStage(stageArtigo);
-
-    Scene cena = new Scene(root);
-    stageArtigo.setTitle("Cadastro de Artigo");
-    stageArtigo.setMaximized(true);
-    stageArtigo.setScene(cena);
-    stageArtigo.show();
-}
-
-
-
-    void setProjeto(Projeto projeto) {
-       this.projeto = projeto;
-            lblNomeProjeto.setText(projeto.getTitulo());//falta foto
 
     }
       void ajustarElementosJanela(Bolsista bolsista, Projeto projeto) {
@@ -302,7 +383,5 @@ void onClickArtigo(ActionEvent event) throws IOException {
         this.projeto = projeto;
                  txtNomeUsuario.setText(bolsista.getNome());//falta foto
       }
-
-
 
 }
