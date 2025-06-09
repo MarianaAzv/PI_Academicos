@@ -269,6 +269,10 @@ DesativarBolsista();
             tpc.setCoordenador(coordenador);
             tpc.setProjeto(projeto);
             
+              stagePrincipal.setOnShown(evento -> {
+            tpc.ajustarElementosJanela(coordenador,projeto);
+        });
+        
             Scene cena = new Scene(root);
             stagePrincipal.setTitle("Tela principal Coordenador");
             stagePrincipal.setScene(cena);
@@ -287,7 +291,7 @@ DesativarBolsista();
         Stage stageMaisBolsista = new Stage();
 
         MaisBolsistaController mbc = loader.getController();
-        //mbc.setCoordenador(coordenador);
+        mbc.setCoordenador(coordenador);
         mbc.setProjeto(projeto);
         mbc.setStage(stageMaisBolsista);
         mbc.setOrigem(Origem.atualizar_projeto);

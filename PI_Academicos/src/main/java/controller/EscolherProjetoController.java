@@ -68,6 +68,8 @@ public class EscolherProjetoController {
   public void setCoordenador(Coordenador coordenador) {
         this.coordenador = coordenador;
     }
+  
+  
               @FXML
     void OnClickCriarProjeto(ActionEvent event) throws MalformedURLException, MalformedURLException, IOException {
         try{
@@ -214,6 +216,8 @@ if(coordenador.getAtiva()==true){
    public void setBolsista(Bolsista bolsista) {
         this.bolsista = bolsista;
     }
+   
+ 
 }
     
 
