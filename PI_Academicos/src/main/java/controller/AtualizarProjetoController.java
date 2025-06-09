@@ -175,8 +175,9 @@ DesativarBolsista();
         this.stageAtualizarProjeto = telaAtualizarProjeto;
 
     }
-    public void setCoordenador(Coordenador coord) {
-    this.coordenador = coord;
+    public void setCoordenador(Coordenador coordenador) {
+    this.coordenador = coordenador;
+            System.out.print("O coordenador esta sendo set"+coordenador);
 }
 
     public void setProjeto(Projeto pro) {
@@ -223,6 +224,7 @@ DesativarBolsista();
         pdao.atualizarProjeto(projeto);
 
         mostrarConfirmacao("Projeto alterado", "O projeto foi alterado com sucesso!");
+        System.out.print("O projeto de atualizando");
 
     }
 
@@ -271,7 +273,7 @@ DesativarBolsista();
             stagePrincipal.setScene(cena);
             //deixa a tela maximizada
             stagePrincipal.setMaximized(true);
-            
+                    System.out.print("Estamos indo para a pagina do coordenador");
             stagePrincipal.show();
            stageAtualizarProjeto.close();
     }

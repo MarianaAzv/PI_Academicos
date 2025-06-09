@@ -411,7 +411,7 @@ public class TelaPrincipalCoordenadorController {
         
         if(coordenador.getAtiva()==false){
         
-        
+          System.out.println("Coordenador esta falso");
         }
        
     }

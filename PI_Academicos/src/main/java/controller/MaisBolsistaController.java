@@ -74,7 +74,9 @@ public class MaisBolsistaController {
     public void setOrigem(Origem origem){
         this.origem=origem;
     }
-
+  public void setCoordenador(Coordenador coordenador) {
+        this.coordenador = coordenador;
+    }
     //--------------------*METODOS*-----------------//
     public void abrirJanelaCadastroBolsista() throws IOException{
        URL url = new File("src/main/java/view/CadastroBolsistaCoodernador.fxml").toURI().toURL();
@@ -121,6 +123,7 @@ public class MaisBolsistaController {
         stageAtualizarProjeto.setScene(cena);
        stageAtualizarProjeto.show();
        stageMaisBolsista.close();
+        System.out.print("O coordenador esta sendo set"+coordenador);
        }
       
       
@@ -147,7 +150,10 @@ public class MaisBolsistaController {
             stagePrincipal.setMaximized(true);
             
             stagePrincipal.show();
+             System.out.print("O coordenador esta sendo set"+coordenador);
            stageMaisBolsista.close();
 
 }
+
+    
 }

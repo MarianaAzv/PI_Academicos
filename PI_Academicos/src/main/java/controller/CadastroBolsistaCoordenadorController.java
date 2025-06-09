@@ -244,6 +244,7 @@ public void setCoordenador(Coordenador coordenador) {
        AtualizarProjetoController apc = loader.getController();
         
         apc.setStage(stageAtualizarProjeto);
+        apc.setCoordenador(coordenador);
         apc.setProjeto(projeto);
         
           stageAtualizarProjeto.setOnShown(evento -> {

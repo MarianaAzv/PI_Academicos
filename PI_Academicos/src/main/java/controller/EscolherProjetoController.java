@@ -87,6 +87,7 @@ if(coordenador.getAtiva()==true){
        
         tpc.setStage(telaCriarProjeto);
         tpc.setCoordenador(coordenador);
+        System.out.print("O coordenador é teste"+coordenador);
          telaCriarProjeto.setOnShown(evento -> {
         tpc.ajustarElementosJanela();
       });
