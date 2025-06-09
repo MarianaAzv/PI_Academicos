@@ -267,6 +267,7 @@ DesativarBolsista();
             TelaPrincipalCoordenadorController tpc = loader.getController();    
             tpc.setStagePrincipal(stagePrincipal);
             tpc.setCoordenador(coordenador);
+            tpc.setProjeto(projeto);
             
             Scene cena = new Scene(root);
             stagePrincipal.setTitle("Tela principal Coordenador");
