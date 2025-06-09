@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.lang.ModuleLayer.Controller;
@@ -9,21 +10,29 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.TilePane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Coordenador;
+import model.Noticia;
+import model.Postagem;
+import model.PostagemDAO;
 import model.Projeto;
 //import model.Coordenador;
 import model.Usuario;
@@ -35,7 +44,29 @@ public class TelaPrincipalCoordenadorController {
     private final Usuario dao = new Usuario();
  
     private Coordenador coordenador;
+    private PostagemDAO postagemDAO;
     Projeto projeto;
+    
+    public TelaPrincipalCoordenadorController() {
+        postagemDAO = new PostagemDAO();
+    }
+    
+    @FXML
+    public void initialize() {
+
+       Platform.runLater(() -> {
+           //esse método permite que a tela inicialize sem depender de uma operação mais demorada
+           try{
+           carregarFotos();
+           } catch (IOException ex) {
+               ex.printStackTrace();
+           }
+            
+        });
+
+    }
+    
+    
     
     public void setStage(Stage stage){
     this.stagePrincipalCoordenador = stage;
@@ -96,6 +127,9 @@ public class TelaPrincipalCoordenadorController {
 
     @FXML
     private Text textNomeProjeto;
+    
+    @FXML
+    private TilePane tilePaneGaleria;
 
     @FXML
     private Text txtCampus;
@@ -213,8 +247,38 @@ public class TelaPrincipalCoordenadorController {
         btnVerPerfil.setStyle("-fx-background-color:  DBA5A5" );
     }
     
-//******************* MÉTODOS ***************************************
+    @FXML
+    public void carregarFotos() throws IOException {
+        tilePaneGaleria.getChildren().clear(); // Limpa a galeria antes de recarregar
+        try {
+            List<Postagem> postagens = postagemDAO.listarPostagens(projeto);
+            if (postagens.isEmpty()) {
+                System.out.println("Nenhuma postagem encontrada no banco de dados.");
+                
+
+            }
+            for (Postagem postagem : postagens) {
+                if(postagem.getFoto().getDadosImagem()!=null){
+                adicionarPostagemFeed(postagem);
+                }
+                else{ // caso o link da foto estiver com problema uma outra foto substitui ela
+                    ImageView imageView = new ImageView();
+                    imageView.setFitWidth(320);
+                    imageView.setFitHeight(320);
+                    imageView.setPreserveRatio(true);
+                    tilePaneGaleria.getChildren().add(imageView);
+                    Image image = new Image("https://developers.google.com/static/maps/documentation/streetview/images/error-image-generic.png", true);
+                    imageView.setImage(image);
+                }
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Não é possível carregar postagens");
+        }
+    }
     
+//******************* MÉTODOS ***************************************
+   
     
     private void abrirTelaVerPerfil() throws IOException{
  
@@ -347,6 +411,24 @@ public class TelaPrincipalCoordenadorController {
         stagePostagem.show();
     }
     
+    public void abrirTelaAtualizarPublicacao(Postagem postagem) throws IOException{
+        URL url = new File("src/main/java/view/AtualizarPostagem.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stageAtualizarPostagem = new Stage();
+        AtualizarPostagemController apc = loader.getController();
+        apc.setStage(stageAtualizarPostagem);
+        apc.setProjeto(projeto);
+        apc.setPostagem(postagem);
+
+        Scene cena = new Scene(root);
+        stageAtualizarPostagem.setTitle("Atualizar Postagem");
+        stageAtualizarPostagem.setMaximized(false);
+        stageAtualizarPostagem.setScene(cena);
+        stageAtualizarPostagem.show();
+    }
+    
     public void abrirTelaOutrosProjetos() throws IOException{
         URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
          FXMLLoader loader = new FXMLLoader(url);
@@ -413,8 +495,102 @@ public class TelaPrincipalCoordenadorController {
        
     }
     
+    private void adicionarPostagemFeed(Postagem postagem) {
+        
+        ImageView imageView = new ImageView();
+        imageView.setFitWidth(320);
+        imageView.setFitHeight(320);
+        imageView.setPreserveRatio(true);
+
+        tilePaneGaleria.getChildren().add(imageView);
+        
+        Image image = null;
+                
+                byte[] conteudoFoto = postagem.getFoto().getDadosImagem();
+                if(conteudoFoto!=null){
+                   try (ByteArrayInputStream bis = new ByteArrayInputStream(conteudoFoto)) {
+                            image = new Image(bis); // Converte byte[] para Image AQUI
+                        } catch (Exception e) {
+                            System.err.println("Erro ao converter bytes para Image: " + e.getMessage());
+                            // precisa definir uma imagem padrao de erro
+                        }
+                }
+        
+        
+        
+        if(image!=null){
+        imageView.setImage(image);
+        carregarFotosAjustadas(image,imageView, postagem);//método para deixar fotos quadradas
+  
+                  
+            System.out.println("Id da imagem: " + postagem.getFoto().getId());
+            
+
+            imageView.setOnMouseClicked(event -> {
+                try {
+                abrirTelaAtualizarPublicacao(postagem); //tela teste, posteriormente será passada uma tela que mostre os detalhes da noticia
+                } catch (IOException e) {
+                System.err.println("Erro ao abrir tela de detalhes da postagem: " + e.getMessage());
+                }
+            });
+            
+            
+        
+    }
+        else{
+            imageView.setImage(new Image(getClass().getResourceAsStream("/src/main/resources/Variant3.png")));
+        }
+    }
     
     
+    private void carregarFotosAjustadas(Image image, ImageView imageView, Postagem postagem) {
+    // verifica se a imagem foi carregada
+    if (image.isError()) {
+        System.err.println("Error loading image for ID: " + postagem.getFoto().getId());
+        imageView.setImage(new Image(getClass().getResourceAsStream("/src/main/resources/Variant3.png")));
+        return; 
+    }
+
+    if (image.isBackgroundLoading() || image.getProgress() < 1.0) {
+        // se a imagem está carregando ele adiciona um listener
+        image.progressProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal.doubleValue() == 1.0) { // Image fully loaded
+                Platform.runLater(() -> { // Ensure UI update on FX Application Thread
+                    redimensionarFotos(image, imageView, postagem);
+                });
+            }
+        });
+    } else {
+        // se a imagem está carregada ele redimensiona
+        redimensionarFotos(image, imageView, postagem);
+    }
+}
+  
+    
+    private void redimensionarFotos(Image image, ImageView imageView, Postagem postagem) {
+    double imageWidth = image.getWidth();
+    double imageHeight = image.getHeight();
+    double imageViewWidth = imageView.getFitWidth();
+    double imageViewHeight = imageView.getFitHeight();
+
+    double ratioImage = imageWidth / imageHeight;
+    double ratioView = imageViewWidth / imageViewHeight;
+
+    Rectangle2D viewport;
+    if (ratioImage > ratioView) {
+        // Image is wider than ImageView. Crop sides.
+        double newImageWidth = imageHeight * ratioView;
+        double xOffset = (imageWidth - newImageWidth) / 2;
+        viewport = new Rectangle2D(xOffset, 0, newImageWidth, imageHeight);
+    } else {
+        // Image is taller than ImageView. Crop top/bottom.
+        double newImageHeight = imageWidth / ratioView;
+        double yOffset = (imageHeight - newImageHeight) / 2;
+        viewport = new Rectangle2D(0, yOffset, imageWidth, newImageHeight);
+    }
+    imageView.setViewport(viewport);
+    System.out.println("Postagem arrumada com id:" + postagem.getFoto().getId());
+}
    
         
    }
