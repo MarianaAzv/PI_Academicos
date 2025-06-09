@@ -30,12 +30,13 @@ import model.LoginDAO;
 import model.Usuario;
 import util.AlertaUtil;
 
-public class TelaLoginController {
+public class TelaLoginController implements INotificacaoAlert{
     
     private Stage stageLogin;
     private Connection conexao;
     private final LoginDAO dao = new LoginDAO();
     private Usuario user;
+    boolean resp;
                      
      @FXML
     private Button btnEntrar;
@@ -277,6 +278,7 @@ public void abrirTelaPrincipalBolsista(Bolsista bolsista) throws MalformedURLExc
     vpb.setMsg(msg);
     vpb.setTipo(tipo);
     vpb.setStage(stageAlerta); 
+    vpb.setControllerResposta(this);
   
     Scene cena = new Scene(root);
     stageAlerta.setTitle(titulo);
@@ -285,5 +287,16 @@ public void abrirTelaPrincipalBolsista(Bolsista bolsista) throws MalformedURLExc
 
     stageAlerta.show();
     
+    }
+
+    @Override
+    public void btnOk() {
+        resp = true;
+       
+    }
+
+    @Override
+    public void btnCancela() {
+        resp = true;
     }
 }

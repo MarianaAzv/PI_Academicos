@@ -321,7 +321,7 @@ public class VerPerfilBolsistaController {
         stageArtigo.setMaximized(false);
         stageArtigo.setScene(cena);
         stageArtigo.show();
-    }
+     }
 
 
     
