@@ -362,16 +362,18 @@ public class TelaPrincipalCoordenadorController {
         stageProjetos.setTitle("Outros projetos");
         stageProjetos.setMaximized(false);
         stageProjetos.setScene(cena);
-        stageProjetos.show();
         stageProjetos.setOnShown(evento -> {
-             try {
-                 tpc.OnClickProjeto();
-             } catch (SQLException ex) {
-                 Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
-             }
-      });
-    }
+        try {
+            tpc.OnClickProjeto();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    });
 
+
+    stageProjetos.show();
+    }
+    
     void ajustarElementosJanela(Coordenador coordenador, Projeto projeto) {
         this.coordenador=coordenador;
         this.projeto=projeto;
