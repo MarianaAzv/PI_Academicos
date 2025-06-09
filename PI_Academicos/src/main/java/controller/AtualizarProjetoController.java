@@ -30,6 +30,7 @@ import model.Projeto;
 import model.ProjetoDAO;
 import static util.AlertaUtil.mostrarAviso;
 import static util.AlertaUtil.mostrarConfirmacao;
+import util.Origem;
 
 public class AtualizarProjetoController {
 
@@ -115,13 +116,13 @@ public class AtualizarProjetoController {
 
     //------------------------*Clicks*----------------------------------//
     @FXML
-    void OnClickAdicionarBolsista(ActionEvent event) {
-
+    void OnClickAdicionarBolsista(ActionEvent event) throws IOException {
+   AdicionarBolsista();
     }
 
     @FXML
     void OnClickAdicionarCocoordenador(ActionEvent event) throws IOException {
-   AdicionarBolsista();
+
     }
 
     @FXML
@@ -174,6 +175,10 @@ DesativarBolsista();
         this.stageAtualizarProjeto = telaAtualizarProjeto;
 
     }
+    public void setCoordenador(Coordenador coordenador) {
+    this.coordenador = coordenador;
+            System.out.print("O coordenador esta sendo set"+coordenador);
+}
 
     public void setProjeto(Projeto pro) {
         this.projeto = pro;
@@ -219,6 +224,7 @@ DesativarBolsista();
         pdao.atualizarProjeto(projeto);
 
         mostrarConfirmacao("Projeto alterado", "O projeto foi alterado com sucesso!");
+        System.out.print("O projeto de atualizando");
 
     }
 
@@ -260,13 +266,15 @@ DesativarBolsista();
         
             TelaPrincipalCoordenadorController tpc = loader.getController();    
             tpc.setStagePrincipal(stagePrincipal);
+            tpc.setCoordenador(coordenador);
+            tpc.setProjeto(projeto);
             
             Scene cena = new Scene(root);
             stagePrincipal.setTitle("Tela principal Coordenador");
             stagePrincipal.setScene(cena);
             //deixa a tela maximizada
             stagePrincipal.setMaximized(true);
-            
+                    System.out.print("Estamos indo para a pagina do coordenador");
             stagePrincipal.show();
            stageAtualizarProjeto.close();
     }
@@ -282,6 +290,7 @@ DesativarBolsista();
         //mbc.setCoordenador(coordenador);
         mbc.setProjeto(projeto);
         mbc.setStage(stageMaisBolsista);
+        mbc.setOrigem(Origem.atualizar_projeto);
 
         Scene cena = new Scene(root);
         stageMaisBolsista.setTitle("Adicionar bolsistas");

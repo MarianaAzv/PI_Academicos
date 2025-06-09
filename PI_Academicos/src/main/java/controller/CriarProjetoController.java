@@ -47,6 +47,7 @@ import model.SolicitacaoDAO;
 import model.Usuario;
 import static util.AlertaUtil.mostrarAviso;
 import static util.AlertaUtil.mostrarConfirmacao;
+import util.Origem;
 
 public class CriarProjetoController {
 
@@ -292,6 +293,7 @@ public class CriarProjetoController {
         }
     }
 
+   
     public void abrirJanelaMaisBolsista() throws IOException {
         URL url = new File("src/main/java/view/MaisBolsista.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
@@ -300,9 +302,10 @@ public class CriarProjetoController {
         Stage stageMaisBolsista = new Stage();
 
         MaisBolsistaController mbc = loader.getController();
-        //mbc.setCoordenador(coordenador);
+        mbc.setCoordenador(coordenador);
         mbc.setProjeto(projeto);
         mbc.setStage(stageMaisBolsista);
+        mbc.setOrigem(Origem.cadastro_projeto);
 
         Scene cena = new Scene(root);
         stageMaisBolsista.setTitle("Adicionar bolsistas");

@@ -4,11 +4,16 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.awt.Desktop;
 import java.io.IOException;
-import java.nio.file.Paths;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import java.sql.SQLException;
 import java.time.LocalDate;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -20,10 +25,12 @@ import static util.AlertaUtil.mostrarConfirmacao;
 import javafx.stage.Stage;
 import model.Bolsista;
 import model.BolsistaDAO;
+import model.Coordenador;
 import model.Projeto;
 import model.Solicitacao;
 import model.SolicitacaoDAO;
 import model.Usuario;
+import util.Origem;
 
 
 public class CadastroBolsistaCoordenadorController {
@@ -34,6 +41,8 @@ public class CadastroBolsistaCoordenadorController {
      Projeto projeto;
      Bolsista bolsista;
      Usuario usuario;
+     private Origem origem;
+     Coordenador coordenador;
      
     @FXML
     private DatePicker DataFimdaBolsa;
@@ -106,7 +115,7 @@ public class CadastroBolsistaCoordenadorController {
 
 
     @FXML
-    void OnClickEnviar(ActionEvent event) throws SQLException {
+    void OnClickEnviar(ActionEvent event) throws SQLException, IOException {
         try {
             Long cpf = Long.parseLong(txtCPF.getText());
             Long matricula = Long.parseLong(txtMatricula.getText());
@@ -159,7 +168,7 @@ public class CadastroBolsistaCoordenadorController {
     }
     
     
-    void incluir(Long cpf, String nome, String apelido, String email, String senha, Long matricula, String curso, LocalDate dataInicio, LocalDate dataFim) throws SQLException {
+    void incluir(Long cpf, String nome, String apelido, String email, String senha, Long matricula, String curso, LocalDate dataInicio, LocalDate dataFim) throws SQLException, IOException {
          usuario = new Usuario(cpf, nome, apelido, email, senha);
          bolsista = new Bolsista(matricula, curso, dataInicio, dataFim);
         int repetido = new BolsistaDAO().validarApelido(apelido, 0);
@@ -171,7 +180,13 @@ public class CadastroBolsistaCoordenadorController {
         } else {
             new BolsistaDAO().cadastrarUsuarioBolsista(usuario, bolsista, projeto);
             mostrarConfirmacao("Cadastro realizado", "O bolsista foi registrado com sucesso!");
-            stageCadastrarBolsistaCoordenador.close();
+         if(origem== Origem.atualizar_projeto) {
+   VoltarParaAtualizarprojeto();
+} else if (origem == Origem.cadastro_projeto) {
+    Irtelacoordenador(); 
+} else {
+    mostrarAviso("Erro", "O sistema nao esta funcionando corretamente");
+}
         }
     }
 
@@ -182,6 +197,16 @@ public class CadastroBolsistaCoordenadorController {
      public void setProjeto(Projeto projeto){
         this.projeto = projeto;
     }
+     
+     
+
+public void setOrigem(Origem origem) {
+    this.origem = origem;
+}
+
+public void setCoordenador(Coordenador coordenador) {
+    this.coordenador = coordenador;
+}
      
      public void enviarSolicitacao(){
      
@@ -208,6 +233,57 @@ public class CadastroBolsistaCoordenadorController {
      
  }
     
-   
+   public void VoltarParaAtualizarprojeto() throws IOException{
+        URL url = new File("src/main/java/view/AtualizarProjeto.fxml").toURI().toURL();       
+      FXMLLoader loader = new FXMLLoader(url);
+       
+      Parent root = loader.load();
+        
+     Stage stageAtualizarProjeto = new Stage();
+        
+       AtualizarProjetoController apc = loader.getController();
+        
+        apc.setStage(stageAtualizarProjeto);
+        apc.setCoordenador(coordenador);
+        apc.setProjeto(projeto);
+        
+          stageAtualizarProjeto.setOnShown(evento -> {
+        apc.ajustarElementosJanela();
+      });
+        
+      Scene cena = new Scene(root);
+       stageAtualizarProjeto.setTitle("Atualizar Projeto");
+       stageAtualizarProjeto.setMaximized(true);
+        stageAtualizarProjeto.setScene(cena);
+       stageAtualizarProjeto.show();
+       stageCadastrarBolsistaCoordenador.close();
+    
+        
+    }
+   public void Irtelacoordenador() throws IOException{
+        URL url = new File("src/main/java/view/TelaPrincipalCoordenador.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage stagePrincipal = new Stage();
+        
+            TelaPrincipalCoordenadorController tpc = loader.getController();    
+            tpc.setStagePrincipal(stagePrincipal);
+            tpc.setCoordenador(coordenador);
+            tpc.setProjeto(projeto);
+            
+            stagePrincipal.setOnShown(evento -> {
+            tpc.ajustarElementosJanela(coordenador,projeto);
+        });
+        
+            Scene cena = new Scene(root);
+            stagePrincipal.setTitle("Tela principal Coordenador");
+            stagePrincipal.setScene(cena);
+            //deixa a tela maximizada
+            stagePrincipal.setMaximized(true);
+            
+            stagePrincipal.show();
+            stageCadastrarBolsistaCoordenador.close();
+   }
 
 }
