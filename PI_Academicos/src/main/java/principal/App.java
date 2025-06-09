@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class App extends Application {
 
@@ -32,7 +34,11 @@ public class App extends Application {
         tlc.setStage(telaLogin);
         
         telaLogin.setOnShown(event -> {
-            tlc.abrirJanela();
+            try {
+                tlc.abrirJanela();
+            } catch (IOException ex) {
+                Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         
         

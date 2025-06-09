@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 public class AlertGenericoController {
     
     private Stage stageAlerta;
+    private boolean r;
     
     public void setStage(Stage stage) {
         this.stageAlerta = stage;
@@ -22,6 +23,10 @@ public class AlertGenericoController {
     void setMsg(String msg) {
         this.msg = msg;
         lblMsg.setText(msg);
+    }
+    void setTipo(int tipo) {
+        this.tipo = tipo;
+        
     }
 
     @FXML
@@ -35,24 +40,29 @@ public class AlertGenericoController {
     
     @FXML
     private Label lblMsg;
+    
+    
 
     @FXML
     void onClickCancelar(ActionEvent event) {
-
+        r = false;
+        getResultado(r);
+        stageAlerta.close();
     }
 
     @FXML
     void onClickOK(ActionEvent event) {
-
+        r = true;
+        getResultado(r);
+        stageAlerta.close();
     }
     
     //setar img
     
-    public boolean ok(){
-        
-        return true;
-        
+    public boolean getResultado(boolean r){
+        return(r);
     }
+    
    
 
 }

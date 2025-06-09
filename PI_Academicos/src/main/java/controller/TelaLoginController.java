@@ -62,28 +62,28 @@ public class TelaLoginController {
         this.stageLogin = stage;
     }
     
-    public void verificarBanco() {
+    public void verificarBanco() throws IOException {
         
         this.conexao = ConexaoBD.conectar();
         if (this.conexao != null) {
             System.out.println("Conectou no banco de dados");
         } else {
-            System.out.println("Problemas na conexão com o banco de dados");
+            System.out.println("Não conectou o banco de dados");
         }
 
     }
         
-    public void abrirJanela(){
+    public void abrirJanela() throws IOException{
         verificarBanco();
     }
         
     public void processarLogin() throws IOException, SQLException {
         if (!dao.bancoOnline()) {
-            System.out.println("Banco de dados desconectado!");
+            alerta("Banco de dados não conectado", 2, "Erro de banco");
         } else if (txtApelido.getText() != null && !txtApelido.getText().isEmpty() && txtSenha.getText() != null && !txtSenha.getText().isEmpty()) {
             user = autenticar(txtApelido.getText(),txtSenha.getText());
             if (user != null) {
-                System.out.println("Bem vindo " + user.getNome() + " acesso liberado!");
+                System.out.println("Acesso liberado");
                        
                 if (stageLogin != null) { 
                     stageLogin.close();
@@ -106,11 +106,13 @@ public class TelaLoginController {
                 
                 
             } else {
-               System.out.println("Usuário e senha invalidos!");
+               
+              alerta("Este usuário ou senha é invalido!", 1, "Erro de validação");
+               
 
             }
         } else {
-            System.out.println("Verifique as informações!");
+            alerta("Verifique as informações", 2, "Erro de validação");
         }
 
     }
@@ -261,5 +263,26 @@ public void abrirTelaPrincipalBolsista(Bolsista bolsista) throws MalformedURLExc
             
             
             
+    }
+    
+    public void alerta(String msg, int tipo, String titulo) throws IOException{
+        URL url = new File("src/main/java/view/AlertGenerico.fxml").toURI().toURL();
+    FXMLLoader loader = new FXMLLoader(url);
+    Parent root = loader.load();
+
+    Stage stageAlerta = new Stage();
+
+    AlertGenericoController vpb = loader.getController();
+    vpb.setMsg(msg);
+    vpb.setTipo(tipo);
+    vpb.setStage(stageAlerta); 
+  
+    Scene cena = new Scene(root);
+    stageAlerta.setTitle(titulo);
+    stageAlerta.setScene(cena);
+    
+
+    stageAlerta.show();
+    
     }
 }

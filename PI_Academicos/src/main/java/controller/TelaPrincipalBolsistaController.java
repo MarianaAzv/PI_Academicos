@@ -378,6 +378,7 @@ public class TelaPrincipalBolsistaController {
 
     AlertGenericoController vpb = loader.getController();
     vpb.setMsg("Oi fernanda!");
+    vpb.setTipo(1);
     vpb.setStage(stageAlerta); // Correção: Garantir que a nova tela tenha controle sobre seu próprio Stage
 
     Scene cena = new Scene(root);
