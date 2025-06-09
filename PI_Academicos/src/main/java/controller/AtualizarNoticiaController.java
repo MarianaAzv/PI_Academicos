@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.ByteArrayInputStream;
+import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,6 +15,8 @@ import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 import model.Administrador;
 import model.Noticia;
+import model.NoticiaDAO;
+import static util.AlertaUtil.mostrarConfirmacao;
 
 public class AtualizarNoticiaController {
 
@@ -43,7 +46,12 @@ public class AtualizarNoticiaController {
     }
 
     @FXML
-    void onClickExcluir(ActionEvent event) {
+    void onClickExcluir(ActionEvent event) throws SQLException {
+        
+        NoticiaDAO noticiaDAO = new NoticiaDAO();
+        noticiaDAO.deletarNoticia(noticia);
+        mostrarConfirmacao("Notícia excluída","A noticia foi excluída.");
+        stageAtualizarNoticia.close();
 
     }
 

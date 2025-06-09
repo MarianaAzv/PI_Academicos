@@ -64,6 +64,35 @@ public class NoticiaDAO extends GenericDAO{
         }
     }
     
+    
+    public void deletarNoticia (Noticia noticia) throws SQLException{
+        
+        Connection con = conectarDAO();
+        
+        
+        String sqlNoticia = "DELETE FROM noticiasgerais WHERE idNoticia = ?;";
+        String sqlFoto = "DELETE FROM fotos_noticias WHERE idNoticia = ?;";
+        
+        try {
+            PreparedStatement stmtNoticia = con.prepareStatement(sqlNoticia);
+  
+            stmtNoticia.setInt(1, noticia.getId());
+            stmtNoticia.executeUpdate();
+            
+            PreparedStatement stmtFoto = con.prepareStatement(sqlFoto);
+            
+            stmtFoto.setInt(1, noticia.getId());
+            stmtFoto.executeUpdate();
+            
+            System.out.println("A notícia foi excluída");
+            
+        }catch (SQLException e) {
+            System.err.println("Erro ao excluir notícia do banco de dados: " + e.getMessage());
+            // Adicione aqui tratamento de erro mais robusto (ex: log, exceção customizada)
+        }
+        
+    }
+    
     public List<Noticia> listarNoticias(Administrador adm) throws SQLException, IOException {
         List<Noticia> noticias = new ArrayList<>();
         String sql = "select noticiasgerais.idNoticia, idAdministrador, titulo, texto, dataPublicacao, idFoto," +
