@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +27,7 @@ public class VerPerfilBolsistaController {
     private Bolsista bolsista;
 
     @FXML
-    private Text TxtNomeUsuario;
+    private Text txtNomeUsuario;
 
     @FXML
     private Button btnArtigo;
@@ -48,6 +51,10 @@ public class VerPerfilBolsistaController {
     private Label lblCPF, lblCPFBolsista, lblCurso, lblDataFimBols, 
                   lblDataInicioBols, lblEmail, lblEmailBolsista, lblMatricula, lblMatriculaBols, 
                   lblNomeBol, lblUsuarioBolsista;
+    
+    @FXML
+    private Label lblNomeProjeto;
+
       @FXML
     private Label lblSenhaBolsista;
         @FXML
@@ -109,6 +116,13 @@ public class VerPerfilBolsistaController {
         AtualizarPerfilBolsistaController apb = loader.getController();
         apb.setBolsista(bolsista); // Passando o bolsista corretamente para a tela de atualização
         apb.setStage(stage);
+        
+         apb.setProjeto(projeto);
+        
+        stage.setOnShown(evento -> {//hj
+            apb.ajustarElementosJanela(bolsista,projeto);
+        });
+
 
         Scene cena = new Scene(root);
         stage.setTitle("Atualizar Perfil Bolsista");
@@ -173,8 +187,13 @@ public class VerPerfilBolsistaController {
 
         Stage stage = new Stage();
         VerPerfilBolsistaController vpb = loader.getController();
-        vpb.setBolsista(bolsista); // Garantindo que os dados sejam passados corretamente
         vpb.setStage(stage);
+
+        vpb.setBolsista(bolsista); // Garantindo que os dados sejam passados corretamente
+        vpb.setProjeto(projeto);
+        stage.setOnShown(evento -> {
+            vpb.ajustarElementosJanela(bolsista,projeto);
+        });
 
         Scene cena = new Scene(root);
         stage.setTitle("Ver Perfil Bolsista");
@@ -194,7 +213,13 @@ public class VerPerfilBolsistaController {
         Stage stage = new Stage();
         TelaPrincipalBolsistaController tpb = loader.getController();
         tpb.setStagePrincipal(stage);
-
+        
+        tpb.setBolsista(bolsista);
+        tpb.setStagePrincipal(stage);
+        stage.setOnShown(evento -> {//hj
+            tpb.ajustarElementosJanela(bolsista,projeto);
+        }); 
+        
         Scene cena = new Scene(root);
         stage.setTitle("Tela Principal Bolsista");
         stage.setScene(cena);
@@ -204,9 +229,32 @@ public class VerPerfilBolsistaController {
         stageVerPerfil.close();
     }
     @FXML
-void onClickOutrosProjetos(ActionEvent event) {
-    System.out.println("Outros Projetos click");
-}
+    void onClickOutrosProjetos(ActionEvent event) throws MalformedURLException, IOException {
+        System.out.println("Outros Projetos clicado!");
+        URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stagePrincipal = new Stage();
+        EscolherProjetoController epb = loader.getController();
+        epb.setBolsista(bolsista);
+        epb.setStage(stagePrincipal);
+
+        stagePrincipal.setOnShown(evento -> {
+             try {
+                 epb.OnClickProjeto();
+             } catch (SQLException ex) {
+                  Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+             }              
+           // tpb.ajustarElementosJanela(bolsista);
+        });
+
+        Scene cena = new Scene(root);
+        stagePrincipal.setTitle("Tela Escolher Projeto Bolsista");
+        stagePrincipal.setMaximized(true);
+        stagePrincipal.setScene(cena);
+        stagePrincipal.show();
+        stageVerPerfil.close();}
 
 
    @FXML
@@ -246,7 +294,15 @@ void onClickArtigo(ActionEvent event) throws IOException {
 
     void setProjeto(Projeto projeto) {
        this.projeto = projeto;
+            lblNomeProjeto.setText(projeto.getTitulo());//falta foto
+
     }
+      void ajustarElementosJanela(Bolsista bolsista, Projeto projeto) {
+        this.bolsista = bolsista;
+        this.projeto = projeto;
+                 txtNomeUsuario.setText(bolsista.getNome());//falta foto
+      }
+
 
 
 }

@@ -302,7 +302,7 @@
                </rowConstraints>
                <children>
                   <ImageView fx:id="imgPerfil" fitHeight="87.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
-                  <Text fx:id="TxtNomeUsuario" fill="#840d0b" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Text fx:id="txtNomeUsuario" fill="#840d0b" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Courier New Bold" size="14.0" />
                      </font>
@@ -325,7 +325,7 @@
                </rowConstraints>
                <children>
                   <ImageView fx:id="imgProjeto" fitHeight="87.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
-                  <Text fx:id="TxtNomeUsuario1" fill="#840d0b" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Text fx:id="txtNomeProjeto" fill="#840d0b" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Courier New Bold" size="14.0" />
                      </font>
