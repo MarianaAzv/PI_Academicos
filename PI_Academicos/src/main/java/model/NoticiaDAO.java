@@ -28,7 +28,7 @@ public class NoticiaDAO extends GenericDAO{
         
         
         String sqlNoticia = "INSERT INTO noticiasgerais (idAdministrador, titulo, texto) VALUES (?, ?, ?)";
-        String sqlFoto = "INSERT INTO fotos (arquivoFoto, idNoticia) VALUES (?, ?)";
+        String sqlFoto = "INSERT INTO fotos_noticias (arquivoFoto, idNoticia) VALUES (?, ?)";
 
         try {
              PreparedStatement stmtNoticia = con.prepareStatement(sqlNoticia, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -64,9 +64,40 @@ public class NoticiaDAO extends GenericDAO{
         }
     }
     
-    public List<Noticia> listarNoticias() throws SQLException, IOException {
+    
+    public void deletarNoticia (Noticia noticia) throws SQLException{
+        
+        Connection con = conectarDAO();
+        
+        
+        String sqlNoticia = "DELETE FROM noticiasgerais WHERE idNoticia = ?;";
+        String sqlFoto = "DELETE FROM fotos_noticias WHERE idNoticia = ?;";
+        
+        try {
+            PreparedStatement stmtNoticia = con.prepareStatement(sqlNoticia);
+  
+            stmtNoticia.setInt(1, noticia.getId());
+            stmtNoticia.executeUpdate();
+            
+            PreparedStatement stmtFoto = con.prepareStatement(sqlFoto);
+            
+            stmtFoto.setInt(1, noticia.getId());
+            stmtFoto.executeUpdate();
+            
+            System.out.println("A notícia foi excluída");
+            
+        }catch (SQLException e) {
+            System.err.println("Erro ao excluir notícia do banco de dados: " + e.getMessage());
+            // Adicione aqui tratamento de erro mais robusto (ex: log, exceção customizada)
+        }
+        
+    }
+    
+    public List<Noticia> listarNoticias(Administrador adm) throws SQLException, IOException {
         List<Noticia> noticias = new ArrayList<>();
-        String sql = "select noticiasgerais.idNoticia, idAdministrador, titulo, texto, dataPublicacao, idFoto, arquivoFoto, fotos.idNoticia from noticiasgerais left join fotos on noticiasgerais.idNoticia = fotos.idNoticia;";
+        String sql = "select noticiasgerais.idNoticia, idAdministrador, titulo, texto, dataPublicacao, idFoto," +
+                     "arquivoFoto, fotos_noticias.idNoticia from noticiasgerais left join fotos_noticias " +
+                     "on noticiasgerais.idNoticia = fotos_noticias.idNoticia WHERE idAdministrador = ?;";
         
         Connection con = conectarDAO();
         ResultSet rs = null;
@@ -74,6 +105,7 @@ public class NoticiaDAO extends GenericDAO{
         if(con!=null){
         try {
             PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, adm.getId());
             rs = stmt.executeQuery();
 
             int cont=0;

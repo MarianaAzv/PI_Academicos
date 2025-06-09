@@ -19,6 +19,9 @@ public class Usuario {
 	private String email;
 	private String senha;
 	private Boolean ativa;
+        private Foto fotoPerfil;
+
+    
 
 	// Método construtor com todos os parâmetros
 
@@ -31,6 +34,18 @@ public class Usuario {
         this.senha = senha;
         this.ativa = ativa;
     }
+    
+    // Método construtor com todos os parâmetros e foto
+    public Usuario(int id, long cpf, String nome, String apelido, String email, String senha, Boolean ativa, Foto fotoPerfil) {
+        this.id = id;
+        this.cpf = cpf;
+        this.nome = nome;
+        this.apelido = apelido;
+        this.email = email;
+        this.senha = senha;
+        this.ativa = ativa;
+        this.fotoPerfil = fotoPerfil;
+    }
 
     // Método construtor sem boolean ativa
 
@@ -41,6 +56,18 @@ public class Usuario {
         this.apelido = apelido;
         this.email = email;
         this.senha = senha;
+    }
+    
+    // Método construtor sem boolean ativa com foto
+
+    public Usuario(int id, long cpf, String nome, String apelido, String email, String senha, Foto fotoPerfil) {
+        this.id = id;
+        this.cpf = cpf;
+        this.nome = nome;
+        this.apelido = apelido;
+        this.email = email;
+        this.senha = senha;
+        this.fotoPerfil = fotoPerfil;
     }
     
    
@@ -134,6 +161,14 @@ public class Usuario {
 
     public void setAtiva(Boolean ativa) {
         this.ativa = ativa;
+    }
+    
+    public void setFotoPerfil(Foto fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
+    }
+
+    public Foto getFotoPerfil() {
+        return fotoPerfil;
     }
     
     private transient IntegerProperty idProperty;

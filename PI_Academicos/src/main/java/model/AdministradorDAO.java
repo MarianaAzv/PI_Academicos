@@ -28,12 +28,13 @@ public class AdministradorDAO extends GenericDAO {
         return rowCount;
     }
     
-    public void cadastrarUsuarioAdministrador(Usuario usuario, Administrador administrador){
+    public void cadastrarUsuarioAdministrador(Usuario usuario, Administrador administrador, Foto fotoPerfil) throws SQLException{
         
         Connection con = conectarDAO();
         
         String queryUsuario = "INSERT INTO USUARIOS(cpf, nome, apelido, senha, email,ativa) VALUES(?,?,?,?,?,1)";
         String queryCoordenador = "INSERT INTO ADMINISTRADORES(idUsuario) VALUES (?)";
+        String queryFotoPerfil = "INSERT INTO fotos_perfil_usuario(idUsuario, arquivoFoto) VALUES(?,?);";
 
         try (con) {
             // Inserir em Usuario
@@ -54,6 +55,20 @@ public class AdministradorDAO extends GenericDAO {
                 PreparedStatement stmtAdministrador = con.prepareStatement(queryCoordenador);
                 stmtAdministrador.setInt(1, idGerado);
                 stmtAdministrador.executeUpdate();
+                
+                //Inserir em fotos_perfil_usuario
+                PreparedStatement stmtFotos = con.prepareStatement(queryFotoPerfil, PreparedStatement.RETURN_GENERATED_KEYS);
+                stmtFotos.setInt(1, idGerado);
+                stmtFotos.setBytes(2, fotoPerfil.getDadosImagem());
+                stmtFotos.executeUpdate();
+                
+                ResultSet keys2 = stmtFotos.getGeneratedKeys();
+                if (keys2.next()) {
+                int idGerado2 = keys2.getInt(1);
+                fotoPerfil.setId(idGerado2);
+                }
+                
+                
 
                 System.out.println("Administrados cadastrado com ID: " + idGerado);
             }
@@ -67,11 +82,12 @@ public class AdministradorDAO extends GenericDAO {
   
         Connection con = conectarDAO();
         
-        String queryUsuario = "UPDATE USUARIOS SET cpf = ?, nome = ?, apelido = ?, senha = ?, email = ? WHERE idUsuario = ?";
+        String queryUsuario = "UPDATE USUARIOS SET cpf = ?, nome = ?, apelido = ?, senha = ?, email = ? WHERE idUsuario = ?";       
+        String queryFotoPerfil = "UPDATE fotos_perfil_usuario SET arquivoFoto = ? WHERE idUsuario = ?";
 
         try (con) {
         // Inserir em Usuario
-        PreparedStatement stmtUsuario = con.prepareStatement(queryUsuario, PreparedStatement.RETURN_GENERATED_KEYS);
+        PreparedStatement stmtUsuario = con.prepareStatement(queryUsuario);
         stmtUsuario.setLong(1, administrador.getCpf());
         stmtUsuario.setString(2, administrador.getNome());
         stmtUsuario.setString(3, administrador.getApelido());
@@ -79,8 +95,13 @@ public class AdministradorDAO extends GenericDAO {
         stmtUsuario.setString(5, administrador.getEmail());  
         stmtUsuario.setInt(6, administrador.getId()); 
         stmtUsuario.executeUpdate();
+        
+        PreparedStatement stmtFotoPerfil = con.prepareStatement(queryFotoPerfil);
+        stmtFotoPerfil.setBytes(1, administrador.getFotoPerfil().getDadosImagem());
+        stmtFotoPerfil.setInt(2, administrador.getId());
+        stmtFotoPerfil.executeUpdate();
 
-        System.out.println("Administrador cadastrado com ID: " + administrador.getId());
+        System.out.println("Administrador atualizado com ID: " + administrador.getId());
     }
 }
         

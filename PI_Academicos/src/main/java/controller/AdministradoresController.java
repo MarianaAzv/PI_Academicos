@@ -67,6 +67,9 @@ public class AdministradoresController {
 
     @FXML
     private Label lblAdiministradoirs;
+    
+    @FXML
+    private Button btnCadastrarADM;
 
     @FXML
     private Label lblNomeAdm;
@@ -141,6 +144,27 @@ public class AdministradoresController {
          btnVerPerfil.setStyle("-fx-background-color:  DBA5A5" );
     }
 //**********************************
+    
+    @FXML
+    void onClickCadastrarADM(ActionEvent event) throws IOException {
+        
+        URL url = new File("src/main/java/view/CadastrarAdministrador.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage stageCadastrarADM = new Stage();
+        
+            CadastrarAdministradorController cac = loader.getController();    
+            cac.setStage(stageCadastrarADM);
+
+        
+            Scene cena = new Scene(root);
+            stageCadastrarADM.setTitle("Perfil administrador");
+            stageCadastrarADM.setScene(cena);
+            
+            stageCadastrarADM.show();
+            
+    }
     
     @FXML
     void onClickBtnNotificacoes(ActionEvent event) throws IOException {
@@ -333,7 +357,7 @@ public class AdministradoresController {
             stageADMS.close();
     }
     private void abrirTelaPrincipal() throws IOException{
-     URL url = new File("src/main/java/view/TelaPrincipalAdministrador.fxml").toURI().toURL();
+     URL url = new File("src/main/java/view/TelaPrincipalAdministradorTeste.fxml").toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
         

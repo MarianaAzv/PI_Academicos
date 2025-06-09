@@ -273,7 +273,7 @@ public class VerPerfilAdministradorController  {
     }
     
     private void abrirTelaPrincipal() throws IOException{
-     URL url = new File("src/main/java/view/TelaPrincipalAdministrador.fxml").toURI().toURL();
+     URL url = new File("src/main/java/view/TelaPrincipalAdministradorTeste.fxml").toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
         

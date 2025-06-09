@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -12,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="920.0" minWidth="1290.0" style="-fx-background-color: ECECEC;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdministradoresController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="920.0" minWidth="1290.0" style="-fx-background-color: ECECEC;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdministradoresController">
   <columnConstraints>
     <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="1012.0" />
     <ColumnConstraints hgrow="NEVER" maxWidth="300.0" minWidth="10.0" prefWidth="300.0" />
@@ -38,7 +44,7 @@
                   <Insets left="10.0" top="10.0" />
                </GridPane.margin>
             </ImageView>
-            <Label fx:id="lblAdiministradoirs" contentDisplay="CENTER" text="Adiministradores" textAlignment="CENTER" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <Label fx:id="lblAdiministradoirs" contentDisplay="CENTER" text="Administradores" textAlignment="CENTER" textFill="#840d0b" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
                </GridPane.margin>
@@ -47,6 +53,11 @@
                </font>
             </Label>
             <TableView fx:id="tabelaADMS" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+            <Button fx:id="btnCadastrarADM" mnemonicParsing="false" onAction="#onClickCadastrarADM" prefHeight="31.0" prefWidth="248.0" text="Cadastrar um novo administrador" textOverrun="WORD_ELLIPSIS" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="25.0" right="50.0" />
+               </GridPane.margin>
+            </Button>
          </children>
       </GridPane>
       <GridPane style="-fx-background-color: DBA5A5; -fx-background-radius: 12;" GridPane.columnIndex="1">
