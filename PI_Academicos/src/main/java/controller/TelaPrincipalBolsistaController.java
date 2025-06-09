@@ -65,6 +65,8 @@ public class TelaPrincipalBolsistaController {
     @FXML
     private Text txtNomeCoordenador;
     @FXML
+    private Text txtNomeBolsista;
+    @FXML
     private Text txtProrrogacao;
     @FXML
     private Label lblNomeBolsista, lblNomeCocoordenador, lblNomeCoordenador, lblResumo;
@@ -90,6 +92,10 @@ void onClickVerPerfil(ActionEvent event) throws IOException {
     vpb.setBolsista(bolsista);
     vpb.setProjeto(projeto);
     vpb.setStage(stageVerPerfil); // Correção: Garantir que a nova tela tenha controle sobre seu próprio Stage
+   
+    stageVerPerfil.setOnShown(evento -> {//hj
+            vpb.ajustarElementosJanela(bolsista,projeto);
+        });
 
     Scene cena = new Scene(root);
     stageVerPerfil.setTitle("Perfil Bolsista");
@@ -110,6 +116,10 @@ void onClickVerPerfil(ActionEvent event) throws IOException {
         AtualizarPerfilBolsistaController apb = loader.getController();
         apb.setBolsista(bolsista);
         apb.setProjeto(projeto);
+        
+        stageAtualizar.setOnShown(evento -> {//hj
+            apb.ajustarElementosJanela(bolsista,projeto);
+        });
 
         Scene cena = new Scene(root);
         stageAtualizar.setTitle("Atualizar Perfil Bolsista");
@@ -199,6 +209,9 @@ URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
         TelaPrincipalBolsistaController tpb = loader.getController();
         tpb.setBolsista(bolsista);
         tpb.setStagePrincipal(stage);
+        stage.setOnShown(evento -> {//hj
+            tpb.ajustarElementosJanela(bolsista,projeto);
+        });
 
         Scene cena = new Scene(root);
         stage.setTitle("Tela Principal Bolsista");
@@ -218,11 +231,15 @@ URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
         this.projeto = projeto;
         
         System.out.println("Aqui chegam os parâmetros do login " + bolsista.getNome() + " - " + bolsista.getMatricula() + " ATIVA: " + bolsista.getAtiva());
+        
+         
+
+        
         TxtNomeUsuario.setText(bolsista.getNome());
        // String matricula = String.valueOf(bolsista.getMatricula());
         textNomeProjeto.setText(projeto.getTitulo());
         TxtNomeProjetoBarra.setText(projeto.getTitulo());
-     
+      
       
     }
 
@@ -234,7 +251,7 @@ URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
        this.projeto = projeto;
        //PRECISA FAZER LISTA DE BOLSISTAS E COORDENADORES
        txtNomeCoordenador.setText(projeto.getCocoordenadores());
-     //  txtNomeBolsista.setText(projeto.getBolistas)
+      // txtNomeBolsista.setText(projeto.getBolistas)
        txtNomeCocoordenador.setText(projeto.getCocoordenadores());
        
        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -252,8 +269,15 @@ URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
        
        txtCampus.setText(projeto.getCampus().getNomeCampus());
        
-       //txtNomeBolsitas.setText(projeto.get);
        
        
+    }
+
+     void carregarUsuariosDoProjeto(Projeto projeto) {
+        this.projeto = projeto;
+        System.out.println("Coordenadores do Projeto: " + projeto.getCocoordenadores());
+System.out.println("Bolsistas do Projeto: " + projeto.getBolsistas());
+        txtNomeBolsista.setText(projeto.getBolsistas());
+       txtNomeCoordenador.setText(projeto.getCocoordenadores());
     }
     }

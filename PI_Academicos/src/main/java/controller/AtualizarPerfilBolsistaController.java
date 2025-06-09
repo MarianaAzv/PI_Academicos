@@ -36,6 +36,9 @@ public class AtualizarPerfilBolsistaController {
 
     @FXML
     private Text txtNomeUsuario;
+    
+    @FXML
+    private Text  txtNomeProjeto;
 
     @FXML
     private Button btnAtualizarPerfil, btnSair;
@@ -134,6 +137,11 @@ void onClickVerPerfil(ActionEvent event) throws IOException {
     vpb.setBolsista(bolsista);
     vpb.setProjeto(projeto);
     vpb.setStage(stageVerPerfil); // Correção: Garantir que a nova tela tenha controle sobre seu próprio Stage
+    
+    stageVerPerfil.setOnShown(evento -> {//hj
+            vpb.ajustarElementosJanela(bolsista,projeto);
+        });
+
 
     Scene cena = new Scene(root);
     stageVerPerfil.setTitle("Perfil Bolsista");
@@ -222,7 +230,11 @@ URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
         Stage stage = new Stage();
         TelaPrincipalBolsistaController tpb = loader.getController();
         tpb.setBolsista(bolsista);
+        tpb.setProjeto(projeto);//hj
         tpb.setStagePrincipal(stage);
+          stage.setOnShown(evento -> {
+            tpb.ajustarElementosJanela(bolsista,projeto);
+        });
 
         Scene cena = new Scene(root);
         stage.setTitle("Tela Principal Bolsista");
@@ -236,6 +248,7 @@ URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
        this.projeto = projeto;
        //PRECISA FAZER LISTA DE BOLSISTAS E COORDENADORES
      //  txtNomeBolsista.setText(projeto.getBolistas)
+     txtNomeProjeto.setText(projeto.getTitulo());//falta foto
      
     }
     
@@ -252,7 +265,10 @@ URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
             mostrarConfirmacao("Usuário alterado", "O usuário foi alterado com sucesso!");
         }
     }
-     
-     
+      void ajustarElementosJanela(Bolsista bolsista, Projeto projeto) {
+        this.bolsista = bolsista;
+        this.projeto = projeto;
+                 txtNomeUsuario.setText(bolsista.getNome());//falta foto
+      }
      
 }
