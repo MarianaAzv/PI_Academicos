@@ -109,6 +109,17 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Button>
+                  <Label fx:id="lblAbrirArquivo" onMouseClicked="#onClickAbrirArquivo" onMouseEntered="#onEnterArquivo" onMouseExited="#onExitArquivo" prefHeight="20.0" prefWidth="511.0" underline="true">
+                     <font>
+                        <Font name="Courier New" size="15.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
+                  </Label>
                </children>
                <GridPane.margin>
                   <Insets bottom="15.0" left="15.0" right="3.0" top="3.0" />
