@@ -266,7 +266,7 @@ public class CriarProjetoController {
         pdao.AreaProjeto(projeto, areasconhecimento);
 
         mostrarConfirmacao("Projeto cadastrado", "O projeto foi registrado no sistema com sucesso!");
-        stageCriarProjeto.close();
+       
 
     }
 
@@ -304,6 +304,7 @@ public class CriarProjetoController {
         MaisBolsistaController mbc = loader.getController();
         mbc.setCoordenador(coordenador);
         mbc.setProjeto(projeto);
+        mbc.setControllerCriar(this);
         mbc.setStage(stageMaisBolsista);
         mbc.setOrigem(Origem.cadastro_projeto);
 
@@ -313,7 +314,11 @@ public class CriarProjetoController {
         //deixa a tela maximizada
 
         stageMaisBolsista.show();
-        stageCriarProjeto.close();
+      
+    }
+
+  public  void Close() {
+this.stageCriarProjeto.close();
     }
 
 }

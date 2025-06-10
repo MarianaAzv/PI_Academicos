@@ -43,6 +43,7 @@ public class CadastroBolsistaCoordenadorController {
      Usuario usuario;
      private Origem origem;
      Coordenador coordenador;
+     CriarProjetoController criarprojetocontrtoller;
      
     @FXML
     private DatePicker DataFimdaBolsa;
@@ -207,6 +208,10 @@ public void setOrigem(Origem origem) {
 public void setCoordenador(Coordenador coordenador) {
     this.coordenador = coordenador;
 }
+
+public  void setControllerCriar(CriarProjetoController aThis) {
+        this.criarprojetocontrtoller=aThis;
+    }
      
      public void enviarSolicitacao(){
      
@@ -256,6 +261,7 @@ public void setCoordenador(Coordenador coordenador) {
        stageAtualizarProjeto.setMaximized(true);
         stageAtualizarProjeto.setScene(cena);
        stageAtualizarProjeto.show();
+       
        stageCadastrarBolsistaCoordenador.close();
     
         
@@ -283,6 +289,7 @@ public void setCoordenador(Coordenador coordenador) {
             stagePrincipal.setMaximized(true);
             
             stagePrincipal.show();
+              criarprojetocontrtoller.Close(); 
             stageCadastrarBolsistaCoordenador.close();
    }
 

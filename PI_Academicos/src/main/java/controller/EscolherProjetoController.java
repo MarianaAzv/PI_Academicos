@@ -57,18 +57,8 @@ public class EscolherProjetoController {
     private Usuario user;
 
     
-           public void setStage(Stage stageEscolherProjeto){
-            this.stageEscolherProjeto= stageEscolherProjeto;
-        
-        
-           }
-    
-    
-    
-  public void setCoordenador(Coordenador coordenador) {
-        this.coordenador = coordenador;
-    }
-  
+          
+  //------------------------*OnClick*-------------------------//
   
               @FXML
     void OnClickCriarProjeto(ActionEvent event) throws MalformedURLException, MalformedURLException, IOException {
@@ -99,6 +89,7 @@ if(coordenador.getAtiva()==true){
             telaCriarProjeto.setMaximized(true);
         telaCriarProjeto.setScene(cena);
         telaCriarProjeto.show();
+        stageEscolherProjeto.close();
         
          }
     }catch (IOException e) {
@@ -108,7 +99,18 @@ if(coordenador.getAtiva()==true){
     }
          
   
+    //--------------------------*SETs*-------------------------------//
+     public void setStage(Stage stageEscolherProjeto){
+            this.stageEscolherProjeto= stageEscolherProjeto;
+        
+        
+           }
     
+    
+    
+  public void setCoordenador(Coordenador coordenador) {
+        this.coordenador = coordenador;
+    }
  public void setProjeto() {
      ProjetoDAO dao = new ProjetoDAO();
     try {
@@ -119,7 +121,12 @@ if(coordenador.getAtiva()==true){
     }
     }
   
-  
+   public void setBolsista(Bolsista bolsista) {
+        this.bolsista = bolsista;
+    }
+   
+   
+   //-----------------------------*Metodos*-------------------------------//
  
  public void OnClickProjeto() throws SQLException { 
     vboxbutton.getChildren().clear(); // Limpa os botões antes de adicionar novos
@@ -213,9 +220,7 @@ if(coordenador.getAtiva()==true){
             stagePrincipal.show();
             stageEscolherProjeto.close();
     }
-   public void setBolsista(Bolsista bolsista) {
-        this.bolsista = bolsista;
-    }
+  
    
  
 }
