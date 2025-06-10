@@ -34,10 +34,6 @@
           <RowConstraints maxHeight="511.0" minHeight="10.0" prefHeight="478.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text=" ---------- Publicações - Artigos ----------" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-               <font>
-                  <Font name="Courier New Bold" size="18.0" />
-               </font></Label>
             <GridPane style="-fx-background-color: DBA5A5; -fx-background-radius: 12;" GridPane.columnIndex="1">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -283,6 +279,41 @@
                   </TilePane>
                </content>
             </ScrollPane>
+            <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="250.0" />
+                <ColumnConstraints hgrow="ALWAYS" maxWidth="150.0" minWidth="10.0" prefWidth="150.0" />
+                  <ColumnConstraints hgrow="NEVER" maxWidth="50.0" minWidth="10.0" prefWidth="50.0" />
+                <ColumnConstraints hgrow="ALWAYS" maxWidth="150.0" minWidth="10.0" prefWidth="150.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="250.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label prefHeight="27.0" prefWidth="135.0" text="Publicações" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                     <font>
+                        <Font name="Courier New Bold" size="20.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="24.0" prefHeight="24.0" prefWidth="106.0" text=" Artigos" GridPane.columnIndex="3" GridPane.halignment="LEFT">
+                     <font>
+                        <Font name="Courier New Bold" size="20.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="24.0" prefHeight="23.0" prefWidth="14.0" text="-" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                     <font>
+                        <Font name="Courier New Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
          </children>
          <GridPane.margin>
             <Insets top="30.0" />
