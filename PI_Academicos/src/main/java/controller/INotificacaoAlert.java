@@ -7,4 +7,5 @@ public interface INotificacaoAlert {
     public void btnOk();
     public void btnCancela();
     
+    
 }

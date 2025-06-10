@@ -24,13 +24,14 @@ import model.Bolsista;
 import model.Projeto;
 import model.Usuario;
 
-public class TelaPrincipalBolsistaController {
+public class TelaPrincipalBolsistaController implements INotificacaoAlert{
 
     private Stage stageTelaPrincipalBolsista;
     private Connection conexao;
     private final Usuario dao = new Usuario();
     private Bolsista bolsista;
     private Projeto projeto;//hj
+    int resp = 1;
     
     public void setStage(Stage stage) {
         this.stageTelaPrincipalBolsista = stage;
@@ -196,7 +197,7 @@ public class TelaPrincipalBolsistaController {
 
     @FXML
     void onClickSair(ActionEvent event) throws IOException {
-        AbrirTelaLogin();
+        alerta("Você tem certeza mana", 2, "Verificação de saida");
     }
     @FXML
     void onEnterSair(MouseEvent event) {
@@ -232,7 +233,7 @@ public class TelaPrincipalBolsistaController {
     VerPerfilBolsistaController vpb = loader.getController();
     vpb.setBolsista(bolsista);
     vpb.setProjeto(projeto);
-    vpb.setStage(stageVerPerfil); // Correção: Garantir que a nova tela tenha controle sobre seu próprio Stage
+    vpb.setStage(stageVerPerfil); 
    
     stageVerPerfil.setOnShown(evento -> {//hj
             vpb.ajustarElementosJanela(bolsista,projeto);
@@ -338,8 +339,9 @@ public class TelaPrincipalBolsistaController {
 
     
     private void AbrirTelaLogin() throws IOException {
-
-         URL url = new File("src/main/java/view/TelaLogin.fxml").toURI().toURL();
+        
+            
+        URL url = new File("src/main/java/view/TelaLogin.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
 
@@ -356,6 +358,7 @@ public class TelaPrincipalBolsistaController {
         stageLogin.show();
         
         stageTelaPrincipalBolsista.close();
+        
 
     }
     
@@ -377,20 +380,47 @@ public class TelaPrincipalBolsistaController {
       
     }
     
-    public void alerta() throws IOException{
-        URL url = new File("src/main/java/view/AlertGenerico.fxml").toURI().toURL();
+    public void alerta(String msg, int tipo, String titulo) throws IOException{
+    URL url = new File("src/main/java/view/AlertGenerico.fxml").toURI().toURL();
     FXMLLoader loader = new FXMLLoader(url);
     Parent root = loader.load();
 
     Stage stageAlerta = new Stage();
 
+    AlertGenericoController vpb = loader.getController();
+    vpb.setMsg(msg);
+    vpb.setTipo(tipo);
+    vpb.setStage(stageAlerta); 
+    vpb.setControllerResposta(this);
+  
+    Scene cena = new Scene(root);
+    stageAlerta.setTitle(titulo);
+    stageAlerta.setScene(cena);
+    
 
-//     void carregarUsuariosDoProjeto(Projeto projeto) {
-//        this.projeto = projeto;
-//        System.out.println("Coordenadores do Projeto: " + projeto.getCocoordenadores());
-//        System.out.println("Bolsistas do Projeto: " + projeto.getBolsistas());
-//        txtNomeBolsista.setText(projeto.getBolsistas());
-//       txtNomeCoordenador.setText(projeto.getCocoordenadores());
-//    }
+    stageAlerta.show();
+    
     }
-}
+
+    @Override
+    public void btnOk() {
+        try {
+            resp = 2;
+            AbrirTelaLogin();
+        } catch (IOException ex) {
+            Logger.getLogger(TelaPrincipalBolsistaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }
+
+    @Override
+    public void btnCancela() {
+        resp = 3;
+        
+
+    }
+    
+    
+    
+    
+    }

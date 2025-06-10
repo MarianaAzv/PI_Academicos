@@ -28,7 +28,7 @@ import util.AlertaUtil;
 import static util.AlertaUtil.mostrarAviso;
 import static util.AlertaUtil.mostrarConfirmacao;
 
-public class AtualizarPerfilBolsistaController {
+public class AtualizarPerfilBolsistaController implements INotificacaoAlert{
 
     private Stage stageAtualizarBolsista;
     private Bolsista bolsista;
@@ -155,7 +155,7 @@ public class AtualizarPerfilBolsistaController {
         this.stageAtualizarBolsista = stageAtualizarBolsista;
     }
 
-    public void setBolsista(Bolsista bol) {
+    public void setBolsista(Bolsista bol) throws IOException {
         if (bol != null) {
             this.bolsista = bol;
             txtNome.setText(bolsista.getNome());
@@ -181,14 +181,15 @@ public class AtualizarPerfilBolsistaController {
            // System.out.println("Data Início carregada: " + bolsista.getDataInicio());
           //  System.out.println("Data Fim carregada: " + bolsista.getDataFim());
         } else {
-            mostrarAviso("Erro", "Bolsista não encontrado.");
+            alerta("Bolsista não encontrado.", 1, "Erro");
+            
         }
     }
 
    
 
     @FXML
-    void onClickAtualizar(ActionEvent event) throws SQLException {
+    void onClickAtualizar(ActionEvent event) throws SQLException, IOException {
         try {
             Long cpf = Long.parseLong(txtCPF.getText());
             Long matricula = Long.parseLong(txtMatricula.getText());
@@ -204,7 +205,7 @@ public class AtualizarPerfilBolsistaController {
 
 
         } catch (NumberFormatException e) {
-            mostrarAviso("Erro", "CPF, matrícula e datas devem estar em formatos válidos.");
+            alerta("CPF, matrícula e datas devem estar em formatos válidos.", 2, "Erro");
         }
     }
 
@@ -298,16 +299,20 @@ public class AtualizarPerfilBolsistaController {
     //******************* MÉTODOS ***************************************
 
     void atualizarBolsista(int id, long cpf, String nome, String apelido, String email, String senha, boolean ativa,
-                           long matricula, String curso, LocalDate dataInicio, LocalDate dataFim) throws SQLException {
+                           long matricula, String curso, LocalDate dataInicio, LocalDate dataFim) throws SQLException, IOException {
         Bolsista bolsista = new Bolsista(id, cpf, nome, apelido, email, senha, ativa, matricula, curso, dataInicio, dataFim);
 
         int repetido = bolsistaDAO.validarApelido(apelido, id);
 
         if (repetido > 0) {
-            mostrarAviso("Nome de usuário indisponível", "Este nome de usuário já está sendo usado.");
+            alerta("Este nome de usuário já está sendo usado.", 2, "Nome de usuário indisponível");
+            
         } else {
             bolsistaDAO.atualizarBolsista(bolsista, projeto);
-            mostrarConfirmacao("Usuário alterado", "O usuário foi alterado com sucesso!");
+            alerta("O usuário foi alterado com sucesso!", 3, "Usuário alterado");
+            abrirVerPerfil();
+            stageAtualizarBolsista.close(); 
+            
         }
     }
     
@@ -387,7 +392,7 @@ public class AtualizarPerfilBolsistaController {
 
     
     public void outrosProjetos() throws MalformedURLException, IOException {
-        System.out.println("Outros Projetos clicado!");
+        
         URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
@@ -407,7 +412,7 @@ public class AtualizarPerfilBolsistaController {
         });
 
         Scene cena = new Scene(root);
-        stagePrincipal.setTitle("Tela Escolher Projeto Bolsista");
+        stagePrincipal.setTitle("Tela Escolher Projeto");
         stagePrincipal.setMaximized(false);
         stagePrincipal.setScene(cena);
         stagePrincipal.show();
@@ -429,12 +434,46 @@ public class AtualizarPerfilBolsistaController {
         tpb.setBolsista(bolsista);
 
         Scene cena = new Scene(root);
-        stagePrincipalBolsista.setTitle("Tela Principal Bolsista");
+        stagePrincipalBolsista.setTitle("Tela Principal");
         stagePrincipalBolsista.setScene(cena);
         stagePrincipalBolsista.setMaximized(true);
 
         stagePrincipalBolsista.show();
         stageAtualizarBolsista.close();
+
+    }
+    
+    public void alerta(String msg, int tipo, String titulo) throws IOException{
+    URL url = new File("src/main/java/view/AlertGenerico.fxml").toURI().toURL();
+    FXMLLoader loader = new FXMLLoader(url);
+    Parent root = loader.load();
+
+    Stage stageAlerta = new Stage();
+
+    AlertGenericoController vpb = loader.getController();
+    vpb.setMsg(msg);
+    vpb.setTipo(tipo);
+    vpb.setStage(stageAlerta); 
+    vpb.setControllerResposta(this);
+  
+    Scene cena = new Scene(root);
+    stageAlerta.setTitle(titulo);
+    stageAlerta.setScene(cena);
+    
+
+    stageAlerta.show();
+    
+    }
+
+    @Override
+    public void btnOk() {
+       
+    }
+
+    @Override
+    public void btnCancela() {
+        
+        
 
     }
 

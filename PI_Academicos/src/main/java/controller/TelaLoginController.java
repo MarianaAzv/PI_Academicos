@@ -36,7 +36,7 @@ public class TelaLoginController implements INotificacaoAlert{
     private Connection conexao;
     private final LoginDAO dao = new LoginDAO();
     private Usuario user;
-    boolean resp;
+    
                      
      @FXML
     private Button btnEntrar;
@@ -291,12 +291,12 @@ public void abrirTelaPrincipalBolsista(Bolsista bolsista) throws MalformedURLExc
 
     @Override
     public void btnOk() {
-        resp = true;
+       
        
     }
 
     @Override
     public void btnCancela() {
-        resp = true;
+        
     }
 }

@@ -57,15 +57,16 @@ public class AlertGenericoController {
 
     @FXML
     void onClickCancelar(ActionEvent event) {
-        stageAlerta.close();
         contResp.btnCancela();
+        stageAlerta.close();
     }
 
     @FXML
     void onClickOK(ActionEvent event) {
-        stageAlerta.close();
         contResp.btnOk();
+        stageAlerta.close();
     }
+    
     
 
     void setControllerResposta(INotificacaoAlert cont) {
