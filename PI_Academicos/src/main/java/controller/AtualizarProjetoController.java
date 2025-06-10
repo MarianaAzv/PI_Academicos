@@ -147,7 +147,7 @@ public class AtualizarProjetoController {
             }
             }
 //       
-
+System.out.print("Coordenador no atualizar"+coordenador);
             atualizarProjeto(projeto.getIdProjeto(), txtNomedoProjeto.getText(), txtResumo.getText(), campusnomeSelecionado, txtEdital.getText(), dI, dF, prorrogacao, areaconhecimento);
 //            } 
         } catch (SQLException e) {
@@ -267,8 +267,13 @@ DesativarBolsista();
             TelaPrincipalCoordenadorController tpc = loader.getController();    
             tpc.setStagePrincipal(stagePrincipal);
             tpc.setCoordenador(coordenador);
+            System.out.print("Coordenador VoltarPagiana"+coordenador);
             tpc.setProjeto(projeto);
             
+              stagePrincipal.setOnShown(evento -> {
+            tpc.ajustarElementosJanela(coordenador,projeto);
+        });
+        
             Scene cena = new Scene(root);
             stagePrincipal.setTitle("Tela principal Coordenador");
             stagePrincipal.setScene(cena);
@@ -287,7 +292,7 @@ DesativarBolsista();
         Stage stageMaisBolsista = new Stage();
 
         MaisBolsistaController mbc = loader.getController();
-        //mbc.setCoordenador(coordenador);
+        mbc.setCoordenador(coordenador);
         mbc.setProjeto(projeto);
         mbc.setStage(stageMaisBolsista);
         mbc.setOrigem(Origem.atualizar_projeto);
@@ -298,7 +303,7 @@ DesativarBolsista();
         //deixa a tela maximizada
 
         stageMaisBolsista.show();
-       stageAtualizarProjeto.close();
+       
     }
     
    public void DesativarBolsista() throws IOException{

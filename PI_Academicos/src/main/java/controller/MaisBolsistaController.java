@@ -44,7 +44,7 @@ public class MaisBolsistaController {
             case atualizar_projeto:
                 abrirTelaAtualizarProjeto();
                 break;
-            case  principal_coordenador:
+            case  cadastro_projeto:
                 abrirTelaCoordenador();
                 break;
           
@@ -101,29 +101,30 @@ public class MaisBolsistaController {
            
    }
       public void abrirTelaAtualizarProjeto() throws IOException{
-            URL url = new File("src/main/java/view/AtualizarProjeto.fxml").toURI().toURL();       
-      FXMLLoader loader = new FXMLLoader(url);
-       
-      Parent root = loader.load();
-        
-     Stage stageAtualizarProjeto = new Stage();
-        
-       AtualizarProjetoController apc = loader.getController();
-        
-        apc.setStage(stageAtualizarProjeto);
-        apc.setProjeto(projeto);
-        
-          stageAtualizarProjeto.setOnShown(evento -> {
-        apc.ajustarElementosJanela();
-      });
-        
-      Scene cena = new Scene(root);
-       stageAtualizarProjeto.setTitle("Atualizar Projeto");
-       stageAtualizarProjeto.setMaximized(true);
-        stageAtualizarProjeto.setScene(cena);
-       stageAtualizarProjeto.show();
+//            URL url = new File("src/main/java/view/AtualizarProjeto.fxml").toURI().toURL();       
+//      FXMLLoader loader = new FXMLLoader(url);
+//       
+//      Parent root = loader.load();
+//        
+//     Stage stageAtualizarProjeto = new Stage();
+//        
+//       AtualizarProjetoController apc = loader.getController();
+//        
+//        apc.setStage(stageAtualizarProjeto);
+//        apc.setCoordenador(coordenador);
+//        apc.setProjeto(projeto);
+//        
+//          stageAtualizarProjeto.setOnShown(evento -> {
+//        apc.ajustarElementosJanela();
+//      });
+//        
+//      Scene cena = new Scene(root);
+//       stageAtualizarProjeto.setTitle("Atualizar Projeto");
+//       stageAtualizarProjeto.setMaximized(true);
+//        stageAtualizarProjeto.setScene(cena);
+//       stageAtualizarProjeto.show();
        stageMaisBolsista.close();
-        System.out.print("O coordenador esta sendo set"+coordenador);
+      //  System.out.print("O coordenador esta sendo set"+coordenador);
        }
       
       

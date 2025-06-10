@@ -365,6 +365,7 @@ public class TelaPrincipalCoordenadorController {
         
         apc.setStage(stageAtualizarProjeto);
         apc.setCoordenador(coordenador);
+        System.out.print("Coordenador em abrir atualizar"+coordenador);
         apc.setProjeto(projeto);
         
         
