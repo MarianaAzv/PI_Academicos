@@ -117,12 +117,12 @@ public class AtualizarProjetoController {
     //------------------------*Clicks*----------------------------------//
     @FXML
     void OnClickAdicionarBolsista(ActionEvent event) throws IOException {
-   AdicionarBolsista();
+        AdicionarBolsista();
     }
 
     @FXML
     void OnClickAdicionarCocoordenador(ActionEvent event) throws IOException {
-  mostrarAviso("Erro", "Esse botão não abre!");
+        mostrarAviso("Erro", "Esse botão não abre!");
     }
 
     @FXML
@@ -141,13 +141,13 @@ public class AtualizarProjetoController {
             LocalDate prorrogacao = null;
             if (!txtProrrogacao.getText().isEmpty()) {
                 prorrogacao = LocalDate.parse(txtProrrogacao.getText(), formatter);
-                 if (!prorrogacao.isAfter(dF)) {
-                mostrarAviso("Data inválida", "A data de prorrogação deve ser posterior à data de fim.");
-                return;
-            }
+                if (!prorrogacao.isAfter(dF)) {
+                    mostrarAviso("Data inválida", "A data de prorrogação deve ser posterior à data de fim.");
+                    return;
+                }
             }
 //       
-System.out.print("Coordenador no atualizar"+coordenador);
+            System.out.print("Coordenador no atualizar" + coordenador);
             atualizarProjeto(projeto.getIdProjeto(), txtNomedoProjeto.getText(), txtResumo.getText(), campusnomeSelecionado, txtEdital.getText(), dI, dF, prorrogacao, areaconhecimento);
 //            } 
         } catch (SQLException e) {
@@ -161,24 +161,24 @@ System.out.print("Coordenador no atualizar"+coordenador);
 
     @FXML
     void OnClickDesativarBolsista(ActionEvent event) throws IOException {
-DesativarBolsista();
+        DesativarBolsista();
     }
 
     @FXML
     void OnClickDesativarCocoordenador(ActionEvent event) {
-  mostrarAviso("Erro", "Esse botão não abre!");
+        mostrarAviso("Erro", "Esse botão não abre!");
     }
 
-    
     //----------------------------*Sets*----------------------------------//
     public void setStage(Stage telaAtualizarProjeto) {
         this.stageAtualizarProjeto = telaAtualizarProjeto;
 
     }
+
     public void setCoordenador(Coordenador coordenador) {
-    this.coordenador = coordenador;
-            System.out.print("O coordenador esta sendo set"+coordenador);
-}
+        this.coordenador = coordenador;
+        System.out.print("O coordenador esta sendo set" + coordenador);
+    }
 
     public void setProjeto(Projeto pro) {
         this.projeto = pro;
@@ -205,9 +205,8 @@ DesativarBolsista();
         }
 
     }
-    
-    //---------------------------*Metodos*------------------------------------//
 
+    //---------------------------*Metodos*------------------------------------//
     void atualizarProjeto(int idProjeto, String titulo, String resumo, Campus campus, String edital, LocalDate dataInicio, LocalDate dataFim, LocalDate prorrogacao, AreasConhecimento areaconhecimento) throws SQLException {
 
         ProjetoDAO pdao = new ProjetoDAO();
@@ -256,36 +255,36 @@ DesativarBolsista();
             mostrarAviso("Banco de Dados", "A falha de comunicação entre o sistema e o Banco");
         }
     }
-    
+
     public void voltarapaginainicial() throws MalformedURLException, IOException {
-          URL url = new File("src/main/java/view/TelaPrincipalCoordenador.fxml").toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-        
-            Stage stagePrincipal = new Stage();
-        
-            TelaPrincipalCoordenadorController tpc = loader.getController();    
-            tpc.setStagePrincipal(stagePrincipal);
-            tpc.setCoordenador(coordenador);
-            System.out.print("Coordenador VoltarPagiana"+coordenador);
-            tpc.setProjeto(projeto);
-            
-              stagePrincipal.setOnShown(evento -> {
-            tpc.ajustarElementosJanela(coordenador,projeto);
+        URL url = new File("src/main/java/view/TelaPrincipalCoordenador.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stagePrincipal = new Stage();
+
+        TelaPrincipalCoordenadorController tpc = loader.getController();
+        tpc.setStagePrincipal(stagePrincipal);
+        tpc.setCoordenador(coordenador);
+        System.out.print("Coordenador VoltarPagiana" + coordenador);
+        tpc.setProjeto(projeto);
+
+        stagePrincipal.setOnShown(evento -> {
+            tpc.ajustarElementosJanela(coordenador, projeto);
         });
-        
-            Scene cena = new Scene(root);
-            stagePrincipal.setTitle("Tela principal Coordenador");
-            stagePrincipal.setScene(cena);
-            //deixa a tela maximizada
-            stagePrincipal.setMaximized(true);
-                    System.out.print("Estamos indo para a pagina do coordenador");
-            stagePrincipal.show();
-           stageAtualizarProjeto.close();
+
+        Scene cena = new Scene(root);
+        stagePrincipal.setTitle("Tela principal Coordenador");
+        stagePrincipal.setScene(cena);
+        //deixa a tela maximizada
+        stagePrincipal.setMaximized(true);
+        System.out.print("Estamos indo para a pagina do coordenador");
+        stagePrincipal.show();
+        stageAtualizarProjeto.close();
     }
-    
-    public void AdicionarBolsista() throws IOException{
-         URL url = new File("src/main/java/view/MaisBolsista.fxml").toURI().toURL();
+
+    public void AdicionarBolsista() throws IOException {
+        URL url = new File("src/main/java/view/MaisBolsista.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
 
@@ -303,11 +302,11 @@ DesativarBolsista();
         //deixa a tela maximizada
 
         stageMaisBolsista.show();
-       
+
     }
-    
-   public void DesativarBolsista() throws IOException{
-    URL url = new File("src/main/java/view/BolsistaDesativarCoordenador.fxml").toURI().toURL();
+
+    public void DesativarBolsista() throws IOException {
+        URL url = new File("src/main/java/view/BolsistaDesativarCoordenador.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
 
@@ -321,9 +320,8 @@ DesativarBolsista();
         Scene cena = new Scene(root);
         stageBolsistaDesativar.setTitle("Desativar bolsistas");
         stageBolsistaDesativar.setScene(cena);
-      
 
-       stageBolsistaDesativar.show();
-      
-   }
+        stageBolsistaDesativar.show();
+
+    }
 }

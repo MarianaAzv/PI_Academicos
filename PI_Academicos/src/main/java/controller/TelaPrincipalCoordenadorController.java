@@ -29,6 +29,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Bolsista;
 import model.Coordenador;
 import model.Noticia;
 import model.Postagem;
@@ -46,10 +47,9 @@ public class TelaPrincipalCoordenadorController {
     private Coordenador coordenador;
     private PostagemDAO postagemDAO;
     Projeto projeto;
+    Bolsista bolsista;
     
-    public TelaPrincipalCoordenadorController() {
-        postagemDAO = new PostagemDAO();
-    }
+
     
     @FXML
     public void initialize() {
@@ -65,17 +65,7 @@ public class TelaPrincipalCoordenadorController {
         });
 
     }
-    
-    
-    
-    public void setStage(Stage stage){
-    this.stagePrincipalCoordenador = stage;
-    }
-    
-    public void setStagePrincipal(Stage stagePrincipalCoordenador){
-    this.stagePrincipalCoordenador = stagePrincipalCoordenador;
-   }
-    
+
 
     @FXML
     private Text TxtNomeUsuario;
@@ -113,14 +103,14 @@ public class TelaPrincipalCoordenadorController {
     @FXML
     private ImageView imgProjeto;
 
-//    @FXML
-//    private Label lblNomeBolsista;
-//
-//    @FXML
-//    private Label lblNomeCocoordenador;
-//
-//    @FXML
-//    private Label lblNomeCoordenador;
+  @FXML
+   private Label lblNomeBolsista;
+
+  @FXML
+    private Label lblNomeCocoordenador;
+
+    @FXML
+   private Label lblNomeCoordenador;
 
     @FXML
     private Label lblResumo;
@@ -247,32 +237,12 @@ public class TelaPrincipalCoordenadorController {
         btnVerPerfil.setStyle("-fx-background-color:  DBA5A5" );
     }
     
-    //------------------*SETs*----------------------//
-    public void setCoordenador(Coordenador coord) {
-       this.coordenador = coord;
-       TxtNomeUsuario.setText(coord.getNome());
+    //----------------------*CarregarFotos*----------------------//
+        public TelaPrincipalCoordenadorController() {
+        postagemDAO = new PostagemDAO();
     }
-    public void setProjeto(Projeto projeto) {
-       this.projeto = projeto;
-       //lblNomeCoordenador.setText(projeto.getCoordenador());
-       lblResumo.setText(projeto.getResumo());
-       txtCampus.setText(projeto.getCampus().getNomeCampus());
-       txtNomeProjeto.setText(projeto.getTitulo());
-       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-       String DataInicio = projeto.getDataInicio().format(formatter);
-       txtInicio.setText(DataInicio);
-
-       String DataFim = projeto.getDataFim().format(formatter);
-       txtFim.setText(DataFim);
-       String prorroga = String.valueOf(projeto.getProrroacao());
-       txtProrrogacao.setText(prorroga);
-       txtNomeCoordenador.setText(projeto.getCocoordenadores());
-       //txtNomeBolsitas.setText(projeto.get);
-       
-       
-    }
-    
-    @FXML
+        
+          @FXML
     public void carregarFotos() throws IOException {
         tilePaneGaleria.getChildren().clear(); // Limpa a galeria antes de recarregar
         try {
@@ -301,6 +271,51 @@ public class TelaPrincipalCoordenadorController {
             System.out.println("Não é possível carregar postagens");
         }
     }
+        
+    //------------------*SETs*----------------------//
+    
+    
+        
+      public void setStage(Stage stage){
+    this.stagePrincipalCoordenador = stage;
+    }
+    
+    public void setStagePrincipal(Stage stagePrincipalCoordenador){
+    this.stagePrincipalCoordenador = stagePrincipalCoordenador;
+   }
+    
+    public void setCoordenador(Coordenador coord) {
+       this.coordenador = coord;
+       TxtNomeUsuario.setText(coord.getNome());
+    }
+    public void setProjeto(Projeto projeto) {
+       this.projeto = projeto;
+       //lblNomeCoordenador.setText(projeto.getCoordenador());
+       lblResumo.setText(projeto.getResumo());
+       txtCampus.setText(projeto.getCampus().getNomeCampus());
+       txtNomeProjeto.setText(projeto.getTitulo());
+       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+       String DataInicio = projeto.getDataInicio().format(formatter);
+       txtInicio.setText(DataInicio);
+
+       String DataFim = projeto.getDataFim().format(formatter);
+       txtFim.setText(DataFim);
+       String prorroga = String.valueOf(projeto.getProrroacao());
+       txtProrrogacao.setText(prorroga);
+       txtNomeCoordenador.setText(projeto.getCocoordenadores());
+       //txtNomeBolsitas.setText(projeto.get);
+ 
+    }
+    
+    //Setar os nomes dos bolsistas e deixar null o coordenador
+        public void setBolsista(Bolsista bolsista){
+txtNomeBolsitas.setText(bolsista.getNome());
+}
+       public void  setCocoordenador(){
+          txtNomeCocoordenador.setText("Null");
+       }
+        
+  
     
 //******************* MÉTODOS ***************************************
    
