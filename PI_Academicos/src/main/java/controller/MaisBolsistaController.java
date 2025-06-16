@@ -82,6 +82,8 @@ public class MaisBolsistaController {
  public  void setControllerCriar(CriarProjetoController aThis) {
         this.criarprojetocontroller=aThis;
     }
+ 
+ 
      //--------------------*METODOS*-----------------//
     public void abrirJanelaCadastroBolsista() throws IOException{
        URL url = new File("src/main/java/view/CadastroBolsistaCoodernador.fxml").toURI().toURL();
@@ -94,6 +96,7 @@ public class MaisBolsistaController {
             cbcc.setCoordenador(coordenador);
             cbcc.setProjeto(projeto);
             cbcc.setOrigem(origem);
+            cbcc.setControllerCriar(criarprojetocontroller);
             cbcc.setStage(stageCadastroBolsista);
            
         
