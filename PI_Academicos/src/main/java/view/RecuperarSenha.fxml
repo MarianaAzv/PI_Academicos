@@ -21,7 +21,7 @@
   </rowConstraints>
    <children>
       <TextField fx:id="txtEmailUsuario" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="325.0" promptText="Ex: usuario@gmail.com" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-      <Button fx:id="btnEnviar" mnemonicParsing="false" style="-fx-background-color: #840d0b;" text="Enviar" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+      <Button fx:id="btnEnviar" mnemonicParsing="false" onAction="#onClickEnviar" style="-fx-background-color: #840d0b;" text="Enviar" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2">
          <font>
             <Font name="Courier New" size="18.0" />
          </font>
