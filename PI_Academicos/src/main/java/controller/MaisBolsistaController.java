@@ -93,8 +93,9 @@ public class MaisBolsistaController {
             CadastroBolsistaCoordenadorController cbcc = loader.getController();
             cbcc.setCoordenador(coordenador);
             cbcc.setProjeto(projeto);
-            cbcc.setStage(stageCadastroBolsista);
             cbcc.setOrigem(origem);
+            cbcc.setStage(stageCadastroBolsista);
+           
         
             Scene cena = new Scene(root);
             stageCadastroBolsista.setTitle("Adicionar bolsistas");

@@ -30,15 +30,15 @@ import model.LoginDAO;
 import model.Usuario;
 import util.AlertaUtil;
 
-public class TelaLoginController implements INotificacaoAlert{
-    
+public class TelaLoginController implements INotificacaoAlert {
+
     private Stage stageLogin;
     private Connection conexao;
     private final LoginDAO dao = new LoginDAO();
     private Usuario user;
     boolean resp;
-                     
-     @FXML
+
+    @FXML
     private Button btnEntrar;
 
     @FXML
@@ -55,16 +55,16 @@ public class TelaLoginController implements INotificacaoAlert{
 
     @FXML
     void onClickEntrar(ActionEvent event) throws IOException, SQLException {
-        
+
         processarLogin();
     }
-    
-    public void setStage(Stage stage){
+
+    public void setStage(Stage stage) {
         this.stageLogin = stage;
     }
-    
+
     public void verificarBanco() throws IOException {
-        
+
         this.conexao = ConexaoBD.conectar();
         if (this.conexao != null) {
             System.out.println("Conectou no banco de dados");
@@ -73,43 +73,41 @@ public class TelaLoginController implements INotificacaoAlert{
         }
 
     }
-        
-    public void abrirJanela() throws IOException{
+
+    public void abrirJanela() throws IOException {
         verificarBanco();
     }
-        
+
     public void processarLogin() throws IOException, SQLException {
         if (!dao.bancoOnline()) {
             alerta("Banco de dados não conectado", 2, "Erro de banco");
         } else if (txtApelido.getText() != null && !txtApelido.getText().isEmpty() && txtSenha.getText() != null && !txtSenha.getText().isEmpty()) {
-            user = autenticar(txtApelido.getText(),txtSenha.getText());
+            user = autenticar(txtApelido.getText(), txtSenha.getText());
             if (user != null) {
                 System.out.println("Acesso liberado");
-                       
-                if (stageLogin != null) { 
+
+                if (stageLogin != null) {
                     stageLogin.close();
                 }
-                 if(user instanceof Coordenador){
-                                Coordenador c = (Coordenador) user;
-                                abrirTelaPrincipalCoordenador(c);
-                            }else if (user instanceof Bolsista) {//login bolsista
-                                Bolsista b = (Bolsista) user;
-                                System.out.println("Abrindo tela de Bolsista...");
+                if (user instanceof Coordenador) {
+                    Coordenador c = (Coordenador) user;
+                    abrirTelaPrincipalCoordenador(c);
+                } else if (user instanceof Bolsista) {//login bolsista
+                    Bolsista b = (Bolsista) user;
+                    System.out.println("Abrindo tela de Bolsista...");
 
-                                abrirTelaPrincipalBolsista(b);
-                            } else if (user instanceof Administrador) {//login adm
-                                Administrador a = (Administrador) user;
-                                System.out.println("Abrindo tela de Administrador...");
-                                
-                                abrirTelaPrincipalAdministradorTeste(a);
-                                //abrirTelaPrincipalAdministrador(a);
-                            }
-                
-                
+                    abrirTelaPrincipalBolsista(b);
+                } else if (user instanceof Administrador) {//login adm
+                    Administrador a = (Administrador) user;
+                    System.out.println("Abrindo tela de Administrador...");
+
+                    abrirTelaPrincipalAdministradorTeste(a);
+                    //abrirTelaPrincipalAdministrador(a);
+                }
+
             } else {
-               
-              alerta("Este usuário ou senha é invalido!", 1, "Erro de validação");
-               
+
+                alerta("Este usuário ou senha é invalido!", 1, "Erro de validação");
 
             }
         } else {
@@ -117,19 +115,20 @@ public class TelaLoginController implements INotificacaoAlert{
         }
 
     }
+
     @FXML
     void onClickCadastro(MouseEvent event) throws IOException {
-        
-        URL url = new File("src/main/java/view/CadastroCoordenador.fxml").toURI().toURL();       
+
+        URL url = new File("src/main/java/view/CadastroCoordenador.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
-        
+
         Parent root = loader.load();
-        
+
         Stage stage = new Stage();
-        
+
         CadastroCoordenadorController cc = loader.getController();
         cc.setStage(stage);
-        
+
         Scene cena = new Scene(root);
         stage.setTitle("Cadastro Coordenador");
         stage.setMaximized(true);
@@ -142,48 +141,71 @@ public class TelaLoginController implements INotificacaoAlert{
     void onClickRecuperarSenha(MouseEvent event) {
 
     }
-    
 
     private Usuario autenticar(String apelido, String senha) throws SQLException {
-    user = dao.autenticar(apelido, senha);
+        user = dao.autenticar(apelido, senha);
         if (user != null) {
-            
+
             return user;
         }
         return null;
     }
-    
-    public void abrirTelaPrincipalCoordenador(Coordenador coordenador) throws MalformedURLException, IOException{
-        
-        
-         
-         URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
-         FXMLLoader loader = new FXMLLoader(url);
-          Parent root = loader.load();
-        
-           Stage stagePrincipal = new Stage();
-        
-          EscolherProjetoController tpc = loader.getController();  
-          tpc.setCoordenador(coordenador);
-          tpc.setStage(stagePrincipal);
-          
-            
-             stagePrincipal.setOnShown(evento -> {
-             try {
-                 tpc.OnClickProjeto();
-             } catch (SQLException ex) {
-                 Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
-             }
-      });
-        
-          Scene cena = new Scene(root);
-           stagePrincipal.setTitle("Tela principal Coordenador");
-           stagePrincipal.setScene(cena);
-           stagePrincipal.show();
-           stageLogin.close();
-           System.out.println("Coordenador ao clicar em Criar Projeto: " + coordenador);
+
+    public void abrirTelaPrincipalCoordenador(Coordenador coordenador) throws MalformedURLException, IOException {
+     
+        URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stagePrincipal = new Stage();
+
+        EscolherProjetoController tpc = loader.getController();
+        tpc.setCoordenador(coordenador);
+        tpc.setStage(stagePrincipal);
+
+        stagePrincipal.setOnShown(evento -> {
+            try {
+                tpc.OnClickProjeto();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+
+        Scene cena = new Scene(root);
+        stagePrincipal.setTitle("Tela principal Coordenador");
+        stagePrincipal.setScene(cena);
+       // stagePrincipal.setMaximized(true);
+        stagePrincipal.show();
+        stageLogin.close();
+        System.out.println("Coordenador ao clicar em Criar Projeto: " + coordenador);
+
+//      URL url = new File("src/main/java/view/Teladefundo.fxml").toURI().toURL();
+//        FXMLLoader loader = new FXMLLoader(url);
+//         Parent root = loader.load();
+//       
+//         Stage stagePrincipal = new Stage();
+//       
+//      TeladefundoController tdfc = loader.getController();  
+//         tdfc.setCoordenador(coordenador);
+//         tdfc.setStage(stagePrincipal);
+//         
+//          
+//            stagePrincipal.setOnShown(evento -> {
+//            tdfc.ajustarElementosJanela(coordenador);
+//        });
+//       
+//         Scene cena = new Scene(root);
+//         stagePrincipal.setTitle("Tela Escolher Projeto");
+//           stagePrincipal.setScene(cena);
+//          stagePrincipal.show();
+//        
+          System.out.println("Coordenador ao clicar em Criar Projeto: " + coordenador);
+
+
     }
-public void abrirTelaPrincipalBolsista(Bolsista bolsista) throws MalformedURLException, IOException {
+
+    
+    public void abrirTelaPrincipalBolsista(Bolsista bolsista) throws MalformedURLException, IOException {
         URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
@@ -194,109 +216,108 @@ public void abrirTelaPrincipalBolsista(Bolsista bolsista) throws MalformedURLExc
         epb.setStage(stagePrincipal);
 
         stagePrincipal.setOnShown(evento -> {
-             try {
-                 epb.OnClickProjeto();
-             } catch (SQLException ex) {
-                  Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
-             }              
-           // tpb.ajustarElementosJanela(bolsista);
+            try {
+                epb.OnClickProjeto();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            // tpb.ajustarElementosJanela(bolsista);
         });
 
         Scene cena = new Scene(root);
         stagePrincipal.setTitle("Tela Escolher Projeto Bolsista");
-        
-         stagePrincipal.setScene(cena);
+
+        stagePrincipal.setScene(cena);
         stagePrincipal.show();
         stageLogin.close();
 
     }
 
-   private void abrirTelaPrincipalAdministrador(Administrador adm) throws MalformedURLException, IOException{
-        
-         URL url = new File("src/main/java/view/TelaPrincipalAdministrador.fxml").toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-        
-            Stage stagePrincipal = new Stage();
-        
-            TelaPrincipalAdministradorController tpa = loader.getController();    
-            tpa.setStage(stagePrincipal);
-            tpa.setAdministrador(adm);
-            
-           stagePrincipal.setOnShown(evento -> {
+    private void abrirTelaPrincipalAdministrador(Administrador adm) throws MalformedURLException, IOException {
+
+        URL url = new File("src/main/java/view/TelaPrincipalAdministrador.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stagePrincipal = new Stage();
+
+        TelaPrincipalAdministradorController tpa = loader.getController();
+        tpa.setStage(stagePrincipal);
+        tpa.setAdministrador(adm);
+
+        stagePrincipal.setOnShown(evento -> {
             tpa.ajustarElementosJanela(adm);
-       });
-        
-            Scene cena = new Scene(root);
-            stagePrincipal.setTitle("Tela principal Administrador");
-            stagePrincipal.setScene(cena);
-            //deixa a tela maximizada
-            stagePrincipal.setMaximized(true);
-            
-            stagePrincipal.show();
-            stageLogin.close();
-            
-            
+        });
+
+        Scene cena = new Scene(root);
+        stagePrincipal.setTitle("Tela principal Administrador");
+        stagePrincipal.setScene(cena);
+        //deixa a tela maximizada
+        stagePrincipal.setMaximized(true);
+
+        stagePrincipal.show();
+        stageLogin.close();
+
     }
-    
-    private void abrirTelaPrincipalAdministradorTeste(Administrador adm) throws MalformedURLException, IOException{
-        
-         URL url = new File("src/main/java/view/TelaPrincipalAdministradorTeste.fxml").toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-        
-            Stage stagePrincipal = new Stage();
-        
-            TelaPrincipalAdministradorController tpa = loader.getController();    
-            tpa.setStage(stagePrincipal);
-            tpa.setAdministrador(adm);
-            
-           stagePrincipal.setOnShown(evento -> {
+
+    private void abrirTelaPrincipalAdministradorTeste(Administrador adm) throws MalformedURLException, IOException {
+
+        URL url = new File("src/main/java/view/TelaPrincipalAdministradorTeste.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stagePrincipal = new Stage();
+
+        TelaPrincipalAdministradorController tpa = loader.getController();
+        tpa.setStage(stagePrincipal);
+        tpa.setAdministrador(adm);
+
+        stagePrincipal.setOnShown(evento -> {
             tpa.ajustarElementosJanela(adm);
-       });
-        
-            Scene cena = new Scene(root);
-            stagePrincipal.setTitle("Tela principal Administrador Teste");
-            stagePrincipal.setScene(cena);
-            //deixa a tela maximizada
-            stagePrincipal.setMaximized(true);
-            
-            stagePrincipal.show();
-            
-            
-            
+        });
+
+        Scene cena = new Scene(root);
+        stagePrincipal.setTitle("Tela principal Administrador Teste");
+        stagePrincipal.setScene(cena);
+        //deixa a tela maximizada
+        stagePrincipal.setMaximized(true);
+
+        stagePrincipal.show();
+
     }
-    
-    public void alerta(String msg, int tipo, String titulo) throws IOException{
+
+    public void alerta(String msg, int tipo, String titulo) throws IOException {
         URL url = new File("src/main/java/view/AlertGenerico.fxml").toURI().toURL();
-    FXMLLoader loader = new FXMLLoader(url);
-    Parent root = loader.load();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
 
-    Stage stageAlerta = new Stage();
+        Stage stageAlerta = new Stage();
 
-    AlertGenericoController vpb = loader.getController();
-    vpb.setMsg(msg);
-    vpb.setTipo(tipo);
-    vpb.setStage(stageAlerta); 
-    vpb.setControllerResposta(this);
-  
-    Scene cena = new Scene(root);
-    stageAlerta.setTitle(titulo);
-    stageAlerta.setScene(cena);
-    
+        AlertGenericoController vpb = loader.getController();
+        vpb.setMsg(msg);
+        vpb.setTipo(tipo);
+        vpb.setStage(stageAlerta);
+        vpb.setControllerResposta(this);
 
-    stageAlerta.show();
-    
+        Scene cena = new Scene(root);
+        stageAlerta.setTitle(titulo);
+        stageAlerta.setScene(cena);
+
+        stageAlerta.show();
+
     }
 
     @Override
     public void btnOk() {
         resp = true;
-       
+
     }
 
     @Override
     public void btnCancela() {
         resp = true;
     }
+    
+    
+
 }

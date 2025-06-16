@@ -122,7 +122,7 @@ public class AtualizarProjetoController {
 
     @FXML
     void OnClickAdicionarCocoordenador(ActionEvent event) throws IOException {
-
+  mostrarAviso("Erro", "Esse botão não abre!");
     }
 
     @FXML
@@ -166,7 +166,7 @@ DesativarBolsista();
 
     @FXML
     void OnClickDesativarCocoordenador(ActionEvent event) {
-
+  mostrarAviso("Erro", "Esse botão não abre!");
     }
 
     
@@ -324,6 +324,6 @@ DesativarBolsista();
       
 
        stageBolsistaDesativar.show();
-       stageAtualizarProjeto.close();
+      
    }
 }
