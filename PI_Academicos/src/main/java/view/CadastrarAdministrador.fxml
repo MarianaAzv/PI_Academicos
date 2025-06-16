@@ -20,7 +20,7 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <GridPane fx:id="btnAtualizarProjeto" onDragDetected="#AtualizarProjetoOnClick" prefHeight="509.0" prefWidth="976.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+      <GridPane prefHeight="509.0" prefWidth="976.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -117,7 +117,7 @@
                   </GridPane>
                </children>
             </VBox>
-            <ImageView fx:id="imgFotoAdministrador" fitHeight="120.0" fitWidth="129.0" onMouseClicked="#onClickAdicionarFoto" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <ImageView fx:id="imgFotoAdministrador" fitHeight="120.0" fitWidth="129.0" onMouseClicked="#onClickAdicionarFoto" pickOnBounds="true" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
                <GridPane.margin>
                   <Insets bottom="20.0" />
                </GridPane.margin>

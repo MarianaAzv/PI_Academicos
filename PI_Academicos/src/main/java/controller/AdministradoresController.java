@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
@@ -163,6 +165,16 @@ public class AdministradoresController {
             stageCadastrarADM.setScene(cena);
             
             stageCadastrarADM.show();
+            
+            
+            cac.setOnADMCadastrado(() -> {
+            try {
+                carregarTabelaADMS();
+            } catch (SQLException ex) {
+                Logger.getLogger(AdministradoresController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        });
             
     }
     

@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -229,8 +232,7 @@ public class VerPerfilAdministradorController  {
     }
      
     private void abrirTelaADMS() throws IOException{
-        
-         URL url = new File("src/main/java/view/Administradores.fxml").toURI().toURL();
+        URL url = new File("src/main/java/view/Administradores.fxml").toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
         
@@ -239,6 +241,14 @@ public class VerPerfilAdministradorController  {
             AdministradoresController ac = loader.getController();  
             ac.setAdministrador(adm);
             ac.setStage(stageADMS);
+            
+            stageADMS.setOnShown(evento -> {
+            try {
+                ac.ajustarElementosJanela();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaPrincipalAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
         
             Scene cena = new Scene(root);
             stageADMS.setTitle("Tela Administradores");
