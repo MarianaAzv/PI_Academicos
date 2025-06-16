@@ -291,7 +291,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label prefHeight="27.0" prefWidth="135.0" text="Publicações" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                  <Label fx:id="lblPublicacoes" onMouseClicked="#onClickLabelPublicacoes" onMouseEntered="#onEnterLabelPublicacoes" onMouseExited="#onExitLabelPublicacoes" prefHeight="27.0" prefWidth="135.0" text="Publicações" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
                      <font>
                         <Font name="Courier New Bold" size="20.0" />
                      </font>
@@ -299,7 +299,7 @@
                         <Insets />
                      </GridPane.margin>
                   </Label>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="24.0" prefHeight="24.0" prefWidth="106.0" text=" Artigos" GridPane.columnIndex="3" GridPane.halignment="LEFT">
+                  <Label fx:id="lblArtigos" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="24.0" onMouseClicked="#onClickLabelArtigos" onMouseEntered="#onEnterLabelArtigos" onMouseExited="#onExitLabelArtigos" prefHeight="24.0" prefWidth="106.0" text=" Artigos" GridPane.columnIndex="3" GridPane.halignment="LEFT">
                      <font>
                         <Font name="Courier New Bold" size="20.0" />
                      </font>

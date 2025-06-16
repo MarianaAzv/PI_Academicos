@@ -29,6 +29,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Artigo;
+import model.ArtigoDAO;
 import model.Coordenador;
 import model.Noticia;
 import model.Postagem;
@@ -45,11 +47,14 @@ public class TelaPrincipalCoordenadorController {
  
     private Coordenador coordenador;
     private PostagemDAO postagemDAO;
+    private ArtigoDAO artigoDAO;
     Projeto projeto;
     
     public TelaPrincipalCoordenadorController() {
         postagemDAO = new PostagemDAO();
+        artigoDAO = new ArtigoDAO();
     }
+
     
     @FXML
     public void initialize() {
@@ -112,6 +117,9 @@ public class TelaPrincipalCoordenadorController {
 
     @FXML
     private ImageView imgProjeto;
+    
+    @FXML
+    private Label lblArtigos;
 
 //    @FXML
 //    private Label lblNomeBolsista;
@@ -124,6 +132,9 @@ public class TelaPrincipalCoordenadorController {
 
     @FXML
     private Label lblResumo;
+    
+    @FXML
+    private Label lblPublicacoes;
 
     @FXML
     private Text textNomeProjeto;
@@ -246,7 +257,40 @@ public class TelaPrincipalCoordenadorController {
     void OnExitVerPerfil(MouseEvent event) {
         btnVerPerfil.setStyle("-fx-background-color:  DBA5A5" );
     }
-    
+    //******************************************************************
+      @FXML
+    void onClickLabelArtigos(MouseEvent event) throws IOException, SQLException {
+        try{
+        carregarArtigos();
+        }catch(IOException ex){
+            ex.printStackTrace();
+        }
+    }    
+     @FXML
+    void onEnterLabelArtigos(MouseEvent event) {
+        lblArtigos.setStyle("-fx-text-fill: #840d0b" );
+    }    
+    @FXML
+    void onExitLabelArtigos(MouseEvent event) {
+        lblArtigos.setStyle("-fx-text-fill: black" );
+    }
+    //******************************************************************
+    @FXML
+    void onClickLabelPublicacoes(MouseEvent event) {
+        try{
+           carregarFotos();
+           } catch (IOException ex) {
+               ex.printStackTrace();
+           }
+    }    
+    @FXML
+    void onEnterLabelPublicacoes(MouseEvent event) {
+        lblPublicacoes.setStyle("-fx-text-fill: #840d0b" );
+    }
+    @FXML
+    void onExitLabelPublicacoes(MouseEvent event) {
+        lblPublicacoes.setStyle("-fx-text-fill: black" );
+    }
     //------------------*SETs*----------------------//
     public void setCoordenador(Coordenador coord) {
        this.coordenador = coord;
@@ -300,6 +344,28 @@ public class TelaPrincipalCoordenadorController {
         } catch (SQLException e) {
             System.out.println("Não é possível carregar postagens");
         }
+    }
+    
+    @FXML
+    public void carregarArtigos() throws IOException, SQLException {
+        tilePaneGaleria.getChildren().clear(); // Limpa a galeria antes de recarregar
+        
+            List<Artigo> artigos = artigoDAO.listarArtigos(projeto);
+            if (artigos.isEmpty()) {
+                System.out.println("Nenhum artigo encontrado no banco de dados.");
+                
+
+            }
+            for (Artigo artigo : artigos) {
+                if(artigo.getArquivo()!=null){
+                adicionarArtigoFeed(artigo);
+                }
+                else{ // caso o link da foto estiver com problema uma outra foto substitui ela
+                    System.out.println("Não carregou o artigo");
+                }
+
+            } 
+        
     }
     
 //******************* MÉTODOS ***************************************
@@ -500,6 +566,23 @@ public class TelaPrincipalCoordenadorController {
        
     }
    
+   private void adicionarArtigoFeed(Artigo artigo){
+       
+       Label lblTituloArtigo = new Label();
+       lblTituloArtigo.setPrefHeight(30);
+       lblTituloArtigo.setPrefWidth(920);
+       lblTituloArtigo.setStyle("-fx-font-family: 'Courier New'; -fx-font-size: 18px; -fx-underline: true;");
+       lblTituloArtigo.setText("Artigo");
+       
+       tilePaneGaleria.getChildren().add(lblTituloArtigo);
+       
+       File arquivoArtigo = artigo.getArquivo();
+       if(arquivoArtigo!=null){
+           lblTituloArtigo.setText(artigo.getTitulo());
+       }
+       
+       
+   }
     
     private void adicionarPostagemFeed(Postagem postagem) {
         
