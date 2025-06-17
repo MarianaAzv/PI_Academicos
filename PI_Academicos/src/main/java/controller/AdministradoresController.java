@@ -33,6 +33,7 @@ public class AdministradoresController {
     private Stage stageADMS;
     private Administrador adm;
     ObservableList<Administrador> lista;
+    
 
    public void setAdministrador(Administrador adm) {
         this.adm = adm;
@@ -392,6 +393,41 @@ public class AdministradoresController {
             stageADMS.close();
     }
     
+    @FXML
+    void TableViewClick(MouseEvent event) throws IOException {
+        if (event.getClickCount() == 1) {
+            this.adm = tabelaADMS.getSelectionModel().getSelectedItem();
+            if (this.adm != null) {
+                URL url = new File("src/main/java/view/ADM.fxml").toURI().toURL();
+                FXMLLoader loader = new FXMLLoader(url);
+                Parent root = loader.load();
+
+                Stage stageADM = new Stage();
+
+                ADMController ac = loader.getController();
+
+                ac.setStage(stageADM);
+
+                stageADM.setOnShown(evento -> {
+                    //ac.ajustarElementosJanela(this.adm);
+                });
+                
+                ac.setOnADMDesativado(() -> {
+                    try{
+                        carregarTabelaADMS();
+                    } catch (SQLException ex){
+                        
+                    }
+                });
+
+                Scene scene = new Scene(root);
+
+                stageADM.setTitle("Administrador selecionado");
+                stageADM.setScene(scene);
+                stageADM.show();
+            }
+        }
+    }
      
     
     

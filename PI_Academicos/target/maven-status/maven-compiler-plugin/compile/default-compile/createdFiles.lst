@@ -6,6 +6,7 @@ model\SolicitacaoDAO.class
 controller\TelaNoticiaController.class
 controller\INotificacaoAlert.class
 controller\TelaPrincipalBolsistaController.class
+controller\ADMController.class
 controller\CadastrarPostagemController.class
 model\Coordenador.class
 util\Origem.class
