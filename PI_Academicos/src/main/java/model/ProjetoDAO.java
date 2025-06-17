@@ -294,6 +294,56 @@ public class ProjetoDAO extends GenericDAO{
         stmt.executeUpdate();
     }
 }
+    
+    
+//    public void SetarBolsista(int idUsuario,int idProjeto) throws SQLException {
+//            List<Bolsista> bolsistas = new ArrayList<>();
+//                Connection con = conectarDAO();
+//                
+//        String sql = "Select bp.*,b.*,u.* from bolsistas_projetos bp inner join bolsistas b on b.idUsuario=bp.idUsuario inner join usuarios u  on b.idUsuario=u.idUsuario where bp.idProjeto = ?";
+//  
+//        try(con ){
+//             PreparedStatement stmt = con.prepareStatement(sql);
+//             stmt.setInt(1,idUsuario);
+//             stmt.setInt(2, idProjeto);
+//             
+//              ResultSet rs = stmt.executeQuery();
+//              
+//              
+//        while (rs.next()) {
+//            Campus campus = new Campus();
+//            campus.setIdCampus(rs.getInt("idCampus"));
+//            campus.setNomeCampus(rs.getString("nomeCampus"));
+//            campus.setLocalCampus(rs.getString("localCampus"));
+//            
+//            AreasConhecimento areasconhecimento = new AreasConhecimento();
+//            areasconhecimento.setIdArea(rs.getInt("idArea"));
+//            areasconhecimento.setNomeArea(rs.getString("nomeArea")); 
+//
+//            Projeto projeto = new Projeto(
+//                rs.getString("tituloProjeto"),
+//                rs.getString("resumo"),
+//                campus,
+//                rs.getString("edital"),
+//                rs.getDate("dataInicio").toLocalDate(),
+//                rs.getDate("dataFim").toLocalDate(),
+//                rs.getDate("prorrogacao") != null ? rs.getDate("prorrogacao").toLocalDate() : null,
+//                rs.getBoolean("emAndamento")
+//            );
+//            Bolsista bolsista = new Bolsista();
+//                    bolsista.setId(rs.getInt("idUsuario"));
+//            
+//         
+//            projeto.setAreaConhecimento(areasconhecimento);
+//        
+//
+//       projeto.setIdProjeto(rs.getInt("idProjeto"));
+//
+//            bolsistas.add(bolsista);
+//        }
+//        }
+//        return bolsistas;
+//        }
 }
 
     
