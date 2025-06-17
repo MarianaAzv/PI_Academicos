@@ -224,5 +224,5 @@ public class Usuario {
         }
         return ativaProperty;
     }
-    	   
+	   
 }

@@ -128,5 +128,7 @@ public class Bolsista extends Usuario {
     public void setAcessoArtigos(boolean acessoArtigos) {
         this.acessoArtigos = acessoArtigos;
     }
-
+public Bolsista() {
+    super(); 
+}
 }

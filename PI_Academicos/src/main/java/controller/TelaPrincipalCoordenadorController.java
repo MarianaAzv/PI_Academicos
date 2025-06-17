@@ -27,9 +27,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Bolsista;
+import model.BolsistaDAO;
 import model.Coordenador;
 import model.Noticia;
 import model.Postagem;
@@ -37,6 +39,7 @@ import model.PostagemDAO;
 import model.Projeto;
 //import model.Coordenador;
 import model.Usuario;
+import static util.AlertaUtil.mostrarAviso;
 
 public class TelaPrincipalCoordenadorController {
     
@@ -144,6 +147,9 @@ public class TelaPrincipalCoordenadorController {
 
     @FXML
     private Text txtProrrogacao;
+    
+        @FXML
+    private VBox vbox;
     
     //******************* OnClicks ***************************************
     @FXML
@@ -303,17 +309,12 @@ public class TelaPrincipalCoordenadorController {
        String prorroga = String.valueOf(projeto.getProrroacao());
        txtProrrogacao.setText(prorroga);
        txtNomeCoordenador.setText(projeto.getCocoordenadores());
-       //txtNomeBolsitas.setText(projeto.get);
+        carregarBolsista(projeto);
  
     }
     
     //Setar os nomes dos bolsistas e deixar null o coordenador
-        public void setBolsista(Bolsista bolsista){
-txtNomeBolsitas.setText(bolsista.getNome());
-}
-       public void  setCocoordenador(){
-          txtNomeCocoordenador.setText("Null");
-       }
+      
         
   
     
@@ -502,7 +503,8 @@ txtNomeBolsitas.setText(bolsista.getNome());
    public void ajustarElementosJanela(Coordenador coordenador, Projeto projeto) {
         this.coordenador=coordenador;
         this.projeto=projeto;
-        
+        carregarBolsista(projeto);
+                
         System.out.println("Aqui chegam os parâmetros do login "
                 + coordenador.getNome() + " - " + coordenador.getSiape() + "ATIVA: " + coordenador.getAtiva());
         txtNomeCoordenador.setText(coordenador.getNome());
@@ -513,6 +515,7 @@ txtNomeBolsitas.setText(bolsista.getNome());
         
           System.out.println("Coordenador esta falso");
         }
+
        
     }
    
@@ -613,6 +616,27 @@ txtNomeBolsitas.setText(bolsista.getNome());
     imageView.setViewport(viewport);
     System.out.println("Postagem arrumada com id:" + postagem.getFoto().getId());
 }
+
+    public void carregarBolsista(Projeto projeto) {
+       try {
+        BolsistaDAO dao = new BolsistaDAO();
+        List<Bolsista> bolsistas = dao.selecionarBolsistasPorProjeto(projeto);
+
+        vbox.getChildren().clear(); 
+
+         if (bolsistas.isEmpty()) {
+            System.out.println("Nenhum bolsista encontrado para o projeto: " + projeto.getTitulo());
+        }
+         
+        for (Bolsista b : bolsistas) {
+            Label lbl = new Label(b.getNome()); 
+            vbox.getChildren().add(lbl);
+        }
+    } catch (SQLException e) {
+        mostrarAviso("Erro", "Erro ao carregar bolsistas do projeto");
+       
+    }
+    }
    
         
    }
