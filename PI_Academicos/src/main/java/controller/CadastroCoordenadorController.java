@@ -110,6 +110,7 @@ public class CadastroCoordenadorController {
         try {
 
             if (txtCPF.getText().isEmpty() || txtSIAPE.getText().isEmpty() || txtNomeCompleto.getText().isEmpty() || txtUsuario.getText().isEmpty() || txtEmail.getText().isEmpty() || txtSenha.getText().isEmpty() || txtFormacao.getText().isEmpty()) {
+               
                 mostrarAviso("Falta informação", "Por favor inserir todos os dados");
                 return;
             } else {
@@ -118,13 +119,17 @@ public class CadastroCoordenadorController {
                     if (Email.isValidEmail(txtEmail.getText())) {
                         System.out.print("O Email esta valido");
                        if(Apenasletras.isLetras(txtNomeCompleto.getText())){
+                           if(Apenasletras.isLetras(txtFormacao.getText())){
+                               
 
                         Long cpf = Long.parseLong(txtCPF.getText());
                         int siape = Integer.parseInt(txtSIAPE.getText());
 
                         incluir(cpf, txtNomeCompleto.getText(), txtUsuario.getText(), txtEmail.getText(), txtSenha.getText(), siape, txtFormacao.getText());
 
-                        
+                           }else{
+                               mostrarAviso("ERRO","Por favor inserir a sua formação corretamente");
+                           }
                        }else{
                            mostrarAviso("ERRO","Por favor inserir o nome corretamente");
                        }
