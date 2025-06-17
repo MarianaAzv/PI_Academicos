@@ -37,6 +37,7 @@ public class TelaLoginController implements INotificacaoAlert {
     private final LoginDAO dao = new LoginDAO();
     private Usuario user;
     boolean resp;
+    TeladefundoController stageTelafundo;
 
     @FXML
     private Button btnEntrar;
@@ -152,97 +153,67 @@ public class TelaLoginController implements INotificacaoAlert {
     }
 
     public void abrirTelaPrincipalCoordenador(Coordenador coordenador) throws MalformedURLException, IOException {
-      // Carrega a tela de fundo
-    URL urlFundo = new File("src/main/java/view/Teladefundo.fxml").toURI().toURL();
-    FXMLLoader loaderFundo = new FXMLLoader(urlFundo);
-    Parent rootFundo = loaderFundo.load();
+        // Carrega a tela de fundo
+        URL urlFundo = new File("src/main/java/view/Teladefundo.fxml").toURI().toURL();
+        FXMLLoader loaderFundo = new FXMLLoader(urlFundo);
+        Parent rootFundo = loaderFundo.load();
 
-    Stage stageFundo = new Stage();
-    stageFundo.setTitle("Tela de Fundo Escolher Projeto");
-    stageFundo.setScene(new Scene(rootFundo));
-    stageFundo.setMaximized(true);
-    stageFundo.show();
+        Stage stageFundo = new Stage();
 
-    // Carrega a tela de escolher projeto
-    URL urlProjeto = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
-    FXMLLoader loaderProjeto = new FXMLLoader(urlProjeto);
-    Parent rootProjeto = loaderProjeto.load();
+        stageFundo.setTitle("Tela de Fundo Escolher Projeto");
+        stageFundo.setScene(new Scene(rootFundo));
+        stageFundo.setMaximized(true);
+        stageFundo.show();
 
-    Stage stageProjeto = new Stage();
+        // Carrega a tela de escolher projeto
+        URL urlProjeto = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
+        FXMLLoader loaderProjeto = new FXMLLoader(urlProjeto);
+        Parent rootProjeto = loaderProjeto.load();
 
-    EscolherProjetoController tpc = loaderProjeto.getController();
-    tpc.setCoordenador(coordenador);
-    tpc.setStage(stageProjeto);
+        Stage stageProjeto = new Stage();
 
-    stageProjeto.setOnShown(evento -> {
-        try {
-            tpc.OnClickProjeto();
-        } catch (SQLException ex) {
-            Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+        EscolherProjetoController tpc = loaderProjeto.getController();
+        tpc.setCoordenador(coordenador);
+        tpc.setStagefundo(stageFundo);
+        tpc.setStage(stageProjeto);
+
+        stageProjeto.setOnShown(evento -> {
+            try {
+                tpc.OnClickProjeto();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+
+        Scene cenaProjeto = new Scene(rootProjeto);
+        stageProjeto.setTitle("Escolher Projeto");
+        stageProjeto.setScene(cenaProjeto);
+        stageProjeto.initOwner(stageFundo); // Define o fundo como tela base
+        stageProjeto.show();
+
+        // Fecha a tela de login
+        if (stageLogin != null) {
+            stageLogin.close();
         }
-    });
 
-    Scene cenaProjeto = new Scene(rootProjeto);
-    stageProjeto.setTitle("Escolher Projeto");
-    stageProjeto.setScene(cenaProjeto);
-    stageProjeto.initOwner(stageFundo); // Define o fundo como tela base
-    stageProjeto.show();
-
-    // Fecha a tela de login
-    if (stageLogin != null) {
-        stageLogin.close();
-    }
-
-    System.out.println("Coordenador ao clicar em Criar Projeto: " + coordenador);
-//         URL urlfundo = new File("src/main/java/view/Teladefundo.fxml").toURI().toURL();
-//        FXMLLoader loader = new FXMLLoader(urlfundo);
-//         Parent rootFundo = loader.load();
-//       
-//        Stage stageFundo = new Stage();
-//        stageFundo .setTitle("Tela  de Fundo Escolher Projeto");
-//        stageFundo.setScene(new Scene(rootFundo));
-//        stageFundo.setMaximized(true);
-//        stageFundo.show();
-//        
-//        
-//        
-//        
-//        URL urlprojeto = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
-//        FXMLLoader loader = new FXMLLoader(urlprojeto);
-//        Parent root = loader.load();
-//
-//        Stage stageProjeto = new Stage();
-//
-//        EscolherProjetoController tpc = loader.getController();
-//        tpc.setCoordenador(coordenador);
-//        tpc.setStage(stageProjeto);
-//
-//        stageProjeto.setOnShown(evento -> {
-//            try {
-//                tpc.OnClickProjeto();
-//            } catch (SQLException ex) {
-//                Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        });
-//
-//        Scene cena = new Scene(root);
-//        stageProjeto.setTitle("Tela principal Coordenador");
-//        stageProjeto.setScene(cena);
-//        stageProjeto.initOwner(stageFundo); 
-//       // stagePrincipal.setMaximized(true);
-//        stageProjeto.show();
-//        stageLogin.close();
-//        System.out.println("Coordenador ao clicar em Criar Projeto: " + coordenador);
-//
-//
-//        
-//          System.out.println("Coordenador ao clicar em Criar Projeto: " + coordenador);
-
+        System.out.println("Coordenador ao clicar em Criar Projeto: " + coordenador);
 
     }
 
-    
     public void abrirTelaPrincipalBolsista(Bolsista bolsista) throws MalformedURLException, IOException {
+
+        // Carrega a tela de fundo
+        URL urlFundo = new File("src/main/java/view/Teladefundo.fxml").toURI().toURL();
+        FXMLLoader loaderFundo = new FXMLLoader(urlFundo);
+        Parent rootFundo = loaderFundo.load();
+
+        Stage stageFundo = new Stage();
+
+        stageFundo.setTitle("Tela de Fundo Escolher Projeto");
+        stageFundo.setScene(new Scene(rootFundo));
+        stageFundo.setMaximized(true);
+        stageFundo.show();
+
         URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
@@ -250,6 +221,7 @@ public class TelaLoginController implements INotificacaoAlert {
         Stage stagePrincipal = new Stage();
         EscolherProjetoController epb = loader.getController();
         epb.setBolsista(bolsista);
+        epb.setStagefundo(stageFundo);
         epb.setStage(stagePrincipal);
 
         stagePrincipal.setOnShown(evento -> {
@@ -354,7 +326,5 @@ public class TelaLoginController implements INotificacaoAlert {
     public void btnCancela() {
         resp = true;
     }
-    
-    
 
 }
