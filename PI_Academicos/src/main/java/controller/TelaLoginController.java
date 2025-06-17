@@ -152,54 +152,91 @@ public class TelaLoginController implements INotificacaoAlert {
     }
 
     public void abrirTelaPrincipalCoordenador(Coordenador coordenador) throws MalformedURLException, IOException {
-     
-        URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
-        FXMLLoader loader = new FXMLLoader(url);
-        Parent root = loader.load();
+      // Carrega a tela de fundo
+    URL urlFundo = new File("src/main/java/view/Teladefundo.fxml").toURI().toURL();
+    FXMLLoader loaderFundo = new FXMLLoader(urlFundo);
+    Parent rootFundo = loaderFundo.load();
 
-        Stage stagePrincipal = new Stage();
+    Stage stageFundo = new Stage();
+    stageFundo.setTitle("Tela de Fundo Escolher Projeto");
+    stageFundo.setScene(new Scene(rootFundo));
+    stageFundo.setMaximized(true);
+    stageFundo.show();
 
-        EscolherProjetoController tpc = loader.getController();
-        tpc.setCoordenador(coordenador);
-        tpc.setStage(stagePrincipal);
+    // Carrega a tela de escolher projeto
+    URL urlProjeto = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
+    FXMLLoader loaderProjeto = new FXMLLoader(urlProjeto);
+    Parent rootProjeto = loaderProjeto.load();
 
-        stagePrincipal.setOnShown(evento -> {
-            try {
-                tpc.OnClickProjeto();
-            } catch (SQLException ex) {
-                Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
+    Stage stageProjeto = new Stage();
 
-        Scene cena = new Scene(root);
-        stagePrincipal.setTitle("Tela principal Coordenador");
-        stagePrincipal.setScene(cena);
-       // stagePrincipal.setMaximized(true);
-        stagePrincipal.show();
+    EscolherProjetoController tpc = loaderProjeto.getController();
+    tpc.setCoordenador(coordenador);
+    tpc.setStage(stageProjeto);
+
+    stageProjeto.setOnShown(evento -> {
+        try {
+            tpc.OnClickProjeto();
+        } catch (SQLException ex) {
+            Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    });
+
+    Scene cenaProjeto = new Scene(rootProjeto);
+    stageProjeto.setTitle("Escolher Projeto");
+    stageProjeto.setScene(cenaProjeto);
+    stageProjeto.initOwner(stageFundo); // Define o fundo como tela base
+    stageProjeto.show();
+
+    // Fecha a tela de login
+    if (stageLogin != null) {
         stageLogin.close();
-        System.out.println("Coordenador ao clicar em Criar Projeto: " + coordenador);
+    }
 
-//      URL url = new File("src/main/java/view/Teladefundo.fxml").toURI().toURL();
-//        FXMLLoader loader = new FXMLLoader(url);
-//         Parent root = loader.load();
+    System.out.println("Coordenador ao clicar em Criar Projeto: " + coordenador);
+//         URL urlfundo = new File("src/main/java/view/Teladefundo.fxml").toURI().toURL();
+//        FXMLLoader loader = new FXMLLoader(urlfundo);
+//         Parent rootFundo = loader.load();
 //       
-//         Stage stagePrincipal = new Stage();
-//       
-//      TeladefundoController tdfc = loader.getController();  
-//         tdfc.setCoordenador(coordenador);
-//         tdfc.setStage(stagePrincipal);
-//         
-//          
-//            stagePrincipal.setOnShown(evento -> {
-//            tdfc.ajustarElementosJanela(coordenador);
-//        });
-//       
-//         Scene cena = new Scene(root);
-//         stagePrincipal.setTitle("Tela Escolher Projeto");
-//           stagePrincipal.setScene(cena);
-//          stagePrincipal.show();
+//        Stage stageFundo = new Stage();
+//        stageFundo .setTitle("Tela  de Fundo Escolher Projeto");
+//        stageFundo.setScene(new Scene(rootFundo));
+//        stageFundo.setMaximized(true);
+//        stageFundo.show();
 //        
-          System.out.println("Coordenador ao clicar em Criar Projeto: " + coordenador);
+//        
+//        
+//        
+//        URL urlprojeto = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
+//        FXMLLoader loader = new FXMLLoader(urlprojeto);
+//        Parent root = loader.load();
+//
+//        Stage stageProjeto = new Stage();
+//
+//        EscolherProjetoController tpc = loader.getController();
+//        tpc.setCoordenador(coordenador);
+//        tpc.setStage(stageProjeto);
+//
+//        stageProjeto.setOnShown(evento -> {
+//            try {
+//                tpc.OnClickProjeto();
+//            } catch (SQLException ex) {
+//                Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        });
+//
+//        Scene cena = new Scene(root);
+//        stageProjeto.setTitle("Tela principal Coordenador");
+//        stageProjeto.setScene(cena);
+//        stageProjeto.initOwner(stageFundo); 
+//       // stagePrincipal.setMaximized(true);
+//        stageProjeto.show();
+//        stageLogin.close();
+//        System.out.println("Coordenador ao clicar em Criar Projeto: " + coordenador);
+//
+//
+//        
+//          System.out.println("Coordenador ao clicar em Criar Projeto: " + coordenador);
 
 
     }
