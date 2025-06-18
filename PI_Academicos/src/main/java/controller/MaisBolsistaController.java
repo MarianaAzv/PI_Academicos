@@ -22,6 +22,7 @@ public class MaisBolsistaController {
     Projeto projeto;
     private Origem origem;
     Coordenador coordenador;
+    CriarProjetoController criarprojetocontroller;
     
     @FXML
     private Button BtnNao;
@@ -77,7 +78,13 @@ public class MaisBolsistaController {
   public void setCoordenador(Coordenador coordenador) {
         this.coordenador = coordenador;
     }
-    //--------------------*METODOS*-----------------//
+  
+ public  void setControllerCriar(CriarProjetoController aThis) {
+        this.criarprojetocontroller=aThis;
+    }
+ 
+ 
+     //--------------------*METODOS*-----------------//
     public void abrirJanelaCadastroBolsista() throws IOException{
        URL url = new File("src/main/java/view/CadastroBolsistaCoodernador.fxml").toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
@@ -88,8 +95,10 @@ public class MaisBolsistaController {
             CadastroBolsistaCoordenadorController cbcc = loader.getController();
             cbcc.setCoordenador(coordenador);
             cbcc.setProjeto(projeto);
-            cbcc.setStage(stageCadastroBolsista);
             cbcc.setOrigem(origem);
+            cbcc.setControllerCriar(criarprojetocontroller);
+            cbcc.setStage(stageCadastroBolsista);
+           
         
             Scene cena = new Scene(root);
             stageCadastroBolsista.setTitle("Adicionar bolsistas");
@@ -97,34 +106,14 @@ public class MaisBolsistaController {
             //deixa a tela maximizada
             
             stageCadastroBolsista.show();
+         
             stageMaisBolsista.close();
            
    }
       public void abrirTelaAtualizarProjeto() throws IOException{
-//            URL url = new File("src/main/java/view/AtualizarProjeto.fxml").toURI().toURL();       
-//      FXMLLoader loader = new FXMLLoader(url);
-//       
-//      Parent root = loader.load();
-//        
-//     Stage stageAtualizarProjeto = new Stage();
-//        
-//       AtualizarProjetoController apc = loader.getController();
-//        
-//        apc.setStage(stageAtualizarProjeto);
-//        apc.setCoordenador(coordenador);
-//        apc.setProjeto(projeto);
-//        
-//          stageAtualizarProjeto.setOnShown(evento -> {
-//        apc.ajustarElementosJanela();
-//      });
-//        
-//      Scene cena = new Scene(root);
-//       stageAtualizarProjeto.setTitle("Atualizar Projeto");
-//       stageAtualizarProjeto.setMaximized(true);
-//        stageAtualizarProjeto.setScene(cena);
-//       stageAtualizarProjeto.show();
+         
        stageMaisBolsista.close();
-      //  System.out.print("O coordenador esta sendo set"+coordenador);
+     
        }
       
       
@@ -152,9 +141,14 @@ public class MaisBolsistaController {
             
             stagePrincipal.show();
              System.out.print("O coordenador esta sendo set"+coordenador);
+             
+           criarprojetocontroller.Close();  
            stageMaisBolsista.close();
+           
 
 }
+
+   
 
     
 }

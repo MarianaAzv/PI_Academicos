@@ -27,8 +27,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Bolsista;
+import model.BolsistaDAO;
 import model.Coordenador;
 import model.Noticia;
 import model.Postagem;
@@ -36,6 +39,7 @@ import model.PostagemDAO;
 import model.Projeto;
 //import model.Coordenador;
 import model.Usuario;
+import static util.AlertaUtil.mostrarAviso;
 
 public class TelaPrincipalCoordenadorController {
     
@@ -46,10 +50,9 @@ public class TelaPrincipalCoordenadorController {
     private Coordenador coordenador;
     private PostagemDAO postagemDAO;
     Projeto projeto;
+    Bolsista bolsista;
     
-    public TelaPrincipalCoordenadorController() {
-        postagemDAO = new PostagemDAO();
-    }
+
     
     @FXML
     public void initialize() {
@@ -65,17 +68,7 @@ public class TelaPrincipalCoordenadorController {
         });
 
     }
-    
-    
-    
-    public void setStage(Stage stage){
-    this.stagePrincipalCoordenador = stage;
-    }
-    
-    public void setStagePrincipal(Stage stagePrincipalCoordenador){
-    this.stagePrincipalCoordenador = stagePrincipalCoordenador;
-   }
-    
+
 
     @FXML
     private Text TxtNomeUsuario;
@@ -113,14 +106,14 @@ public class TelaPrincipalCoordenadorController {
     @FXML
     private ImageView imgProjeto;
 
-//    @FXML
-//    private Label lblNomeBolsista;
-//
-//    @FXML
-//    private Label lblNomeCocoordenador;
-//
-//    @FXML
-//    private Label lblNomeCoordenador;
+  @FXML
+   private Label lblNomeBolsista;
+
+  @FXML
+    private Label lblNomeCocoordenador;
+
+    @FXML
+   private Label lblNomeCoordenador;
 
     @FXML
     private Label lblResumo;
@@ -154,6 +147,9 @@ public class TelaPrincipalCoordenadorController {
 
     @FXML
     private Text txtProrrogacao;
+    
+        @FXML
+    private VBox vbox;
     
     //******************* OnClicks ***************************************
     @FXML
@@ -247,32 +243,12 @@ public class TelaPrincipalCoordenadorController {
         btnVerPerfil.setStyle("-fx-background-color:  DBA5A5" );
     }
     
-    //------------------*SETs*----------------------//
-    public void setCoordenador(Coordenador coord) {
-       this.coordenador = coord;
-       TxtNomeUsuario.setText(coord.getNome());
+    //----------------------*CarregarFotos*----------------------//
+        public TelaPrincipalCoordenadorController() {
+        postagemDAO = new PostagemDAO();
     }
-    public void setProjeto(Projeto projeto) {
-       this.projeto = projeto;
-       //lblNomeCoordenador.setText(projeto.getCoordenador());
-       lblResumo.setText(projeto.getResumo());
-       txtCampus.setText(projeto.getCampus().getNomeCampus());
-       txtNomeProjeto.setText(projeto.getTitulo());
-       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-       String DataInicio = projeto.getDataInicio().format(formatter);
-       txtInicio.setText(DataInicio);
-
-       String DataFim = projeto.getDataFim().format(formatter);
-       txtFim.setText(DataFim);
-       String prorroga = String.valueOf(projeto.getProrroacao());
-       txtProrrogacao.setText(prorroga);
-       txtNomeCoordenador.setText(projeto.getCocoordenadores());
-       //txtNomeBolsitas.setText(projeto.get);
-       
-       
-    }
-    
-    @FXML
+        
+          @FXML
     public void carregarFotos() throws IOException {
         tilePaneGaleria.getChildren().clear(); // Limpa a galeria antes de recarregar
         try {
@@ -301,6 +277,46 @@ public class TelaPrincipalCoordenadorController {
             System.out.println("Não é possível carregar postagens");
         }
     }
+        
+    //------------------*SETs*----------------------//
+    
+    
+        
+      public void setStage(Stage stage){
+    this.stagePrincipalCoordenador = stage;
+    }
+    
+    public void setStagePrincipal(Stage stagePrincipalCoordenador){
+    this.stagePrincipalCoordenador = stagePrincipalCoordenador;
+   }
+    
+    public void setCoordenador(Coordenador coord) {
+       this.coordenador = coord;
+       TxtNomeUsuario.setText(coord.getNome());
+    }
+    public void setProjeto(Projeto projeto) {
+       this.projeto = projeto;
+       //lblNomeCoordenador.setText(projeto.getCoordenador());
+       lblResumo.setText(projeto.getResumo());
+       txtCampus.setText(projeto.getCampus().getNomeCampus());
+       txtNomeProjeto.setText(projeto.getTitulo());
+       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+       String DataInicio = projeto.getDataInicio().format(formatter);
+       txtInicio.setText(DataInicio);
+
+       String DataFim = projeto.getDataFim().format(formatter);
+       txtFim.setText(DataFim);
+       String prorroga = String.valueOf(projeto.getProrroacao());
+       txtProrrogacao.setText(prorroga);
+       txtNomeCoordenador.setText(projeto.getCocoordenadores());
+        carregarBolsista(projeto);
+ 
+    }
+    
+    //Setar os nomes dos bolsistas e deixar null o coordenador
+      
+        
+  
     
 //******************* MÉTODOS ***************************************
    
@@ -487,7 +503,8 @@ public class TelaPrincipalCoordenadorController {
    public void ajustarElementosJanela(Coordenador coordenador, Projeto projeto) {
         this.coordenador=coordenador;
         this.projeto=projeto;
-        
+        carregarBolsista(projeto);
+                
         System.out.println("Aqui chegam os parâmetros do login "
                 + coordenador.getNome() + " - " + coordenador.getSiape() + "ATIVA: " + coordenador.getAtiva());
         txtNomeCoordenador.setText(coordenador.getNome());
@@ -498,6 +515,7 @@ public class TelaPrincipalCoordenadorController {
         
           System.out.println("Coordenador esta falso");
         }
+
        
     }
    
@@ -598,6 +616,27 @@ public class TelaPrincipalCoordenadorController {
     imageView.setViewport(viewport);
     System.out.println("Postagem arrumada com id:" + postagem.getFoto().getId());
 }
+
+    public void carregarBolsista(Projeto projeto) {
+       try {
+        BolsistaDAO dao = new BolsistaDAO();
+        List<Bolsista> bolsistas = dao.selecionarBolsistasPorProjeto(projeto);
+
+        vbox.getChildren().clear(); 
+
+         if (bolsistas.isEmpty()) {
+            System.out.println("Nenhum bolsista encontrado para o projeto: " + projeto.getTitulo());
+        }
+         
+        for (Bolsista b : bolsistas) {
+            Label lbl = new Label(b.getNome()); 
+            vbox.getChildren().add(lbl);
+        }
+    } catch (SQLException e) {
+        mostrarAviso("Erro", "Erro ao carregar bolsistas do projeto");
+       
+    }
+    }
    
         
    }

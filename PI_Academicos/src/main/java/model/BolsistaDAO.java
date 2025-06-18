@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BolsistaDAO extends GenericDAO {
 
@@ -118,5 +120,35 @@ public class BolsistaDAO extends GenericDAO {
         
     }
 
- 
+    public List<Bolsista> selecionarBolsistasPorProjeto(Projeto projeto) throws SQLException {
+    List<Bolsista> bolsistas = new ArrayList<>();
+    String sql = "Select bp.*,b.*,u.* from bolsistas_projetos bp inner join bolsistas b on b.idUsuario=bp.idUsuario inner join usuarios u  on b.idUsuario=u.idUsuario where bp.idProjeto = ?";
+
+    Connection con = conectarDAO();
+    PreparedStatement stmt = con.prepareStatement(sql);
+    stmt.setInt(1, projeto.getIdProjeto());
+    
+    ResultSet rs = stmt.executeQuery();
+    
+while (rs.next()) {
+    
+           
+    Usuario u = new Usuario();
+    u.setId(rs.getInt("idUsuario"));
+    u.setNome(rs.getString("nome"));
+    u.setCpf(rs.getInt("cpf"));
+    u.setApelido(rs.getString("apelido"));
+    u.setEmail(rs.getString("email"));
+    u.setAtiva(rs.getBoolean("ativa"));
+    
+     Bolsista b = new Bolsista();
+     b.setId(rs.getInt("idUsuario"));
+     b.setMatricula(rs.getInt("matricula"));
+     b.setCurso(rs.getString("curso"));
+     
+     bolsistas.add(b);
+}
+       
+      return bolsistas;  
+    }
 }

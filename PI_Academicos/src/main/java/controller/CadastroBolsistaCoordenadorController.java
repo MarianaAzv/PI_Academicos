@@ -32,18 +32,18 @@ import model.SolicitacaoDAO;
 import model.Usuario;
 import util.Origem;
 
-
 public class CadastroBolsistaCoordenadorController {
 
-     private Stage stageCadastrarBolsistaCoordenador;
-     File arquivoPDF = null;
-     private final String DIRETORIO_PDFS = Paths.get(System.getProperty("user.home"), "pdfs_baixados").toString();
-     Projeto projeto;
-     Bolsista bolsista;
-     Usuario usuario;
-     private Origem origem;
-     Coordenador coordenador;
-     
+    private Stage stageCadastrarBolsistaCoordenador;
+    File arquivoPDF = null;
+    private final String DIRETORIO_PDFS = Paths.get(System.getProperty("user.home"), "pdfs_baixados").toString();
+    Projeto projeto;
+    Bolsista bolsista;
+    Usuario usuario;
+    private Origem origem;
+    Coordenador coordenador;
+    CriarProjetoController criarprojetocontrtoller;
+
     @FXML
     private DatePicker DataFimdaBolsa;
 
@@ -55,7 +55,7 @@ public class CadastroBolsistaCoordenadorController {
 
     @FXML
     private Button btnPDF;
-    
+
     @FXML
     private Label lblAbrirArquivo;
 
@@ -112,7 +112,9 @@ public class CadastroBolsistaCoordenadorController {
 
     @FXML
     private TextField txtUsuario;
-
+    
+    
+    //---------------------------*OnClicks*------------------------------//
 
     @FXML
     void OnClickEnviar(ActionEvent event) throws SQLException, IOException {
@@ -133,10 +135,9 @@ public class CadastroBolsistaCoordenadorController {
         } catch (NumberFormatException n) {
             mostrarAviso("CPF ou Matrícula inválidos", "Os valores inseridos para CPF e Matrícula devem ser apenas números.");
         }
-        
+
         enviarSolicitacao();
     }
-
 
     @FXML
     void OnClickPDF(ActionEvent event) {
@@ -147,10 +148,10 @@ public class CadastroBolsistaCoordenadorController {
         arquivoPDF = fileChooser.showOpenDialog(btnPDF.getScene().getWindow());
         lblAbrirArquivo.setText(arquivoPDF.getName());
     }
-    
+
     @FXML
     void onClickAbrirArquivo(MouseEvent event) {
-        
+
         if (arquivoPDF != null) {
             try {
                 if (Desktop.isDesktopSupported()) {
@@ -168,9 +169,34 @@ public class CadastroBolsistaCoordenadorController {
     }
     
     
+    
+    //--------------------------*SETs*------------------------//
+       public void setStage(Stage TelaCadastroBolsistaCoordenador) {
+        this.stageCadastrarBolsistaCoordenador = TelaCadastroBolsistaCoordenador;
+    }
+
+    public void setProjeto(Projeto projeto) {
+        this.projeto = projeto;
+    }
+
+    public void setOrigem(Origem origem) {
+        this.origem = origem;
+    }
+
+    public void setCoordenador(Coordenador coordenador) {
+        this.coordenador = coordenador;
+    }
+
+    public void setControllerCriar(CriarProjetoController aThis) {
+        this.criarprojetocontrtoller = aThis;
+    }
+    
+    
+    //-------------------------*Metodos*--------------------//
+
     void incluir(Long cpf, String nome, String apelido, String email, String senha, Long matricula, String curso, LocalDate dataInicio, LocalDate dataFim) throws SQLException, IOException {
-         usuario = new Usuario(cpf, nome, apelido, email, senha);
-         bolsista = new Bolsista(matricula, curso, dataInicio, dataFim);
+        usuario = new Usuario(cpf, nome, apelido, email, senha);
+        bolsista = new Bolsista(matricula, curso, dataInicio, dataFim);
         int repetido = new BolsistaDAO().validarApelido(apelido, 0);
 
         if (repetido > 0) {
@@ -180,44 +206,28 @@ public class CadastroBolsistaCoordenadorController {
         } else {
             new BolsistaDAO().cadastrarUsuarioBolsista(usuario, bolsista, projeto);
             mostrarConfirmacao("Cadastro realizado", "O bolsista foi registrado com sucesso!");
-         if(origem== Origem.atualizar_projeto) {
-   VoltarParaAtualizarprojeto();
-} else if (origem == Origem.cadastro_projeto) {
-    Irtelacoordenador(); 
-} else {
-    mostrarAviso("Erro", "O sistema nao esta funcionando corretamente");
-}
+            if (origem == Origem.atualizar_projeto) {
+                VoltarParaAtualizarprojeto();
+            } else if (origem == Origem.cadastro_projeto) {
+                Irtelacoordenador();
+            } else {
+                mostrarAviso("Erro", "O sistema nao esta funcionando corretamente");
+            }
         }
     }
 
-     public void setStage(Stage TelaCadastroBolsistaCoordenador){
-        this.stageCadastrarBolsistaCoordenador = TelaCadastroBolsistaCoordenador;
-    }
+ 
 
-     public void setProjeto(Projeto projeto){
-        this.projeto = projeto;
-    }
-     
-     
+    public void enviarSolicitacao() {
 
-public void setOrigem(Origem origem) {
-    this.origem = origem;
-}
-
-public void setCoordenador(Coordenador coordenador) {
-    this.coordenador = coordenador;
-}
-     
-     public void enviarSolicitacao(){
-     
-     if (arquivoPDF != null) {
+        if (arquivoPDF != null) {
             try {
-          
+
                 usuario.setId(bolsista.getId());
-                
+
                 String descricao = "Solicitação para cadastro de bolsista de projeto: "
-                        + "\nNome completo: " + txtNomeCompleto.getText() 
-                        + "\nNome de usuário: " + txtUsuario.getText() 
+                        + "\nNome completo: " + txtNomeCompleto.getText()
+                        + "\nNome de usuário: " + txtUsuario.getText()
                         + "\nCPF: " + txtCPF.getText()
                         + "\nCurso: " + txtCurso.getText()
                         + "\nMatrícula: " + txtMatricula.getText()
@@ -225,65 +235,44 @@ public void setCoordenador(Coordenador coordenador) {
                 Solicitacao solicitacao = new Solicitacao(usuario, descricao, arquivoPDF);
                 new SolicitacaoDAO().salvarPDF(solicitacao);
                 System.out.println("Arquivo PDF salvo no banco de dados.");
-                
+
             } catch (IOException e) {
                 System.err.println("Erro ao ler o arquivo PDF: " + e.getMessage());
             }
         }
-     
- }
-    
-   public void VoltarParaAtualizarprojeto() throws IOException{
-        URL url = new File("src/main/java/view/AtualizarProjeto.fxml").toURI().toURL();       
-      FXMLLoader loader = new FXMLLoader(url);
-       
-      Parent root = loader.load();
-        
-     Stage stageAtualizarProjeto = new Stage();
-        
-       AtualizarProjetoController apc = loader.getController();
-        
-        apc.setStage(stageAtualizarProjeto);
-        apc.setCoordenador(coordenador);
-        apc.setProjeto(projeto);
-        
-          stageAtualizarProjeto.setOnShown(evento -> {
-        apc.ajustarElementosJanela();
-      });
-        
-      Scene cena = new Scene(root);
-       stageAtualizarProjeto.setTitle("Atualizar Projeto");
-       stageAtualizarProjeto.setMaximized(true);
-        stageAtualizarProjeto.setScene(cena);
-       stageAtualizarProjeto.show();
-       stageCadastrarBolsistaCoordenador.close();
-    
-        
+
     }
-   public void Irtelacoordenador() throws IOException{
+
+    public void VoltarParaAtualizarprojeto() throws IOException {
+
+        stageCadastrarBolsistaCoordenador.close();
+    }
+
+    public void Irtelacoordenador() throws IOException {
         URL url = new File("src/main/java/view/TelaPrincipalCoordenador.fxml").toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-        
-            Stage stagePrincipal = new Stage();
-        
-            TelaPrincipalCoordenadorController tpc = loader.getController();    
-            tpc.setStagePrincipal(stagePrincipal);
-            tpc.setCoordenador(coordenador);
-            tpc.setProjeto(projeto);
-            
-            stagePrincipal.setOnShown(evento -> {
-            tpc.ajustarElementosJanela(coordenador,projeto);
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stagePrincipal = new Stage();
+
+        TelaPrincipalCoordenadorController tpc = loader.getController();
+        tpc.setStagePrincipal(stagePrincipal);
+        tpc.setCoordenador(coordenador);
+        tpc.setProjeto(projeto);
+
+        stagePrincipal.setOnShown(evento -> {
+            tpc.ajustarElementosJanela(coordenador, projeto);
         });
-        
-            Scene cena = new Scene(root);
-            stagePrincipal.setTitle("Tela principal Coordenador");
-            stagePrincipal.setScene(cena);
-            //deixa a tela maximizada
-            stagePrincipal.setMaximized(true);
-            
-            stagePrincipal.show();
-            stageCadastrarBolsistaCoordenador.close();
-   }
+
+        Scene cena = new Scene(root);
+        stagePrincipal.setTitle("Tela principal Coordenador");
+        stagePrincipal.setScene(cena);
+        //deixa a tela maximizada
+        stagePrincipal.setMaximized(true);
+
+        stagePrincipal.show();
+        criarprojetocontrtoller.Close();
+        stageCadastrarBolsistaCoordenador.close();
+    }
 
 }
