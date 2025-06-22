@@ -30,6 +30,8 @@ import model.Projeto;
 import model.Solicitacao;
 import model.SolicitacaoDAO;
 import model.Usuario;
+import static util.AlertaUtil.mostrarAviso;
+import util.CPF;
 import util.Origem;
 
 public class CadastroBolsistaCoordenadorController {
@@ -119,6 +121,16 @@ public class CadastroBolsistaCoordenadorController {
     @FXML
     void OnClickEnviar(ActionEvent event) throws SQLException, IOException {
         try {
+                if (arquivoPDF == null) {
+            mostrarAviso("PDF obrigatório", "Você deve selecionar um arquivo PDF antes de submeter.");
+            return;
+        }
+            if(txtCPF.getText().isEmpty()||txtMatricula.getText().isEmpty()||txtNomeCompleto.getText().isEmpty()||txtUsuario.getText().isEmpty()||txtEmail.getText().isEmpty()|| txtSenha.getText().isEmpty()||txtCurso.getText().isEmpty()||DataInicioBolsa.getValue()==null ||DataFimdaBolsa.getValue()==null){
+                mostrarAviso("ERRO","Por favor inserir todos os dados");
+            }else{
+                
+                if (CPF.isValid(txtCPF.getText())) {
+                    System.out.print("CPF valido");
             Long cpf = Long.parseLong(txtCPF.getText());
             Long matricula = Long.parseLong(txtMatricula.getText());
             LocalDate dataInicio = DataInicioBolsa.getValue();
@@ -131,7 +143,10 @@ public class CadastroBolsistaCoordenadorController {
 
             incluir(cpf, txtNomeCompleto.getText(), txtUsuario.getText(), txtEmail.getText(), txtSenha.getText(),
                     matricula, txtCurso.getText(), dataInicio, dataFim);
-
+                }else{
+                    mostrarAviso("ERRO","CPF invalido");
+                } 
+            }
         } catch (NumberFormatException n) {
             mostrarAviso("CPF ou Matrícula inválidos", "Os valores inseridos para CPF e Matrícula devem ser apenas números.");
         }

@@ -108,6 +108,10 @@ public class CadastroCoordenadorController {
     void OnClickSubmeter(ActionEvent event) throws SQLException {
 
         try {
+             if (arquivoPDF == null) {
+            mostrarAviso("PDF obrigatório", "Você deve selecionar um arquivo PDF antes de submeter.");
+            return;
+        }
 
             if (txtCPF.getText().isEmpty() || txtSIAPE.getText().isEmpty() || txtNomeCompleto.getText().isEmpty() || txtUsuario.getText().isEmpty() || txtEmail.getText().isEmpty() || txtSenha.getText().isEmpty() || txtFormacao.getText().isEmpty()) {
                
