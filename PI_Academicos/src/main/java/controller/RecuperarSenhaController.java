@@ -42,8 +42,8 @@ void onClickEnviar(ActionEvent event) {
     public static void enviarEmail(String destinatario, String assunto, String mensagem) {
           // Configuração do servidor SMTP
         String host = "smtp.gmail.com";  // Exemplo: SMTP do Gmail
-        final String user = "jaquelinebrandao49@gmail.com";  // Seu e-mail
-        final String password = "08678506555";  // Sua senha ou senha de app do Gmail
+        final String user = "pipocaazeda64@gmail.com";  // Seu e-mail
+        final String password = "momj yhit mvin rtyc";  // Sua senha ou senha de app do Gmail
 
           // Definir as propriedades do servidor SMTP
         Properties properties = new Properties();
@@ -62,9 +62,12 @@ void onClickEnviar(ActionEvent event) {
               // Criar o objeto de mensagem de e-mail
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(user)); // De quem é o e-mail
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress("destinatario@dominio.com")); // Para quem é o e-mail
-            message.setSubject("Assunto do E-mail");  // Assunto
-            message.setText("Este é o corpo do e-mail");  // Corpo do e-mail
+          message.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
+          message.setSubject(assunto);
+          message.setText(mensagem);
+            // message.addRecipient(Message.RecipientType.TO, new InternetAddress("destinatario@dominio.com")); // Para quem é o e-mail
+           /// message.setSubject("Assunto do E-mail");  // Assunto
+          //  message.setText("Este é o corpo do e-mail");  // Corpo do e-mail
 
             // Enviar o e-mail
             Transport.send(message);
@@ -75,7 +78,7 @@ void onClickEnviar(ActionEvent event) {
     }
 
     public static void main(String[] args) {
-        enviarEmail("jaquelinemira@gmail.com", "Recuperação de Senha", "Aqui está oseu código de recuperação: 123456");
+        enviarEmail("jaquelinemiraculous@gmail.com", "Recuperação de Senha", "Aqui está oseu código de recuperação: 123456");
     }
 
     void setStage(Stage stageRecuperar) {
