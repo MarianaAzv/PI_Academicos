@@ -14,16 +14,19 @@ C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\Recu
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\VerPerfilCoordenadorController.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\MaisBolsistaController.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Coordenador.java
+C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\util\Email.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\util\AlertaUtil.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\EscolherProjetoController.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\CampusDAO.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\AlertGenericoController.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CriarProjetoController.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\module-info.java
+C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\util\CPF.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Solicitacao.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Campus.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CadastrarArtigoController.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\AdministradoresController.java
+C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\CodigoSenha.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\LoginDAO.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\INotificacaoAlert.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Foto.java
@@ -34,6 +37,7 @@ C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\Recu
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Postagem.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\TelaPrincipalBolsistaController.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\BolsistaDesativarCoordenadorController.java
+C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\TeladefundoController.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Artigo.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarPerfilAdministradorController.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\MaisCoCoordenadorController.java
@@ -41,6 +45,7 @@ C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\Atua
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\AreasConhecimento.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\PostagemDAO.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\util\Origem.java
+C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\util\Apenasletras.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CadastrarAdministradorController.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Usuario.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\VerPerfilBolsistaController.java

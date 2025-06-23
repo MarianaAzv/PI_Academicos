@@ -1,10 +1,13 @@
 model\ArtigoDAO.class
 controller\RecuperarSenhaCodigoController.class
 model\AdministradorDAO.class
+util\Email.class
 controller\VerPerfilAdministradorController.class
 model\SolicitacaoDAO.class
 controller\TelaNoticiaController.class
+util\Apenasletras.class
 controller\INotificacaoAlert.class
+controller\TeladefundoController.class
 controller\TelaPrincipalBolsistaController.class
 controller\CadastrarPostagemController.class
 controller\RecuperarSenhaController$1.class
@@ -20,11 +23,13 @@ controller\MaisBolsistaController.class
 model\PostagemDAO.class
 controller\CadastrarArtigoController.class
 model\CampusDAO.class
+util\CPF.class
 model\FotoDAO.class
 model\Postagem.class
 controller\CadastroCocoordenadorCoordenadorController.class
 model\ProjetoDAO.class
 model\Bolsista.class
+model\CodigoSenha.class
 model\Foto.class
 controller\AtualizarPerfilBolsistaController.class
 controller\VerPerfilBolsistaController.class
