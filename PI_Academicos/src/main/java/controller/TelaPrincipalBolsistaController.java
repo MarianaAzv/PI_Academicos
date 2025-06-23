@@ -404,20 +404,13 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert{
 
     @Override
     public void btnOk() {
-        try {
-            resp = 2;
-            AbrirTelaLogin();
-        } catch (IOException ex) {
-            Logger.getLogger(TelaPrincipalBolsistaController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
+    
+            resp = 2;   
     }
 
     @Override
     public void btnCancela() {
         resp = 3;
-        
-
     }
     
     

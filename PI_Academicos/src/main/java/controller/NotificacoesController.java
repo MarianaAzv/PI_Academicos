@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -225,6 +228,14 @@ public class NotificacoesController {
             AdministradoresController ac = loader.getController();  
             ac.setAdministrador(adm);
             ac.setStage(stageADMS);
+            
+            stageADMS.setOnShown(evento -> {
+            try {
+                ac.ajustarElementosJanela();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaPrincipalAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
         
             Scene cena = new Scene(root);
             stageADMS.setTitle("Tela Administradores");

@@ -9,6 +9,8 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.sql.SQLException;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -337,6 +339,14 @@ public class AtualizarPerfilAdministradorController {
             AdministradoresController ac = loader.getController();  
             ac.setAdministrador(adm);
             ac.setStage(stageADMS);
+            
+            stageADMS.setOnShown(evento -> {
+            try {
+                ac.ajustarElementosJanela();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaPrincipalAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
         
             Scene cena = new Scene(root);
             stageADMS.setTitle("Tela Administradores");

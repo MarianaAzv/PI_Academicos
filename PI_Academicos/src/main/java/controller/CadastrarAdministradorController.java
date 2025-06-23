@@ -31,6 +31,7 @@ public class CadastrarAdministradorController {
 
     private Stage stage;
     private File arquivoSelecionado=null;
+    private Runnable onADMCadastrado;// callback
 
     
     @FXML
@@ -72,10 +73,7 @@ public class CadastrarAdministradorController {
     @FXML
     private TextField txtUsuario;
 
-    @FXML
-    void AtualizarProjetoOnClick(MouseEvent event) {
-
-    }
+   
 
     @FXML
     void onClickCadastrar(ActionEvent event) throws SQLException, IOException {
@@ -86,7 +84,13 @@ public class CadastrarAdministradorController {
         }catch(NumberFormatException n){
             mostrarAviso("CPF inválido","O valor inserido para CPF deve ser apenas números");
         }
+        if(onADMCadastrado != null){
+            onADMCadastrado.run();
+        }
         
+    }
+    public void setOnADMCadastrado(Runnable callback){
+        this.onADMCadastrado = callback;
     }
     
     @FXML
@@ -141,6 +145,8 @@ public class CadastrarAdministradorController {
         
         
     }
+    
+    
     
 
    
