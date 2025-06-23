@@ -10,6 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.stage.Stage;
 import model.Administrador;
 import javafx.event.ActionEvent;
@@ -22,10 +24,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import model.AdministradorDAO;
+import model.Usuario;
 
 
 public class AdministradoresController {
@@ -76,6 +80,9 @@ public class AdministradoresController {
 
     @FXML
     private Label lblNomeAdm;
+    
+    @FXML
+    private TextField tfPesquisa;
 
     @FXML
     private TableView<Administrador> tabelaADMS;
@@ -228,7 +235,25 @@ public class AdministradoresController {
             
             tabelaADMS.getColumns().addAll(colunaID, colunaCPF, colunaNome, colunaApelido, colunaEmail);
             
-            tabelaADMS.setItems(lista);
+            
+            FilteredList<Administrador> listaFiltrada = new FilteredList<>(lista, p -> true);
+            tfPesquisa.textProperty().addListener((obs, oldVal, newVal) -> {
+                listaFiltrada.setPredicate( adm -> {
+                    if(newVal == null || newVal.isEmpty()){
+                        return true;
+                    }
+                    String filtro = newVal.toLowerCase();
+                    return adm.getNome().toLowerCase().contains(filtro)
+                            //|| adm.getCpf().toLowerCase().contains(filtro)
+                            || adm.getEmail().toLowerCase().contains(filtro);
+                            
+                });
+            });
+            SortedList<Administrador> listaOrdenada = new SortedList<>(listaFiltrada);
+            listaOrdenada.comparatorProperty().bind(tabelaADMS.comparatorProperty());
+                tabelaADMS.setItems(listaOrdenada);
+
+            //tabelaADMS.setItems(lista);
          }
      }
      
