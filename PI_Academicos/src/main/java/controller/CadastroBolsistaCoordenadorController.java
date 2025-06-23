@@ -138,7 +138,6 @@ public class CadastroBolsistaCoordenadorController {
                             if (Apenasletras.isLetras(txtCurso.getText())) {
                                 System.out.print("Curso valido");
 
-                                Long cpf = Long.parseLong(txtCPF.getText());
                                 Long matricula = Long.parseLong(txtMatricula.getText());
                                 LocalDate dataInicio = DataInicioBolsa.getValue();
                                 LocalDate dataFim = DataFimdaBolsa.getValue();
@@ -157,7 +156,7 @@ public class CadastroBolsistaCoordenadorController {
                                     return;
                                 }
 
-                                incluir(cpf, txtNomeCompleto.getText(), txtUsuario.getText(), txtEmail.getText(), txtSenha.getText(),
+                                incluir(txtCPF.getText(), txtNomeCompleto.getText(), txtUsuario.getText(), txtEmail.getText(), txtSenha.getText(),
                                         matricula, txtCurso.getText(), dataInicio, dataFim);
                             } else {
                                 mostrarAviso("ERRO", "O curso tem caracters não esperados");
@@ -230,7 +229,7 @@ public class CadastroBolsistaCoordenadorController {
     }
 
     //-------------------------*Metodos*--------------------//
-    void incluir(Long cpf, String nome, String apelido, String email, String senha, Long matricula, String curso, LocalDate dataInicio, LocalDate dataFim) throws SQLException, IOException {
+    void incluir(String cpf, String nome, String apelido, String email, String senha, Long matricula, String curso, LocalDate dataInicio, LocalDate dataFim) throws SQLException, IOException {
         usuario = new Usuario(cpf, nome, apelido, email, senha);
         bolsista = new Bolsista(matricula, curso, dataInicio, dataFim);
         int repetido = new BolsistaDAO().validarApelido(apelido, 0);

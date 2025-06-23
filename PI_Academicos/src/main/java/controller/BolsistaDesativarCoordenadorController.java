@@ -1,6 +1,5 @@
 package controller;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -25,15 +24,12 @@ import model.Projeto;
 import model.ProjetoDAO;
 import static util.AlertaUtil.mostrarErro;
 
-
 public class BolsistaDesativarCoordenadorController {
 
     private Stage stageBolsistaDesativar;
     Projeto projeto;
 
-    
     private List<CheckBox> checkboxes = new ArrayList<>();
-
 
     @FXML
     private Button btnConcluido;
@@ -48,9 +44,8 @@ public class BolsistaDesativarCoordenadorController {
     public void setStage(Stage telaBolsistaDesativar) {
         this.stageBolsistaDesativar = telaBolsistaDesativar;
     }
-    
-    
-    public void setProjeto(Projeto projeto){
+
+    public void setProjeto(Projeto projeto) {
         this.projeto = projeto;
         SetarBolsistas();
     }
@@ -58,57 +53,53 @@ public class BolsistaDesativarCoordenadorController {
     //---------------*OnClick*---------------//
     @FXML
     void OnClickConcluido(ActionEvent event) throws IOException {
-      DesativarBolsista();
-        
+        DesativarBolsista();
+
         Concluido();
     }
 
     //--------------*Metodos*-------------//
-    
-    public void SetarBolsistas(){
+    public void SetarBolsistas() {
 
-    try{
-        ProjetoDAO dao = new  ProjetoDAO();
-        
-    List<Bolsista> bolsistas = dao.selecioBolPProj(projeto.getIdProjeto());
+        try {
+            ProjetoDAO dao = new ProjetoDAO();
 
-        for (Bolsista b : bolsistas) {
-            CheckBox cb = new CheckBox(b.getNome() + " - Matrícula: " + b.getMatricula());
-            cb.setUserData(b); 
-            vbox.getChildren().add(cb);
-            checkboxes.add(cb);
-        }
-           
-        
-    }catch(Exception e){
-        mostrarErro("Erro","Erro ao carregar bolsista");
-    } 
-          
-    }
-    
-    public void DesativarBolsista() {
+            List<Bolsista> bolsistas = dao.selecioBolPProj(projeto.getIdProjeto());
 
- ProjetoDAO dao =  new ProjetoDAO();
- 
-   for (CheckBox cb : checkboxes) {
-       if(cb.isSelected()){
-           
-       Bolsista b = (Bolsista) cb.getUserData();
-            try {
-                dao.Destivar(b.getId(), projeto.getIdProjeto());
-            } catch (Exception e) {
-                mostrarErro("Erro", "Erro ao remover o bolsista: " + b.getNome());
-                e.printStackTrace();
+            for (Bolsista b : bolsistas) {
+                CheckBox cb = new CheckBox(b.getNome() + " - Matrícula: " + b.getMatricula());
+                cb.setUserData(b);
+                vbox.getChildren().add(cb);
+                checkboxes.add(cb);
             }
 
-        
+        } catch (Exception e) {
+            mostrarErro("Erro", "Erro ao carregar bolsista");
         }
-        
-        
+
     }
+
+    public void DesativarBolsista() {
+
+        ProjetoDAO dao = new ProjetoDAO();
+
+        for (CheckBox cb : checkboxes) {
+            if (cb.isSelected()) {
+
+                Bolsista b = (Bolsista) cb.getUserData();
+                try {
+                    dao.Destivar(b.getId(), projeto.getIdProjeto());
+                } catch (Exception e) {
+                    mostrarErro("Erro", "Erro ao remover o bolsista: " + b.getNome());
+                    e.printStackTrace();
+                }
+
+            }
+
+        }
     }
-    
-    public void Concluido() throws IOException{
+
+    public void Concluido() throws IOException {
 
         stageBolsistaDesativar.close();
     }

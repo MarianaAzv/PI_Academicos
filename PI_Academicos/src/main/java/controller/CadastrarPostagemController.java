@@ -22,26 +22,26 @@ import model.PostagemDAO;
 import model.Projeto;
 
 public class CadastrarPostagemController {
-    
+
     Stage stagePostagem;
-    private File arquivoSelecionado=null;
+    private File arquivoSelecionado = null;
     PostagemDAO postagemDAO;
-    
+
     public CadastrarPostagemController() {
         postagemDAO = new PostagemDAO();
-   }
+    }
 
     void setStage(Stage stagePostagem) {
         this.stagePostagem = stagePostagem;
     }
     Projeto projeto;
-    
-     public void setProjeto(Projeto projeto) {
-       this.projeto = projeto;
-       lblNomeProjeto.setText(projeto.getTitulo());
+
+    public void setProjeto(Projeto projeto) {
+        this.projeto = projeto;
+        lblNomeProjeto.setText(projeto.getTitulo());
     }
 
-     @FXML
+    @FXML
     private ImageView btnMaisFotos;
 
     @FXML
@@ -58,16 +58,15 @@ public class CadastrarPostagemController {
 
     @FXML
     void onClickImagem(MouseEvent event) {
-        
+
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Selecionar Imagem");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Arquivos de Imagem", "*.png", "*.jpg", "*.jpeg", "*.gif"));
         arquivoSelecionado = fileChooser.showOpenDialog(lblImagem.getScene().getWindow());
-        
-        if(arquivoSelecionado!=null){
-             //lblCaminhoArquivo.setText(arquivoSelecionado.getAbsolutePath());
-        }
-        else{
+
+        if (arquivoSelecionado != null) {
+            //lblCaminhoArquivo.setText(arquivoSelecionado.getAbsolutePath());
+        } else {
             //lblCaminhoArquivo.setText("Nenhum arquivo foi selecionado");
         }
     }
@@ -79,12 +78,12 @@ public class CadastrarPostagemController {
 
     @FXML
     void onClickPostar(ActionEvent event) throws IOException, SQLException {
-        
+
         byte[] conteudoImagem = Files.readAllBytes(arquivoSelecionado.toPath());
         Foto foto = new Foto(conteudoImagem);
         Postagem postagem = new Postagem(projeto.getIdProjeto(), foto, txtLegenda.getText());
-        
-        try{
+
+        try {
             postagemDAO.cadastrarPostagem(postagem, foto);
         } catch (IOException ex) {
             Logger.getLogger(TelaNoticiaController.class.getName()).log(Level.SEVERE, null, ex);
@@ -92,10 +91,4 @@ public class CadastrarPostagemController {
         stagePostagem.close();
     }
 
-   
-    
-
-    
-
 }
-

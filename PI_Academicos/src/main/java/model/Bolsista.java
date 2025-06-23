@@ -13,8 +13,8 @@ public class Bolsista extends Usuario {
     private int idProjeto;
 
     //Todos os atributos
-    public Bolsista(int id, long cpf, String nome, String apelido, String email, String senha, boolean ativa, 
-                    long matricula, String curso, boolean acessoPostagens, boolean acessoArtigos, LocalDate dataInicio, LocalDate dataFim){
+    public Bolsista(int id, String cpf, String nome, String apelido, String email, String senha, boolean ativa,
+            long matricula, String curso, boolean acessoPostagens, boolean acessoArtigos, LocalDate dataInicio, LocalDate dataFim) {
         super(id, cpf, nome, apelido, email, senha, ativa);
         this.matricula = matricula;
         this.curso = curso;
@@ -25,8 +25,8 @@ public class Bolsista extends Usuario {
     }
 
     // Construtor sem ID para INSERIR novo bolsista)
-    public Bolsista(long cpf, String nome, String apelido, String email, String senha, 
-                    long matricula, String curso,  boolean acessoPostagens, boolean acessoArtigos, LocalDate dataInicio, LocalDate dataFim){
+    public Bolsista(String cpf, String nome, String apelido, String email, String senha,
+            long matricula, String curso, boolean acessoPostagens, boolean acessoArtigos, LocalDate dataInicio, LocalDate dataFim) {
         super(cpf, nome, apelido, email, senha);
         this.matricula = matricula;
         this.curso = curso;
@@ -37,14 +37,15 @@ public class Bolsista extends Usuario {
     }
 
     // Construtor de atributos básicos
-    public Bolsista(long matricula, String curso, LocalDate dataInicio, LocalDate dataFim){
+    public Bolsista(long matricula, String curso, LocalDate dataInicio, LocalDate dataFim) {
         this.matricula = matricula;
         this.curso = curso;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
     }
+
     //CONSTRUTOR PARA ATUALIZAR com datas  E SEM ACESSOS
-        public Bolsista(int id, long cpf, String nome, String apelido, String email, String senha, boolean ativa, long matricula, String curso, LocalDate dataInicio, LocalDate dataFim){
+    public Bolsista(int id, String cpf, String nome, String apelido, String email, String senha, boolean ativa, long matricula, String curso, LocalDate dataInicio, LocalDate dataFim) {
         super(id, cpf, nome, apelido, email, senha, ativa);
         this.matricula = matricula;
         this.curso = curso;
@@ -52,26 +53,26 @@ public class Bolsista extends Usuario {
         this.dataFim = dataFim;
 
     }
-        //autenticar bolsista logindao ERRADO
-     //   public Bolsista(int id, long cpf, String nome, String apelido, String email, String senha, boolean ativa, 
-      //          long matricula, String curso, boolean acessoPostagens, boolean acessoArtigos, LocalDate dataInicio, LocalDate dataFim, int idProjeto) {
+    //autenticar bolsista logindao ERRADO
+    //   public Bolsista(int id, long cpf, String nome, String apelido, String email, String senha, boolean ativa, 
+    //          long matricula, String curso, boolean acessoPostagens, boolean acessoArtigos, LocalDate dataInicio, LocalDate dataFim, int idProjeto) {
     //super(id, cpf, nome, apelido, email, senha, ativa);
     //this.matricula = matricula;
     //this.curso = curso;
     // this.acessoPostagens = acessoPostagens;
     //this.acessoArtigos = acessoArtigos;
-   // this.dataInicio = dataInicio;
-   // this.dataFim = dataFim;
-   
-   // this.idProjeto = idProjeto;  // Adicionando id do projeto
-//}
+    // this.dataInicio = dataInicio;
+    // this.dataFim = dataFim;
 
+    // this.idProjeto = idProjeto;  // Adicionando id do projeto
+//}
 //11-05
     Bolsista(long aLong, String string) {
         this.matricula = matricula;
         this.curso = curso;
     }
 //CERTO LOGIN
+
     Bolsista(long matricula, String curso, LocalDate dataInicio, LocalDate dataFim, int idProjeto) {
         this.matricula = matricula;
         this.curso = curso;
@@ -128,7 +129,8 @@ public class Bolsista extends Usuario {
     public void setAcessoArtigos(boolean acessoArtigos) {
         this.acessoArtigos = acessoArtigos;
     }
-public Bolsista() {
-    super(); 
-}
+
+    public Bolsista() {
+        super();
+    }
 }

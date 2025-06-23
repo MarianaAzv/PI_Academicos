@@ -22,6 +22,7 @@ controller\TelaPrincipalCoordenadorController.class
 controller\AtualizarPostagemController.class
 controller\MaisBolsistaController.class
 model\PostagemDAO.class
+util\Senha.class
 controller\CadastrarArtigoController.class
 model\CampusDAO.class
 util\CPF.class

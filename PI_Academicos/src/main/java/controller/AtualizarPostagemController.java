@@ -17,12 +17,11 @@ import model.Projeto;
 import static util.AlertaUtil.mostrarConfirmacao;
 
 public class AtualizarPostagemController {
-    
+
     private Stage stageAtualizarPostagem;
     private Projeto projeto;
     private Postagem postagem;
     private Image image;
-    
 
     @FXML
     private Button btnAtualizar;
@@ -46,10 +45,10 @@ public class AtualizarPostagemController {
 
     @FXML
     void onClickExcluir(ActionEvent event) throws SQLException {
-        
+
         PostagemDAO postagemDAO = new PostagemDAO();
         postagemDAO.deletarPostagem(postagem);
-        mostrarConfirmacao("Postagem excluída","A postagem foi excluída.");
+        mostrarConfirmacao("Postagem excluída", "A postagem foi excluída.");
         stageAtualizarPostagem.close();
 
     }
@@ -58,30 +57,29 @@ public class AtualizarPostagemController {
     void onClickFoto(MouseEvent event) {
 
     }
-    
-    public void setStage(Stage stageAtualizarPostagem){
+
+    public void setStage(Stage stageAtualizarPostagem) {
         this.stageAtualizarPostagem = stageAtualizarPostagem;
     }
-    
-    public void setProjeto(Projeto projeto){
+
+    public void setProjeto(Projeto projeto) {
         this.projeto = projeto;
     }
-    
-    public void setPostagem(Postagem postagem){
+
+    public void setPostagem(Postagem postagem) {
         this.postagem = postagem;
         byte[] conteudoFoto = postagem.getFoto().getDadosImagem();
-                if(conteudoFoto!=null){
-                   try (ByteArrayInputStream bis = new ByteArrayInputStream(conteudoFoto)) {
-                            image = new Image(bis); // Converte byte[] para Image AQUI
-                        } catch (Exception e) {
-                            System.err.println("Erro ao converter bytes para Image: " + e.getMessage());
-                            // precisa definir uma imagem padrao de erro
-                        }
-                }
+        if (conteudoFoto != null) {
+            try (ByteArrayInputStream bis = new ByteArrayInputStream(conteudoFoto)) {
+                image = new Image(bis); // Converte byte[] para Image AQUI
+            } catch (Exception e) {
+                System.err.println("Erro ao converter bytes para Image: " + e.getMessage());
+                // precisa definir uma imagem padrao de erro
+            }
+        }
         imageViewFoto.setImage(image);
         txtLegenda.setText(postagem.getLegenda());
-        
+
     }
 
 }
-

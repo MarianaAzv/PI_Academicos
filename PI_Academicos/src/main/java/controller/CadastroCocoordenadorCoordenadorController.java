@@ -13,7 +13,7 @@ import model.CoordenadorDAO;
 public class CadastroCocoordenadorCoordenadorController {
 
     Stage stageCadastroCocoordenador;
-    
+
     @FXML
     private Button btnEEnviar;
 
@@ -67,10 +67,9 @@ public class CadastroCocoordenadorCoordenadorController {
 
     @FXML
     void OnClickEnviar(ActionEvent event) throws SQLException {
-        
-        Long cpf = Long.parseLong(txtCPF.getText());
+
         int siape = Integer.parseInt(txttSIAPE.getText());
-        cadastrar(cpf,txtNomeCompleto.getText(),txtUsuario.getText(),txtEmail.getText(),
+        cadastrar(txtCPF.getText(), txtNomeCompleto.getText(), txtUsuario.getText(), txtEmail.getText(),
                 txtSenha.getText(), siape, txtFormacao.getText());
     }
 
@@ -78,12 +77,12 @@ public class CadastroCocoordenadorCoordenadorController {
     void OnClickPDF(ActionEvent event) {
 
     }
-    
-    void setStage(Stage  TelaCadastroCocoordenadorCoordenador){
-        this.stageCadastroCocoordenador =  TelaCadastroCocoordenadorCoordenador;     
+
+    void setStage(Stage TelaCadastroCocoordenadorCoordenador) {
+        this.stageCadastroCocoordenador = TelaCadastroCocoordenadorCoordenador;
     }
-    
-     void cadastrar(Long cpf, String nome, String apelido, String email, String senha, int siape, String formacao) throws SQLException {
+
+    void cadastrar(String cpf, String nome, String apelido, String email, String senha, int siape, String formacao) throws SQLException {
         Coordenador coordenador = new Coordenador(cpf, nome, apelido, email, senha, siape, formacao);
         //new CoordenadorDAO().cadastrar(coordenador);
         System.out.println("Registro inserido com sucesso!");

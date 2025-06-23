@@ -47,6 +47,7 @@ import model.SolicitacaoDAO;
 import model.Usuario;
 import static util.AlertaUtil.mostrarAviso;
 import static util.AlertaUtil.mostrarConfirmacao;
+import util.Apenasletras;
 import util.Origem;
 
 public class CriarProjetoController {
@@ -139,9 +140,8 @@ public class CriarProjetoController {
 
     @FXML
     private TextArea txtResumo;
-    
-    //------------------*SETs*-----------------//
 
+    //------------------*SETs*-----------------//
     public void setStage(Stage telaCriarProjeto) {
         this.stageCriarProjeto = telaCriarProjeto;
     }
@@ -155,27 +155,38 @@ public class CriarProjetoController {
     void OnClickEnviar(ActionEvent event) throws ParseException, IOException {
 
         try {
-
+//Verificar se esse nome de projeto ja existe no sistema 
             if (txtNomedoProjeto.getText().isEmpty() || txtResumo.getText().isEmpty() || txtEdital.getText().isEmpty() || txtDatadeInicio.getText().isEmpty() || txtDatadeFim.getText().isEmpty() || CBcampus.getValue() == null || CBcategoria.getValue() == null) {
                 mostrarAviso("Falta informacao", "Por favor inserir todos os dados corretamente");
 
                 return;
             } else {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                LocalDate dI = LocalDate.parse(txtDatadeInicio.getText(), formatter);
-                LocalDate dF = LocalDate.parse(txtDatadeFim.getText(), formatter);
-
-                if (dI.isAfter(dF)) {
-                    mostrarAviso("Datas", "A data do final do projeto esta menor que a data de inicio do projeto");
+                if (arquivoPDF == null) {
+                    mostrarAviso("PDF obrigatório", "Você deve selecionar um arquivo PDF antes de submeter.");
                     return;
-                } else {
-                    Campus campusnomeSelecionado = CBcampus.getValue();
-                    AreasConhecimento areacnhecimentoselecionado = CBcategoria.getValue();
-                    this.areasconhecimento = areacnhecimentoselecionado;
+                }
 
-                    incluir(txtNomedoProjeto.getText(), txtResumo.getText(), campusnomeSelecionado, txtEdital.getText(), dI, dF, null, true, coordenador.getId());
+                if (Apenasletras.isLetras(txtNomedoProjeto.getText())) {
+                    System.out.print("O nome do projeto valido");
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    LocalDate dI = LocalDate.parse(txtDatadeInicio.getText(), formatter);
+                    LocalDate dF = LocalDate.parse(txtDatadeFim.getText(), formatter);
+
+                    if (dI.isAfter(dF)) {
+                        mostrarAviso("Datas", "A data do final do projeto esta menor que a data de inicio do projeto");
+                        return;
+                    } else {
+                        Campus campusnomeSelecionado = CBcampus.getValue();
+                        AreasConhecimento areacnhecimentoselecionado = CBcategoria.getValue();
+                        this.areasconhecimento = areacnhecimentoselecionado;
+
+                        incluir(txtNomedoProjeto.getText(), txtResumo.getText(), campusnomeSelecionado, txtEdital.getText(), dI, dF, null, true, coordenador.getId());
+                    }
+                } else {
+                    mostrarAviso("ERRO", "O nome do projeto tem caracters não esperados");
                 }
             }
+
         } catch (SQLException e) {
             mostrarAviso("Falha", "A falha em cadastrar esse projeto");
         } catch (DateTimeParseException e) {
@@ -199,8 +210,6 @@ public class CriarProjetoController {
 
     }
 
-   
-
     @FXML
     void onClickAbrirArquivo(MouseEvent event) {
 
@@ -219,10 +228,9 @@ public class CriarProjetoController {
         }
 
     }
-    
+
     //-----------------*OnMouse*--------------
-    
-     @FXML
+    @FXML
     void onMouseEnterAbrirArquivo(MouseEvent event) {
         lblAbrirArquivo.setStyle("text-decoration: underline;");
     }
@@ -231,9 +239,8 @@ public class CriarProjetoController {
     void onMouseExitedAbrirArquivo(MouseEvent event) {
 
     }
-    
-    //------------*Metodos*-------------
 
+    //------------*Metodos*-------------
     public void ajustarElementosJanela() {
         //ArrayList para set dos nomes dos campus no combo box de campus
         try {
@@ -266,7 +273,6 @@ public class CriarProjetoController {
         pdao.AreaProjeto(projeto, areasconhecimento);
 
         mostrarConfirmacao("Projeto cadastrado", "O projeto foi registrado no sistema com sucesso!");
-       
 
     }
 
@@ -277,11 +283,11 @@ public class CriarProjetoController {
 
                 Usuario usuario = new Usuario();
                 usuario.setId(coordenador.getId());
-               
+
                 String descricao = "Solicitação para cadstro de projeto:"
-                        + "\nNome do projeto: "+ txtNomedoProjeto.getText()
-                        + "\nCoordenador: " + coordenador.getNome() 
-                        + "\nSIAPE: " + coordenador.getSiape() 
+                        + "\nNome do projeto: " + txtNomedoProjeto.getText()
+                        + "\nCoordenador: " + coordenador.getNome()
+                        + "\nSIAPE: " + coordenador.getSiape()
                         + "\ne-mail: " + coordenador.getEmail();
                 Solicitacao solicitacao = new Solicitacao(usuario, descricao, arquivoPDF);
                 new SolicitacaoDAO().salvarPDF(solicitacao);
@@ -293,7 +299,6 @@ public class CriarProjetoController {
         }
     }
 
-   
     public void abrirJanelaMaisBolsista() throws IOException {
         URL url = new File("src/main/java/view/MaisBolsista.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
@@ -314,11 +319,11 @@ public class CriarProjetoController {
         //deixa a tela maximizada
 
         stageMaisBolsista.show();
-      
+
     }
 
-  public  void Close() {
-this.stageCriarProjeto.close();
+    public void Close() {
+        this.stageCriarProjeto.close();
     }
 
 }

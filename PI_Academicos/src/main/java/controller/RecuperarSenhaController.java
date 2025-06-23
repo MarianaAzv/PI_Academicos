@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import static util.AlertaUtil.mostrarAlerta;
 
 public class RecuperarSenhaController {
-    
+
     private Stage stageRecuperar;
 
     @FXML
@@ -21,52 +21,51 @@ public class RecuperarSenhaController {
 
     @FXML
     private TextField txtEmailUsuario;
-    
-    @FXML
-void onClickEnviar(ActionEvent event) {
-    String destinatario = txtEmailUsuario.getText();
 
-    if (destinatario == null || destinatario.isEmpty()) {
-        mostrarAlerta(AlertType.ERROR, "Erro", "O campo de e-mail está vazio.");
-        return;
+    @FXML
+    void onClickEnviar(ActionEvent event) {
+        String destinatario = txtEmailUsuario.getText();
+
+        if (destinatario == null || destinatario.isEmpty()) {
+            mostrarAlerta(AlertType.ERROR, "Erro", "O campo de e-mail está vazio.");
+            return;
+        }
+
+        String assunto = "Recuperação de Senha";
+        String mensagem = "Aqui está seu código de recuperação: 123456"; // substitua por geração dinâmica se quiser
+
+        enviarEmail(destinatario, assunto, mensagem); // Aqui está a chamada direta!
+        mostrarAlerta(AlertType.INFORMATION, "Sucesso", "E-mail enviado para: " + destinatario);
     }
 
-    String assunto = "Recuperação de Senha";
-    String mensagem = "Aqui está seu código de recuperação: 123456"; // substitua por geração dinâmica se quiser
-
-    enviarEmail(destinatario, assunto, mensagem); // Aqui está a chamada direta!
-    mostrarAlerta(AlertType.INFORMATION, "Sucesso", "E-mail enviado para: " + destinatario);
-}
-
-
     public static void enviarEmail(String destinatario, String assunto, String mensagem) {
-          // Configuração do servidor SMTP
+        // Configuração do servidor SMTP
         String host = "smtp.gmail.com";  // Exemplo: SMTP do Gmail
         final String user = "pipocaazeda64@gmail.com";  // Seu e-mail
         final String password = "momj yhit mvin rtyc";  // Sua senha ou senha de app do Gmail
 
-          // Definir as propriedades do servidor SMTP
+        // Definir as propriedades do servidor SMTP
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true"); // Ativar TLS
         properties.put("mail.smtp.host", host);
         properties.put("mail.smtp.port", "587");  // Porta SMTP para TLS
 
-         Session session = Session.getInstance(properties, new Authenticator() {
+        Session session = Session.getInstance(properties, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(user, password);
             }
         });
 
         try {
-              // Criar o objeto de mensagem de e-mail
+            // Criar o objeto de mensagem de e-mail
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(user)); // De quem é o e-mail
-          message.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
-          message.setSubject(assunto);
-          message.setText(mensagem);
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
+            message.setSubject(assunto);
+            message.setText(mensagem);
             // message.addRecipient(Message.RecipientType.TO, new InternetAddress("destinatario@dominio.com")); // Para quem é o e-mail
-           /// message.setSubject("Assunto do E-mail");  // Assunto
+            /// message.setSubject("Assunto do E-mail");  // Assunto
           //  message.setText("Este é o corpo do e-mail");  // Corpo do e-mail
 
             // Enviar o e-mail
@@ -82,8 +81,7 @@ void onClickEnviar(ActionEvent event) {
     }
 
     void setStage(Stage stageRecuperar) {
-        this.stageRecuperar= stageRecuperar;
+        this.stageRecuperar = stageRecuperar;
     }
 
-    
 }

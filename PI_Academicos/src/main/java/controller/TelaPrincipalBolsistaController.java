@@ -24,7 +24,7 @@ import model.Bolsista;
 import model.Projeto;
 import model.Usuario;
 
-public class TelaPrincipalBolsistaController implements INotificacaoAlert{
+public class TelaPrincipalBolsistaController implements INotificacaoAlert {
 
     private Stage stageTelaPrincipalBolsista;
     private Connection conexao;
@@ -32,36 +32,35 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert{
     private Bolsista bolsista;
     private Projeto projeto;//hj
     int resp = 1;
-    
+
     public void setStage(Stage stage) {
         this.stageTelaPrincipalBolsista = stage;
     }
-    
+
     public void setStagePrincipal(Stage telaPrincipalBolsista) {
         this.stageTelaPrincipalBolsista = telaPrincipalBolsista;
     }
-    
+
     void setBolsista(Bolsista bol) {
         this.bolsista = bol;
     }
 
     void setProjeto(Projeto projeto) {
-       this.projeto = projeto;
-       txtResumo.setText(projeto.getResumo());
-       txtCampus.setText(projeto.getCampus().getNomeCampus());
-       textNomeProjeto.setText(projeto.getTitulo());
-       DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-       String DataInicio = projeto.getDataInicio().format(formatter);
-       txtInicio.setText(DataInicio);
+        this.projeto = projeto;
+        txtResumo.setText(projeto.getResumo());
+        txtCampus.setText(projeto.getCampus().getNomeCampus());
+        textNomeProjeto.setText(projeto.getTitulo());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String DataInicio = projeto.getDataInicio().format(formatter);
+        txtInicio.setText(DataInicio);
 
-       String DataFim = projeto.getDataFim().format(formatter);
-       txtFim.setText(DataFim);
-       String prorroga = String.valueOf(projeto.getProrroacao());
-       txtProrrogacao.setText(prorroga);
-       txtNomeCoordenador.setText(projeto.getCocoordenadores());
-       //txtNomeBolsitas.setText(projeto.get);
+        String DataFim = projeto.getDataFim().format(formatter);
+        txtFim.setText(DataFim);
+        String prorroga = String.valueOf(projeto.getProrroacao());
+        txtProrrogacao.setText(prorroga);
+        txtNomeCoordenador.setText(projeto.getCocoordenadores());
+        //txtNomeBolsitas.setText(projeto.get);
     }
-
 
     @FXML
     private Text TxtNomeProjetoBarra;
@@ -136,34 +135,37 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert{
 
     @FXML
     private Label txtResumo;
-    
-    //******************* OnClicks ***************************************
 
+    //******************* OnClicks ***************************************
     @FXML
     void onClickArtigo(ActionEvent event) throws IOException {
         abrirArtigo();
     }
+
     @FXML
     void onEnterArtigo(MouseEvent event) {
-        btnArtigo.setStyle("-fx-background-color: D07979" );
+        btnArtigo.setStyle("-fx-background-color: D07979");
     }
+
     @FXML
     void onExitArtigo(MouseEvent event) {
-        btnArtigo.setStyle("-fx-background-color:  DBA5A5" );
+        btnArtigo.setStyle("-fx-background-color:  DBA5A5");
     }
-     //******************************************************************
+    //******************************************************************
 
     @FXML
     void onClickAtualizarPerfil(ActionEvent event) throws IOException {
         abrirAtualizarPerfil();
     }
+
     @FXML
     void onEnterAtualizarPerfil(MouseEvent event) {
-        btnAtualizarPerfil.setStyle("-fx-background-color: D07979" );
+        btnAtualizarPerfil.setStyle("-fx-background-color: D07979");
     }
+
     @FXML
     void onExitAtualizarPerfil(MouseEvent event) {
-        btnAtualizarPerfil.setStyle("-fx-background-color:  DBA5A5" );
+        btnAtualizarPerfil.setStyle("-fx-background-color:  DBA5A5");
     }
     //******************************************************************
 
@@ -171,13 +173,15 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert{
     void onClickOutrosProjetos(ActionEvent event) throws IOException {
         outrosProjetos();
     }
+
     @FXML
     void onEnterOutrosProjeto(MouseEvent event) {
-        btnOutrosProjetos.setStyle("-fx-background-color: D07979" );
+        btnOutrosProjetos.setStyle("-fx-background-color: D07979");
     }
+
     @FXML
     void onExitOutrosProjeto(MouseEvent event) {
-        btnOutrosProjetos.setStyle("-fx-background-color:  DBA5A5" );
+        btnOutrosProjetos.setStyle("-fx-background-color:  DBA5A5");
     }
     //******************************************************************
 
@@ -185,13 +189,15 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert{
     void onClickPublicacao(ActionEvent event) throws IOException {
         abrirPublicacao();
     }
-     @FXML
+
+    @FXML
     void onEnterPublicacao(MouseEvent event) {
-        btnPublicacao.setStyle("-fx-background-color: D07979" );
+        btnPublicacao.setStyle("-fx-background-color: D07979");
     }
+
     @FXML
     void onExitPublicacao(MouseEvent event) {
-        btnPublicacao.setStyle("-fx-background-color:  DBA5A5" );
+        btnPublicacao.setStyle("-fx-background-color:  DBA5A5");
     }
     //******************************************************************
 
@@ -199,56 +205,59 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert{
     void onClickSair(ActionEvent event) throws IOException {
         alerta("Você tem certeza mana", 2, "Verificação de saida");
     }
+
     @FXML
     void onEnterSair(MouseEvent event) {
-        btnSair.setStyle("-fx-background-color: D07979" );
+        btnSair.setStyle("-fx-background-color: D07979");
     }
+
     @FXML
     void onExitSair(MouseEvent event) {
-        btnSair.setStyle("-fx-background-color:  DBA5A5" );
+        btnSair.setStyle("-fx-background-color:  DBA5A5");
     }
+
     //******************************************************************
     @FXML
     void onClickVerPerfil(ActionEvent event) throws IOException {
         abrirVerPerfil();
     }
+
     @FXML
     void onEnterVerPerfil(MouseEvent event) {
-        btnVerPerfil.setStyle("-fx-background-color: D07979" );
+        btnVerPerfil.setStyle("-fx-background-color: D07979");
     }
+
     @FXML
     void onExitVerPerfil(MouseEvent event) {
-        btnVerPerfil.setStyle("-fx-background-color:  DBA5A5" );
+        btnVerPerfil.setStyle("-fx-background-color:  DBA5A5");
     }
 
     //******************* MÉTODOS ***************************************
-    
     public void abrirVerPerfil() throws IOException {
-    URL url = new File("src/main/java/view/VerPerfilBolsista.fxml").toURI().toURL();
-    FXMLLoader loader = new FXMLLoader(url);
-    Parent root = loader.load();
+        URL url = new File("src/main/java/view/VerPerfilBolsista.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
 
-    Stage stageVerPerfil = new Stage();
+        Stage stageVerPerfil = new Stage();
 
-    VerPerfilBolsistaController vpb = loader.getController();
-    vpb.setBolsista(bolsista);
-    vpb.setProjeto(projeto);
-    vpb.setStage(stageVerPerfil); 
-   
-    stageVerPerfil.setOnShown(evento -> {//hj
-            vpb.ajustarElementosJanela(bolsista,projeto);
+        VerPerfilBolsistaController vpb = loader.getController();
+        vpb.setBolsista(bolsista);
+        vpb.setProjeto(projeto);
+        vpb.setStage(stageVerPerfil);
+
+        stageVerPerfil.setOnShown(evento -> {//hj
+            vpb.ajustarElementosJanela(bolsista, projeto);
         });
 
-    Scene cena = new Scene(root);
-    stageVerPerfil.setTitle("Perfil Bolsista");
-    stageVerPerfil.setScene(cena);
-    stageVerPerfil.setMaximized(true);
+        Scene cena = new Scene(root);
+        stageVerPerfil.setTitle("Perfil Bolsista");
+        stageVerPerfil.setScene(cena);
+        stageVerPerfil.setMaximized(true);
 
-    stageVerPerfil.show();
-    stageTelaPrincipalBolsista.close(); // Correção: Fechar a tela principal ao abrir a nova
-}
+        stageVerPerfil.show();
+        stageTelaPrincipalBolsista.close(); // Correção: Fechar a tela principal ao abrir a nova
+    }
 
-    
     public void abrirAtualizarPerfil() throws IOException {
         URL url = new File("src/main/java/view/AtualizarPerfilBolsista.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
@@ -258,7 +267,7 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert{
         AtualizarPerfilBolsistaController apb = loader.getController();
         apb.setBolsista(bolsista);
         apb.setProjeto(projeto);
-        
+
         stageAtualizar.setOnShown(evento -> {//hj
             //apb.ajustarElementosJanela(bolsista,projeto);
         });
@@ -271,7 +280,6 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert{
         stageTelaPrincipalBolsista.close();
     }
 
-    
     public void abrirPublicacao() throws MalformedURLException, IOException {
         URL url = new File("src/main/java/view/CadastrarPostagem.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
@@ -279,7 +287,7 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert{
 
         Stage stagePostagem = new Stage();
         CadastrarPostagemController cpb = loader.getController();
-       // cpb.setBolsista(bolsista);
+        // cpb.setBolsista(bolsista);
         cpb.setStage(stagePostagem);
 
         Scene cena = new Scene(root);
@@ -289,7 +297,6 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert{
         stagePostagem.show();
     }
 
-   
     public void abrirArtigo() throws MalformedURLException, IOException {
         URL url = new File("src/main/java/view/CadastrarArtigo.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
@@ -297,7 +304,7 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert{
 
         Stage stageArtigo = new Stage();
         CadastrarArtigoController cab = loader.getController();
-      //  cab.setBolsista(bolsista);
+        //  cab.setBolsista(bolsista);
         cab.setStage(stageArtigo);
 
         Scene cena = new Scene(root);
@@ -320,12 +327,12 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert{
         epb.setStage(stagePrincipal);
 
         stagePrincipal.setOnShown(evento -> {
-             try {
-                 epb.OnClickProjeto();
-             } catch (SQLException ex) {
-                  Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
-             }              
-           // tpb.ajustarElementosJanela(bolsista);
+            try {
+                epb.OnClickProjeto();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            // tpb.ajustarElementosJanela(bolsista);
         });
 
         Scene cena = new Scene(root);
@@ -337,10 +344,8 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert{
 
     }
 
-    
     private void AbrirTelaLogin() throws IOException {
-        
-            
+
         URL url = new File("src/main/java/view/TelaLogin.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
@@ -348,7 +353,7 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert{
         Stage stageLogin = new Stage();
 
         TelaLoginController tpc = loader.getController();
-        tpc.setStage(stageLogin);     
+        tpc.setStage(stageLogin);
 
         Scene cena = new Scene(root);
         stageLogin.setTitle("Tela de Login");
@@ -356,50 +361,43 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert{
         //deixa a tela maximizada
         stageLogin.setMaximized(true);
         stageLogin.show();
-        
+
         stageTelaPrincipalBolsista.close();
-        
 
     }
-    
 
     public void ajustarElementosJanela(Bolsista bolsista, Projeto projeto) {
         this.bolsista = bolsista;
         this.projeto = projeto;
-        
-        System.out.println("Aqui chegam os parâmetros do login " + bolsista.getNome() + " - " + bolsista.getMatricula() + " ATIVA: " + bolsista.getAtiva());
-        
-         
 
-        
+        System.out.println("Aqui chegam os parâmetros do login " + bolsista.getNome() + " - " + bolsista.getMatricula() + " ATIVA: " + bolsista.getAtiva());
+
         TxtNomeUsuario.setText(bolsista.getNome());
-       // String matricula = String.valueOf(bolsista.getMatricula());
+        // String matricula = String.valueOf(bolsista.getMatricula());
         textNomeProjeto.setText(projeto.getTitulo());
         TxtNomeProjetoBarra.setText(projeto.getTitulo());
-      
-      
+
     }
-    
-    public void alerta(String msg, int tipo, String titulo) throws IOException{
-    URL url = new File("src/main/java/view/AlertGenerico.fxml").toURI().toURL();
-    FXMLLoader loader = new FXMLLoader(url);
-    Parent root = loader.load();
 
-    Stage stageAlerta = new Stage();
+    public void alerta(String msg, int tipo, String titulo) throws IOException {
+        URL url = new File("src/main/java/view/AlertGenerico.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
 
-    AlertGenericoController vpb = loader.getController();
-    vpb.setMsg(msg);
-    vpb.setTipo(tipo);
-    vpb.setStage(stageAlerta); 
-    vpb.setControllerResposta(this);
-  
-    Scene cena = new Scene(root);
-    stageAlerta.setTitle(titulo);
-    stageAlerta.setScene(cena);
-    
+        Stage stageAlerta = new Stage();
 
-    stageAlerta.show();
-    
+        AlertGenericoController vpb = loader.getController();
+        vpb.setMsg(msg);
+        vpb.setTipo(tipo);
+        vpb.setStage(stageAlerta);
+        vpb.setControllerResposta(this);
+
+        Scene cena = new Scene(root);
+        stageAlerta.setTitle(titulo);
+        stageAlerta.setScene(cena);
+
+        stageAlerta.show();
+
     }
 
     @Override
@@ -412,8 +410,5 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert{
     public void btnCancela() {
         resp = 3;
     }
-    
-    
-    
-    
-    }
+
+}

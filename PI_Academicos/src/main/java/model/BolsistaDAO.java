@@ -21,7 +21,7 @@ public class BolsistaDAO extends GenericDAO {
         try (con) {
             // Inserir usuário
             PreparedStatement stmtUsuario = con.prepareStatement(queryUsuario, PreparedStatement.RETURN_GENERATED_KEYS);
-            stmtUsuario.setLong(1, usuario.getCpf());
+            stmtUsuario.setString(1, usuario.getCpf());
             stmtUsuario.setString(2, usuario.getNome());
             stmtUsuario.setString(3, usuario.getApelido());
             stmtUsuario.setString(4, usuario.getSenha());
@@ -68,8 +68,8 @@ public class BolsistaDAO extends GenericDAO {
             // Atualiza USUARIOS
             con.setAutoCommit(false);
             PreparedStatement stmtUsuario = con.prepareStatement(queryUsuario);
-            
-            stmtUsuario.setLong(1, bolsista.getCpf());
+
+            stmtUsuario.setString(1, bolsista.getCpf());
             stmtUsuario.setString(2, bolsista.getNome());
             stmtUsuario.setString(3, bolsista.getApelido());
             stmtUsuario.setString(4, bolsista.getSenha());
@@ -116,39 +116,39 @@ public class BolsistaDAO extends GenericDAO {
         }
         return rowCount;
     }
-    public void buscarDados(Bolsista bolsista, Projeto projeto){
-        
+
+    public void buscarDados(Bolsista bolsista, Projeto projeto) {
+
     }
 
     public List<Bolsista> selecionarBolsistasPorProjeto(Projeto projeto) throws SQLException {
-    List<Bolsista> bolsistas = new ArrayList<>();
-    String sql = "Select bp.*,b.*,u.* from bolsistas_projetos bp inner join bolsistas b on b.idUsuario=bp.idUsuario inner join usuarios u  on b.idUsuario=u.idUsuario where bp.idProjeto = ?";
+        List<Bolsista> bolsistas = new ArrayList<>();
+        String sql = "Select bp.*,b.*,u.* from bolsistas_projetos bp inner join bolsistas b on b.idUsuario=bp.idUsuario inner join usuarios u  on b.idUsuario=u.idUsuario where bp.idProjeto = ?";
 
-    Connection con = conectarDAO();
-    PreparedStatement stmt = con.prepareStatement(sql);
-    stmt.setInt(1, projeto.getIdProjeto());
-    
-    ResultSet rs = stmt.executeQuery();
-    
-while (rs.next()) {
-    
-           
-    Usuario u = new Usuario();
-    u.setId(rs.getInt("idUsuario"));
-    u.setNome(rs.getString("nome"));
-    u.setCpf(rs.getInt("cpf"));
-    u.setApelido(rs.getString("apelido"));
-    u.setEmail(rs.getString("email"));
-    u.setAtiva(rs.getBoolean("ativa"));
-    
-     Bolsista b = new Bolsista();
-     b.setId(rs.getInt("idUsuario"));
-     b.setMatricula(rs.getInt("matricula"));
-     b.setCurso(rs.getString("curso"));
-     
-     bolsistas.add(b);
-}
-       
-      return bolsistas;  
+        Connection con = conectarDAO();
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setInt(1, projeto.getIdProjeto());
+
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+
+            Usuario u = new Usuario();
+            u.setId(rs.getInt("idUsuario"));
+            u.setNome(rs.getString("nome"));
+            u.setCpf(rs.getString("cpf"));
+            u.setApelido(rs.getString("apelido"));
+            u.setEmail(rs.getString("email"));
+            u.setAtiva(rs.getBoolean("ativa"));
+
+            Bolsista b = new Bolsista();
+            b.setId(rs.getInt("idUsuario"));
+            b.setMatricula(rs.getInt("matricula"));
+            b.setCurso(rs.getString("curso"));
+
+            bolsistas.add(b);
+        }
+
+        return bolsistas;
     }
 }

@@ -84,8 +84,8 @@ public class EscolherProjetoController {
                 telaCriarProjeto.setScene(cena);
                 telaCriarProjeto.show();
                 if (stagetelafundo != null) {
-            stagetelafundo.close();
-        }
+                    stagetelafundo.close();
+                }
                 stageEscolherProjeto.close();
 
             }

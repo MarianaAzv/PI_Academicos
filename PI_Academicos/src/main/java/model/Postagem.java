@@ -2,15 +2,14 @@ package model;
 
 import java.time.LocalDateTime;
 
-
 public class Postagem {
-    
+
     private int id;
     private int idProjeto;
     private Foto foto;
     private String legenda;
     private LocalDateTime data;
-    
+
     //construtor com todos os atributos
     public Postagem(int id, int idProjeto, Foto foto, String legenda, LocalDateTime data) {
         this.id = id;
@@ -19,15 +18,15 @@ public class Postagem {
         this.legenda = legenda;
         this.data = data;
     }
-    
+
     //construtor sem id
-    public Postagem( int idProjeto, Foto foto, String legenda, LocalDateTime data) {
+    public Postagem(int idProjeto, Foto foto, String legenda, LocalDateTime data) {
         this.idProjeto = idProjeto;
         this.foto = foto;
         this.legenda = legenda;
         this.data = data;
     }
-    
+
     //construtor sem data
     public Postagem(int id, int idProjeto, Foto foto, String legenda) {
         this.id = id;
@@ -35,19 +34,18 @@ public class Postagem {
         this.foto = foto;
         this.legenda = legenda;
     }
-    
+
     //construtor sem id e data
-    public Postagem( int idProjeto, Foto foto, String legenda) {
+    public Postagem(int idProjeto, Foto foto, String legenda) {
         this.idProjeto = idProjeto;
         this.foto = foto;
         this.legenda = legenda;
     }
-    
+
     public Postagem(Foto foto) {
         this.foto = foto;
     }
-    
-    
+
     public void setId(int id) {
         this.id = id;
     }
@@ -87,5 +85,5 @@ public class Postagem {
     public LocalDateTime getData() {
         return data;
     }
-    
+
 }

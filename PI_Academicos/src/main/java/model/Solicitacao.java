@@ -4,7 +4,7 @@ import java.io.File;
 import java.time.LocalDateTime;
 
 public class Solicitacao {
-    
+
     private int idSolicitacao;
     private Usuario usuario;
     private int idUsuario;
@@ -14,49 +14,53 @@ public class Solicitacao {
     private boolean aceitacao;
     private File anexo;
 
-    public Solicitacao(int idSolicitacao, Usuario usuario, File anexo){
-        this.idSolicitacao=idSolicitacao;
-        this.usuario=usuario;
-        this.anexo=anexo;
-        
+    public Solicitacao(int idSolicitacao, Usuario usuario, File anexo) {
+        this.idSolicitacao = idSolicitacao;
+        this.usuario = usuario;
+        this.anexo = anexo;
+
+    }
+
+    //id
+    public Solicitacao(int idSolicitacao, int idUsuario, File anexo) {
+        this.idSolicitacao = idSolicitacao;
+        this.idUsuario = idUsuario;
+        this.anexo = anexo;
+
+    }
+
+    public Solicitacao(Usuario usuario, File anexo) {
+        this.usuario = usuario;
+        this.anexo = anexo;
+
     }
     //id
-    public Solicitacao(int idSolicitacao, int idUsuario, File anexo){
-        this.idSolicitacao=idSolicitacao;
-        this.idUsuario=idUsuario;
-        this.anexo=anexo;
-        
+
+    public Solicitacao(int idUsuario, File anexo) {
+        this.idUsuario = idUsuario;
+        this.anexo = anexo;
+
     }
-    
-     public Solicitacao( Usuario usuario, File anexo){
-        this.usuario=usuario;
-        this.anexo=anexo;
-        
+
+    public Solicitacao(Usuario usuario, String descricao, File anexo) {
+        this.usuario = usuario;
+        this.descricao = descricao;
+        this.anexo = anexo;
+
     }
-     //id
-     public Solicitacao( int idUsuario, File anexo){
-        this.idUsuario=idUsuario;
-        this.anexo=anexo;
-        
-    }
-     
-          public Solicitacao( Usuario usuario, String descricao, File anexo){
-              this.usuario=usuario;
-              this.descricao=descricao;
-              this.anexo=anexo;
-        
-    }
+
     //id      
-    public Solicitacao(int idUsuario, String descricao, File anexo){
-              this.idUsuario=idUsuario;
-              this.descricao=descricao;
-              this.anexo=anexo;
-        
+    public Solicitacao(int idUsuario, String descricao, File anexo) {
+        this.idUsuario = idUsuario;
+        this.descricao = descricao;
+        this.anexo = anexo;
+
     }
-          
-     public Solicitacao(){
-        
+
+    public Solicitacao() {
+
     }
+
     public void setIdSolicitacao(int idSolicitacao) {
         this.idSolicitacao = idSolicitacao;
     }
@@ -64,7 +68,7 @@ public class Solicitacao {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
+
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
@@ -88,7 +92,6 @@ public class Solicitacao {
     public void setAnexo(File anexo) {
         this.anexo = anexo;
     }
-    
 
     public int getIdSolicitacao() {
         return idSolicitacao;
@@ -113,6 +116,5 @@ public class Solicitacao {
     public File getAnexo() {
         return anexo;
     }
-    
-    
+
 }

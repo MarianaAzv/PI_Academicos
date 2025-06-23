@@ -25,6 +25,7 @@ import static util.AlertaUtil.mostrarConfirmacao;
 import util.Apenasletras;
 import util.CPF;
 import util.Email;
+import util.Senha;
 
 public class CadastroCoordenadorController {
 
@@ -108,42 +109,44 @@ public class CadastroCoordenadorController {
     void OnClickSubmeter(ActionEvent event) throws SQLException {
 
         try {
-             if (arquivoPDF == null) {
-            mostrarAviso("PDF obrigatório", "Você deve selecionar um arquivo PDF antes de submeter.");
-            return;
-        }
+            if (arquivoPDF == null) {
+                mostrarAviso("PDF obrigatório", "Você deve selecionar um arquivo PDF antes de submeter.");
+                return;
+            }
 
             if (txtCPF.getText().isEmpty() || txtSIAPE.getText().isEmpty() || txtNomeCompleto.getText().isEmpty() || txtUsuario.getText().isEmpty() || txtEmail.getText().isEmpty() || txtSenha.getText().isEmpty() || txtFormacao.getText().isEmpty()) {
-               
+
                 mostrarAviso("Falta informação", "Por favor inserir todos os dados");
                 return;
             } else {
-                if (CPF.isValid(txtCPF.getText())) {
-                    System.out.print("CPF valido");
-                    if (Email.isValidEmail(txtEmail.getText())) {
-                        System.out.print("O Email esta valido");
-                       if(Apenasletras.isLetras(txtNomeCompleto.getText())){
-                           if(Apenasletras.isLetras(txtFormacao.getText())){
-                               
+                if (Senha.senhaForte(txtSenha.getText())) {
+                    if (CPF.isValid(txtCPF.getText())) {
+                        System.out.print("CPF valido");
+                        if (Email.isValidEmail(txtEmail.getText())) {
+                            System.out.print("O Email esta valido");
+                            if (Apenasletras.isLetras(txtNomeCompleto.getText())) {
+                                if (Apenasletras.isLetras(txtFormacao.getText())) {
 
-                        Long cpf = Long.parseLong(txtCPF.getText());
-                        int siape = Integer.parseInt(txtSIAPE.getText());
+                                    int siape = Integer.parseInt(txtSIAPE.getText());
 
-                        incluir(cpf, txtNomeCompleto.getText(), txtUsuario.getText(), txtEmail.getText(), txtSenha.getText(), siape, txtFormacao.getText());
+                                    incluir(txtCPF.getText(), txtNomeCompleto.getText(), txtUsuario.getText(), txtEmail.getText(), txtSenha.getText(), siape, txtFormacao.getText());
 
-                           }else{
-                               mostrarAviso("ERRO","Por favor inserir a sua formação corretamente");
-                           }
-                       }else{
-                           mostrarAviso("ERRO","Por favor inserir o nome corretamente");
-                       }
+                                } else {
+                                    mostrarAviso("ERRO", "Por favor inserir a sua formação corretamente");
+                                }
+                            } else {
+                                mostrarAviso("ERRO", "Por favor inserir o nome corretamente");
+                            }
+                        } else {
+                            System.out.print("O Email invalido");
+                            mostrarAviso("ERRO", "O Email não esta no formato esperado");
+                        }
                     } else {
-                        System.out.print("O Email invalido");
-                        mostrarAviso("ERRO", "O Email não esta no formato esperado");
+                        System.out.print("CPF invalido");
+                        mostrarAviso("ERRO", "O CPF nao esta correto");
                     }
                 } else {
-                    System.out.print("CPF invalido");
-                    mostrarAviso("ERRO", "O CPF nao esta correto");
+                    mostrarAviso("ERRO", "A senha esta muito fraca, para uma senha forte é necessario ter 6 caracters,ter pelo menos 1 letra Maiuscula e 1 Letra minuscula, um numero e um simbulo especial");
                 }
             }
         } catch (NumberFormatException n) {
@@ -188,7 +191,7 @@ public class CadastroCoordenadorController {
         this.stageCadastroCoordenador = telaCadastroCoordenador;
     }
 
-    void incluir(Long cpf, String nome, String apelido, String email, String senha, int siape, String formacao) throws SQLException {
+    void incluir(String cpf, String nome, String apelido, String email, String senha, int siape, String formacao) throws SQLException {
         usuario = new Usuario(cpf, nome, apelido, email, senha);
         coordenador = new Coordenador(siape, formacao);
         int repetido = new CoordenadorDAO().validarApelido(apelido, 0);

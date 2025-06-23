@@ -1,5 +1,5 @@
 package controller;
- 
+
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -18,7 +18,7 @@ import static util.AlertaUtil.mostrarAviso;
 import static util.AlertaUtil.mostrarConfirmacao;
 
 public class CadastrarArtigoController {
-    
+
     Stage stageArtigo;
     File arquivoPDF = null;
 
@@ -26,12 +26,12 @@ public class CadastrarArtigoController {
         this.stageArtigo = stageArtigo;
     }
     Projeto projeto;
-    
-     public void setProjeto(Projeto projeto) {
-       this.projeto = projeto;
+
+    public void setProjeto(Projeto projeto) {
+        this.projeto = projeto;
     }
-     
-      @FXML
+
+    @FXML
     private Button btnPDF;
 
     @FXML
@@ -64,26 +64,21 @@ public class CadastrarArtigoController {
 
     @FXML
     void onClickPostar(ActionEvent event) throws IOException, SQLException {
-        
+
         int idProjeto = projeto.getIdProjeto();
         String titulo = txtNOmeArtigo.getText();
         String resumo = txtResumo.getText();
         String autores = txtAutores.getText();
-        
+
         if (arquivoPDF != null) {
-            Artigo artigo = new Artigo(idProjeto, titulo, resumo, autores,  arquivoPDF, dataPublicacao.getValue());
-                new ArtigoDAO().salvarArtigo(artigo);
-                mostrarConfirmacao("Artigo cadastrado", "O artigo foi cadastrado no sistema.");
-                stageArtigo.close();
+            Artigo artigo = new Artigo(idProjeto, titulo, resumo, autores, arquivoPDF, dataPublicacao.getValue());
+            new ArtigoDAO().salvarArtigo(artigo);
+            mostrarConfirmacao("Artigo cadastrado", "O artigo foi cadastrado no sistema.");
+            stageArtigo.close();
+        } else {
+            mostrarAviso("Arquivo PDF não escolhido", "É necessário selecionar um arquivo PDF para completar a ação.");
         }
-        else{
-            mostrarAviso("Arquivo PDF não escolhido","É necessário selecionar um arquivo PDF para completar a ação.");
-        }
-        
 
     }
-    
 
-    
-    
 }
