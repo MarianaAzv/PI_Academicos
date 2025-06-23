@@ -40,6 +40,8 @@ public class ADMController {
     public void setOnADMDesativado(Runnable callback){
         this.onADMDesativado = callback;
     }
+    
+  
 
     @FXML
     void onClickDesativar(ActionEvent event) throws SQLException {
@@ -62,10 +64,18 @@ public class ADMController {
         }
         }
 
+        if(onADMDesativado != null){
+            onADMDesativado.run();
+        }
+       
+        stageADM.close();
     }
     
     public void setAdministrador(Administrador adm) {
        this.adm = adm;
+       if(adm.getAtiva()==false){
+        btnDesativar.setText("Ativar");
+       }
        lblNomeR.setText(adm.getNome());
        lblUsuarioR.setText(adm.getApelido());
        String cpf = String.valueOf(adm.getCpf());

@@ -1,10 +1,13 @@
 model\ArtigoDAO.class
 controller\RecuperarSenhaCodigoController.class
 model\AdministradorDAO.class
+util\Email.class
 controller\VerPerfilAdministradorController.class
 model\SolicitacaoDAO.class
 controller\TelaNoticiaController.class
+util\Apenasletras.class
 controller\INotificacaoAlert.class
+controller\TeladefundoController.class
 controller\TelaPrincipalBolsistaController.class
 controller\ADMController.class
 controller\CadastrarPostagemController.class
@@ -21,6 +24,7 @@ controller\MaisBolsistaController.class
 model\PostagemDAO.class
 controller\CadastrarArtigoController.class
 model\CampusDAO.class
+util\CPF.class
 model\FotoDAO.class
 model\Postagem.class
 controller\CadastroCocoordenadorCoordenadorController.class

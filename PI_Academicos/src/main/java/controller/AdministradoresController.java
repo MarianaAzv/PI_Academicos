@@ -323,6 +323,7 @@ public class AdministradoresController {
             //deixa a tela maximizada
             stageADMS.setMaximized(true);
             
+            
             stageADMS.show();
             stageADMS.close();
     }
@@ -413,19 +414,21 @@ public class AdministradoresController {
                     //ac.ajustarElementosJanela(this.adm);
                 });
                 
-                ac.setOnADMDesativado(() -> {
-                    try{
-                        carregarTabelaADMS();
-                    } catch (SQLException ex){
-                        
-                    }
-                });
+                
 
                 Scene scene = new Scene(root);
 
                 stageADM.setTitle("Administrador selecionado");
                 stageADM.setScene(scene);
                 stageADM.show();
+                ac.setOnADMDesativado(() -> {
+                    try{
+                        carregarTabelaADMS();
+                        
+                    } catch (SQLException ex){
+                        
+                    }
+                });
             }
         }
     }
