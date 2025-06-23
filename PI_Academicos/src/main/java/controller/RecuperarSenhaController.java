@@ -39,7 +39,9 @@ public class RecuperarSenhaController {
         }
 
         String assunto = "Recuperação de Senha";
-        String link = "http://localhost:8080/resetar-senha?codigo=" + codigo;
+        String link = "http://localhost/web_PI_Academicos/tela1.php?codigo=" + codigo + "&email=" + destinatario;
+       // String link = "http://localhost/tela1.php?codigo=" + codigo + "&email=" + destinatario;
+        //String link = "http://localhost:8080/resetar-senha?codigo=" + codigo;
         String mensagem = """
             Olá!
 
