@@ -30,6 +30,10 @@ import model.Projeto;
 import model.Solicitacao;
 import model.SolicitacaoDAO;
 import model.Usuario;
+import static util.AlertaUtil.mostrarAviso;
+import util.Apenasletras;
+import util.CPF;
+import util.Email;
 import util.Origem;
 
 public class CadastroBolsistaCoordenadorController {
@@ -112,26 +116,62 @@ public class CadastroBolsistaCoordenadorController {
 
     @FXML
     private TextField txtUsuario;
-    
-    
-    //---------------------------*OnClicks*------------------------------//
 
+    //---------------------------*OnClicks*------------------------------//
     @FXML
     void OnClickEnviar(ActionEvent event) throws SQLException, IOException {
         try {
-            Long cpf = Long.parseLong(txtCPF.getText());
-            Long matricula = Long.parseLong(txtMatricula.getText());
-            LocalDate dataInicio = DataInicioBolsa.getValue();
-            LocalDate dataFim = DataFimdaBolsa.getValue();
-
-            if (dataInicio == null || dataFim == null) {
-                mostrarAviso("Erro", "As datas de início e fim da bolsa devem ser preenchidas.");
+            if (arquivoPDF == null) {
+                mostrarAviso("PDF obrigatório", "Você deve selecionar um arquivo PDF antes de submeter.");
                 return;
             }
+            if (txtCPF.getText().isEmpty() || txtMatricula.getText().isEmpty() || txtNomeCompleto.getText().isEmpty() || txtUsuario.getText().isEmpty() || txtEmail.getText().isEmpty() || txtSenha.getText().isEmpty() || txtCurso.getText().isEmpty() || DataInicioBolsa.getValue() == null || DataFimdaBolsa.getValue() == null) {
+                mostrarAviso("ERRO", "Por favor inserir todos os dados");
+            } else {
 
-            incluir(cpf, txtNomeCompleto.getText(), txtUsuario.getText(), txtEmail.getText(), txtSenha.getText(),
-                    matricula, txtCurso.getText(), dataInicio, dataFim);
+                if (CPF.isValid(txtCPF.getText())) {
+                    System.out.print("CPF valido");
+                    if (Email.isValidEmail(txtEmail.getText())) {
+                        System.out.print("Email valido");
+                        if (Apenasletras.isLetras(txtNomeCompleto.getText())) {
+                            System.out.print("Nome valido");
+                            if (Apenasletras.isLetras(txtCurso.getText())) {
+                                System.out.print("Curso valido");
 
+                                Long cpf = Long.parseLong(txtCPF.getText());
+                                Long matricula = Long.parseLong(txtMatricula.getText());
+                                LocalDate dataInicio = DataInicioBolsa.getValue();
+                                LocalDate dataFim = DataFimdaBolsa.getValue();
+                                LocalDate dataFimProjeto = projeto.getDataFim();
+
+                                if (dataInicio == null || dataFim == null) {
+                                    mostrarAviso("Erro", "As datas de início e fim da bolsa devem ser preenchidas.");
+                                    return;
+                                }
+                                if (dataFim != null && dataFimProjeto != null && dataFim.isAfter(dataFimProjeto)) {
+                                    mostrarAviso("Data inválida", "A data de fim do bolsista não pode ser maior que a do projeto.");
+                                    return;
+                                }
+                                if (dataInicio.isAfter(dataFim)) {
+                                    mostrarAviso("Data inválida", "A data do inicio do bolsista não pode ser maior que a data de fim");
+                                    return;
+                                }
+
+                                incluir(cpf, txtNomeCompleto.getText(), txtUsuario.getText(), txtEmail.getText(), txtSenha.getText(),
+                                        matricula, txtCurso.getText(), dataInicio, dataFim);
+                            } else {
+                                mostrarAviso("ERRO", "O curso tem caracters não esperados");
+                            }
+                        } else {
+                            mostrarAviso("ERRO", "O Nome tem caracters não esperado");
+                        }
+                    } else {
+                        mostrarAviso("ERRO", "Email invalido");
+                    }
+                } else {
+                    mostrarAviso("ERRO", "CPF invalido");
+                }
+            }
         } catch (NumberFormatException n) {
             mostrarAviso("CPF ou Matrícula inválidos", "Os valores inseridos para CPF e Matrícula devem ser apenas números.");
         }
@@ -167,11 +207,9 @@ public class CadastroBolsistaCoordenadorController {
         }
 
     }
-    
-    
-    
+
     //--------------------------*SETs*------------------------//
-       public void setStage(Stage TelaCadastroBolsistaCoordenador) {
+    public void setStage(Stage TelaCadastroBolsistaCoordenador) {
         this.stageCadastrarBolsistaCoordenador = TelaCadastroBolsistaCoordenador;
     }
 
@@ -190,10 +228,8 @@ public class CadastroBolsistaCoordenadorController {
     public void setControllerCriar(CriarProjetoController aThis) {
         this.criarprojetocontrtoller = aThis;
     }
-    
-    
-    //-------------------------*Metodos*--------------------//
 
+    //-------------------------*Metodos*--------------------//
     void incluir(Long cpf, String nome, String apelido, String email, String senha, Long matricula, String curso, LocalDate dataInicio, LocalDate dataFim) throws SQLException, IOException {
         usuario = new Usuario(cpf, nome, apelido, email, senha);
         bolsista = new Bolsista(matricula, curso, dataInicio, dataFim);
@@ -215,8 +251,6 @@ public class CadastroBolsistaCoordenadorController {
             }
         }
     }
-
- 
 
     public void enviarSolicitacao() {
 
