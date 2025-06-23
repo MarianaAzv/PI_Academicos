@@ -407,6 +407,7 @@ public class AdministradoresController {
                 ADMController ac = loader.getController();
 
                 ac.setStage(stageADM);
+                ac.setAdministrador(adm);
 
                 stageADM.setOnShown(evento -> {
                     //ac.ajustarElementosJanela(this.adm);

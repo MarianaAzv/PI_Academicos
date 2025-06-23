@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <GridPane prefHeight="357.0" prefWidth="501.0" style="-fx-background-color: ECECEC;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ADMController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="1.0" prefWidth="1.0" />
@@ -39,7 +38,7 @@
       </Label>
       <Label fx:id="lblNomeR" alignment="CENTER" prefHeight="30.0" prefWidth="483.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
          <font>
-            <Font name="Courier New Bold" size="24.0" />
+            <Font name="Courier New Bold" size="18.0" />
          </font>
       </Label>
       <Label fx:id="lblUsuarioR" alignment="CENTER" prefHeight="30.0" prefWidth="483.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
@@ -47,12 +46,12 @@
             <Font name="Courier New Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="lblCPFR" alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="30.0" prefWidth="483.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+      <Label fx:id="lblCPFR" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="483.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4">
          <font>
             <Font name="Courier New Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="lblEmailR" contentDisplay="CENTER" prefHeight="30.0" prefWidth="483.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+      <Label fx:id="lblEmailR" alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="483.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5">
          <font>
             <Font name="Courier New Bold" size="18.0" />
          </font>
