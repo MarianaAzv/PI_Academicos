@@ -211,13 +211,13 @@ public class BolsistaDAO extends GenericDAO {
         }
     }
 
-    public boolean vinculadoEmOutroProjeto(int idBolsista, int idProjetoAtual) throws SQLException {
-        String sql = "SELECT COUNT(*) FROM projetos_bolsistas WHERE idBolsista = ? AND idProjeto <> ?";
+    public boolean vinculadoEmOutroProjeto(int idUsuario, int idProjeto) throws SQLException {
+        String sql = "select count(*) from bolsistas_projetos where idUsuario =? and idProjeto=?";
 
         try (Connection con = conectarDAO(); PreparedStatement stmt = con.prepareStatement(sql)) {
 
-            stmt.setInt(1, idBolsista);
-            stmt.setInt(2, idProjetoAtual);
+            stmt.setInt(1, idUsuario);
+            stmt.setInt(2, idProjeto);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {

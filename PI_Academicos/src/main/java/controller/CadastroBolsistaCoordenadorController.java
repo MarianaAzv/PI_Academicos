@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -24,7 +25,7 @@ import util.*;
 import static util.AlertaUtil.mostrarAviso;
 import static util.AlertaUtil.mostrarConfirmacao;
 
-public class CadastroBolsistaCoordenadorController {
+public class CadastroBolsistaCoordenadorController implements INotificacaoAlert{
 
     private Stage stageCadastrarBolsistaCoordenador;
     private final String DIRETORIO_PDFS = Paths.get(System.getProperty("user.home"), "pdfs_baixados").toString();
@@ -48,6 +49,7 @@ public class CadastroBolsistaCoordenadorController {
     @FXML
     private TextField txtCPF, txtCurso, txtEmail, txtMatricula, txtNomeCompleto, txtSenha, txtUsuario;
 
+    //Verificar se aqule cpf ja esta vingulado deu o alerta
     @FXML
     void OnClickEnviar(ActionEvent event) throws SQLException, IOException {
         String cpfDigitado = txtCPF.getText().trim();
@@ -58,7 +60,7 @@ public class CadastroBolsistaCoordenadorController {
 
         if (bolsistaExistente != null) {
             if (dao.vinculadoEmOutroProjeto(bolsistaExistente.getId(), projeto.getIdProjeto())) {
-            mostrarAviso("Vínculo existente", "Este bolsista já está vinculado a outro projeto.");
+            alerta("Este bolsista já está vinculado a outro projeto.",2,"Vínculo existente");
             
             return;
         }
@@ -76,6 +78,7 @@ public class CadastroBolsistaCoordenadorController {
             LocalDate dataInicio = DataInicioBolsa.getValue();
             LocalDate dataFim = DataFimdaBolsa.getValue();
             LocalDate dataFimProjeto = projeto.getDataFim();
+            LocalDate dataInicioProjeto = projeto.getDataInicio();
 
             if (dataInicio == null || dataFim == null) {
                 mostrarAviso("Erro", "As datas de início e fim da bolsa devem ser preenchidas.");
@@ -91,6 +94,12 @@ public class CadastroBolsistaCoordenadorController {
                 mostrarAviso("Data inválida", "A data do início não pode ser maior que a de fim.");
                 return;
             }
+            if(dataInicio.isBefore(dataInicioProjeto)){
+                alerta("A data do inicio do bolsista não pode ser menor que a data de inicio do projeto",2,"Data inválida");
+            }
+            if(dataFim.isBefore(dataInicioProjeto)){
+                alerta("A data do fim do bolsista não pode ser menor que a data de inicio do prjeto",2,"Data inválida");
+            }
 
             dao.atualizarVinculo(bolsistaExistente.getId(), projeto.getIdProjeto(), dataInicio, dataFim);
 
@@ -98,13 +107,13 @@ public class CadastroBolsistaCoordenadorController {
             usuario.setId(bolsistaExistente.getId());
             enviarSolicitacao();
 
-            mostrarConfirmacao("Bolsista vinculado", "O bolsista já existia e foi vinculado ao projeto com sucesso.");
+            alerta("O bolsista já existia e foi vinculado ao projeto com sucesso.",3,"Bolsista vinculado");
             return;
         }
 
         // Novo cadastro
         if (arquivoPDF == null) {
-            mostrarAviso("PDF obrigatório", "Você deve selecionar um arquivo PDF antes de submeter.");
+            alerta("Você deve selecionar um arquivo PDF antes de submeter.",2,"PDF obrigatório");
             return;
         }
 
@@ -112,49 +121,65 @@ public class CadastroBolsistaCoordenadorController {
                 || txtUsuario.getText().isEmpty() || txtEmail.getText().isEmpty()
                 || txtSenha.getText().isEmpty() || txtCurso.getText().isEmpty()
                 || DataInicioBolsa.getValue() == null || DataFimdaBolsa.getValue() == null) {
-            mostrarAviso("Erro", "Por favor, preencha todos os campos.");
+            alerta( "Por favor, preencha todos os campos.",2,"Erro");
             return;
         }
 
         if (!CPF.isValid(txtCPF.getText())) {
-            mostrarAviso("Erro", "CPF inválido.");
+           alerta("CPF inválido.",2,"Erro");
             return;
         }
 
         if (!Email.isValidEmail(txtEmail.getText())) {
-            mostrarAviso("Erro", "Email inválido.");
+            alerta("Email inválido.",2,"Erro");
             return;
         }
 
         if (!Apenasletras.isLetras(txtNomeCompleto.getText())) {
-            mostrarAviso("Erro", "Nome inválido (apenas letras são permitidas).");
+            alerta("Nome inválido (apenas letras são permitidas).",2,"Erro");
             return;
         }
 
         if (!Apenasletras.isLetras(txtCurso.getText())) {
-            mostrarAviso("Erro", "Curso inválido (apenas letras são permitidas).");
+            alerta("Curso inválido (apenas letras são permitidas).",2,"Erro");
             return;
         }
+        
+           if (!Senha.senhaForte(txtSenha.getText())) {
+            alerta("Curso inválido (apenas letras são permitidas).",2,"Erro");
+            return;
+        }
+
 
         try {
             Long matricula = Long.parseLong(txtMatricula.getText());
             LocalDate dataInicio = DataInicioBolsa.getValue();
             LocalDate dataFim = DataFimdaBolsa.getValue();
+             LocalDate dataFimProjeto = projeto.getDataFim();
+            LocalDate dataInicioProjeto = projeto.getDataInicio();
 
-            if (dataFim.isAfter(projeto.getDataFim())) {
-                mostrarAviso("Data inválida", "A data de fim da bolsa não pode ser maior que a do projeto.");
+            if (dataFim.isAfter(dataFimProjeto)) {
+                alerta( "A data de fim da bolsa não pode ser maior que a do projeto.",2,"Data inválida");
                 return;
             }
 
             if (dataInicio.isAfter(dataFim)) {
-                mostrarAviso("Data inválida", "A data de início não pode ser posterior à data de fim.");
+               alerta("A data de início não pode ser posterior à data de fim.",2,"Data inválida");
                 return;
+            }
+            
+            if(dataInicio.isBefore(dataInicioProjeto)){
+                alerta("A data de inicio do bolsista não pode seer menor que a data de inicio do projeto",2,"Data inválida");
+            }
+            
+            if(dataFim.isBefore(dataInicioProjeto)){
+                alerta("A data de fim do bolsista não pode ser menor que a data de inicio do projeto",2,"Data inválida");
             }
 
             incluir(txtCPF.getText(), txtNomeCompleto.getText(), txtUsuario.getText(), txtEmail.getText(),
                     txtSenha.getText(), matricula, txtCurso.getText(), dataInicio, dataFim);
         } catch (NumberFormatException e) {
-            mostrarAviso("Erro", "Matrícula deve conter apenas números.");
+            alerta("Matrícula deve conter apenas números.",2,"Erro");
         }
     }
 
@@ -182,8 +207,10 @@ public class CadastroBolsistaCoordenadorController {
     }
 
     @FXML
-    void onCpfDigitado(ActionEvent event) {
+    void onCpfDigitado(KeyEvent  event) throws IOException {
         String cpfDigitado = txtCPF.getText().trim();
+        
+        
 
         if (CPF.isValid(cpfDigitado)) {
             try {
@@ -235,7 +262,7 @@ public class CadastroBolsistaCoordenadorController {
                     btnEnviar.setText("Cadastrar");
                 }
             } catch (SQLException e) {
-                mostrarAviso("Erro", "Erro ao consultar CPF no banco de dados.");
+                alerta("Erro ao consultar CPF no banco de dados.",2,"Erro");
             }
         }
     }
@@ -274,7 +301,7 @@ public class CadastroBolsistaCoordenadorController {
         }
 
         dao.cadastrarUsuarioBolsista(usuario, bolsista, projeto);
-        mostrarConfirmacao("Cadastro realizado", "O bolsista foi registrado com sucesso!");
+        alerta( "O bolsista foi registrado com sucesso!",3,"Cadastro realizado");
 
         if (origem == Origem.atualizar_projeto) {
             VoltarParaAtualizarprojeto();
@@ -329,5 +356,33 @@ public class CadastroBolsistaCoordenadorController {
 
         criarprojetocontrtoller.Close();
         stageCadastrarBolsistaCoordenador.close();
+    }
+    
+      public void alerta(String msg, int tipo, String titulo) throws IOException {
+        URL url = new File("src/main/java/view/AlertGenerico.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stageAlerta = new Stage();
+
+        AlertGenericoController vpb = loader.getController();
+        vpb.setMsg(msg);
+        vpb.setTipo(tipo);
+        vpb.setStage(stageAlerta);
+        vpb.setControllerResposta(this);
+
+        Scene cena = new Scene(root);
+        stageAlerta.setTitle(titulo);
+        stageAlerta.setScene(cena);
+
+        stageAlerta.show();
+
+    }
+
+    @Override
+    public void btnOk() {
+        
+        
+
     }
 }
