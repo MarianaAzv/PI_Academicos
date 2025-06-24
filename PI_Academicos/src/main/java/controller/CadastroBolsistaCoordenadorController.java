@@ -54,13 +54,14 @@ public class CadastroBolsistaCoordenadorController {
         BolsistaDAO dao = new BolsistaDAO();
         Bolsista bolsistaExistente = dao.buscarPorCPF(cpfDigitado, projeto.getIdProjeto());
         
-        if (dao.vinculadoEmOutroProjeto(bolsistaExistente.getId(), projeto.getIdProjeto())) {
+        
+
+        if (bolsistaExistente != null) {
+            if (dao.vinculadoEmOutroProjeto(bolsistaExistente.getId(), projeto.getIdProjeto())) {
             mostrarAviso("Vínculo existente", "Este bolsista já está vinculado a outro projeto.");
             
             return;
         }
-
-        if (bolsistaExistente != null) {
             if (dao.jaVinculadoAoProjeto(bolsistaExistente.getId(), projeto.getIdProjeto())) {
                 mostrarAviso("Já vinculado", "Este bolsista já está vinculado ao projeto.");
                 stageCadastrarBolsistaCoordenador.close();
