@@ -28,12 +28,14 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.scene.control.TableColumn;
 import model.AdministradorDAO;
+import model.Solicitacao;
+import model.SolicitacaoDAO;
 
 public class NotificacoesController {
     
     private Stage stageNotificacoes;
     private Administrador adm;
-    ObservableList<Administrador> lista;
+    ObservableList<Solicitacao> lista;
     
      
     public void setAdministrador(Administrador adm) {
@@ -86,7 +88,7 @@ public class NotificacoesController {
     private TextField tfPesquisa;
 
     @FXML
-    private TableView<Administrador> tvNotificacoes;
+    private TableView<Solicitacao> tvNotificacoes;
 
    @FXML
     void onClickAtualizarPerfil(ActionEvent event) throws IOException {  
@@ -174,69 +176,62 @@ public class NotificacoesController {
 //********************************** 
     
     
-    private ObservableList<Administrador> listarADMS() throws SQLException {
-        AdministradorDAO admDAO = new AdministradorDAO();
-        return admDAO.listarAdministradores(adm);
+    private ObservableList<Solicitacao> listarSol() throws SQLException, IOException {
+        SolicitacaoDAO solDAO = new SolicitacaoDAO();
+        return solDAO.listarSolicitacoes();
     }
     
-     private void carregarTabelaADMS() throws SQLException{
-         lista = FXCollections.observableArrayList(listarADMS());
+     private void carregarTabelaSol() throws SQLException, IOException{
+         lista = FXCollections.observableArrayList(listarSol());
          if(!lista.isEmpty()){
              tvNotificacoes.getColumns().clear();
              
-            TableColumn<Administrador, Number> colunaID = new TableColumn<>("ID");
-            colunaID.setCellValueFactory(u -> u.getValue().idProperty());
-            colunaID.setStyle("-fx-alignment: CENTER;");
-            colunaID.setPrefWidth(100);
+            TableColumn<Solicitacao, Number> colunaIDSol = new TableColumn<>("ID solicitação");
+            colunaIDSol.setCellValueFactory(u -> u.getValue().idPropertyS());
+            colunaIDSol.setStyle("-fx-alignment: CENTER;");
+            colunaIDSol.setPrefWidth(100);
             
-            // para inserir um long precisa fazer essa transformação para object
-            TableColumn<Administrador, Long> colunaCPF = new TableColumn<>("CPF"); 
-            colunaCPF.setCellValueFactory(u -> u.getValue().cpfProperty().asObject());
-            colunaCPF.setStyle("-fx-alignment: CENTER;");
-            colunaCPF.setPrefWidth(250);
+            TableColumn<Solicitacao, Number> colunaIDUsu = new TableColumn<>("ID usuário"); 
+            colunaIDUsu.setCellValueFactory(u -> u.getValue().idPropertyU);
+            colunaIDUsu.setStyle("-fx-alignment: CENTER;");
+            colunaIDUsu.setPrefWidth(250);
             
-            TableColumn<Administrador, String> colunaNome = new TableColumn<>("Nome");
-            colunaNome.setCellValueFactory(u -> u.getValue().nomeProperty());
-            colunaNome.setStyle("-fx-alignment: CENTER;");
-            colunaNome.setPrefWidth(250);
+            TableColumn<Solicitacao, String> colunaDescricao = new TableColumn<>("Descrição");
+            colunaDescricao.setCellValueFactory(u -> u.getValue().descricaoProperty());
+            colunaDescricao.setStyle("-fx-alignment: CENTER;");
+            colunaDescricao.setPrefWidth(500);
             
-            TableColumn<Administrador, String> colunaApelido = new TableColumn<>("Usuário");
-            colunaApelido.setCellValueFactory(u -> u.getValue().apelidoProperty());
-            colunaApelido.setStyle("-fx-alignment: CENTER;");
-            colunaApelido.setPrefWidth(250);
+            TableColumn<Solicitacao, Boolean> colunaAceitacao = new TableColumn<>("Aceitação");
+            colunaAceitacao.setCellValueFactory(u-> u.getValue().aceitacaoProperty());
+            colunaAceitacao.setStyle("-fx-alignment: CENTER;");
+            colunaAceitacao.setPrefWidth(250);
             
-            TableColumn<Administrador, String> colunaEmail = new TableColumn<>("Email");
-            colunaEmail.setCellValueFactory(u -> u.getValue().emailProperty());
-            colunaEmail.setStyle("-fx-alignment: CENTER;");
-            colunaEmail.setPrefWidth(250);
-           
-            
-            tvNotificacoes.getColumns().addAll(colunaID, colunaCPF, colunaNome, colunaApelido, colunaEmail);
-            
-            
-            FilteredList<Administrador> listaFiltrada = new FilteredList<>(lista, p -> true);
-            tfPesquisa.textProperty().addListener((obs, oldVal, newVal) -> {
-                listaFiltrada.setPredicate( adm -> {
-                    if(newVal == null || newVal.isEmpty()){
-                        return true;
-                    }
-                    String filtro = newVal.toLowerCase();
-                    return adm.getNome().toLowerCase().contains(filtro)
-                            //|| adm.getCpf().toLowerCase().contains(filtro)
-                            || adm.getEmail().toLowerCase().contains(filtro);
-                            
-                });
-            });
-            SortedList<Administrador> listaOrdenada = new SortedList<>(listaFiltrada);
-            listaOrdenada.comparatorProperty().bind(tvNotificacoes.comparatorProperty());
-                tvNotificacoes.setItems(listaOrdenada);
+            tvNotificacoes.getColumns().addAll(colunaIDSol, colunaIDUsu, colunaDescricao, colunaAceitacao);
+//            
+//            
+//            FilteredList<Solicitacao> listaFiltrada = new FilteredList<>(lista, p -> true);
+//            tfPesquisa.textProperty().addListener((obs, oldVal, newVal) -> {
+//                listaFiltrada.setPredicate( adm -> {
+//                    if(newVal == null || newVal.isEmpty()){
+//                        return true;
+//                    }
+//                    String filtro = newVal.toLowerCase();
+//                    return adm.getIdSolicitacao().toLowerCase().contains(filtro);
+//                            //|| adm.getCpf().toLowerCase().contains(filtro)
+//                            //|| adm.getEmail().toLowerCase().contains(filtro);
+//                            
+//                });
+//            });
+//            SortedList<Solicitacao> listaOrdenada = new SortedList<>(listaFiltrada);
+//            listaOrdenada.comparatorProperty().bind(tvNotificacoes.comparatorProperty());
+//                tvNotificacoes.setItems(listaOrdenada);
 
-            //tabelaADMS.setItems(lista);
+            tvNotificacoes.setItems(lista);
          }
      }
      
-    void ajustarElementosJanela() throws SQLException {
-        carregarTabelaADMS();
+    void ajustarElementosJanela() throws SQLException, IOException {
+        carregarTabelaSol();
     }
     
      private void abrirTelaVerPerfil() throws MalformedURLException, IOException{

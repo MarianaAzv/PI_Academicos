@@ -365,10 +365,12 @@ public class AdministradoresController {
             nc.setAdministrador(adm);
             nc.setStage(stageNotificacoes);
             
-            stageADMS.setOnShown(evento -> {
+            stageNotificacoes.setOnShown(evento -> {
              try {
                  nc.ajustarElementosJanela();
              } catch (SQLException ex) {
+                 Logger.getLogger(AdministradoresController.class.getName()).log(Level.SEVERE, null, ex);
+             } catch (IOException ex) {
                  Logger.getLogger(AdministradoresController.class.getName()).log(Level.SEVERE, null, ex);
              }
         });
