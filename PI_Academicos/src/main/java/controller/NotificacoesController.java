@@ -7,6 +7,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,16 +16,24 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Administrador;
+import javafx.scene.control.TableView;
+import javafx.collections.FXCollections;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.scene.control.TableColumn;
+import model.AdministradorDAO;
 
 public class NotificacoesController {
     
     private Stage stageNotificacoes;
     private Administrador adm;
+    ObservableList<Administrador> lista;
     
      
     public void setAdministrador(Administrador adm) {
@@ -36,6 +45,7 @@ public class NotificacoesController {
         this.stageNotificacoes = stageNotificacoes;
         }
 
+  
     @FXML
     private Text TxtNomeUsuario;
 
@@ -46,6 +56,9 @@ public class NotificacoesController {
     private Button btnAtualizarPerfil;
 
     @FXML
+    private Button btnNaoValidados;
+
+    @FXML
     private Button btnNotificacoes;
 
     @FXML
@@ -53,6 +66,9 @@ public class NotificacoesController {
 
     @FXML
     private Button btnSair;
+
+    @FXML
+    private Button btnValidados;
 
     @FXML
     private Button btnVerPerfil;
@@ -67,7 +83,10 @@ public class NotificacoesController {
     private Label lblNotificacoes;
 
     @FXML
-    private ListView<?> lvNotificacoes;
+    private TextField tfPesquisa;
+
+    @FXML
+    private TableView<Administrador> tvNotificacoes;
 
    @FXML
     void onClickAtualizarPerfil(ActionEvent event) throws IOException {  
@@ -152,7 +171,73 @@ public class NotificacoesController {
     }
    
     
-//**********************************    
+//********************************** 
+    
+    
+    private ObservableList<Administrador> listarADMS() throws SQLException {
+        AdministradorDAO admDAO = new AdministradorDAO();
+        return admDAO.listarAdministradores(adm);
+    }
+    
+     private void carregarTabelaADMS() throws SQLException{
+         lista = FXCollections.observableArrayList(listarADMS());
+         if(!lista.isEmpty()){
+             tvNotificacoes.getColumns().clear();
+             
+            TableColumn<Administrador, Number> colunaID = new TableColumn<>("ID");
+            colunaID.setCellValueFactory(u -> u.getValue().idProperty());
+            colunaID.setStyle("-fx-alignment: CENTER;");
+            colunaID.setPrefWidth(100);
+            
+            // para inserir um long precisa fazer essa transformação para object
+            TableColumn<Administrador, Long> colunaCPF = new TableColumn<>("CPF"); 
+            colunaCPF.setCellValueFactory(u -> u.getValue().cpfProperty().asObject());
+            colunaCPF.setStyle("-fx-alignment: CENTER;");
+            colunaCPF.setPrefWidth(250);
+            
+            TableColumn<Administrador, String> colunaNome = new TableColumn<>("Nome");
+            colunaNome.setCellValueFactory(u -> u.getValue().nomeProperty());
+            colunaNome.setStyle("-fx-alignment: CENTER;");
+            colunaNome.setPrefWidth(250);
+            
+            TableColumn<Administrador, String> colunaApelido = new TableColumn<>("Usuário");
+            colunaApelido.setCellValueFactory(u -> u.getValue().apelidoProperty());
+            colunaApelido.setStyle("-fx-alignment: CENTER;");
+            colunaApelido.setPrefWidth(250);
+            
+            TableColumn<Administrador, String> colunaEmail = new TableColumn<>("Email");
+            colunaEmail.setCellValueFactory(u -> u.getValue().emailProperty());
+            colunaEmail.setStyle("-fx-alignment: CENTER;");
+            colunaEmail.setPrefWidth(250);
+           
+            
+            tvNotificacoes.getColumns().addAll(colunaID, colunaCPF, colunaNome, colunaApelido, colunaEmail);
+            
+            
+            FilteredList<Administrador> listaFiltrada = new FilteredList<>(lista, p -> true);
+            tfPesquisa.textProperty().addListener((obs, oldVal, newVal) -> {
+                listaFiltrada.setPredicate( adm -> {
+                    if(newVal == null || newVal.isEmpty()){
+                        return true;
+                    }
+                    String filtro = newVal.toLowerCase();
+                    return adm.getNome().toLowerCase().contains(filtro)
+                            //|| adm.getCpf().toLowerCase().contains(filtro)
+                            || adm.getEmail().toLowerCase().contains(filtro);
+                            
+                });
+            });
+            SortedList<Administrador> listaOrdenada = new SortedList<>(listaFiltrada);
+            listaOrdenada.comparatorProperty().bind(tvNotificacoes.comparatorProperty());
+                tvNotificacoes.setItems(listaOrdenada);
+
+            //tabelaADMS.setItems(lista);
+         }
+     }
+     
+    void ajustarElementosJanela() throws SQLException {
+        carregarTabelaADMS();
+    }
     
      private void abrirTelaVerPerfil() throws MalformedURLException, IOException{
         
@@ -290,7 +375,7 @@ public class NotificacoesController {
             stageNotificacoes.close();
     }
     private void abrirTelaPrincipal() throws IOException{
-     URL url = new File("src/main/java/view/TelaPrincipalAdministradorTeste.fxml").toURI().toURL();
+     URL url = new File("src/main/java/view/TelaPrincipalAdministrador.fxml").toURI().toURL();
             FXMLLoader loader = new FXMLLoader(url);
             Parent root = loader.load();
         
@@ -304,7 +389,7 @@ public class NotificacoesController {
            
         
             Scene cena = new Scene(root);
-            stagePrincipal.setTitle("Tela principal Administrador");
+            stagePrincipal.setTitle("Tela principal");
             stagePrincipal.setScene(cena);
             //deixa a tela maximizada
             stagePrincipal.setMaximized(true);
