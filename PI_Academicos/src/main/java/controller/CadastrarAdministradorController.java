@@ -26,6 +26,8 @@ import model.Foto;
 import model.Usuario;
 import static util.AlertaUtil.mostrarAviso;
 import static util.AlertaUtil.mostrarConfirmacao;
+import util.CPF;
+import util.Email;
 
 public class CadastrarAdministradorController {
 
@@ -33,7 +35,6 @@ public class CadastrarAdministradorController {
     private File arquivoSelecionado=null;
     private Runnable onADMCadastrado;// callback
 
-    
     @FXML
     private GridPane btnAtualizarProjeto;
 
@@ -78,11 +79,25 @@ public class CadastrarAdministradorController {
     @FXML
     void onClickCadastrar(ActionEvent event) throws SQLException, IOException {
 
-         try{
-        Long cpf = Long.parseLong(txtCPF.getText());
-        incluir(cpf,txtNome.getText(),txtUsuario.getText(),txtEmail.getText(),txtSenha.getText());
-        }catch(NumberFormatException n){
-            mostrarAviso("CPF inválido","O valor inserido para CPF deve ser apenas números");
+        try {
+            if (txtCPF.getText().isEmpty() || txtNome.getText().isEmpty() || txtUsuario.getText().isEmpty() || txtEmail.getText().isEmpty() || txtSenha.getText().isEmpty()) {
+                if (CPF.isValid(txtCPF.getText())) {
+                    System.out.print("CPF válido");
+                    if (Email.isValidEmail(txtEmail.getText())) {
+
+                        incluir(txtCPF.getText(), txtNome.getText(), txtUsuario.getText(), txtEmail.getText(), txtSenha.getText());
+
+                    } else {
+                        mostrarAviso("ERRO", "Email inválido");
+                    }
+                } else {
+                    mostrarAviso("ERRO", "CPF inválido");
+                }
+            } else {
+                mostrarAviso("ERRO", "Por favor inserir todos os dados");
+            }
+        } catch (NumberFormatException n) {
+            mostrarAviso("CPF inválido", "O valor inserido para CPF deve ser apenas números");
         }
         if(onADMCadastrado != null){
             onADMCadastrado.run();
@@ -95,53 +110,51 @@ public class CadastrarAdministradorController {
     
     @FXML
     void onClickAdicionarFoto(MouseEvent event) throws MalformedURLException {
-        
+
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Selecionar Imagem");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Arquivos de Imagem", "*.png", "*.jpg", "*.jpeg", "*.gif"));
         arquivoSelecionado = fileChooser.showOpenDialog(imgFotoAdministrador.getScene().getWindow());
-        
-        if(arquivoSelecionado!=null){
-             System.out.println("Arquivo escolhido: "+ arquivoSelecionado.getAbsolutePath());
-             String urlImagem = arquivoSelecionado.toURI().toURL().toString();            
-             Image fotoEscolhida = new Image(urlImagem);
-             imgFotoAdministrador.setImage(fotoEscolhida);
-        }
-        else{
+
+        if (arquivoSelecionado != null) {
+            System.out.println("Arquivo escolhido: " + arquivoSelecionado.getAbsolutePath());
+            String urlImagem = arquivoSelecionado.toURI().toURL().toString();
+            Image fotoEscolhida = new Image(urlImagem);
+            imgFotoAdministrador.setImage(fotoEscolhida);
+        } else {
             System.out.println("Nenhum arquivo foi selecionado");
         }
     }
-    
-    public void setStage(Stage stage){
-        this.stage=stage;
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
-    
-    void incluir(Long cpf, String nome, String apelido, String email, String senha) throws SQLException, IOException {
+
+    void incluir(String cpf, String nome, String apelido, String email, String senha) throws SQLException, IOException {
         Usuario usuario = new Usuario(cpf, nome, apelido, email, senha);
         Administrador administrador = new Administrador();
-        
-        if(arquivoSelecionado==null){
+
+        if (arquivoSelecionado == null) {
             mostrarAviso("Arquivo para foto de perfil não escolhido", " É ne cessário escolher uma foto de perfil para o administrador");
-        }
-        else{
-        byte[] conteudoImagem = Files.readAllBytes(arquivoSelecionado.toPath());
-        Foto fotoPerfil = new Foto(conteudoImagem);
+        } else {
+            byte[] conteudoImagem = Files.readAllBytes(arquivoSelecionado.toPath());
+            Foto fotoPerfil = new Foto(conteudoImagem);
 
-        
-        int repetido = new AdministradorDAO().validarApelido(apelido,0);
-        if(repetido>0){
-            mostrarAviso("Nome de usuário indisponível","Este nome de usuário já está sendo usado");
-           
+            int repetido = new AdministradorDAO().validarApelido(apelido, 0);
+            if (repetido > 0) {
+                mostrarAviso("Nome de usuário indisponível", "Este nome de usuário já está sendo usado");
+
+            } else if (nome.isEmpty() || apelido.isEmpty() || email.isEmpty() || senha.isEmpty()) {
+                mostrarAviso("Campos de preenchimento obrigatórios", "Todos os campos de cadastro devem ser preenchidos.");
+            } else {
+                new AdministradorDAO().cadastrarUsuarioAdministrador(usuario, administrador, fotoPerfil);
+                mostrarConfirmacao("Usuário cadastrado", "O usuário foi registrado no sistema com sucesso!");
+                stage.close();
+            }
         }
-        else if(nome.isEmpty() || apelido.isEmpty() || email.isEmpty() || senha.isEmpty()){
-         mostrarAviso("Campos de preenchimento obrigatórios","Todos os campos de cadastro devem ser preenchidos.");
+
     }
-        else{
-        new AdministradorDAO().cadastrarUsuarioAdministrador(usuario,administrador, fotoPerfil);
-        mostrarConfirmacao("Usuário cadastrado","O usuário foi registrado no sistema com sucesso!");
-        stage.close();
-        }
-        }
+        
         
         
     }
@@ -149,6 +162,4 @@ public class CadastrarAdministradorController {
     
     
 
-   
 
-}

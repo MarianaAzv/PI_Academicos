@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Projeto {
 
-  
     private int idProjeto;
     private String titulo;
     private AreasConhecimento areaConhecimento;
@@ -19,9 +18,6 @@ public class Projeto {
     private String cocoordenadores;
     private Campus campus;
     private List<Bolsista> bolsistas = new ArrayList<>();
-
-
-
 
     public Projeto(String titulo, String resumo, Campus campus, String edital, LocalDate dataInicio, LocalDate dataFim, LocalDate prorrogacao, boolean emAndamento) {
         this.titulo = titulo;
@@ -161,8 +157,8 @@ public class Projeto {
     public String getCocoordenadores() {
         return cocoordenadores;
     }
-    
-     /**
+
+    /**
      * @return the campus
      */
     public Campus getCampus() {
@@ -182,8 +178,8 @@ public class Projeto {
     public void setCocoordenadores(String cocoordenadores) {
         this.cocoordenadores = cocoordenadores;
     }
-    
-      /**
+
+    /**
      * @return the bolsistas
      */
     public List<Bolsista> getBolsistas() {
@@ -197,10 +193,8 @@ public class Projeto {
         this.bolsistas = bolsistas;
     }
 
-
     public Projeto() {
 
     }
-    
-    
+
 }

@@ -28,16 +28,16 @@ import util.AlertaUtil;
 import static util.AlertaUtil.mostrarAviso;
 import static util.AlertaUtil.mostrarConfirmacao;
 
-public class AtualizarPerfilBolsistaController implements INotificacaoAlert{
+public class AtualizarPerfilBolsistaController implements INotificacaoAlert {
 
     private Stage stageAtualizarBolsista;
     private Bolsista bolsista;
     Projeto projeto;
     private BolsistaDAO bolsistaDAO = new BolsistaDAO();
     private boolean ativa = true;
-    
+
     void setProjeto(Projeto projeto) {
-       this.projeto = projeto;
+        this.projeto = projeto;
     }
 
     @FXML
@@ -166,32 +166,28 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert{
             txtEmail.setText(bolsista.getEmail());
             txtMatricula.setText(String.valueOf(bolsista.getMatricula()));
 
-            
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-              System.out.println(bolsista.getDataInicio());
+            System.out.println(bolsista.getDataInicio());
             txtDataInicio.setText(bolsista.getDataInicio() != null ? bolsista.getDataInicio().format(formatter) : "Data não disponível");
-             System.out.println(bolsista.getDataInicio().format(formatter));
-           txtDataFim.setText(bolsista.getDataFim() != null ? bolsista.getDataFim().format(formatter) : "Data não disponível");
-            
-            //  Evitar erro ao acessar valores NULL
-          //  txtDataInicio.setText(bolsista.getDataInicio() != null ? bolsista.getDataInicio().toString() : "Data não cadastrada");
-          //  txtDataFim.setText(bolsista.getDataFim() != null ? bolsista.getDataFim().toString() : "Data não cadastrada");
+            System.out.println(bolsista.getDataInicio().format(formatter));
+            txtDataFim.setText(bolsista.getDataFim() != null ? bolsista.getDataFim().format(formatter) : "Data não disponível");
 
-           // System.out.println("Data Início carregada: " + bolsista.getDataInicio());
-          //  System.out.println("Data Fim carregada: " + bolsista.getDataFim());
+            //  Evitar erro ao acessar valores NULL
+            //  txtDataInicio.setText(bolsista.getDataInicio() != null ? bolsista.getDataInicio().toString() : "Data não cadastrada");
+            //  txtDataFim.setText(bolsista.getDataFim() != null ? bolsista.getDataFim().toString() : "Data não cadastrada");
+            // System.out.println("Data Início carregada: " + bolsista.getDataInicio());
+            //  System.out.println("Data Fim carregada: " + bolsista.getDataFim());
         } else {
             alerta("Bolsista não encontrado.", 1, "Erro");
-            
+
         }
     }
-
-   
 
     @FXML
     void onClickAtualizar(ActionEvent event) throws SQLException, IOException {
         try {
-            Long cpf = Long.parseLong(txtCPF.getText());
+
             Long matricula = Long.parseLong(txtMatricula.getText());
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -200,57 +196,60 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert{
             LocalDate dataInicio = txtDataInicio.getText().isEmpty() ? null : LocalDate.parse(txtDataInicio.getText(), formatter);
             LocalDate dataFim = txtDataFim.getText().isEmpty() ? null : LocalDate.parse(txtDataFim.getText(), formatter);
 
-            atualizarBolsista(bolsista.getId(), cpf, txtNome.getText(), txtUsuario.getText(), txtEmail.getText(),
-                              txtSenha.getText(), ativa, matricula, txtCurso.getText(), dataInicio, dataFim);
-
+            atualizarBolsista(bolsista.getId(), txtCPF.getText(), txtNome.getText(), txtUsuario.getText(), txtEmail.getText(),
+                    txtSenha.getText(), ativa, matricula, txtCurso.getText(), dataInicio, dataFim);
 
         } catch (NumberFormatException e) {
             alerta("CPF, matrícula e datas devem estar em formatos válidos.", 2, "Erro");
         }
     }
 
-    
-
     //******************* OnClicks ***************************************
-
     @FXML
     void onClickArtigo(ActionEvent event) throws IOException {
         abrirArtigo();
     }
+
     @FXML
     void onEnterArtigo(MouseEvent event) {
-        btnArtigo.setStyle("-fx-background-color: D07979" );
+        btnArtigo.setStyle("-fx-background-color: D07979");
     }
+
     @FXML
     void onExitArtigo(MouseEvent event) {
-        btnArtigo.setStyle("-fx-background-color:  DBA5A5" );
+        btnArtigo.setStyle("-fx-background-color:  DBA5A5");
     }
-     //******************************************************************
+    //******************************************************************
 
     @FXML
     void onClickAtualizarPerfil(ActionEvent event) throws IOException {
         //abrirAtualizarPerfil();
     }
+
     @FXML
     void onEnterAtualizarPerfil(MouseEvent event) {
         //btnAtualizarPerfil.setStyle("-fx-background-color: D07979" );
     }
+
     @FXML
     void onExitAtualizarPerfil(MouseEvent event) {
         //btnAtualizarPerfil.setStyle("-fx-background-color:  DBA5A5" );
     }
+
     //******************************************************************
-     @FXML
+    @FXML
     void onClickOutrosProjetos(ActionEvent event) throws MalformedURLException, IOException {
         outrosProjetos();
     }
+
     @FXML
     void onEnterOutrosProjeto(MouseEvent event) {
-        btnOutrosProjetos.setStyle("-fx-background-color: D07979" );
+        btnOutrosProjetos.setStyle("-fx-background-color: D07979");
     }
+
     @FXML
     void onExitOutrosProjeto(MouseEvent event) {
-        btnOutrosProjetos.setStyle("-fx-background-color:  DBA5A5" );
+        btnOutrosProjetos.setStyle("-fx-background-color:  DBA5A5");
     }
     //******************************************************************
 
@@ -258,13 +257,15 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert{
     void onClickPublicacao(ActionEvent event) throws IOException {
         abrirPublicacao();
     }
-     @FXML
+
+    @FXML
     void onEnterPublicacao(MouseEvent event) {
-        btnPublicacao.setStyle("-fx-background-color: D07979" );
+        btnPublicacao.setStyle("-fx-background-color: D07979");
     }
+
     @FXML
     void onExitPublicacao(MouseEvent event) {
-        btnPublicacao.setStyle("-fx-background-color:  DBA5A5" );
+        btnPublicacao.setStyle("-fx-background-color:  DBA5A5");
     }
     //******************************************************************
 
@@ -272,50 +273,52 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert{
     void onClickSair(ActionEvent event) throws IOException {
         abrirTelaPrincipal();
     }
+
     @FXML
     void onEnterSair(MouseEvent event) {
-        btnSair.setStyle("-fx-background-color: D07979" );
+        btnSair.setStyle("-fx-background-color: D07979");
     }
+
     @FXML
     void onExitSair(MouseEvent event) {
-        btnSair.setStyle("-fx-background-color:  DBA5A5" );
+        btnSair.setStyle("-fx-background-color:  DBA5A5");
     }
+
     //******************************************************************
     @FXML
     void onClickVerPerfil(ActionEvent event) throws IOException {
         abrirVerPerfil();
     }
+
     @FXML
     void onEnterVerPerfil(MouseEvent event) {
-        btnVerPerfil.setStyle("-fx-background-color: D07979" );
+        btnVerPerfil.setStyle("-fx-background-color: D07979");
     }
+
     @FXML
     void onExitVerPerfil(MouseEvent event) {
-        btnVerPerfil.setStyle("-fx-background-color:  DBA5A5" );
+        btnVerPerfil.setStyle("-fx-background-color:  DBA5A5");
     }
-   
-    
 
     //******************* MÉTODOS ***************************************
-
-    void atualizarBolsista(int id, long cpf, String nome, String apelido, String email, String senha, boolean ativa,
-                           long matricula, String curso, LocalDate dataInicio, LocalDate dataFim) throws SQLException, IOException {
+    void atualizarBolsista(int id, String cpf, String nome, String apelido, String email, String senha, boolean ativa,
+            long matricula, String curso, LocalDate dataInicio, LocalDate dataFim) throws SQLException, IOException {
         Bolsista bolsista = new Bolsista(id, cpf, nome, apelido, email, senha, ativa, matricula, curso, dataInicio, dataFim);
 
         int repetido = bolsistaDAO.validarApelido(apelido, id);
 
         if (repetido > 0) {
             alerta("Este nome de usuário já está sendo usado.", 2, "Nome de usuário indisponível");
-            
+
         } else {
             bolsistaDAO.atualizarBolsista(bolsista, projeto);
             alerta("O usuário foi alterado com sucesso!", 3, "Usuário alterado");
             abrirVerPerfil();
-            stageAtualizarBolsista.close(); 
-            
+            stageAtualizarBolsista.close();
+
         }
     }
-    
+
     public void abrirVerPerfil() throws IOException {
         URL url = new File("src/main/java/view/VerPerfilBolsista.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
@@ -326,7 +329,7 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert{
         VerPerfilBolsistaController vpb = loader.getController();
         vpb.setBolsista(bolsista);
         vpb.setProjeto(projeto);
-        vpb.setStage(stageVerPerfil); 
+        vpb.setStage(stageVerPerfil);
 
         Scene cena = new Scene(root);
         stageVerPerfil.setTitle("Perfil Bolsista");
@@ -334,10 +337,9 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert{
         stageVerPerfil.setMaximized(true);
 
         stageVerPerfil.show();
-        stageAtualizarBolsista.close(); 
+        stageAtualizarBolsista.close();
     }
 
-    
     public void abrirAtualizarPerfil() throws IOException {
         URL url = new File("src/main/java/view/AtualizarPerfilBolsista.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
@@ -356,7 +358,6 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert{
         stageAtualizarBolsista.close();
     }
 
-    
     public void abrirPublicacao() throws MalformedURLException, IOException {
         URL url = new File("src/main/java/view/CadastrarPostagem.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
@@ -373,7 +374,6 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert{
         stagePostagem.show();
     }
 
-   
     public void abrirArtigo() throws MalformedURLException, IOException {
         URL url = new File("src/main/java/view/CadastrarArtigo.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
@@ -390,9 +390,8 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert{
         stageArtigo.show();
     }
 
-    
     public void outrosProjetos() throws MalformedURLException, IOException {
-        
+
         URL url = new File("src/main/java/view/EscolherProjeto.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
@@ -403,12 +402,12 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert{
         epb.setStage(stagePrincipal);
 
         stagePrincipal.setOnShown(evento -> {
-             try {
-                 epb.OnClickProjeto();
-             } catch (SQLException ex) {
-                  Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
-             }              
-           // tpb.ajustarElementosJanela(bolsista);
+            try {
+                epb.OnClickProjeto();
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            // tpb.ajustarElementosJanela(bolsista);
         });
 
         Scene cena = new Scene(root);
@@ -419,7 +418,6 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert{
         stageAtualizarBolsista.close();
     }
 
-    
     private void abrirTelaPrincipal() throws IOException {
 
         URL url = new File("src/main/java/view/TelaPrincipalBolsista.fxml").toURI().toURL();
@@ -442,32 +440,31 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert{
         stageAtualizarBolsista.close();
 
     }
-    
-    public void alerta(String msg, int tipo, String titulo) throws IOException{
-    URL url = new File("src/main/java/view/AlertGenerico.fxml").toURI().toURL();
-    FXMLLoader loader = new FXMLLoader(url);
-    Parent root = loader.load();
 
-    Stage stageAlerta = new Stage();
+    public void alerta(String msg, int tipo, String titulo) throws IOException {
+        URL url = new File("src/main/java/view/AlertGenerico.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
 
-    AlertGenericoController vpb = loader.getController();
-    vpb.setMsg(msg);
-    vpb.setTipo(tipo);
-    vpb.setStage(stageAlerta); 
-    vpb.setControllerResposta(this);
-  
-    Scene cena = new Scene(root);
-    stageAlerta.setTitle(titulo);
-    stageAlerta.setScene(cena);
-    
+        Stage stageAlerta = new Stage();
 
-    stageAlerta.show();
-    
+        AlertGenericoController vpb = loader.getController();
+        vpb.setMsg(msg);
+        vpb.setTipo(tipo);
+        vpb.setStage(stageAlerta);
+        vpb.setControllerResposta(this);
+
+        Scene cena = new Scene(root);
+        stageAlerta.setTitle(titulo);
+        stageAlerta.setScene(cena);
+
+        stageAlerta.show();
+
     }
 
     @Override
     public void btnOk() {
-       
+
     }
      
 }

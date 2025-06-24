@@ -1,6 +1,4 @@
-
 package controller;
-
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -35,33 +33,33 @@ import model.Noticia;
 import model.NoticiaDAO;
 
 public class TelaPrincipalAdministradorController {
-    
+
     private Administrador adm;
     private NoticiaDAO noticiaDAO;
     private Stage stageADM;
 
     // Formatador para a data e hora
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-    
+
     public TelaPrincipalAdministradorController() {
         noticiaDAO = new NoticiaDAO();
     }
-    
+
     @FXML
     public void initialize() {
 
-       Platform.runLater(() -> {
-           //esse método permite que a tela inicialize sem depender de uma operação mais demorada
-           try{
-           carregarFotos();
-           } catch (IOException ex) {
-               ex.printStackTrace();
-           }
-            
+        Platform.runLater(() -> {
+            //esse método permite que a tela inicialize sem depender de uma operação mais demorada
+            try {
+                carregarFotos();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+
         });
 
     }
-    
+
     @FXML
     private Text TxtNomeUsuario;
 
@@ -82,7 +80,7 @@ public class TelaPrincipalAdministradorController {
 
     @FXML
     private Button btnVerPerfil;
-    
+
     @FXML
     private TilePane galeria;
 
@@ -94,10 +92,10 @@ public class TelaPrincipalAdministradorController {
 
     @FXML
     private Label lblNomeAdm;
-    
+
     @FXML
     private TilePane tilePaneGaleria;
-    
+
     @FXML
     public void carregarFotos() throws IOException {
         tilePaneGaleria.getChildren().clear(); // Limpa a galeria antes de recarregar
@@ -105,14 +103,12 @@ public class TelaPrincipalAdministradorController {
             List<Noticia> noticias = noticiaDAO.listarNoticias(adm);
             if (noticias.isEmpty()) {
                 System.out.println("Nenhuma notícia encontrada no banco de dados.");
-                
 
             }
             for (Noticia noticia : noticias) {
-                if(noticia.getFoto().getDadosImagem()!=null){
-                adicionarNoticiaFeed(noticia);
-                }
-                else{ // caso o link da foto estiver com problema uma outra foto substitui ela
+                if (noticia.getFoto().getDadosImagem() != null) {
+                    adicionarNoticiaFeed(noticia);
+                } else { // caso o link da foto estiver com problema uma outra foto substitui ela
                     ImageView imageView = new ImageView();
                     imageView.setFitWidth(320);
                     imageView.setFitHeight(320);
@@ -127,114 +123,111 @@ public class TelaPrincipalAdministradorController {
             System.out.println("Deu ruim na hora de carregar noticias");
         }
     }
-    
+
     private void adicionarNoticiaFeed(Noticia noticia) {
-        
+
         ImageView imageView = new ImageView();
         imageView.setFitWidth(320);
         imageView.setFitHeight(320);
         imageView.setPreserveRatio(true);
 
         tilePaneGaleria.getChildren().add(imageView);
-        
+
         Image image = null;
-                
-                byte[] conteudoFoto = noticia.getFoto().getDadosImagem();
-                if(conteudoFoto!=null){
-                   try (ByteArrayInputStream bis = new ByteArrayInputStream(conteudoFoto)) {
-                            image = new Image(bis); // Converte byte[] para Image AQUI
-                        } catch (Exception e) {
-                            System.err.println("Erro ao converter bytes para Image: " + e.getMessage());
-                            // precisa definir uma imagem padrao de erro
-                        }
-                }
-        
-        
-        
-        if(image!=null){
-        imageView.setImage(image);
-        carregarFotosAjustadas(image,imageView, noticia);//método para deixar fotos quadradas
-  
-                  
+
+        byte[] conteudoFoto = noticia.getFoto().getDadosImagem();
+        if (conteudoFoto != null) {
+            try (ByteArrayInputStream bis = new ByteArrayInputStream(conteudoFoto)) {
+                image = new Image(bis); // Converte byte[] para Image AQUI
+            } catch (Exception e) {
+                System.err.println("Erro ao converter bytes para Image: " + e.getMessage());
+                // precisa definir uma imagem padrao de erro
+            }
+        }
+
+        if (image != null) {
+            imageView.setImage(image);
+            carregarFotosAjustadas(image, imageView, noticia);//método para deixar fotos quadradas
+
             System.out.println("Id da imagem: " + noticia.getFoto().getId());
-            
 
             imageView.setOnMouseClicked(event -> {
                 try {
-                abrirTelaAtualizarNoticia(noticia); //tela teste, posteriormente será passada uma tela que mostre os detalhes da noticia
+                    abrirTelaAtualizarNoticia(noticia); //tela teste, posteriormente será passada uma tela que mostre os detalhes da noticia
                 } catch (IOException e) {
-                System.err.println("Erro ao abrir tela de detalhes da notícia: " + e.getMessage());
+                    System.err.println("Erro ao abrir tela de detalhes da notícia: " + e.getMessage());
                 }
             });
-            
-            
-        
-    }
-        else{
+
+        } else {
             imageView.setImage(new Image(getClass().getResourceAsStream("/src/main/resources/Variant3.png")));
         }
     }
-    
 
-     @FXML
-    void onClickAtualizarPerfil(ActionEvent event) throws IOException {  
+    @FXML
+    void onClickAtualizarPerfil(ActionEvent event) throws IOException {
         abrirTelaAtualizar();
     }
-    
-      @FXML
+
+    @FXML
     void OnDragEnterAtualizarPerfil(MouseEvent event) {
-        
-         btnAtualizarPerfil.setStyle("-fx-background-color: D07979" );
+
+        btnAtualizarPerfil.setStyle("-fx-background-color: D07979");
     }
 
     @FXML
     void OnDragExitAtualizarPerfil(MouseEvent event) {
-        
-         btnAtualizarPerfil.setStyle("-fx-background-color:  DBA5A5" );
+
+        btnAtualizarPerfil.setStyle("-fx-background-color:  DBA5A5");
 
     }
 
-     //**********************************
+    //**********************************
     @FXML
     void onClickADM(ActionEvent event) throws IOException {
         abrirTelaADMS();
     }
-    
+
     @FXML
     void OnDragEnterADM(MouseEvent event) {
-         btnADM.setStyle("-fx-background-color: D07979" );
-    }
-      @FXML
-    void OnDragExitADM(MouseEvent event) {
-         btnADM.setStyle("-fx-background-color:  DBA5A5" );
+        btnADM.setStyle("-fx-background-color: D07979");
     }
 
-     //**********************************
+    @FXML
+    void OnDragExitADM(MouseEvent event) {
+        btnADM.setStyle("-fx-background-color:  DBA5A5");
+    }
+
+    //**********************************
     @FXML
     void onClickPublicacao(ActionEvent event) throws IOException {
         abrirTelaNoticia();
     }
+
     @FXML
     void OnDragEnterPublicacao(MouseEvent event) {
-         btnPublicacao.setStyle("-fx-background-color: D07979" );
+        btnPublicacao.setStyle("-fx-background-color: D07979");
     }
+
     @FXML
     void OnDragExitPublicacao(MouseEvent event) {
-         btnPublicacao.setStyle("-fx-background-color:  DBA5A5" );
+        btnPublicacao.setStyle("-fx-background-color:  DBA5A5");
     }
     //**********************************
 
     @FXML
     void onClickSair(ActionEvent event) throws IOException {
-       abrirTelaLogin();
+        abrirTelaLogin();
     }
+
     @FXML
     void OnDragEnterSair(MouseEvent event) {
-         btnSair.setStyle("-fx-background-color: D07979" );
+        btnSair.setStyle("-fx-background-color: D07979");
     }
+
     @FXML
     void OnDragExitSair(MouseEvent event) {
-         btnSair.setStyle("-fx-background-color:  DBA5A5" );
+        btnSair.setStyle("-fx-background-color:  DBA5A5");
     }
 //**********************************
 
@@ -245,270 +238,267 @@ public class TelaPrincipalAdministradorController {
 
     @FXML
     void OnDragEnterVerPerfil(MouseEvent event) {
-         btnVerPerfil.setStyle("-fx-background-color:  D07979" );
+        btnVerPerfil.setStyle("-fx-background-color:  D07979");
     }
-     @FXML
+
+    @FXML
     void OnDragExitVerPerfil(MouseEvent event) {
-         btnVerPerfil.setStyle("-fx-background-color:  DBA5A5" );
+        btnVerPerfil.setStyle("-fx-background-color:  DBA5A5");
     }
 //**********************************
-    
+
     @FXML
     void onClickBtnNotificacoes(ActionEvent event) throws IOException {
         abrirTelaNotificacoes();
     }
-    
+
     @FXML
     void OnDragExitNotificacoes(MouseEvent event) {
-        btnNotificacoes.setStyle("-fx-background-color:  DBA5A5" );
+        btnNotificacoes.setStyle("-fx-background-color:  DBA5A5");
     }
+
     @FXML
     void OnDragEnterNotificacoes(MouseEvent event) {
-        btnNotificacoes.setStyle("-fx-background-color:  D07979" );
+        btnNotificacoes.setStyle("-fx-background-color:  D07979");
     }
 //**********************************    
-    
-     private void abrirTelaVerPerfil() throws MalformedURLException, IOException{
-        
-         URL url = new File("src/main/java/view/VerPerfilAdministrador.fxml").toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-        
-            Stage stageVerPerfil = new Stage();
-        
-            VerPerfilAdministradorController vpac = loader.getController();    
-            vpac.setStage(stageVerPerfil);
-            vpac.setAdministrador(adm);
-            stageVerPerfil.setMaximized(true);
-        
-            Scene cena = new Scene(root);
-            stageVerPerfil.setTitle("Perfil administrador");
-            stageVerPerfil.setScene(cena);
-            
-            stageVerPerfil.show();
-            stageADM.close();
-            
+
+    private void abrirTelaVerPerfil() throws MalformedURLException, IOException {
+
+        URL url = new File("src/main/java/view/VerPerfilAdministrador.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stageVerPerfil = new Stage();
+
+        VerPerfilAdministradorController vpac = loader.getController();
+        vpac.setStage(stageVerPerfil);
+        vpac.setAdministrador(adm);
+        stageVerPerfil.setMaximized(true);
+
+        Scene cena = new Scene(root);
+        stageVerPerfil.setTitle("Perfil administrador");
+        stageVerPerfil.setScene(cena);
+
+        stageVerPerfil.show();
+        stageADM.close();
+
     }
-    
-    private void abrirTelaNoticia() throws MalformedURLException, IOException{
-        
-         URL url = new File("src/main/java/view/TelaNoticia.fxml").toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-        
-            Stage stageCadastroNoticia = new Stage();
-        
-            TelaNoticiaController tnc = loader.getController();    
-            tnc.setStage(stageCadastroNoticia);
-            tnc.setAdministrador(adm);
-        
-            Scene cena = new Scene(root);
-            stageCadastroNoticia.setTitle("Tela Cadastrar Noticia");
-            stageCadastroNoticia.setScene(cena);
-            
-            stageCadastroNoticia.show();
-            
+
+    private void abrirTelaNoticia() throws MalformedURLException, IOException {
+
+        URL url = new File("src/main/java/view/TelaNoticia.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stageCadastroNoticia = new Stage();
+
+        TelaNoticiaController tnc = loader.getController();
+        tnc.setStage(stageCadastroNoticia);
+        tnc.setAdministrador(adm);
+
+        Scene cena = new Scene(root);
+        stageCadastroNoticia.setTitle("Tela Cadastrar Noticia");
+        stageCadastroNoticia.setScene(cena);
+
+        stageCadastroNoticia.show();
+
     }
-    
-     private void abrirTelaAtualizar() throws MalformedURLException, IOException{
-        
-         URL url = new File("src/main/java/view/AtualizarPerfilAdministrador.fxml").toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-        
-            Stage stageAtualizar = new Stage();
-        
-            AtualizarPerfilAdministradorController apac = loader.getController();  
-            apac.setAdministrador(adm);
-            apac.setStage(stageAtualizar);
-        
-            Scene cena = new Scene(root);
-            stageAtualizar.setTitle("Tela Atualizar Administrador");
-            stageAtualizar.setScene(cena);
-            //deixa a tela maximizada
-            stageAtualizar.setMaximized(true);
-            
-            stageAtualizar.show();
-            stageADM.close();
+
+    private void abrirTelaAtualizar() throws MalformedURLException, IOException {
+
+        URL url = new File("src/main/java/view/AtualizarPerfilAdministrador.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stageAtualizar = new Stage();
+
+        AtualizarPerfilAdministradorController apac = loader.getController();
+        apac.setAdministrador(adm);
+        apac.setStage(stageAtualizar);
+
+        Scene cena = new Scene(root);
+        stageAtualizar.setTitle("Tela Atualizar Administrador");
+        stageAtualizar.setScene(cena);
+        //deixa a tela maximizada
+        stageAtualizar.setMaximized(true);
+
+        stageAtualizar.show();
+        stageADM.close();
     }
-     
-    private void abrirTelaADMS() throws IOException{
-        
-         URL url = new File("src/main/java/view/Administradores.fxml").toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-        
-            Stage stageADMS = new Stage();
-        
-            AdministradoresController ac = loader.getController();  
-            ac.setAdministrador(adm);
-            ac.setStage(stageADMS);
-            
-            stageADMS.setOnShown(evento -> {
+
+    private void abrirTelaADMS() throws IOException {
+
+        URL url = new File("src/main/java/view/Administradores.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stageADMS = new Stage();
+
+        AdministradoresController ac = loader.getController();
+        ac.setAdministrador(adm);
+        ac.setStage(stageADMS);
+
+        stageADMS.setOnShown(evento -> {
             try {
                 ac.ajustarElementosJanela();
             } catch (SQLException ex) {
                 Logger.getLogger(TelaPrincipalAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-        
-            Scene cena = new Scene(root);
-            stageADMS.setTitle("Tela Administradores");
-            stageADMS.setScene(cena);
-            //deixa a tela maximizada
-            stageADMS.setMaximized(true);
-            
-            stageADMS.show();
-            stageADM.close();
+
+        Scene cena = new Scene(root);
+        stageADMS.setTitle("Tela Administradores");
+        stageADMS.setScene(cena);
+        //deixa a tela maximizada
+        stageADMS.setMaximized(true);
+
+        stageADMS.show();
+        stageADM.close();
     }
-    
-    private void abrirTelaNotificacoes() throws IOException{
-        
-         URL url = new File("src/main/java/view/Notificacoes.fxml").toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-        
-            Stage stageNotificacoes = new Stage();
-        
-            NotificacoesController nc = loader.getController();  
-            nc.setAdministrador(adm);
-            nc.setStage(stageNotificacoes);
-        
-            Scene cena = new Scene(root);
-            stageNotificacoes.setTitle("Tela notificações");
-            stageNotificacoes.setScene(cena);
-            //deixa a tela maximizada
-            stageNotificacoes.setMaximized(true);
-            
-            stageNotificacoes.show();
-            stageADM.close();
+
+    private void abrirTelaNotificacoes() throws IOException {
+
+        URL url = new File("src/main/java/view/Notificacoes.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stageNotificacoes = new Stage();
+
+        NotificacoesController nc = loader.getController();
+        nc.setAdministrador(adm);
+        nc.setStage(stageNotificacoes);
+
+        Scene cena = new Scene(root);
+        stageNotificacoes.setTitle("Tela notificações");
+        stageNotificacoes.setScene(cena);
+        //deixa a tela maximizada
+        stageNotificacoes.setMaximized(true);
+
+        stageNotificacoes.show();
+        stageADM.close();
     }
-    
-    private void abrirTelaAtualizarNoticia(Noticia noticia) throws MalformedURLException, IOException{
-        
-         URL url = new File("src/main/java/view/AtualizarNoticia.fxml").toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-        
-            Stage stageAtualizarNoticia = new Stage();
-        
-            AtualizarNoticiaController anc = loader.getController();    
-            anc.setStage(stageAtualizarNoticia);
-            anc.setAdministrador(adm);
-            anc.setNoticia(noticia);
-        
-            Scene cena = new Scene(root);
-            stageAtualizarNoticia.setTitle("Tela Atualizar Noticia");
-            stageAtualizarNoticia.setScene(cena);
-            
-            stageAtualizarNoticia.show();
-            
+
+    private void abrirTelaAtualizarNoticia(Noticia noticia) throws MalformedURLException, IOException {
+
+        URL url = new File("src/main/java/view/AtualizarNoticia.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stageAtualizarNoticia = new Stage();
+
+        AtualizarNoticiaController anc = loader.getController();
+        anc.setStage(stageAtualizarNoticia);
+        anc.setAdministrador(adm);
+        anc.setNoticia(noticia);
+
+        Scene cena = new Scene(root);
+        stageAtualizarNoticia.setTitle("Tela Atualizar Noticia");
+        stageAtualizarNoticia.setScene(cena);
+
+        stageAtualizarNoticia.show();
+
     }
-    
-    private void abrirTelaLogin() throws IOException{
-        
-         URL url = new File("src/main/java/view/TelaLogin.fxml").toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-        
-            Stage stageLogin = new Stage();
-        
-            TelaLoginController tlc = loader.getController();  
-            tlc.setStage(stageLogin);
-        
-            Scene cena = new Scene(root);
-            stageLogin.setTitle("Tela Login");
-            stageLogin.setScene(cena);
-            //deixa a tela maximizada
-            stageLogin.setMaximized(true);
-            
-            stageLogin.show();
-            stageADM.close();
+
+    private void abrirTelaLogin() throws IOException {
+
+        URL url = new File("src/main/java/view/TelaLogin.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stageLogin = new Stage();
+
+        TelaLoginController tlc = loader.getController();
+        tlc.setStage(stageLogin);
+
+        Scene cena = new Scene(root);
+        stageLogin.setTitle("Tela Login");
+        stageLogin.setScene(cena);
+        //deixa a tela maximizada
+        stageLogin.setMaximized(true);
+
+        stageLogin.show();
+        stageADM.close();
     }
-    
-    
-    public void setStage(Stage stage){
+
+    public void setStage(Stage stage) {
         this.stageADM = stage;
     }
-    
+
     public void setAdministrador(Administrador adm) {
         this.adm = adm;
         lblNomeAdm.setText(adm.getNome());
-        
+
         Image image = null;
         byte[] conteudoFoto = adm.getFotoPerfil().getDadosImagem();
-            if(conteudoFoto!=null){
-                try (ByteArrayInputStream bis = new ByteArrayInputStream(conteudoFoto)) {
-                    image = new Image(bis); // Converte byte[] para Image AQUI
-                } catch (Exception e) {
-                    System.err.println("Erro ao converter bytes para Image: " + e.getMessage());
-                            // precisa definir uma imagem padrao de erro
-                        }
-                }
+        if (conteudoFoto != null) {
+            try (ByteArrayInputStream bis = new ByteArrayInputStream(conteudoFoto)) {
+                image = new Image(bis); // Converte byte[] para Image AQUI
+            } catch (Exception e) {
+                System.err.println("Erro ao converter bytes para Image: " + e.getMessage());
+                // precisa definir uma imagem padrao de erro
+            }
+        }
         imgPerfil.setImage(image);
     }
-    
-    
-    
+
     void ajustarElementosJanela(Administrador adm) {
-        this.adm=adm;
-        
+        this.adm = adm;
+
         System.out.println("Aqui chegam os parâmetros do login " + adm.getNome() + " - " + "ATIVA: " + adm.getAtiva());
-        
-        if(adm.getAtiva()==false){
-        
+
+        if (adm.getAtiva() == false) {
+
         }
-       
-    }
-    
- 
-private void carregarFotosAjustadas(Image image, ImageView imageView, Noticia noticia) {
-    // verifica se a imagem foi carregada
-    if (image.isError()) {
-        System.err.println("Error loading image for ID: " + noticia.getFoto().getId());
-        imageView.setImage(new Image(getClass().getResourceAsStream("/src/main/resources/Variant3.png")));
-        return; 
+
     }
 
-    if (image.isBackgroundLoading() || image.getProgress() < 1.0) {
-        // se a imagem está carregando ele adiciona um listener
-        image.progressProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal.doubleValue() == 1.0) { // Image fully loaded
-                Platform.runLater(() -> { // Ensure UI update on FX Application Thread
-                    redimensionarFotos(image, imageView, noticia);
-                });
-            }
-        });
-    } else {
-        // se a imagem está carregada ele redimensiona
-        redimensionarFotos(image, imageView, noticia);
+    private void carregarFotosAjustadas(Image image, ImageView imageView, Noticia noticia) {
+        // verifica se a imagem foi carregada
+        if (image.isError()) {
+            System.err.println("Error loading image for ID: " + noticia.getFoto().getId());
+            imageView.setImage(new Image(getClass().getResourceAsStream("/src/main/resources/Variant3.png")));
+            return;
+        }
+
+        if (image.isBackgroundLoading() || image.getProgress() < 1.0) {
+            // se a imagem está carregando ele adiciona um listener
+            image.progressProperty().addListener((obs, oldVal, newVal) -> {
+                if (newVal.doubleValue() == 1.0) { // Image fully loaded
+                    Platform.runLater(() -> { // Ensure UI update on FX Application Thread
+                        redimensionarFotos(image, imageView, noticia);
+                    });
+                }
+            });
+        } else {
+            // se a imagem está carregada ele redimensiona
+            redimensionarFotos(image, imageView, noticia);
+        }
     }
-}
 
+    private void redimensionarFotos(Image image, ImageView imageView, Noticia noticia) {
+        double imageWidth = image.getWidth();
+        double imageHeight = image.getHeight();
+        double imageViewWidth = imageView.getFitWidth();
+        double imageViewHeight = imageView.getFitHeight();
 
-private void redimensionarFotos(Image image, ImageView imageView, Noticia noticia) {
-    double imageWidth = image.getWidth();
-    double imageHeight = image.getHeight();
-    double imageViewWidth = imageView.getFitWidth();
-    double imageViewHeight = imageView.getFitHeight();
+        double ratioImage = imageWidth / imageHeight;
+        double ratioView = imageViewWidth / imageViewHeight;
 
-    double ratioImage = imageWidth / imageHeight;
-    double ratioView = imageViewWidth / imageViewHeight;
-
-    Rectangle2D viewport;
-    if (ratioImage > ratioView) {
-        // Image is wider than ImageView. Crop sides.
-        double newImageWidth = imageHeight * ratioView;
-        double xOffset = (imageWidth - newImageWidth) / 2;
-        viewport = new Rectangle2D(xOffset, 0, newImageWidth, imageHeight);
-    } else {
-        // Image is taller than ImageView. Crop top/bottom.
-        double newImageHeight = imageWidth / ratioView;
-        double yOffset = (imageHeight - newImageHeight) / 2;
-        viewport = new Rectangle2D(0, yOffset, imageWidth, newImageHeight);
+        Rectangle2D viewport;
+        if (ratioImage > ratioView) {
+            // Image is wider than ImageView. Crop sides.
+            double newImageWidth = imageHeight * ratioView;
+            double xOffset = (imageWidth - newImageWidth) / 2;
+            viewport = new Rectangle2D(xOffset, 0, newImageWidth, imageHeight);
+        } else {
+            // Image is taller than ImageView. Crop top/bottom.
+            double newImageHeight = imageWidth / ratioView;
+            double yOffset = (imageHeight - newImageHeight) / 2;
+            viewport = new Rectangle2D(0, yOffset, imageWidth, newImageHeight);
+        }
+        imageView.setViewport(viewport);
+        System.out.println("Noticia arrumada com id:" + noticia.getFoto().getId());
     }
-    imageView.setViewport(viewport);
-    System.out.println("Noticia arrumada com id:" + noticia.getFoto().getId());
-}
-    
+
 }

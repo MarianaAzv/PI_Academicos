@@ -1,11 +1,10 @@
-
 package model;
-
 
 public class AreasConhecimento {
 
-     private int idArea;
+    private int idArea;
     private String nomeArea;
+
     /**
      * @return the idArea
      */
@@ -33,9 +32,10 @@ public class AreasConhecimento {
     public void setNomeArea(String nomeArea) {
         this.nomeArea = nomeArea;
     }
-     @Override
-    public String toString(){
+
+    @Override
+    public String toString() {
         return nomeArea;
     }
-   
+
 }

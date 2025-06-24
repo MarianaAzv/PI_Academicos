@@ -50,7 +50,7 @@
                         <Font name="Courier New Bold" size="14.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txtCPF" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <TextField fx:id="txtCPF" onAction="#onCpfDigitado" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                   <TextField fx:id="txtNomeCompleto" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                </children>
             </GridPane>

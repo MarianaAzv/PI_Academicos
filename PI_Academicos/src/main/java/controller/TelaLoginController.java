@@ -139,25 +139,21 @@ public class TelaLoginController implements INotificacaoAlert {
 
     @FXML
     void onClickRecuperarSenha(MouseEvent event) throws MalformedURLException, IOException {
-        URL url = new File("src/main/java/view/RecuperarSenha.fxml").toURI().toURL();   
+        URL url = new File("src/main/java/view/RecuperarSenha.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
-        
+
         Parent root = loader.load();
-        
+
         Stage stageRecuperar = new Stage();
-        
+
         RecuperarSenhaController rsc = loader.getController();
         rsc.setStage(stageRecuperar);
-        
+
         Scene cena = new Scene(root);
         stageRecuperar.setTitle("Recuperação de senha");
         stageRecuperar.setMaximized(true);
         stageRecuperar.setScene(cena);
         stageRecuperar.show();
-        
-        
-        
-        
 
     }
 
@@ -336,8 +332,7 @@ public class TelaLoginController implements INotificacaoAlert {
 
     @Override
     public void btnOk() {
-       
-       
+
     }
 
 }

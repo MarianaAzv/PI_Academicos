@@ -1,6 +1,4 @@
-
 package util;
-
 
 public enum Origem {
     cadastro_projeto,

@@ -212,8 +212,8 @@ public class AdministradoresController {
             colunaID.setPrefWidth(100);
             
             // para inserir um long precisa fazer essa transformação para object
-            TableColumn<Administrador, Long> colunaCPF = new TableColumn<>("CPF"); 
-            colunaCPF.setCellValueFactory(u -> u.getValue().cpfProperty().asObject());
+            TableColumn<Administrador, String> colunaCPF = new TableColumn<>("CPF"); 
+            colunaCPF.setCellValueFactory(u -> u.getValue().cpfProperty());
             colunaCPF.setStyle("-fx-alignment: CENTER;");
             colunaCPF.setPrefWidth(250);
             

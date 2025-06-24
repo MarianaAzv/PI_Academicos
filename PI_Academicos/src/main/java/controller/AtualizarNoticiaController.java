@@ -24,7 +24,7 @@ public class AtualizarNoticiaController {
     private Administrador adm;
     private Noticia noticia;
     private Image image;
-    
+
     @FXML
     private Button btnAtualizar;
 
@@ -47,10 +47,10 @@ public class AtualizarNoticiaController {
 
     @FXML
     void onClickExcluir(ActionEvent event) throws SQLException {
-        
+
         NoticiaDAO noticiaDAO = new NoticiaDAO();
         noticiaDAO.deletarNoticia(noticia);
-        mostrarConfirmacao("Notícia excluída","A noticia foi excluída.");
+        mostrarConfirmacao("Notícia excluída", "A noticia foi excluída.");
         stageAtualizarNoticia.close();
 
     }
@@ -59,30 +59,30 @@ public class AtualizarNoticiaController {
     void onClickFoto(MouseEvent event) {
 
     }
-    
-    public void setStage(Stage stageAtualizarNoticia){
+
+    public void setStage(Stage stageAtualizarNoticia) {
         this.stageAtualizarNoticia = stageAtualizarNoticia;
     }
-    
-    public void setAdministrador(Administrador adm){
+
+    public void setAdministrador(Administrador adm) {
         this.adm = adm;
     }
-    
-    public void setNoticia(Noticia noticia){
+
+    public void setNoticia(Noticia noticia) {
         this.noticia = noticia;
         byte[] conteudoFoto = noticia.getFoto().getDadosImagem();
-                if(conteudoFoto!=null){
-                   try (ByteArrayInputStream bis = new ByteArrayInputStream(conteudoFoto)) {
-                            image = new Image(bis); // Converte byte[] para Image AQUI
-                        } catch (Exception e) {
-                            System.err.println("Erro ao converter bytes para Image: " + e.getMessage());
-                            // precisa definir uma imagem padrao de erro
-                        }
-                }
+        if (conteudoFoto != null) {
+            try (ByteArrayInputStream bis = new ByteArrayInputStream(conteudoFoto)) {
+                image = new Image(bis); // Converte byte[] para Image AQUI
+            } catch (Exception e) {
+                System.err.println("Erro ao converter bytes para Image: " + e.getMessage());
+                // precisa definir uma imagem padrao de erro
+            }
+        }
         imageViewFoto.setImage(image);
         txtTituloNoticia.setText(noticia.getTitulo());
         txtLegenda.setText(noticia.getTexto());
-        
+
     }
 
 }
