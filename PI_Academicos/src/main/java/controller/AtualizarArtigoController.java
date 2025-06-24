@@ -1,51 +1,69 @@
 package controller;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import model.Artigo;
+import model.Projeto;
 
 public class AtualizarArtigoController {
 
-    @FXML
-    private Button btnAtuzalizar;
-
+    private Projeto projeto;
+    private Artigo artigo;
+    private Stage stageAtualizarArtigo;
+    
+    File arquivoPDF = artigo.getArquivo();
+    private final String DIRETORIO_PDFS = Paths.get(System.getProperty("user.home"), "pdfs_baixados").toString();
+    
+    public void initialize() {
+        File diretorio = new File(DIRETORIO_PDFS);
+        if (!diretorio.exists()) {
+            diretorio.mkdirs();
+        }
+      }
+    
+    
     @FXML
     private Button btnExcluir;
-
-    @FXML
-    private Button btnPDF;
-
-    @FXML
-    private DatePicker dataPublicacao;
 
     @FXML
     private Label lblAbrirArquivo;
 
     @FXML
-    private TextArea txtAutores;
+    private Label lblAutores;
 
     @FXML
-    private TextField txtNOmeArtigo;
+    private Label lblData;
 
     @FXML
-    private TextArea txtPalavrasChave;
+    private Label lblResumo;
 
     @FXML
-    private TextArea txtResumo;
+    private Label lblTitulo;
 
     @FXML
     void onClickAbrirArquivo(MouseEvent event) {
 
-    }
-
-    @FXML
-    void onClickAtualizar(ActionEvent event) {
-
+        if (arquivoPDF != null) {
+            try {
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().open(arquivoPDF);
+                } else {
+                    System.err.println("A funcionalidade de desktop não é suportada.");
+                }
+            } catch (IOException e) {
+                System.err.println("Erro ao abrir o arquivo: " + e.getMessage());
+            }
+        } else {
+            System.out.println("Nenhum arquivo selecionado para abrir.");
+        }
     }
 
     @FXML
@@ -54,18 +72,33 @@ public class AtualizarArtigoController {
     }
 
     @FXML
-    void onClickPDF(ActionEvent event) {
-
-    }
-
-    @FXML
     void onEnterArquivo(MouseEvent event) {
 
+         lblAbrirArquivo.setStyle("-fx-text-fill: blue" );
     }
 
-    @FXML
-    void onExitArquivo(MouseEvent event) {
-
+    @FXML  
+     void onExitArquivo(MouseEvent event) {
+         
+         lblAbrirArquivo.setStyle("-fx-text-fill: black" );
+         
+     }
+    
+    public void setStage(Stage stageAtualizarArtigo){
+        this.stageAtualizarArtigo = stageAtualizarArtigo;
+    }
+    
+    public void setProjeto(Projeto projeto){
+        this.projeto = projeto;
+    }
+    public void setArtigo(Artigo artigo){
+        this.artigo = artigo;
+        lblTitulo.setText(artigo.getTitulo());
+        lblAutores.setText(artigo.getAutores());
+        lblData.setText(artigo.getDataPublicacao().toString());
+        lblResumo.setText(artigo.getResumo());
+        lblAbrirArquivo.setText(artigo.getArquivo().getName());
     }
 
 }
+

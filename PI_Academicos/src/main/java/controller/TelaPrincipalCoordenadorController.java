@@ -487,6 +487,27 @@ public class TelaPrincipalCoordenadorController {
         stageArtigo.show();
     }
     
+    private void abrirTelaAtualizarArtigo(Artigo artigo) throws IOException{
+ 
+            URL url = new File("src/main/java/view/AtualizarArtigo.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage stageAtualizarArtigo = new Stage();
+            
+            AtualizarArtigoController aac = loader.getController();
+            aac.setProjeto(projeto);
+            aac.setArtigo(artigo);
+            aac.setStage(stageAtualizarArtigo);
+        
+            Scene cena = new Scene(root);
+            stageAtualizarArtigo.setTitle("Mostrar Artigo");
+            stageAtualizarArtigo.setScene(cena);
+            
+            stageAtualizarArtigo.show();
+            
+    }
+    
     public void abrirTelaPublicacao() throws IOException{
         URL url = new File("src/main/java/view/CadastrarPostagem.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
@@ -579,6 +600,17 @@ public class TelaPrincipalCoordenadorController {
        File arquivoArtigo = artigo.getArquivo();
        if(arquivoArtigo!=null){
            lblTituloArtigo.setText(artigo.getTitulo());
+           
+           System.out.println("Lbl artigo: " + lblTituloArtigo.toString());
+           lblTituloArtigo.setOnMouseClicked(event -> {
+                try {
+                    //AbrirTelaLogin();
+                abrirTelaAtualizarArtigo(artigo); 
+                } catch (IOException e) {
+                System.err.println("Erro ao abrir tela de detalhes do artigo: " + e.getMessage());
+                e.printStackTrace();
+                }
+            });
        }
        
        
