@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -150,5 +151,79 @@ public class BolsistaDAO extends GenericDAO {
         }
 
         return bolsistas;
+    }
+
+    public Bolsista buscarPorCPF(String cpf, int idProjeto) throws SQLException {
+        String sql = "SELECT b.*, u.*, bp.dataInicio, bp.dataFim FROM bolsistas b INNER JOIN usuarios u ON b.idUsuario = u.idUsuario LEFT JOIN bolsistas_projetos bp ON bp.idUsuario = u.idUsuario AND bp.idProjeto = ? WHERE u.cpf = ? ";
+
+        Connection con = conectarDAO();
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setInt(1, idProjeto);
+        stmt.setString(2, cpf);
+        ResultSet rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            Bolsista b = new Bolsista(
+                    rs.getLong("matricula"),
+                    rs.getString("curso"),
+                    rs.getDate("dataInicio") != null ? rs.getDate("dataInicio").toLocalDate() : null,
+                    rs.getDate("dataFim") != null ? rs.getDate("dataFim").toLocalDate() : null
+            );
+
+            b.setId(rs.getInt("idUsuario"));
+            b.setCpf(rs.getString("cpf"));
+            b.setNome(rs.getString("nome"));
+            b.setApelido(rs.getString("apelido"));
+            b.setEmail(rs.getString("email"));
+            b.setSenha(rs.getString("senha"));
+            return b;
+        }
+        return null;
+    }
+
+    public boolean jaVinculadoAoProjeto(int idUsuario, int idProjeto) throws SQLException {
+        String sql = "SELECT * FROM bolsistas_projetos WHERE idUsuario = ? AND idProjeto = ?";
+        Connection con = conectarDAO();
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setInt(1, idUsuario);
+        stmt.setInt(2, idProjeto);
+        ResultSet rs = stmt.executeQuery();
+        return rs.next();
+    }
+
+    public void vincularBolsistaAoProjeto(int idUsuario, int idProjeto) throws SQLException {
+        String sql = "INSERT INTO bolsistas_projetos (idUsuario, idProjeto) VALUES (?, ?)";
+        Connection con = conectarDAO();
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setInt(1, idUsuario);
+        stmt.setInt(2, idProjeto);
+        stmt.executeUpdate();
+    }
+
+    public void atualizarVinculo(int idUsuario, int idProjeto, LocalDate dataInicio, LocalDate dataFim) throws SQLException {
+        String sql = "UPDATE bolsistas_projetos SET dataInicio = ?, dataFim = ? WHERE idUsuario = ? AND idProjeto = ?";
+        try (Connection conn = conectarDAO(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setDate(1, java.sql.Date.valueOf(dataInicio));
+            stmt.setDate(2, java.sql.Date.valueOf(dataFim));
+            stmt.setInt(3, idUsuario);
+            stmt.setInt(4, idProjeto);
+            stmt.executeUpdate();
+        }
+    }
+
+    public boolean vinculadoEmOutroProjeto(int idBolsista, int idProjetoAtual) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM projetos_bolsistas WHERE idBolsista = ? AND idProjeto <> ?";
+
+        try (Connection con = conectarDAO(); PreparedStatement stmt = con.prepareStatement(sql)) {
+
+            stmt.setInt(1, idBolsista);
+            stmt.setInt(2, idProjetoAtual);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        }
+        return false;
     }
 }

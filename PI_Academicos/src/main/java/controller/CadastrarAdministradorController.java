@@ -154,12 +154,7 @@ public class CadastrarAdministradorController {
         }
 
     }
-        else{
-        new AdministradorDAO().cadastrarUsuarioAdministrador(usuario,administrador, fotoPerfil);
-        mostrarConfirmacao("Usuário cadastrado","O usuário foi registrado no sistema com sucesso!");
-        stage.close();
-        }
-        }
+        
         
         
     }
@@ -167,4 +162,4 @@ public class CadastrarAdministradorController {
     
     
 
-}
+
