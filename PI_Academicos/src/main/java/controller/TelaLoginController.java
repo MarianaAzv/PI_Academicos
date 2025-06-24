@@ -340,9 +340,4 @@ public class TelaLoginController implements INotificacaoAlert {
        
     }
 
-    @Override
-    public void btnCancela() {
-        
-    }
-
 }

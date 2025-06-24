@@ -407,13 +407,4 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert{
     
             resp = 2;   
     }
-
-    @Override
-    public void btnCancela() {
-        resp = 3;
-    }
-    
-    
-    
-    
-    }
+}

@@ -11,8 +11,7 @@ import javafx.stage.Stage;
 public class AlertGenericoController {
     
     
-    @FXML
-    private Button btnCancelar;
+   
 
     @FXML
     private Button btnOK;
@@ -52,13 +51,6 @@ public class AlertGenericoController {
             imgAlerta.setImage(imgCerto);
         }
         
-    }
-   
-
-    @FXML
-    void onClickCancelar(ActionEvent event) {
-        contResp.btnCancela();
-        stageAlerta.close();
     }
 
     @FXML

@@ -56,15 +56,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnOK" maxHeight="27.0" maxWidth="89.0" minHeight="27.0" minWidth="89.0" mnemonicParsing="false" onAction="#onClickOK" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: #840D0B;" text="OK" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
-               <font>
-                  <Font name="Courier New Bold" size="14.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </GridPane.margin>
-            </Button>
-            <Button fx:id="btnCancelar" maxHeight="27.0" maxWidth="89.0" minHeight="27.0" minWidth="89.0" mnemonicParsing="false" onAction="#onClickCancelar" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: #840D0B;" text="CANCELAR" textFill="WHITE" GridPane.columnIndex="2">
+            <Button fx:id="btnOK" maxHeight="27.0" maxWidth="89.0" minHeight="27.0" minWidth="89.0" mnemonicParsing="false" onAction="#onClickOK" prefHeight="27.0" prefWidth="89.0" style="-fx-background-color: #840D0B;" text="OK" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER">
                <font>
                   <Font name="Courier New Bold" size="14.0" />
                </font>

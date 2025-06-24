@@ -469,13 +469,5 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert{
     public void btnOk() {
        
     }
-
-    @Override
-    public void btnCancela() {
-        
-        
-
-    }
-
      
 }
