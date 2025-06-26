@@ -32,6 +32,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Bolsista;
 import model.BolsistaDAO;
+import model.Artigo;
+import model.ArtigoDAO;
 import model.Coordenador;
 import model.Noticia;
 import model.Postagem;
@@ -49,9 +51,17 @@ public class TelaPrincipalCoordenadorController {
 
     private Coordenador coordenador;
     private PostagemDAO postagemDAO;
+    private ArtigoDAO artigoDAO;
     Projeto projeto;
     Bolsista bolsista;
 
+    
+    public TelaPrincipalCoordenadorController() {
+        postagemDAO = new PostagemDAO();
+        artigoDAO = new ArtigoDAO();
+    }
+
+    
     @FXML
     public void initialize() {
 
@@ -102,6 +112,9 @@ public class TelaPrincipalCoordenadorController {
 
     @FXML
     private ImageView imgProjeto;
+    
+    @FXML
+    private Label lblArtigos;
 
     @FXML
     private Label lblNomeBolsista;
@@ -114,6 +127,9 @@ public class TelaPrincipalCoordenadorController {
 
     @FXML
     private Label lblResumo;
+    
+    @FXML
+    private Label lblPublicacoes;
 
     @FXML
     private Text textNomeProjeto;
@@ -259,10 +275,39 @@ public class TelaPrincipalCoordenadorController {
     void OnExitVerPerfil(MouseEvent event) {
         btnVerPerfil.setStyle("-fx-background-color:  DBA5A5");
     }
-
-    //----------------------*CarregarFotos*----------------------//
-    public TelaPrincipalCoordenadorController() {
-        postagemDAO = new PostagemDAO();
+    //******************************************************************
+      @FXML
+    void onClickLabelArtigos(MouseEvent event) throws IOException, SQLException {
+        try{
+        carregarArtigos();
+        }catch(IOException ex){
+            ex.printStackTrace();
+        }
+    }    
+     @FXML
+    void onEnterLabelArtigos(MouseEvent event) {
+        lblArtigos.setStyle("-fx-text-fill: #840d0b" );
+    }    
+    @FXML
+    void onExitLabelArtigos(MouseEvent event) {
+        lblArtigos.setStyle("-fx-text-fill: black" );
+    }
+    //******************************************************************
+    @FXML
+    void onClickLabelPublicacoes(MouseEvent event) {
+        try{
+           carregarFotos();
+           } catch (IOException ex) {
+               ex.printStackTrace();
+           }
+    }    
+    @FXML
+    void onEnterLabelPublicacoes(MouseEvent event) {
+        lblPublicacoes.setStyle("-fx-text-fill: #840d0b" );
+    }
+    @FXML
+    void onExitLabelPublicacoes(MouseEvent event) {
+        lblPublicacoes.setStyle("-fx-text-fill: black" );
     }
 
     @FXML
@@ -292,6 +337,29 @@ public class TelaPrincipalCoordenadorController {
             System.out.println("Não é possível carregar postagens");
         }
     }
+    
+    @FXML
+    public void carregarArtigos() throws IOException, SQLException {
+        tilePaneGaleria.getChildren().clear(); // Limpa a galeria antes de recarregar
+        
+            List<Artigo> artigos = artigoDAO.listarArtigos(projeto);
+            if (artigos.isEmpty()) {
+                System.out.println("Nenhum artigo encontrado no banco de dados.");
+                
+
+            }
+            for (Artigo artigo : artigos) {
+                if(artigo.getArquivo()!=null){
+                adicionarArtigoFeed(artigo);
+                }
+                else{ // caso o link da foto estiver com problema uma outra foto substitui ela
+                    System.out.println("Não carregou o artigo");
+                }
+
+            } 
+        
+    }
+    
 
     //------------------*SETs*----------------------//
     public void setStage(Stage stage) {
@@ -441,8 +509,29 @@ public class TelaPrincipalCoordenadorController {
         stageArtigo.setScene(cena);
         stageArtigo.show();
     }
-
-    public void abrirTelaPublicacao() throws IOException {
+    
+    private void abrirTelaAtualizarArtigo(Artigo artigo) throws IOException{
+ 
+            URL url = new File("src/main/java/view/AtualizarArtigo.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage stageAtualizarArtigo = new Stage();
+            
+            AtualizarArtigoController aac = loader.getController();
+            aac.setStage(stageAtualizarArtigo);
+            aac.setProjeto(projeto);
+            aac.setArtigo(artigo);
+                  
+            Scene cena = new Scene(root);
+            stageAtualizarArtigo.setTitle("Mostrar Artigo");
+            stageAtualizarArtigo.setScene(cena);
+            
+            stageAtualizarArtigo.show();
+            
+    }
+    
+    public void abrirTelaPublicacao() throws IOException{
         URL url = new File("src/main/java/view/CadastrarPostagem.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
@@ -520,7 +609,44 @@ public class TelaPrincipalCoordenadorController {
         }
 
     }
-
+   
+   private void adicionarArtigoFeed(Artigo artigo){
+       
+       Label lblTituloArtigo = new Label();
+       lblTituloArtigo.setPrefHeight(30);
+       lblTituloArtigo.setPrefWidth(920);
+       lblTituloArtigo.setStyle("-fx-font-family: 'Courier New'; -fx-font-size: 18px; -fx-underline: true;");
+       lblTituloArtigo.setText("Artigo");
+       
+       tilePaneGaleria.getChildren().add(lblTituloArtigo);
+       
+       File arquivoArtigo = artigo.getArquivo();
+       if(arquivoArtigo!=null){
+           lblTituloArtigo.setText(artigo.getTitulo());
+           
+           System.out.println("Lbl artigo: " + lblTituloArtigo.toString());
+           lblTituloArtigo.setOnMouseClicked(event -> {
+                try {
+                    System.out.println("Artigo id: " + artigo.getId());
+                    //AbrirTelaLogin();
+                abrirTelaAtualizarArtigo(artigo); 
+                } catch (Exception e) {
+                System.err.println("Erro ao abrir tela de detalhes do artigo: " + e.getMessage());
+                e.printStackTrace();
+                }
+            });
+           
+           lblTituloArtigo.setOnMouseEntered(event -> {
+               lblTituloArtigo.setStyle("-fx-font-family: 'Courier New'; -fx-font-size: 18px; -fx-underline: true; -fx-text-fill: #840d0b" );
+           });
+           lblTituloArtigo.setOnMouseExited(event -> {
+               lblTituloArtigo.setStyle("-fx-font-family: 'Courier New'; -fx-font-size: 18px; -fx-underline: true; -fx-text-fill: black" );
+           });
+       }
+       
+       
+   }
+    
     private void adicionarPostagemFeed(Postagem postagem) {
 
         ImageView imageView = new ImageView();

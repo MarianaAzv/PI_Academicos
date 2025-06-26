@@ -1,5 +1,8 @@
 package model;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.sql.Connection;
@@ -7,6 +10,9 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ArtigoDAO extends GenericDAO {
 
@@ -40,5 +46,88 @@ public class ArtigoDAO extends GenericDAO {
             // Adicione aqui tratamento de erro mais robusto (ex: log, exceção customizada)
         }
     }
-
+    
+    public void deletarArtigo (Artigo artigo) throws SQLException{
+        
+        Connection con = conectarDAO();
+        
+        
+        String sqlArtigo = "DELETE FROM artigos WHERE idArtigo = ?;";
+        String sqlFoto = "DELETE FROM fotos_postagens WHERE idPostagem = ?;";
+        
+        try {
+            //PreparedStatement stmtPostagem = con.prepareStatement(sqlPostagem);
+  
+            //stmtPostagem.setInt(1, postagem.getId());
+            //stmtPostagem.executeUpdate();
+            
+            PreparedStatement stmtFoto = con.prepareStatement(sqlFoto);
+            
+            //stmtFoto.setInt(1, postagem.getId());
+            stmtFoto.executeUpdate();
+            
+            System.out.println("A postagem foi excluída");
+            
+        }catch (SQLException e) {
+            System.err.println("Erro ao excluir postagem do banco de dados: " + e.getMessage());
+            // Adicione aqui tratamento de erro mais robusto (ex: log, exceção customizada)
+        }
+        
+    }
+    
+    public List<Artigo> listarArtigos(Projeto projeto) throws FileNotFoundException, SQLException{
+        List<Artigo> artigos = new ArrayList<>();
+        String sql = "SELECT idArtigo, titulo, resumo, autores, arquivo, dataPublicacao, idProjeto FROM artigos WHERE idProjeto = ?;";
+        
+        Connection con = conectarDAO();
+        ResultSet rs = null;
+        
+        if(con!=null){
+        try {
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, projeto.getIdProjeto());
+            rs = stmt.executeQuery();
+            
+            
+            int cont=0;
+            while (rs.next()) {
+                int idArtigo = rs.getInt("idArtigo");
+                String titulo = rs.getString("titulo");
+                String resumo = rs.getString("resumo");
+                String autores = rs.getString("autores");
+                byte[] dadosArtigo = rs.getBytes("arquivo");               
+                    String filePath = titulo + ".pdf";
+                    
+                    File file = new File(filePath); 
+                    try{
+                    FileOutputStream fos = new FileOutputStream(file); 
+                    fos.write(dadosArtigo);
+                    fos.close();
+                    System.out.println("byte convertido para file");
+                    } catch (IOException e) {
+                    System.err.println("Ocorreu um erro ao converter o array de bytes para arquivo: " + e.getMessage());
+                    e.printStackTrace();
+                    }
+                LocalDate dataPublicacao = rs.getDate("dataPublicacao").toLocalDate();
+                int idProjeto = rs.getInt("idProjeto");
+                Artigo artigo = new Artigo(idArtigo, idProjeto, titulo, resumo, autores, file, dataPublicacao);
+                artigos.add(artigo);
+                System.out.println("DAO: artigo carregado: " + artigo); // Imprime a foto carregada
+                cont++;
+  
+        }
+            
+        
+        
+    }catch(SQLException e){
+        e.printStackTrace();
+    }
+        
+        finally{
+            rs.close();
+        }
+    
+}
+        return artigos;
+    }
 }

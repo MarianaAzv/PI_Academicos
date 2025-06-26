@@ -2,17 +2,14 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="886.0" style="-fx-background-color: ECECEC;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CadastrarArtigoController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="886.0" style="-fx-background-color: ECECEC;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AtualizarArtigoController">
   <columnConstraints>
     <ColumnConstraints />
       <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="640.0" />
@@ -38,20 +35,21 @@
                         <Font name="Courier New Bold" size="15.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="txtResumo" prefHeight="352.0" prefWidth="490.0" promptText="Insira o resumo aqui" style="-fx-border-color: ffff;">
+                  <Label fx:id="lblResumo" alignment="TOP_LEFT" prefHeight="339.0" prefWidth="477.0" style="-fx-background-color: FFFF; -fx-border-radius: 5; -fx-border-color: #c9c9c9; -fx-background-radius: 5;" text="lblResumo" wrapText="true">
                      <font>
                         <Font name="Courier New" size="15.0" />
                      </font>
+                     <padding>
+                        <Insets left="10.0" top="10.0" />
+                     </padding>
                      <VBox.margin>
-                        <Insets />
-                     </VBox.margin></TextArea>
-                  <Button fx:id="btnPostar" alignment="CENTER" mnemonicParsing="false" onAction="#onClickPostar" prefWidth="80.0" style="-fx-background-color: #840d0b;" text="POSTAR" textFill="WHITE">
+                        <Insets bottom="10.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Button fx:id="btnExcluir" alignment="CENTER" mnemonicParsing="false" onAction="#onClickExcluir" prefHeight="27.0" prefWidth="100.0" style="-fx-background-color: #840d0b;" text="EXCLUIR" textFill="WHITE">
                      <font>
                         <Font name="Courier New Bold" size="14.0" />
                      </font>
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
                   </Button>
                </children>
                <opaqueInsets>
@@ -69,37 +67,53 @@
                   <Insets />
                </opaqueInsets>
                <children>
-                  <Label alignment="CENTER" prefHeight="19.0" prefWidth="73.0" text="Autores">
+                  <Label alignment="TOP_LEFT" prefHeight="19.0" prefWidth="73.0" text="Autores">
                      <font>
                         <Font name="Courier New Bold" size="15.0" />
                      </font>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
                   </Label>
-                  <TextArea fx:id="txtAutores" prefHeight="157.0" prefWidth="356.0" promptText="Insira aqui o nome dos autores separados por ponto (Ex: Anne Junkes. Fernanda Serafim. Jaqueline Brandão. Mariana de Azevedo" style="-fx-border-color: ffff;" wrapText="true">
+                  <Label fx:id="lblAutores" alignment="TOP_LEFT" prefHeight="87.0" prefWidth="363.0" style="-fx-background-color: FFFF; -fx-border-color: #c9c9c9; -fx-border-radius: 5; -fx-background-radius: 5;" text="lblAutores" wrapText="true">
                      <font>
                         <Font name="Courier New" size="15.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="5.0" />
+                        <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
-                  </TextArea>
-                  <Label alignment="CENTER" layoutX="10.0" layoutY="273.0" prefHeight="19.0" prefWidth="168.0" text="Data de publicação" textFill="#840d0b">
+                     <padding>
+                        <Insets left="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label alignment="TOP_LEFT" layoutX="10.0" layoutY="273.0" prefHeight="19.0" prefWidth="168.0" text="Data de publicação" textFill="#840d0b">
                      <font>
                         <Font name="Courier New Bold" size="15.0" />
                      </font>
                      <VBox.margin>
-                        <Insets top="10.0" />
+                        <Insets left="5.0" top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <DatePicker fx:id="dataPublicacao" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="365.0" style="-fx-border-color: ffff;" />
-                  <Button fx:id="btnPDF" alignment="CENTER" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickPDF" prefHeight="15.0" prefWidth="80.0" style="-fx-background-color: #840d0b;" text="PDF" textFill="WHITE">
+                  <Label fx:id="lblData" alignment="TOP_LEFT" layoutX="10.0" layoutY="44.0" prefHeight="43.0" prefWidth="355.0" style="-fx-background-color: FFFF; -fx-border-color: #c9c9c9; -fx-border-radius: 5; -fx-background-radius: 5;" text="27/04/2023">
                      <font>
-                        <Font name="Courier New" size="14.0" />
+                        <Font name="Courier New" size="15.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" top="10.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets bottom="5.0" top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label alignment="TOP_LEFT" prefHeight="19.0" prefWidth="168.0" text="Arquivo PDF" textFill="#840d0b">
+                     <font>
+                        <Font name="Courier New Bold" size="15.0" />
                      </font>
                      <VBox.margin>
-                        <Insets top="10.0" />
+                        <Insets left="5.0" top="10.0" />
                      </VBox.margin>
-                  </Button>
-                  <Label fx:id="lblAbrirArquivo" onMouseClicked="#onClickAbrirArquivo" onMouseEntered="#onEnterArquivo" onMouseExited="#onExitArquivo" prefHeight="20.0" prefWidth="511.0" underline="true">
+                  </Label>
+                  <Label fx:id="lblAbrirArquivo" onMouseClicked="#onClickAbrirArquivo" onMouseEntered="#onEnterArquivo" onMouseExited="#onExitArquivo" prefHeight="20.0" prefWidth="511.0" text="lblArquivo.pdf" underline="true">
                      <font>
                         <Font name="Courier New" size="15.0" />
                      </font>
@@ -107,8 +121,11 @@
                         <Insets />
                      </opaqueInsets>
                      <padding>
-                        <Insets top="5.0" />
+                        <Insets top="10.0" />
                      </padding>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
                   </Label>
                </children>
                <GridPane.margin>
@@ -123,13 +140,16 @@
             <Insets right="15.0" />
          </GridPane.margin>
       </GridPane>
-      <TextField fx:id="txtNOmeArtigo" promptText="Nome do artigo" GridPane.columnIndex="1">
+      <Label fx:id="lblTitulo" prefHeight="43.0" prefWidth="886.0" style="-fx-background-color: FFFF; -fx-border-color: #c9c9c9; -fx-border-radius: 5; -fx-background-radius: 5;" text="Título" GridPane.columnIndex="1">
          <font>
             <Font name="Courier New Bold" size="18.0" />
          </font>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
          <GridPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            <Insets left="10.0" right="10.0" />
          </GridPane.margin>
-      </TextField>
+      </Label>
    </children>
 </GridPane>
