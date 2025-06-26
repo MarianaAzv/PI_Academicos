@@ -35,7 +35,7 @@
                         <Font name="Courier New Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblResumo" alignment="TOP_LEFT" prefHeight="339.0" prefWidth="477.0" style="-fx-background-color: FFFF;" text="lblResumo" wrapText="true">
+                  <Label fx:id="lblResumo" alignment="TOP_LEFT" prefHeight="339.0" prefWidth="477.0" style="-fx-background-color: FFFF; -fx-border-radius: 5; -fx-border-color: #c9c9c9; -fx-background-radius: 5;" text="lblResumo" wrapText="true">
                      <font>
                         <Font name="Courier New" size="15.0" />
                      </font>
@@ -75,12 +75,12 @@
                         <Insets left="5.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="lblAutores" alignment="TOP_LEFT" prefHeight="87.0" prefWidth="363.0" style="-fx-background-color: FFFF;" text="lblAutores" wrapText="true">
+                  <Label fx:id="lblAutores" alignment="TOP_LEFT" prefHeight="87.0" prefWidth="363.0" style="-fx-background-color: FFFF; -fx-border-color: #c9c9c9; -fx-border-radius: 5; -fx-background-radius: 5;" text="lblAutores" wrapText="true">
                      <font>
                         <Font name="Courier New" size="15.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" top="5.0" />
+                        <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
                      <padding>
                         <Insets left="10.0" top="10.0" />
@@ -91,10 +91,10 @@
                         <Font name="Courier New Bold" size="15.0" />
                      </font>
                      <VBox.margin>
-                        <Insets left="5.0" />
+                        <Insets left="5.0" top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="lblData" alignment="TOP_LEFT" layoutX="10.0" layoutY="44.0" prefHeight="43.0" prefWidth="358.0" style="-fx-background-color: FFFF;" text="27/04/2023">
+                  <Label fx:id="lblData" alignment="TOP_LEFT" layoutX="10.0" layoutY="44.0" prefHeight="43.0" prefWidth="355.0" style="-fx-background-color: FFFF; -fx-border-color: #c9c9c9; -fx-border-radius: 5; -fx-background-radius: 5;" text="27/04/2023">
                      <font>
                         <Font name="Courier New" size="15.0" />
                      </font>
@@ -102,7 +102,7 @@
                         <Insets left="10.0" top="10.0" />
                      </padding>
                      <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" top="5.0" />
+                        <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
                   </Label>
                   <Label alignment="TOP_LEFT" prefHeight="19.0" prefWidth="168.0" text="Arquivo PDF" textFill="#840d0b">
@@ -110,7 +110,7 @@
                         <Font name="Courier New Bold" size="15.0" />
                      </font>
                      <VBox.margin>
-                        <Insets left="5.0" />
+                        <Insets left="5.0" top="10.0" />
                      </VBox.margin>
                   </Label>
                   <Label fx:id="lblAbrirArquivo" onMouseClicked="#onClickAbrirArquivo" onMouseEntered="#onEnterArquivo" onMouseExited="#onExitArquivo" prefHeight="20.0" prefWidth="511.0" text="lblArquivo.pdf" underline="true">
@@ -121,7 +121,7 @@
                         <Insets />
                      </opaqueInsets>
                      <padding>
-                        <Insets left="10.0" top="10.0" />
+                        <Insets top="10.0" />
                      </padding>
                      <VBox.margin>
                         <Insets />
@@ -140,13 +140,16 @@
             <Insets right="15.0" />
          </GridPane.margin>
       </GridPane>
-      <Label fx:id="lblTitulo" prefHeight="43.0" prefWidth="886.0" style="-fx-background-color: FFFF;" text="Título" GridPane.columnIndex="1">
+      <Label fx:id="lblTitulo" prefHeight="43.0" prefWidth="886.0" style="-fx-background-color: FFFF; -fx-border-color: #c9c9c9; -fx-border-radius: 5; -fx-background-radius: 5;" text="Título" GridPane.columnIndex="1">
          <font>
             <Font name="Courier New Bold" size="18.0" />
          </font>
          <padding>
             <Insets left="20.0" />
          </padding>
+         <GridPane.margin>
+            <Insets left="10.0" right="10.0" />
+         </GridPane.margin>
       </Label>
    </children>
 </GridPane>

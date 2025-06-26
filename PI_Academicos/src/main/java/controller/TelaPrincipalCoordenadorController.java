@@ -496,10 +496,10 @@ public class TelaPrincipalCoordenadorController {
             Stage stageAtualizarArtigo = new Stage();
             
             AtualizarArtigoController aac = loader.getController();
+            aac.setStage(stageAtualizarArtigo);
             aac.setProjeto(projeto);
             aac.setArtigo(artigo);
-            aac.setStage(stageAtualizarArtigo);
-        
+                  
             Scene cena = new Scene(root);
             stageAtualizarArtigo.setTitle("Mostrar Artigo");
             stageAtualizarArtigo.setScene(cena);
@@ -604,13 +604,21 @@ public class TelaPrincipalCoordenadorController {
            System.out.println("Lbl artigo: " + lblTituloArtigo.toString());
            lblTituloArtigo.setOnMouseClicked(event -> {
                 try {
+                    System.out.println("Artigo id: " + artigo.getId());
                     //AbrirTelaLogin();
                 abrirTelaAtualizarArtigo(artigo); 
-                } catch (IOException e) {
+                } catch (Exception e) {
                 System.err.println("Erro ao abrir tela de detalhes do artigo: " + e.getMessage());
                 e.printStackTrace();
                 }
             });
+           
+           lblTituloArtigo.setOnMouseEntered(event -> {
+               lblTituloArtigo.setStyle("-fx-font-family: 'Courier New'; -fx-font-size: 18px; -fx-underline: true; -fx-text-fill: #840d0b" );
+           });
+           lblTituloArtigo.setOnMouseExited(event -> {
+               lblTituloArtigo.setStyle("-fx-font-family: 'Courier New'; -fx-font-size: 18px; -fx-underline: true; -fx-text-fill: black" );
+           });
        }
        
        

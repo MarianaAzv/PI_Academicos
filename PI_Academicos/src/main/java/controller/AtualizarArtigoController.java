@@ -19,7 +19,7 @@ public class AtualizarArtigoController {
     private Artigo artigo;
     private Stage stageAtualizarArtigo;
     
-    File arquivoPDF = artigo.getArquivo();
+    File arquivoPDF = null;
     private final String DIRETORIO_PDFS = Paths.get(System.getProperty("user.home"), "pdfs_baixados").toString();
     
     public void initialize() {
@@ -98,6 +98,7 @@ public class AtualizarArtigoController {
         lblData.setText(artigo.getDataPublicacao().toString());
         lblResumo.setText(artigo.getResumo());
         lblAbrirArquivo.setText(artigo.getArquivo().getName());
+        arquivoPDF = artigo.getArquivo();
     }
 
 }

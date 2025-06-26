@@ -82,23 +82,13 @@
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </TextArea>
-                  <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="125.0" text="Palvras-chave" textFill="#840d0b">
-                     <font>
-                        <Font name="Courier New Bold" size="15.0" />
-                     </font>
-                  </Label>
-                  <TextArea fx:id="txtPalavrasChave" layoutX="10.0" layoutY="39.0" prefHeight="118.0" prefWidth="356.0" promptText="Insira as palavras-chave separadas por ponto (Ex: Matemática. Educação.  " style="-fx-border-color: ffff;" wrapText="true">
-                     <font>
-                        <Font name="Courier New" size="15.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="5.0" />
-                     </VBox.margin>
-                  </TextArea>
                   <Label alignment="CENTER" layoutX="10.0" layoutY="273.0" prefHeight="19.0" prefWidth="168.0" text="Data de publicação" textFill="#840d0b">
                      <font>
                         <Font name="Courier New Bold" size="15.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
                   </Label>
                   <DatePicker fx:id="dataPublicacao" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="365.0" style="-fx-border-color: ffff;" />
                   <Button fx:id="btnPDF" alignment="CENTER" minWidth="-Infinity" mnemonicParsing="false" onAction="#onClickPDF" prefHeight="15.0" prefWidth="80.0" style="-fx-background-color: #840d0b;" text="PDF" textFill="WHITE">
