@@ -1,8 +1,10 @@
 package controller;
 
 import java.awt.Desktop;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import javafx.event.ActionEvent;
@@ -17,6 +19,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Coordenador;
 import model.CoordenadorDAO;
+import model.Foto;
 import model.Solicitacao;
 import model.SolicitacaoDAO;
 import model.Usuario;
@@ -168,6 +171,16 @@ public class CadastroCoordenadorController {
         lblAbrirArquivo.setText(arquivoPDF.getName());
 
     }
+    
+    @FXML
+    void onEnterLblArquivo(MouseEvent event) {
+        lblAbrirArquivo.setStyle("-fx-text-fill: #840d0b" );
+    }
+
+    @FXML
+    void onExitLblArquivo(MouseEvent event) {
+        lblAbrirArquivo.setStyle("-fx-text-fill: black" );
+    }
 
     @FXML
     void onClickAbrirArquivo(MouseEvent event) {
@@ -192,6 +205,8 @@ public class CadastroCoordenadorController {
     }
 
     void incluir(String cpf, String nome, String apelido, String email, String senha, int siape, String formacao) throws SQLException {
+        
+        Foto fotoPerfil = new Foto(carregarImagemPadrao());
         usuario = new Usuario(cpf, nome, apelido, email, senha);
         coordenador = new Coordenador(siape, formacao);
         int repetido = new CoordenadorDAO().validarApelido(apelido, 0);
@@ -201,7 +216,7 @@ public class CadastroCoordenadorController {
         } else if (nome.isEmpty() || apelido.isEmpty() || email.isEmpty() || senha.isEmpty()) {
             mostrarAviso("Campos de preenchimento obrigatórios", "Todos os campos de cadastro devem ser preenchidos.");
         } else {
-            new CoordenadorDAO().cadastrarUsuarioCoordenador(usuario, coordenador);
+            new CoordenadorDAO().cadastrarUsuarioCoordenador(usuario, coordenador, fotoPerfil);
             mostrarConfirmacao("Usuário cadastrado", "O usuário foi registrado no sistema com sucesso!");
             stageCadastroCoordenador.close();
         }
@@ -231,5 +246,23 @@ public class CadastroCoordenadorController {
         }
 
     }
+    public byte[] carregarImagemPadrao() {
+    try (InputStream is = getClass().getResourceAsStream("/imagens/FotoPerfilDefault.png");
+         ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+
+        byte[] buffer = new byte[1024];
+        int bytesRead;
+        while ((bytesRead = is.read(buffer)) != -1) {
+            baos.write(buffer, 0, bytesRead);
+        }
+
+        return baos.toByteArray();
+
+    } catch (IOException | NullPointerException e) {
+        e.printStackTrace();
+        return null;
+    }
+}
+
 
 }

@@ -9,12 +9,13 @@ import java.sql.Statement;
 
 public class CoordenadorDAO extends GenericDAO {
 
-    public void cadastrarUsuarioCoordenador(Usuario usuario, Coordenador coordenador) {
+    public void cadastrarUsuarioCoordenador(Usuario usuario, Coordenador coordenador, Foto fotoPerfil) {
 
         Connection con = conectarDAO();
 
         String queryUsuario = "INSERT INTO USUARIOS(cpf, nome, apelido, senha, email,ativa) VALUES(?,?,?,?,?,1)";
         String queryCoordenador = "INSERT INTO COORDENADORES(idUsuario, siape, formacao) VALUES (?,?,?)";
+        String queryFotoPerfil = "INSERT INTO fotos_perfil_usuario(idUsuario, arquivoFoto) VALUES(?,?);";
 
         try (con) {
             // Inserir em Usuario
@@ -37,6 +38,18 @@ public class CoordenadorDAO extends GenericDAO {
                 stmtCoordenador.setInt(2, coordenador.getSiape());
                 stmtCoordenador.setString(3, coordenador.getFormacao());
                 stmtCoordenador.executeUpdate();
+                
+                //Inserir em fotos_perfil_usuario
+                PreparedStatement stmtFotos = con.prepareStatement(queryFotoPerfil, PreparedStatement.RETURN_GENERATED_KEYS);
+                stmtFotos.setInt(1, idGerado);
+                stmtFotos.setBytes(2, fotoPerfil.getDadosImagem());
+                stmtFotos.executeUpdate();
+
+                ResultSet keys2 = stmtFotos.getGeneratedKeys();
+                if (keys2.next()) {
+                    int idGerado2 = keys2.getInt(1);
+                    fotoPerfil.setId(idGerado2);
+                }
 
                 System.out.println("Coordenador cadastrado com ID: " + idGerado);
             }
@@ -53,6 +66,7 @@ public class CoordenadorDAO extends GenericDAO {
 
         String queryUsuario = "UPDATE USUARIOS SET cpf = ?, nome = ?, apelido = ?, senha = ?, email = ? WHERE idUsuario = ?";
         String queryCoordenador = "UPDATE COORDENADORES SET siape = ?, formacao = ? WHERE idUsuario = ?";
+        String queryFotoPerfil = "UPDATE fotos_perfil_usuario SET arquivoFoto = ? WHERE idUsuario = ?";
 
         try (con) {
             // Inserir em Usuario
@@ -71,6 +85,11 @@ public class CoordenadorDAO extends GenericDAO {
             stmtCoordenador.setString(2, coordenador.getFormacao());
             stmtCoordenador.setInt(3, coordenador.getId());
             stmtCoordenador.executeUpdate();
+            
+            PreparedStatement stmtFotoPerfil = con.prepareStatement(queryFotoPerfil);
+            stmtFotoPerfil.setBytes(1, coordenador.getFotoPerfil().getDadosImagem());
+            stmtFotoPerfil.setInt(2, coordenador.getId());
+            stmtFotoPerfil.executeUpdate();
 
             System.out.println("Coordenador cadastrado com ID: " + coordenador.getId());
         }

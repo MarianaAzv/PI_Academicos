@@ -373,6 +373,17 @@ public class TelaPrincipalCoordenadorController {
     public void setCoordenador(Coordenador coord) {
         this.coordenador = coord;
         TxtNomeUsuario.setText(coord.getNome());
+        Image image = null;
+        byte[] conteudoFoto = coordenador.getFotoPerfil().getDadosImagem();
+        if (conteudoFoto != null) {
+            try (ByteArrayInputStream bis = new ByteArrayInputStream(conteudoFoto)) {
+                image = new Image(bis); // Converte byte[] para Image AQUI
+            } catch (Exception e) {
+                System.err.println("Erro ao converter bytes para Image: " + e.getMessage());
+                // precisa definir uma imagem padrao de erro
+            }
+        }
+        imgPerfil.setImage(image);
     }
 
     public void setProjeto(Projeto projeto) {

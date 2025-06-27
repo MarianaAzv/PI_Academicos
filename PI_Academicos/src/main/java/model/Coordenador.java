@@ -36,6 +36,13 @@ public class Coordenador extends Usuario {
         this.siape = siape;
         this.formacao = formacao;
     }
+    
+    // Método construtor com todos os parâmetros + foto
+    public Coordenador(int id, String cpf, String nome, String apelido, String email, String senha, Boolean ativa, int siape, String formacao, Foto fotoPerfil) {
+        super(id, cpf, nome, apelido, email, senha, ativa, fotoPerfil);
+        this.siape = siape;
+        this.formacao = formacao;
+    }
 
     public int getSiape() {
         return siape;
