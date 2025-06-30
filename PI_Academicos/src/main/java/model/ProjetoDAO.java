@@ -11,12 +11,13 @@ import java.util.List;
 
 public class ProjetoDAO extends GenericDAO {
 
-    public void cadastraprojeto(Projeto projeto, int id) throws SQLException {
+    public void cadastraprojeto(Projeto projeto, int id, Foto fotoPerfil) throws SQLException {
 
         Connection con = conectarDAO();
 
         String queryProjeto = "INSERT INTO projetos(tituloProjeto,resumo,idCampus,edital,dataInicio,dataFim,prorrogacao,emAndamento) VALUES(?,?,?,?,?,?,?,?)";
         String queryCoordenadorProjeto = "Insert into coordenadores_projetos(idUsuario,idProjeto,dataInicio,dataFim) values(?,?,?,?)";
+        String queryFotoPerfil = "INSERT INTO fotos_perfil_projeto(idProjeto, arquivoFoto) VALUES(?,?);";
 
         try (con) {
             PreparedStatement stmtProjeto = con.prepareStatement(queryProjeto, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -39,6 +40,18 @@ public class ProjetoDAO extends GenericDAO {
                     int idGerado = keys.getInt(1);
                     projeto.setIdProjeto(idGerado);
                     System.out.println("Projeto cadastrado com ID: " + idGerado);
+                    
+                    //Inserir em fotos_perfil_projeto
+                PreparedStatement stmtFotos = con.prepareStatement(queryFotoPerfil, PreparedStatement.RETURN_GENERATED_KEYS);
+                stmtFotos.setInt(1, idGerado);
+                stmtFotos.setBytes(2, fotoPerfil.getDadosImagem());
+                stmtFotos.executeUpdate();
+
+                ResultSet keys2 = stmtFotos.getGeneratedKeys();
+                if (keys2.next()) {
+                    int idGerado2 = keys2.getInt(1);
+                    fotoPerfil.setId(idGerado2);
+                }
                 }
             }
 
@@ -51,6 +64,8 @@ public class ProjetoDAO extends GenericDAO {
             linhasAfetadas = stmtCoordenadorProjeto.executeUpdate();
             System.out.println(linhasAfetadas + "linhas afetadas");
             System.out.println("ID do coordenador " + id);
+            
+                
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,7 +78,20 @@ public class ProjetoDAO extends GenericDAO {
 
         Connection con = conectarDAO();
 
-        String queryProjeto = "UPDATE projetos p join areas_projetos ap  on p.IdProjeto= ap.idProjeto  SET p.tituloProjeto = ?, p.resumo = ?, p.idCampus = ?, p.edital = ?, p.dataInicio = ?, p.dataFim = ?,p.prorrogacao = ?, p.emAndamento = ?, ap.idArea = ? WHERE p.IdProjeto = ?";
+        String queryProjeto = "UPDATE projetos p "
+        + "join areas_projetos ap  on p.IdProjeto= ap.idProjeto "  
+        + "join fotos_perfil_projeto f on p.idProjeto = f.idProjeto "
+        + "SET p.tituloProjeto = ?, "
+        + "p.resumo = ?, "
+        + "p.idCampus = ?, "
+        + "p.edital = ?, " 
+        + "p.dataInicio = ?, " 
+        + "p.dataFim = ?, "
+        + "p.prorrogacao = ?, " 
+        + "p.emAndamento = ?, "
+        + "ap.idArea = ?, "
+        + "f.arquivoFoto = ? "
+        + "WHERE p.IdProjeto = ?;";
 
         try (con) {
 
@@ -79,7 +107,8 @@ public class ProjetoDAO extends GenericDAO {
             stmtProjeto.setDate(7, projeto.getProrroacao() != null ? java.sql.Date.valueOf(projeto.getProrroacao()) : null);
             stmtProjeto.setBoolean(8, projeto.isEmAndamento());
             stmtProjeto.setInt(9, projeto.getAreaConhecimento().getIdArea());
-            stmtProjeto.setInt(10, projeto.getIdProjeto());
+            stmtProjeto.setBytes(10, projeto.getFotoPerfil().getDadosImagem());
+            stmtProjeto.setInt(11, projeto.getIdProjeto());
             stmtProjeto.executeUpdate();
 
             System.out.println("Projeto atualizado com ID: " + projeto.getIdProjeto());
@@ -120,7 +149,13 @@ public class ProjetoDAO extends GenericDAO {
 
         Connection con = conectarDAO();
 
-        String sql = "SELECT p.*, c.*, ap.*, ac.* FROM PROJETOS as p inner join coordenadores_projetos as cp on p.idProjeto = cp.idProjeto inner join campus  as c on p.idCampus = c.idCampus inner join areas_projetos as ap on ap.idProjeto = p.idProjeto inner join areasdeconhecimento as ac on ac.idArea = ap.idArea where cp.idUsuario=?";
+        String sql = "SELECT p.*, c.*, ap.*, ac.*, f.* FROM PROJETOS as p "
+                + "inner join coordenadores_projetos as cp on p.idProjeto = cp.idProjeto "
+                + "inner join campus  as c on p.idCampus = c.idCampus "
+                + "inner join areas_projetos as ap on ap.idProjeto = p.idProjeto "
+                + "inner join areasdeconhecimento as ac on ac.idArea = ap.idArea "
+                + "inner join fotos_perfil_projeto as f on p.idProjeto = f.idProjeto " 
+                + "where cp.idUsuario = ?";
 
         try (con) {
             PreparedStatement stmtProjeto = con.prepareStatement(sql);
@@ -136,6 +171,10 @@ public class ProjetoDAO extends GenericDAO {
                 AreasConhecimento areasconhecimento = new AreasConhecimento();
                 areasconhecimento.setIdArea(rs.getInt("idArea"));
                 areasconhecimento.setNomeArea(rs.getString("nomeArea"));
+                
+                int idFoto = rs.getInt(("idFoto"));
+                byte[] dadosImagem = rs.getBytes("arquivoFoto");
+                Foto fotoPerfil = new Foto(idFoto, dadosImagem);
 
                 Projeto projeto = new Projeto(
                         rs.getString("tituloProjeto"),
@@ -145,7 +184,8 @@ public class ProjetoDAO extends GenericDAO {
                         rs.getDate("dataInicio").toLocalDate(),
                         rs.getDate("dataFim").toLocalDate(),
                         rs.getDate("prorrogacao") != null ? rs.getDate("prorrogacao").toLocalDate() : null,
-                        rs.getBoolean("emAndamento")
+                        rs.getBoolean("emAndamento"),
+                        fotoPerfil
                 );
                 projeto.setAreaConhecimento(areasconhecimento);
 
@@ -183,8 +223,15 @@ public class ProjetoDAO extends GenericDAO {
         Connection con = conectarDAO();
 
         //  String sql = "SELECT p.*, c.*, ap.* FROM PROJETOS as p inner join coordenadores_projetos as cp on p.idProjeto = cp.idProjeto inner join campus  as c on p.idCampus = c.idCampus inner join areas_projetos as ap on ap.idProjeto = p.idProjeto where cp.idUsuario=?";
-        String sql = "SELECT p.*, c.*, ap.*, ac.* FROM PROJETOS as p INNER JOIN bolsistas_projetos as bp on p.idProjeto = bp.idProjeto INNER JOIN campus as c on p.idCampus = c.idCampus INNER JOIN areas_projetos as ap on ap.idProjeto = p.idProjeto INNER JOIN areasdeconhecimento as ac on ac.idArea = ap.idArea WHERE bp.idUsuario = ?";
         //try(con ){
+        String sql = "SELECT p.*, c.*, ap.*, ac.*, f.* FROM PROJETOS as p "
+                + "inner join bolsistas_projetos as bp on p.idProjeto = bp.idProjeto "
+                + "inner join campus  as c on p.idCampus = c.idCampus "
+                + "inner join areas_projetos as ap on ap.idProjeto = p.idProjeto "
+                + "inner join areasdeconhecimento as ac on ac.idArea = ap.idArea "
+                + "inner join fotos_perfil_projeto as f on p.idProjeto = f.idProjeto " 
+                + "where bp.idUsuario = ?";
+        
         PreparedStatement stmtProjeto = con.prepareStatement(sql);
         stmtProjeto.setInt(1, bolsista.getId());
         ResultSet rs = stmtProjeto.executeQuery();
@@ -198,6 +245,10 @@ public class ProjetoDAO extends GenericDAO {
             AreasConhecimento areasconhecimento = new AreasConhecimento();
             areasconhecimento.setIdArea(rs.getInt("idArea"));
             areasconhecimento.setNomeArea(rs.getString("idProjeto"));
+            
+            int idFoto = rs.getInt(("idFoto"));
+                byte[] dadosImagem = rs.getBytes("arquivoFoto");
+                Foto fotoPerfil = new Foto(idFoto, dadosImagem);
 
             Projeto projeto = new Projeto(
                     rs.getString("tituloProjeto"),
@@ -207,7 +258,8 @@ public class ProjetoDAO extends GenericDAO {
                     rs.getDate("dataInicio").toLocalDate(),
                     rs.getDate("dataFim").toLocalDate(),
                     rs.getDate("prorrogacao") != null ? rs.getDate("prorrogacao").toLocalDate() : null,
-                    rs.getBoolean("emAndamento")
+                    rs.getBoolean("emAndamento"), 
+                    fotoPerfil
             );
 
             projeto.setIdProjeto(rs.getInt("idProjeto"));

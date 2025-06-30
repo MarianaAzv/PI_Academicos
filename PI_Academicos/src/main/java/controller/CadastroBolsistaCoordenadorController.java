@@ -3,7 +3,9 @@ package controller;
 import java.io.File;
 import java.nio.file.Paths;
 import java.awt.Desktop;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -264,6 +266,8 @@ public class CadastroBolsistaCoordenadorController {
     // ---------- Métodos ----------
     void incluir(String cpf, String nome, String apelido, String email, String senha,
             Long matricula, String curso, LocalDate dataInicio, LocalDate dataFim) throws SQLException, IOException {
+        
+        Foto fotoPerfil = new Foto(carregarImagemPadrao());
         usuario = new Usuario(cpf, nome, apelido, email, senha);
         bolsista = new Bolsista(matricula, curso, dataInicio, dataFim);
 
@@ -273,7 +277,7 @@ public class CadastroBolsistaCoordenadorController {
             return;
         }
 
-        dao.cadastrarUsuarioBolsista(usuario, bolsista, projeto);
+        dao.cadastrarUsuarioBolsista(usuario, bolsista, projeto, fotoPerfil);
         mostrarConfirmacao("Cadastro realizado", "O bolsista foi registrado com sucesso!");
 
         if (origem == Origem.atualizar_projeto) {
@@ -330,4 +334,22 @@ public class CadastroBolsistaCoordenadorController {
         criarprojetocontrtoller.Close();
         stageCadastrarBolsistaCoordenador.close();
     }
+    
+    public byte[] carregarImagemPadrao() {
+    try (InputStream is = getClass().getResourceAsStream("/imagens/FotoPerfilUsuarioDefault.png");
+         ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+
+        byte[] buffer = new byte[1024];
+        int bytesRead;
+        while ((bytesRead = is.read(buffer)) != -1) {
+            baos.write(buffer, 0, bytesRead);
+        }
+
+        return baos.toByteArray();
+
+    } catch (IOException | NullPointerException e) {
+        e.printStackTrace();
+        return null;
+    }
+}
 }

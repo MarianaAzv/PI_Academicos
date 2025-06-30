@@ -1,9 +1,11 @@
 package controller;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -17,12 +19,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Bolsista;
 import model.BolsistaDAO;
+import model.Foto;
 import model.Projeto;
 import util.AlertaUtil;
 import static util.AlertaUtil.mostrarAviso;
@@ -35,9 +40,22 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert {
     Projeto projeto;
     private BolsistaDAO bolsistaDAO = new BolsistaDAO();
     private boolean ativa = true;
+    private File arquivoSelecionado = null;
 
     void setProjeto(Projeto projeto) {
         this.projeto = projeto;
+        
+        Image image = null;
+        byte[] conteudoFoto = projeto.getFotoPerfil().getDadosImagem();
+        if (conteudoFoto != null) {
+            try (ByteArrayInputStream bis = new ByteArrayInputStream(conteudoFoto)) {
+                image = new Image(bis); // Converte byte[] para Image AQUI
+            } catch (Exception e) {
+                System.err.println("Erro ao converter bytes para Image: " + e.getMessage());
+                // precisa definir uma imagem padrao de erro
+            }
+        }
+        imgProjetoBarra.setImage(image);
     }
 
     @FXML
@@ -172,12 +190,20 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert {
             txtDataInicio.setText(bolsista.getDataInicio() != null ? bolsista.getDataInicio().format(formatter) : "Data não disponível");
             System.out.println(bolsista.getDataInicio().format(formatter));
             txtDataFim.setText(bolsista.getDataFim() != null ? bolsista.getDataFim().format(formatter) : "Data não disponível");
-
-            //  Evitar erro ao acessar valores NULL
-            //  txtDataInicio.setText(bolsista.getDataInicio() != null ? bolsista.getDataInicio().toString() : "Data não cadastrada");
-            //  txtDataFim.setText(bolsista.getDataFim() != null ? bolsista.getDataFim().toString() : "Data não cadastrada");
-            // System.out.println("Data Início carregada: " + bolsista.getDataInicio());
-            //  System.out.println("Data Fim carregada: " + bolsista.getDataFim());
+            
+            Image image = null;
+        byte[] conteudoFoto = bolsista.getFotoPerfil().getDadosImagem();
+        if (conteudoFoto != null) {
+            try (ByteArrayInputStream bis = new ByteArrayInputStream(conteudoFoto)) {
+                image = new Image(bis); // Converte byte[] para Image AQUI
+            } catch (Exception e) {
+                System.err.println("Erro ao converter bytes para Image: " + e.getMessage());
+                // precisa definir uma imagem padrao de erro
+            }
+        }
+        imgFotoBolsista.setImage(image);
+        imgPerfil.setImage(image);
+        
         } else {
             alerta("Bolsista não encontrado.", 1, "Erro");
 
@@ -221,6 +247,23 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert {
     }
     //******************************************************************
 
+    @FXML
+    void onClickFotoPerfil(MouseEvent event) throws MalformedURLException {
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Selecionar Imagem");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Arquivos de Imagem", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+        arquivoSelecionado = fileChooser.showOpenDialog(imgFotoBolsista.getScene().getWindow());
+
+        if (arquivoSelecionado != null) {
+            String urlImagem = arquivoSelecionado.toURI().toURL().toString();
+            Image fotoEscolhida = new Image(urlImagem);
+            imgFotoBolsista.setImage(fotoEscolhida);
+        } else {
+            System.out.println("Nenhum arquivo foi selecionado");
+        }
+
+    }
     @FXML
     void onClickAtualizarPerfil(ActionEvent event) throws IOException {
         //abrirAtualizarPerfil();
@@ -303,7 +346,15 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert {
     //******************* MÉTODOS ***************************************
     void atualizarBolsista(int id, String cpf, String nome, String apelido, String email, String senha, boolean ativa,
             long matricula, String curso, LocalDate dataInicio, LocalDate dataFim) throws SQLException, IOException {
-        Bolsista bolsista = new Bolsista(id, cpf, nome, apelido, email, senha, ativa, matricula, curso, dataInicio, dataFim);
+        
+        Foto fotoPerfil = new Foto();
+        if (arquivoSelecionado == null) {// caso o adm não queira alterar foto
+            fotoPerfil.setDadosImagem(bolsista.getFotoPerfil().getDadosImagem());
+        } else {
+            byte[] conteudoImagem = Files.readAllBytes(arquivoSelecionado.toPath());
+            fotoPerfil.setDadosImagem(conteudoImagem);
+        }
+        Bolsista bolsista = new Bolsista(id, cpf, nome, apelido, email, senha, ativa, matricula, curso, dataInicio, dataFim, fotoPerfil);
 
         int repetido = bolsistaDAO.validarApelido(apelido, id);
 
@@ -312,6 +363,7 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert {
 
         } else {
             bolsistaDAO.atualizarBolsista(bolsista, projeto);
+            setBolsista(bolsista);
             alerta("O usuário foi alterado com sucesso!", 3, "Usuário alterado");
             abrirVerPerfil();
             stageAtualizarBolsista.close();

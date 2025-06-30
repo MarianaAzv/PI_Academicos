@@ -1,9 +1,11 @@
 package controller;
 
 import java.awt.Desktop;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -40,6 +42,7 @@ import model.Campus;
 import model.CampusDAO;
 import model.Coordenador;
 import model.CoordenadorDAO;
+import model.Foto;
 import model.Projeto;
 import model.ProjetoDAO;
 import model.Solicitacao;
@@ -261,6 +264,9 @@ public class CriarProjetoController {
     }
 
     public void incluir(String titulo, String resumo, Campus campus, String edital, LocalDate dataInicio, LocalDate dataFim, LocalDate prorrogacao, boolean emAndamento, int id) throws SQLException {
+        
+        Foto fotoPerfil = new Foto(carregarImagemPadrao());
+        
         projeto = new Projeto(titulo, resumo, campus, edital, dataInicio, dataFim, prorrogacao, emAndamento);
         projeto.setAreaConhecimento(areasconhecimento);
 
@@ -269,7 +275,7 @@ public class CriarProjetoController {
         projeto.setEmAndamento(true);
 
         ProjetoDAO pdao = new ProjetoDAO();
-        pdao.cadastraprojeto(projeto, id);
+        pdao.cadastraprojeto(projeto, id, fotoPerfil);
         pdao.AreaProjeto(projeto, areasconhecimento);
 
         mostrarConfirmacao("Projeto cadastrado", "O projeto foi registrado no sistema com sucesso!");
@@ -325,5 +331,23 @@ public class CriarProjetoController {
     public void Close() {
         this.stageCriarProjeto.close();
     }
+    
+    public byte[] carregarImagemPadrao() {
+    try (InputStream is = getClass().getResourceAsStream("/imagens/FotoPerfilProjetoDefault.png");
+         ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+
+        byte[] buffer = new byte[1024];
+        int bytesRead;
+        while ((bytesRead = is.read(buffer)) != -1) {
+            baos.write(buffer, 0, bytesRead);
+        }
+
+        return baos.toByteArray();
+
+    } catch (IOException | NullPointerException e) {
+        e.printStackTrace();
+        return null;
+    }
+}
 
 }

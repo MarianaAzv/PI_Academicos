@@ -1,9 +1,11 @@
 package controller;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -19,13 +21,17 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.AreasConhecimento;
 import model.AreasConhecimentoDAO;
 import model.Campus;
 import model.CampusDAO;
 import model.Coordenador;
+import model.Foto;
 import model.Projeto;
 import model.ProjetoDAO;
 import static util.AlertaUtil.mostrarAviso;
@@ -39,6 +45,7 @@ public class AtualizarProjetoController {
     Campus campus;
     Coordenador coordenador;
     AreasConhecimento areaconhecimento;
+    private File arquivoSelecionado = null;
 
     @FXML
     private ComboBox<Campus> CBcampus;
@@ -62,6 +69,9 @@ public class AtualizarProjetoController {
 
     @FXML
     private Button btnDesativarCocoordendor;
+    
+    @FXML
+    private ImageView imgFotoProjeto;
 
     @FXML
     private ImageView imgLogo;
@@ -168,6 +178,23 @@ public class AtualizarProjetoController {
     void OnClickDesativarCocoordenador(ActionEvent event) {
         mostrarAviso("Erro", "Esse botão não abre!");
     }
+    
+    @FXML
+    void onClickFotoProjeto(MouseEvent event) throws MalformedURLException {
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Selecionar Imagem");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Arquivos de Imagem", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+        arquivoSelecionado = fileChooser.showOpenDialog(imgFotoProjeto.getScene().getWindow());
+
+        if (arquivoSelecionado != null) {
+            String urlImagem = arquivoSelecionado.toURI().toURL().toString();
+            Image fotoEscolhida = new Image(urlImagem);
+            imgFotoProjeto.setImage(fotoEscolhida);
+        } else {
+            System.out.println("Nenhum arquivo foi selecionado");
+        }
+    }
 
     //----------------------------*Sets*----------------------------------//
     public void setStage(Stage telaAtualizarProjeto) {
@@ -203,12 +230,31 @@ public class AtualizarProjetoController {
         if (projeto.getAreaConhecimento() != null) {
             CBcategoria.setValue(areaconhecimento);
         }
+        Image image = null;
+        byte[] conteudoFoto = projeto.getFotoPerfil().getDadosImagem();
+        if (conteudoFoto != null) {
+            try (ByteArrayInputStream bis = new ByteArrayInputStream(conteudoFoto)) {
+                image = new Image(bis); // Converte byte[] para Image AQUI
+            } catch (Exception e) {
+                System.err.println("Erro ao converter bytes para Image: " + e.getMessage());
+                // precisa definir uma imagem padrao de erro
+            }
+        }
+        imgFotoProjeto.setImage(image);
 
     }
 
     //---------------------------*Metodos*------------------------------------//
-    void atualizarProjeto(int idProjeto, String titulo, String resumo, Campus campus, String edital, LocalDate dataInicio, LocalDate dataFim, LocalDate prorrogacao, AreasConhecimento areaconhecimento) throws SQLException {
+    void atualizarProjeto(int idProjeto, String titulo, String resumo, Campus campus, String edital, LocalDate dataInicio, LocalDate dataFim, LocalDate prorrogacao, AreasConhecimento areaconhecimento) throws SQLException, IOException {
 
+        Foto fotoPerfil = new Foto();
+        if (arquivoSelecionado == null) {// caso o adm não queira alterar foto
+            fotoPerfil.setDadosImagem(projeto.getFotoPerfil().getDadosImagem());
+        } else {
+            byte[] conteudoImagem = Files.readAllBytes(arquivoSelecionado.toPath());
+            fotoPerfil.setDadosImagem(conteudoImagem);
+        }
+        
         ProjetoDAO pdao = new ProjetoDAO();
 
         projeto.setTitulo(titulo);
@@ -219,6 +265,7 @@ public class AtualizarProjetoController {
         projeto.setDataFim(dataFim);
         projeto.setProrroacao(prorrogacao);
         projeto.setAreaConhecimento(areaconhecimento);
+        projeto.setFotoPerfil(fotoPerfil);
 
         pdao.atualizarProjeto(projeto);
 

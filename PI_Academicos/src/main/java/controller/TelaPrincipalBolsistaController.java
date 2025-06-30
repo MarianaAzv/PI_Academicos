@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -16,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
@@ -43,6 +45,17 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert {
 
     void setBolsista(Bolsista bol) {
         this.bolsista = bol;
+        Image image = null;
+        byte[] conteudoFoto = bolsista.getFotoPerfil().getDadosImagem();
+        if (conteudoFoto != null) {
+            try (ByteArrayInputStream bis = new ByteArrayInputStream(conteudoFoto)) {
+                image = new Image(bis); // Converte byte[] para Image AQUI
+            } catch (Exception e) {
+                System.err.println("Erro ao converter bytes para Image: " + e.getMessage());
+                // precisa definir uma imagem padrao de erro
+            }
+        }
+        imgPerfil.setImage(image);
     }
 
     void setProjeto(Projeto projeto) {
@@ -60,6 +73,19 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert {
         txtProrrogacao.setText(prorroga);
         txtNomeCoordenador.setText(projeto.getCocoordenadores());
         //txtNomeBolsitas.setText(projeto.get);
+        
+        Image image = null;
+        byte[] conteudoFoto = projeto.getFotoPerfil().getDadosImagem();
+        if (conteudoFoto != null) {
+            try (ByteArrayInputStream bis = new ByteArrayInputStream(conteudoFoto)) {
+                image = new Image(bis); // Converte byte[] para Image AQUI
+            } catch (Exception e) {
+                System.err.println("Erro ao converter bytes para Image: " + e.getMessage());
+                // precisa definir uma imagem padrao de erro
+            }
+        }
+        imgProjetoBarra.setImage(image);
+        imgPerfilProjeto.setImage(image);
     }
 
     @FXML

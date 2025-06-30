@@ -18,6 +18,9 @@ public class Projeto {
     private String cocoordenadores;
     private Campus campus;
     private List<Bolsista> bolsistas = new ArrayList<>();
+    private Foto fotoPerfil;
+
+    
 
     public Projeto(String titulo, String resumo, Campus campus, String edital, LocalDate dataInicio, LocalDate dataFim, LocalDate prorrogacao, boolean emAndamento) {
         this.titulo = titulo;
@@ -29,6 +32,19 @@ public class Projeto {
         this.dataFim = dataFim;
         this.prorrogacao = prorrogacao;
         this.emAndamento = emAndamento;
+    }
+    
+    // construtor completo + foto
+    public Projeto(String titulo, String resumo, Campus campus, String edital, LocalDate dataInicio, LocalDate dataFim, LocalDate prorrogacao, boolean emAndamento, Foto fotoPerfil) {
+        this.titulo = titulo;
+        this.resumo = resumo;
+        this.campus = campus;
+        this.edital = edital;
+        this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
+        this.prorrogacao = prorrogacao;
+        this.emAndamento = emAndamento;
+        this.fotoPerfil = fotoPerfil;
     }
 
     public int getIdProjeto() {
@@ -191,6 +207,22 @@ public class Projeto {
      */
     public void setBolsistas(List<Bolsista> bolsistas) {
         this.bolsistas = bolsistas;
+    }
+    
+    public void setProrrogacao(LocalDate prorrogacao) {
+        this.prorrogacao = prorrogacao;
+    }
+
+    public void setFotoPerfil(Foto fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
+    }
+
+    public LocalDate getProrrogacao() {
+        return prorrogacao;
+    }
+
+    public Foto getFotoPerfil() {
+        return fotoPerfil;
     }
 
     public Projeto() {

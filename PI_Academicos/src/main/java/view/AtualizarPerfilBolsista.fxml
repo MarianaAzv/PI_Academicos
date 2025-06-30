@@ -268,7 +268,7 @@
                   <Insets left="10.0" top="10.0" />
                </GridPane.margin>
             </ImageView>
-            <ImageView fx:id="imgFotoBolsista" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+            <ImageView fx:id="imgFotoBolsista" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onClickFotoPerfil" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets bottom="50.0" />
                </GridPane.margin>

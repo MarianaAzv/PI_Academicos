@@ -247,7 +247,7 @@ public class CadastroCoordenadorController {
 
     }
     public byte[] carregarImagemPadrao() {
-    try (InputStream is = getClass().getResourceAsStream("/imagens/FotoPerfilDefault.png");
+    try (InputStream is = getClass().getResourceAsStream("/imagens/FotoPerfilUsuarioDefault.png");
          ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
 
         byte[] buffer = new byte[1024];

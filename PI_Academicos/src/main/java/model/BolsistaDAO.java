@@ -12,11 +12,12 @@ import java.util.List;
 public class BolsistaDAO extends GenericDAO {
 
     // Método para cadastrar um novo bolsista no banco de dados
-    public void cadastrarUsuarioBolsista(Usuario usuario, Bolsista bolsista, Projeto projeto) {
+    public void cadastrarUsuarioBolsista(Usuario usuario, Bolsista bolsista, Projeto projeto, Foto fotoPerfil) {
         Connection con = conectarDAO();
 
         String queryUsuario = "INSERT INTO USUARIOS(cpf, nome, apelido, senha, email, ativa) VALUES(?,?,?,?,?,1)";
         String queryBolsista = "INSERT INTO BOLSISTAS(idUsuario, matricula, curso) VALUES (?, ?, ?)";
+        String queryFotoPerfil = "INSERT INTO fotos_perfil_usuario(idUsuario, arquivoFoto) VALUES(?,?);";
         String queryBolsistaProjetos = "INSERT INTO BOLSISTAS_PROJETOS(idUsuario, idProjeto, dataInicio, dataFim) VALUES (?, ?, ?, ?)";
 
         try (con) {
@@ -40,6 +41,18 @@ public class BolsistaDAO extends GenericDAO {
                 stmtBolsista.setLong(2, bolsista.getMatricula());
                 stmtBolsista.setString(3, bolsista.getCurso());
                 stmtBolsista.executeUpdate();
+                
+                //Inserir em fotos_perfil_usuario
+                PreparedStatement stmtFotos = con.prepareStatement(queryFotoPerfil, PreparedStatement.RETURN_GENERATED_KEYS);
+                stmtFotos.setInt(1, idGerado);
+                stmtFotos.setBytes(2, fotoPerfil.getDadosImagem());
+                stmtFotos.executeUpdate();
+
+                ResultSet keys2 = stmtFotos.getGeneratedKeys();
+                if (keys2.next()) {
+                    int idGerado2 = keys2.getInt(1);
+                    fotoPerfil.setId(idGerado2);
+                }
 
                 // Inserir bolsista no projeto
                 PreparedStatement stmtBolsistaProjeto = con.prepareStatement(queryBolsistaProjetos);
@@ -63,6 +76,7 @@ public class BolsistaDAO extends GenericDAO {
 
         String queryUsuario = "UPDATE USUARIOS SET cpf = ?, nome = ?, apelido = ?, senha = ?, email = ? WHERE idUsuario = ?";
         String queryBolsista = "UPDATE BOLSISTAS SET matricula = ?, curso = ? WHERE idUsuario = ?";
+        String queryFotoPerfil = "UPDATE fotos_perfil_usuario SET arquivoFoto = ? WHERE idUsuario = ?";
         String queryBolsistaProjetos = "UPDATE BOLSISTAS_PROJETOS SET  dataInicio = ?, dataFim = ? WHERE idUsuario = ? and idProjeto = ?";
 
         try (con) {
@@ -86,6 +100,11 @@ public class BolsistaDAO extends GenericDAO {
             stmtBolsista.setInt(3, bolsista.getId());
             int linhasBolsista = stmtBolsista.executeUpdate();
             System.out.println("Linhas afetadas em BOLSISTAS: " + linhasBolsista);
+            
+            PreparedStatement stmtFotoPerfil = con.prepareStatement(queryFotoPerfil);
+            stmtFotoPerfil.setBytes(1, bolsista.getFotoPerfil().getDadosImagem());
+            stmtFotoPerfil.setInt(2, bolsista.getId());
+            stmtFotoPerfil.executeUpdate();
 
             // Atualiza BOLSISTAS_PROJETOS (mantendo funcionalidade exclusiva do bolsista)
             PreparedStatement stmtProjeto = con.prepareStatement(queryBolsistaProjetos);
