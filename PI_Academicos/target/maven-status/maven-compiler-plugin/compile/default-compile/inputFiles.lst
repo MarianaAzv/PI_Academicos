@@ -1,70 +1,68 @@
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\principal\App.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarPerfilBolsistaController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarPerfilCoordenadorController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\TelaLoginController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\dal\ConexaoBD.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\NoticiaDAO.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Projeto.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CocoordenadorDesativarCoordenadorController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\TelaNoticiaController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\RecuperarSenhaNovaSenhaController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CadastroCoordenadorController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarProjetoController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\RecuperarSenhaCodigoController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\VerPerfilCoordenadorController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\MaisBolsistaController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Coordenador.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\util\Email.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\util\AlertaUtil.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\EscolherProjetoController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\CampusDAO.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\AlertGenericoController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CriarProjetoController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\module-info.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\util\CPF.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Solicitacao.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Campus.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CadastrarArtigoController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\util\Senha.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\AdministradoresController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\LoginDAO.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\INotificacaoAlert.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Foto.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CadastrarPostagemController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\ArtigoDAO.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Noticia.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\RecuperarSenhaController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Postagem.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\TelaPrincipalBolsistaController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\BolsistaDesativarCoordenadorController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\ADMController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\TeladefundoController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Artigo.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarPerfilAdministradorController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\MaisCoCoordenadorController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarPostagemController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\AreasConhecimento.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\PostagemDAO.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\util\Origem.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\util\Apenasletras.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CadastrarAdministradorController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\SolicitacaoTelaController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Usuario.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\VerPerfilBolsistaController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CadastroCocoordenadorCoordenadorController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Bolsista.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Administrador.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\NotificacoesController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\GenericDAO.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\VerPerfilAdministradorController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\AreasConhecimentoDAO.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CadastroBolsistaCoordenadorController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\CoordenadorDAO.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\SolicitacaoDAO.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarNoticiaController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\FotoDAO.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\AdministradorDAO.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\BolsistaDAO.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\TelaPrincipalAdministradorController.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\ProjetoDAO.java
-C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\TelaPrincipalCoordenadorController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarPerfilAdministradorController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\CocoordenadorDesativarCoordenadorController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\model\ArtigoDAO.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\model\ProjetoDAO.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarPostagemController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\model\Usuario.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\model\NoticiaDAO.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\CadastroCoordenadorController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\TelaPrincipalBolsistaController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\util\CPF.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\NotificacoesController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\VerPerfilBolsistaController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\model\CampusDAO.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\util\AlertaUtil.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\EscolherProjetoController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\CriarProjetoController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\TelaPrincipalAdministradorController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\dal\ConexaoBD.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\model\AreasConhecimento.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\TelaNoticiaController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\MaisCoCoordenadorController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\principal\App.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\MaisBolsistaController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\model\GenericDAO.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\TeladefundoController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\model\Coordenador.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarProjetoController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\module-info.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\BolsistaDesativarCoordenadorController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\TelaLoginController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\model\Solicitacao.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\model\AreasConhecimentoDAO.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\AlertGenericoController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\CadastroCocoordenadorCoordenadorController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\RecuperarSenhaController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\CadastrarAdministradorController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\TelaPrincipalCoordenadorController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\model\CoordenadorDAO.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\util\Email.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\model\CodigoSenha.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\model\Foto.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarNoticiaController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\model\AdministradorDAO.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\AdministradoresController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\model\LoginDAO.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\model\Postagem.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\CadastrarPostagemController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\model\SolicitacaoDAO.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarPerfilBolsistaController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\model\Artigo.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\INotificacaoAlert.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\model\Noticia.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarPerfilCoordenadorController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\VerPerfilAdministradorController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\RecuperarSenhaNovaSenhaController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\util\Apenasletras.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\model\Administrador.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\model\Bolsista.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\CadastrarArtigoController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\model\Campus.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\util\Origem.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\model\PostagemDAO.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\model\Projeto.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\model\FotoDAO.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\CadastroBolsistaCoordenadorController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\VerPerfilCoordenadorController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\controller\RecuperarSenhaCodigoController.java
+C:\Users\Acer\OneDrive\Área de Trabalho\Repositorios\PI_Academicos\PI_Academicos\src\main\java\model\BolsistaDAO.java

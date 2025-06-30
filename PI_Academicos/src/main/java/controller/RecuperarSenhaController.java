@@ -1,15 +1,16 @@
+
 package controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-
 import java.util.Properties;
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import model.CodigoSenha;
 import static util.AlertaUtil.mostrarAlerta;
 
 public class RecuperarSenhaController {
@@ -31,25 +32,44 @@ public class RecuperarSenhaController {
             return;
         }
 
-        String assunto = "Recuperação de Senha";
-        String mensagem = "Aqui está seu código de recuperação: 123456"; // substitua por geração dinâmica se quiser
+        String codigo = CodigoSenha.gerarCodigo(destinatario);
+        if (codigo == null) {
+            mostrarAlerta(AlertType.ERROR, "Erro", "E-mail não encontrado no sistema.");
+            return;
+        }
 
-        enviarEmail(destinatario, assunto, mensagem); // Aqui está a chamada direta!
-        mostrarAlerta(AlertType.INFORMATION, "Sucesso", "E-mail enviado para: " + destinatario);
+        String assunto = "Recuperação de Senha";
+        String link = "http://localhost/web_PI_Academicos/recuperacao_Senha.php?codigo=" + codigo + "&email=" + destinatario;
+       // String link = "http://localhost/Recuperacao_Senha.php?codigo=" + codigo + "&email=" + destinatario;
+        //String link = "http://localhost:8080/resetar-senha?codigo=" + codigo;
+        String mensagem = """
+            Olá!
+
+            Recebemos uma solicitação de recuperação de senha.
+
+            Clique no link abaixo para redefinir sua senha:
+
+            %s
+
+            Esse link é válido por 15 minutos.
+
+            Caso você não tenha solicitado isso, apenas ignore este e-mail.
+            """.formatted(link);
+
+        enviarEmail(destinatario, assunto, mensagem);
+        mostrarAlerta(AlertType.INFORMATION, "Sucesso", "Link de recuperação enviado para: " + destinatario);
     }
 
     public static void enviarEmail(String destinatario, String assunto, String mensagem) {
-        // Configuração do servidor SMTP
-        String host = "smtp.gmail.com";  // Exemplo: SMTP do Gmail
-        final String user = "pipocaazeda64@gmail.com";  // Seu e-mail
-        final String password = "momj yhit mvin rtyc";  // Sua senha ou senha de app do Gmail
+        String host = "smtp.gmail.com";
+        final String user = "pipocaazeda64@gmail.com";
+        final String password = "momj yhit mvin rtyc";
 
-        // Definir as propriedades do servidor SMTP
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.starttls.enable", "true"); // Ativar TLS
+        properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.host", host);
-        properties.put("mail.smtp.port", "587");  // Porta SMTP para TLS
+        properties.put("mail.smtp.port", "587");
 
         Session session = Session.getInstance(properties, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -58,17 +78,11 @@ public class RecuperarSenhaController {
         });
 
         try {
-            // Criar o objeto de mensagem de e-mail
             MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(user)); // De quem é o e-mail
+            message.setFrom(new InternetAddress(user));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
             message.setSubject(assunto);
             message.setText(mensagem);
-            // message.addRecipient(Message.RecipientType.TO, new InternetAddress("destinatario@dominio.com")); // Para quem é o e-mail
-            /// message.setSubject("Assunto do E-mail");  // Assunto
-          //  message.setText("Este é o corpo do e-mail");  // Corpo do e-mail
-
-            // Enviar o e-mail
             Transport.send(message);
             System.out.println("E-mail enviado com sucesso!");
         } catch (MessagingException e) {
@@ -76,12 +90,7 @@ public class RecuperarSenhaController {
         }
     }
 
-    public static void main(String[] args) {
-        enviarEmail("jaquelinemiraculous@gmail.com", "Recuperação de Senha", "Aqui está oseu código de recuperação: 123456");
-    }
-
     void setStage(Stage stageRecuperar) {
         this.stageRecuperar = stageRecuperar;
     }
-
 }
