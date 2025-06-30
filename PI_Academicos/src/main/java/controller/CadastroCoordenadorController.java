@@ -5,10 +5,14 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -25,12 +29,14 @@ import model.SolicitacaoDAO;
 import model.Usuario;
 import static util.AlertaUtil.mostrarAviso;
 import static util.AlertaUtil.mostrarConfirmacao;
+import util.ApenasNumeros;
 import util.Apenasletras;
 import util.CPF;
+import util.CPFDuplicado;
 import util.Email;
 import util.Senha;
 
-public class CadastroCoordenadorController {
+public class CadastroCoordenadorController implements INotificacaoAlert {
 
     private Stage stageCadastroCoordenador;
     File arquivoPDF = null;
@@ -109,54 +115,66 @@ public class CadastroCoordenadorController {
     private TextField txtUsuario;
 
     @FXML
-    void OnClickSubmeter(ActionEvent event) throws SQLException {
-
+    void OnClickSubmeter(ActionEvent event) throws SQLException, IOException {
+//        if (!CPFDuplicado.cpfDuplicado(txtCPF.getText())) {
+//            alerta("Esse CPF já esta cadastrado no sistema", 1, "ERRO");
+//            return;
+//        }
         try {
+
             if (arquivoPDF == null) {
-                mostrarAviso("PDF obrigatório", "Você deve selecionar um arquivo PDF antes de submeter.");
+                alerta("Você deve selecionar um arquivo PDF antes de submeter.", 2, "PDF obrigatório");
                 return;
             }
 
             if (txtCPF.getText().isEmpty() || txtSIAPE.getText().isEmpty() || txtNomeCompleto.getText().isEmpty() || txtUsuario.getText().isEmpty() || txtEmail.getText().isEmpty() || txtSenha.getText().isEmpty() || txtFormacao.getText().isEmpty()) {
 
-                mostrarAviso("Falta informação", "Por favor inserir todos os dados");
+                alerta("Por favor inserir todos os dados", 2, "Falta informação");
                 return;
             } else {
                 if (Senha.senhaForte(txtSenha.getText())) {
                     if (CPF.isValid(txtCPF.getText())) {
                         System.out.print("CPF valido");
-                        if (Email.isValidEmail(txtEmail.getText())) {
-                            System.out.print("O Email esta valido");
-                            if (Apenasletras.isLetras(txtNomeCompleto.getText())) {
-                                if (Apenasletras.isLetras(txtFormacao.getText())) {
+                        if (CPFDuplicado.cpfDuplicado(txtCPF.getText())==false) {
+                            if (Email.isValidEmail(txtEmail.getText())) {
+                                System.out.print("O Email esta valido");
+                                if (Apenasletras.isLetras(txtNomeCompleto.getText())) {
+                                    if (Apenasletras.isLetras(txtFormacao.getText())) {
+                                        if (ApenasNumeros.isNumeros(txtSIAPE.getText())) {
 
-                                    int siape = Integer.parseInt(txtSIAPE.getText());
+                                            int siape = Integer.parseInt(txtSIAPE.getText());
 
-                                    incluir(txtCPF.getText(), txtNomeCompleto.getText(), txtUsuario.getText(), txtEmail.getText(), txtSenha.getText(), siape, txtFormacao.getText());
+                                            incluir(txtCPF.getText(), txtNomeCompleto.getText(), txtUsuario.getText(), txtEmail.getText(), txtSenha.getText(), siape, txtFormacao.getText());
+                                            enviarSolicitacao();
 
+                                        } else {
+                                            alerta("SIAPE inválido(Por favor inserir somente números", 2, "Erro");
+                                        }
+                                    } else {
+                                        alerta("Por favor inserir a sua formação corretamente", 2, "ERRO");
+                                    }
                                 } else {
-                                    mostrarAviso("ERRO", "Por favor inserir a sua formação corretamente");
+                                    alerta("Por favor inserir o nome corretamente", 2, "ERRO");
                                 }
                             } else {
-                                mostrarAviso("ERRO", "Por favor inserir o nome corretamente");
+                                System.out.print("O Email invalido");
+                                alerta("O Email não esta no formato esperado", 2, "ERRO");
                             }
                         } else {
-                            System.out.print("O Email invalido");
-                            mostrarAviso("ERRO", "O Email não esta no formato esperado");
+                            alerta("Esse CPF já esta cadastrado no sistema", 1, "ERRO");
+
                         }
                     } else {
                         System.out.print("CPF invalido");
-                        mostrarAviso("ERRO", "O CPF nao esta correto");
+                        alerta("O CPF nao esta correto", 2, "ERRO");
                     }
                 } else {
-                    mostrarAviso("ERRO", "A senha esta muito fraca, para uma senha forte é necessario ter 6 caracters,ter pelo menos 1 letra Maiuscula e 1 Letra minuscula, um numero e um simbulo especial");
+                    alerta("A senha esta muito fraca, para uma senha forte é necessario ter 6 caracters,ter pelo menos 1 letra Maiuscula e 1 Letra minuscula, um numero e um simbulo especial", 2, "ERRO");
                 }
             }
         } catch (NumberFormatException n) {
-            mostrarAviso("CPF ou SIAPE inválidos", "Os valores inseridos para CPF e SIAPE devem ser apenas números");
+            alerta("Os valores inseridos para CPF e SIAPE devem ser apenas números", 2, "CPF ou SIAPE inválidos");
         }
-
-        enviarSolicitacao();
 
     }
 
@@ -211,13 +229,13 @@ public class CadastroCoordenadorController {
         coordenador = new Coordenador(siape, formacao);
         int repetido = new CoordenadorDAO().validarApelido(apelido, 0);
         if (repetido > 0) {
-            mostrarAviso("Nome de usuário indisponível", "Este nome de usuário já está sendo usado");
+            alerta("Este nome de usuário já está sendo usado", 1, "Nome de usuário indisponível");
 
         } else if (nome.isEmpty() || apelido.isEmpty() || email.isEmpty() || senha.isEmpty()) {
-            mostrarAviso("Campos de preenchimento obrigatórios", "Todos os campos de cadastro devem ser preenchidos.");
+            alerta("Todos os campos de cadastro devem ser preenchidos.", 2, "Campos de preenchimento obrigatórios");
         } else {
-            new CoordenadorDAO().cadastrarUsuarioCoordenador(usuario, coordenador, fotoPerfil);
-            mostrarConfirmacao("Usuário cadastrado", "O usuário foi registrado no sistema com sucesso!");
+            new CoordenadorDAO().cadastrarUsuarioCoordenador(usuario, coordenador);
+            alerta("O usuário foi registrado no sistema com sucesso!", 3, "Usuário cadastrado");
             stageCadastroCoordenador.close();
         }
     }
@@ -262,6 +280,32 @@ public class CadastroCoordenadorController {
         e.printStackTrace();
         return null;
     }
+    public void alerta(String msg, int tipo, String titulo) throws IOException {
+        URL url = new File("src/main/java/view/AlertGenerico.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stageAlerta = new Stage();
+
+        AlertGenericoController vpb = loader.getController();
+        vpb.setMsg(msg);
+        vpb.setTipo(tipo);
+        vpb.setStage(stageAlerta);
+        vpb.setControllerResposta(this);
+
+        Scene cena = new Scene(root);
+        stageAlerta.setTitle(titulo);
+        stageAlerta.setScene(cena);
+
+        stageAlerta.show();
+
+    }
+
+    @Override
+    public void btnOk() {
+
+    }
+
 }
 
 

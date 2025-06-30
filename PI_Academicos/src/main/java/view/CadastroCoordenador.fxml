@@ -58,7 +58,7 @@
                         <Insets right="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <TextField fx:id="txtNomeCompleto" GridPane.columnIndex="3" />
+                  <TextField fx:id="txtNomeCompleto" promptText="João " GridPane.columnIndex="3" />
                </children>
             </GridPane>
             <GridPane layoutX="10.0" layoutY="10.0" prefWidth="1251.0">
@@ -78,7 +78,7 @@
                   <RowConstraints maxHeight="160.0" minHeight="10.0" prefHeight="159.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <TextField fx:id="txtEmail" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <TextField fx:id="txtEmail" promptText="joao@gmail.com" GridPane.columnIndex="4" GridPane.rowIndex="1" />
                   <Label fx:id="lblUsuario" text="Usúario:" textFill="#840d0b" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
                      <font>
                         <Font name="Courier New Bold" size="20.0" />
@@ -103,9 +103,9 @@
                         <Insets right="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <TextField fx:id="txtUsuario" prefHeight="25.0" prefWidth="932.0" GridPane.columnIndex="2" />
-                  <TextField fx:id="txtCPF" prefHeight="25.0" prefWidth="242.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <TextField fx:id="txtFormacao" prefHeight="25.0" prefWidth="249.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <TextField fx:id="txtUsuario" prefHeight="25.0" prefWidth="932.0" promptText="João123" GridPane.columnIndex="2" />
+                  <TextField fx:id="txtCPF" prefHeight="25.0" prefWidth="242.0" promptText="Ex:89156702132" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <TextField fx:id="txtFormacao" prefHeight="25.0" prefWidth="249.0" promptText="Biologo" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                   <Label fx:id="lblSenha" text="Senha:" textFill="#840d0b" GridPane.columnIndex="3" GridPane.halignment="RIGHT">
                      <font>
                         <Font name="Courier New Bold" size="20.0" />
@@ -114,7 +114,7 @@
                         <Insets right="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <PasswordField fx:id="txtSenha" GridPane.columnIndex="4" />
+                  <PasswordField fx:id="txtSenha" promptText="Ex:G!aiSC%7P#7@yLyr4CF" GridPane.columnIndex="4" />
                   <Label fx:id="lblEmail" text="E-mail:" textFill="#840d0b" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                      <font>
                         <Font name="Courier New Bold" size="20.0" />
@@ -131,7 +131,7 @@
                         <Insets right="5.0" />
                      </GridPane.margin>
                   </Label>
-                  <TextField fx:id="txtSIAPE" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                  <TextField fx:id="txtSIAPE" promptText="Somente números" GridPane.columnIndex="4" GridPane.rowIndex="2" />
                </children>
             </GridPane>
             <GridPane prefHeight="130.0" prefWidth="1248.0">

@@ -230,13 +230,30 @@ public class BolsistaDAO extends GenericDAO {
         }
     }
 
-    public boolean vinculadoEmOutroProjeto(int idBolsista, int idProjetoAtual) throws SQLException {
-        String sql = "SELECT COUNT(*) FROM projetos_bolsistas WHERE idBolsista = ? AND idProjeto <> ?";
+    public boolean vinculadoEmOutroProjeto(int idUsuario, int idProjeto) throws SQLException {
+        String sql = "select count(*) from bolsistas_projetos where idUsuario =? and idProjeto=?";
 
         try (Connection con = conectarDAO(); PreparedStatement stmt = con.prepareStatement(sql)) {
 
-            stmt.setInt(1, idBolsista);
-            stmt.setInt(2, idProjetoAtual);
+            stmt.setInt(1, idUsuario);
+            stmt.setInt(2, idProjeto);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        }
+        return false;
+    }
+
+    public boolean existeMatriculaNoCampus(Long matricula, int idCampus) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM bolsista b JOIN bolsista_projeto bp ON bp.id_bolsista = b.id_bolsista JOIN projeto p ON p.id_projeto = bp.id_projeto WHERE b.matricula = ? AND p.id_campus = ?";
+
+        try (Connection con = conectarDAO(); PreparedStatement stmt = con.prepareStatement(sql)) {
+
+            stmt.setLong(1, matricula);
+            stmt.setInt(2, idCampus);
+
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {

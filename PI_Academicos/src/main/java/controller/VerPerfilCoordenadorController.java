@@ -326,7 +326,11 @@ public class VerPerfilCoordenadorController {
         apc.setProjeto(projeto);
 
         stageAtualizarProjeto.setOnShown(evento -> {
-            apc.ajustarElementosJanela();
+            try {
+                apc.ajustarElementosJanela();
+            } catch (IOException ex) {
+                Logger.getLogger(VerPerfilCoordenadorController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
 
         Scene cena = new Scene(root);

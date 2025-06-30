@@ -31,8 +31,13 @@ import model.AdministradorDAO;
 import model.Foto;
 import static util.AlertaUtil.mostrarAviso;
 import static util.AlertaUtil.mostrarConfirmacao;
+import util.Apenasletras;
+import util.CPF;
+import util.CPFDuplicado;
+import util.Email;
+import util.Senha;
 
-public class AtualizarPerfilAdministradorController {
+public class AtualizarPerfilAdministradorController implements INotificacaoAlert {
 
     private Administrador adm;
     private Stage stageAtualizarADM;
@@ -109,12 +114,30 @@ public class AtualizarPerfilAdministradorController {
 
     @FXML
     void onClickAtualizar(ActionEvent event) throws SQLException, IOException {
+        if (!CPF.isValid(txtCPF.getText())) {
+            alerta("CPF inválido", 2, "Data inválida");
+            return;
+        }
+
+        if (!Apenasletras.isLetras(txtNome.getText())) {
+            alerta("Nome inválido", 2, "ERRO");
+            return;
+        }
+       
+        if (!Email.isValidEmail(txtEmail.getText())) {
+            alerta("Email inválido", 2, "ERRO");
+            return;
+        }
+        if (!Senha.senhaForte(txtSenha.getText())) {
+            alerta("A senha esta muito fraca, para uma senha forte é necessario ter 6 caracters,ter pelo menos 1 letra Maiuscula e 1 Letra minuscula, um numero e um simbulo especial", 2, "ERRO");
+            return;
+        }
 
         try {
 
             atualizarAdministrador(adm.getId(), txtCPF.getText(), txtNome.getText(), txtUsuario.getText(), txtEmail.getText(), txtSenha.getText(), adm.getAtiva());
         } catch (NumberFormatException n) {
-            mostrarAviso("CPF inválido", "O valor inserido para CPF deve ser apenas números");
+            alerta("O valor inserido para CPF deve ser apenas números", 2, "CPF inválido");
         }
     }
 
@@ -330,35 +353,35 @@ public class AtualizarPerfilAdministradorController {
         stageAtualizar.show();
         stageAtualizarADM.close();
     }
-     
-    private void abrirTelaADMS() throws IOException{
-        
-         URL url = new File("src/main/java/view/Administradores.fxml").toURI().toURL();
-            FXMLLoader loader = new FXMLLoader(url);
-            Parent root = loader.load();
-        
-            Stage stageADMS = new Stage();
-        
-            AdministradoresController ac = loader.getController();  
-            ac.setAdministrador(adm);
-            ac.setStage(stageADMS);
-            
-            stageADMS.setOnShown(evento -> {
+
+    private void abrirTelaADMS() throws IOException {
+
+        URL url = new File("src/main/java/view/Administradores.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stageADMS = new Stage();
+
+        AdministradoresController ac = loader.getController();
+        ac.setAdministrador(adm);
+        ac.setStage(stageADMS);
+
+        stageADMS.setOnShown(evento -> {
             try {
                 ac.ajustarElementosJanela();
             } catch (SQLException ex) {
                 Logger.getLogger(TelaPrincipalAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-        
-            Scene cena = new Scene(root);
-            stageADMS.setTitle("Tela Administradores");
-            stageADMS.setScene(cena);
-            //deixa a tela maximizada
-            stageADMS.setMaximized(true);
-            
-            stageADMS.show();
-            stageAtualizarADM.close();
+
+        Scene cena = new Scene(root);
+        stageADMS.setTitle("Tela Administradores");
+        stageADMS.setScene(cena);
+        //deixa a tela maximizada
+        stageADMS.setMaximized(true);
+
+        stageADMS.show();
+        stageAtualizarADM.close();
     }
 
     private void abrirTelaNotificacoes() throws IOException {
@@ -472,14 +495,40 @@ public class AtualizarPerfilAdministradorController {
 
         int repetido = new AdministradorDAO().validarApelido(apelido, id);
         if (repetido > 0) {
-            mostrarAviso("Nome de usuário indisponível", "Este nome de usuário já está sendo usado");
+            alerta("Este nome de usuário já está sendo usado", 1, "Nome de usuário indisponível");
 
         } else {
             new AdministradorDAO().atualizarAdministrador(adm);
-            mostrarConfirmacao("Usuário alterado", "O usuário foi alterado com sucesso!");
+            alerta("O usuário foi alterado com sucesso!", 3, "Usuário alterado");
             setAdministrador(adm);
             abrirTelaPrincipal();
         }
+    }
+
+    public void alerta(String msg, int tipo, String titulo) throws IOException {
+        URL url = new File("src/main/java/view/AlertGenerico.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stageAlerta = new Stage();
+
+        AlertGenericoController vpb = loader.getController();
+        vpb.setMsg(msg);
+        vpb.setTipo(tipo);
+        vpb.setStage(stageAlerta);
+        vpb.setControllerResposta(this);
+
+        Scene cena = new Scene(root);
+        stageAlerta.setTitle(titulo);
+        stageAlerta.setScene(cena);
+
+        stageAlerta.show();
+
+    }
+
+    @Override
+    public void btnOk() {
+
     }
 
 }

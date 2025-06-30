@@ -12,7 +12,7 @@ public class CPFDuplicado {
             return dao.cpfJaCadastrado(cpf);
         } catch (SQLException e) {
             System.err.println("Erro ao verificar duplicidade de CPF: " + e.getMessage());
-            return true; // Por segurança, assume duplicado se erro ocorrer
+            return true; 
         }
     }
 }

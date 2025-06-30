@@ -35,8 +35,14 @@ import model.Projeto;
 import model.Usuario;
 import static util.AlertaUtil.mostrarAviso;
 import static util.AlertaUtil.mostrarConfirmacao;
+import util.ApenasNumeros;
+import util.Apenasletras;
+import util.CPF;
+import util.CPFDuplicado;
+import util.Email;
+import util.Senha;
 
-public class AtualizarPerfilCoordenadorController {
+public class AtualizarPerfilCoordenadorController implements INotificacaoAlert {
 
     private Stage stageAtualizarCoordenador;
     Coordenador coordenador;
@@ -266,12 +272,43 @@ public class AtualizarPerfilCoordenadorController {
     @FXML
     void onClickAtualizar(ActionEvent event) throws SQLException, IOException {
 
+        if (txtCPF.getText().isEmpty() || txtNome.getText().isEmpty() || txtUsuario.getText().isEmpty() || txtEmail.getText().isEmpty() || txtSenha.getText().isEmpty() || txtFormacao.getText().isEmpty() || txtSIAPE.getText().isEmpty()) {
+            alerta("Por favor inserir todos os campus", 2, "ERRO");
+            return;
+        }
+        if (!Apenasletras.isLetras(txtNome.getText())) {
+            alerta("Nome inválido", 2, "ERRO");
+            return;
+        }
+       
+        if (!Apenasletras.isLetras(txtFormacao.getText())) {
+            alerta("Nome inválido", 2, "ERRO");
+            return;
+        }
+        if (!CPF.isValid(txtCPF.getText())) {
+            alerta("CPF invalido", 2, "ERRO");
+            return;
+        }
+
+        if (!Email.isValidEmail(txtEmail.getText())) {
+            alerta("Email inválido", 2, "ERRO");
+            return;
+        }
+
+        if (!Senha.senhaForte(txtSenha.getText())) {
+            alerta("Senha inválida", 2, "ERRO");
+            return;
+        }
+        if (!ApenasNumeros.isNumeros(txtSIAPE.getText())) {
+            alerta("Somente números no campus SIAPE", 2, "ERRO");
+            return;
+        }
         try {
 
             int siape = Integer.parseInt(txtSIAPE.getText());
             atualizarCoordenador(coordenador.getId(), txtCPF.getText(), txtNome.getText(), txtUsuario.getText(), txtEmail.getText(), txtSenha.getText(), siape, txtFormacao.getText());
         } catch (NumberFormatException n) {
-            mostrarAviso("CPF ou SIAPE inválidos", "Os valores inseridos para CPF e SIAPE devem ser apenas números");
+            alerta("Os valores inseridos para CPF e SIAPE devem ser apenas números", 2, "CPF ou SIAPE inválidos");
         }
         AbrirTelaPrincipal();
     }
@@ -345,7 +382,11 @@ public class AtualizarPerfilCoordenadorController {
         apc.setProjeto(projeto);
 
         stageAtualizarProjeto.setOnShown(evento -> {
-            apc.ajustarElementosJanela();
+            try {
+                apc.ajustarElementosJanela();
+            } catch (IOException ex) {
+                Logger.getLogger(AtualizarPerfilCoordenadorController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
 
         Scene cena = new Scene(root);
@@ -534,13 +575,38 @@ public class AtualizarPerfilCoordenadorController {
         Coordenador coordenador = new Coordenador(id, cpf, nome, apelido, email, senha, siape, formacao, fotoPerfil);
         int repetido = new CoordenadorDAO().validarApelido(apelido, id);
         if (repetido > 0) {
-            mostrarAviso("Nome de usuário indisponível", "Este nome de usuário já está sendo usado");
+            alerta("Este nome de usuário já está sendo usado", 2, "Nome de usuário indisponível");
 
         } else {
             new CoordenadorDAO().atualizarCoordenador(coordenador);
-            mostrarConfirmacao("Usuário alterado", "O usuário foi alterado com sucesso!");
-            setCoordenador(coordenador);
+            alerta("O usuário foi alterado com sucesso!", 3, "Usuário alterado");
         }
+    }
+
+    public void alerta(String msg, int tipo, String titulo) throws IOException {
+        URL url = new File("src/main/java/view/AlertGenerico.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stageAlerta = new Stage();
+
+        AlertGenericoController vpb = loader.getController();
+        vpb.setMsg(msg);
+        vpb.setTipo(tipo);
+        vpb.setStage(stageAlerta);
+        vpb.setControllerResposta(this);
+
+        Scene cena = new Scene(root);
+        stageAlerta.setTitle(titulo);
+        stageAlerta.setScene(cena);
+
+        stageAlerta.show();
+
+    }
+
+    @Override
+    public void btnOk() {
+
     }
 
 }
