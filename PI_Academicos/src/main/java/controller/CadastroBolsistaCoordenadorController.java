@@ -414,5 +414,4 @@ public class CadastroBolsistaCoordenadorController implements INotificacaoAlert 
 
     }
 }
-}
 

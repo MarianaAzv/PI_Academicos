@@ -351,7 +351,7 @@ public class CriarProjetoController implements INotificacaoAlert {
  
     }
     }
-    }
+    
        public void alerta(String msg, int tipo, String titulo) throws IOException {
         URL url = new File("src/main/java/view/AlertGenerico.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
