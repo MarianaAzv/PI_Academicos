@@ -23,6 +23,7 @@ public class SolicitacaoTelaController {
     private Solicitacao sol;
     //private Administrador adm;
     private Runnable onSolAceitacao;
+    private Runnable onSolNegacao;
     
     public void setStage(Stage stageSol) {
         this.stageSol = stageSol;
@@ -39,7 +40,10 @@ public class SolicitacaoTelaController {
       }
 
     @FXML
-    private Button btnDesativar;
+    private Button btnAceitar;
+    
+    @FXML
+    private Button btnNegar;
 
     @FXML
     private Label lblAceitacao;
@@ -59,15 +63,31 @@ public class SolicitacaoTelaController {
     public void setOnSolAceitacao(Runnable callback){
         this.onSolAceitacao = callback;
     }
+    
+    
 
     @FXML
-    void onClickDesativar(ActionEvent event) throws SQLException {
+    void onClickAceitar(ActionEvent event) throws SQLException {
         
             new SolicitacaoDAO().ativarSolicitacao(sol);
 
         if(onSolAceitacao != null){
            onSolAceitacao.run();
         }
+       
+        stageSol.close();
+
+    }
+    
+    @FXML
+    void onClickNegar(ActionEvent event) throws SQLException {
+        
+            new SolicitacaoDAO().deletarSolicitacao(sol);
+            
+            if(onSolAceitacao != null){
+           onSolAceitacao.run();
+        }
+       
        
         stageSol.close();
 

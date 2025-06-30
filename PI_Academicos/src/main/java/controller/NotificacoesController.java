@@ -63,6 +63,9 @@ public class NotificacoesController {
 
     @FXML
     private Button btnNotificacoes;
+    
+    @FXML
+    private Button btnTodos;
 
     @FXML
     private Button btnPublicacao;
@@ -85,8 +88,7 @@ public class NotificacoesController {
     @FXML
     private Label lblNotificacoes;
 
-    @FXML
-    private TextField tfPesquisa;
+   
 
     @FXML
     private TableView<Solicitacao> tvNotificacoes;
@@ -176,14 +178,42 @@ public class NotificacoesController {
     
 //********************************** 
     
+    @FXML
+    void onClickNaoValidados(ActionEvent event) throws SQLException, IOException {
+        lista = FXCollections.observableArrayList(listarSolAbertas());
+        carregarTabelaSol();
+    }
+
+     @FXML
+    void onClickValidados(ActionEvent event) throws SQLException, IOException {
+        lista = FXCollections.observableArrayList(listarSolAceitas());
+        carregarTabelaSol();
+    }
+    
+    @FXML
+    void onClickTodos(ActionEvent event) throws SQLException, IOException {
+        lista = FXCollections.observableArrayList(listarSol());
+        carregarTabelaSol();
+    }
+    
     
     private ObservableList<Solicitacao> listarSol() throws SQLException, IOException {
         SolicitacaoDAO solDAO = new SolicitacaoDAO();
         return solDAO.listarSolicitacoes();
     }
     
+    private ObservableList<Solicitacao> listarSolAbertas() throws SQLException, IOException {
+        SolicitacaoDAO solDAO = new SolicitacaoDAO();
+        return solDAO.listarSolicitacoesAbertas();
+    }
+    
+    private ObservableList<Solicitacao> listarSolAceitas() throws SQLException, IOException {
+        SolicitacaoDAO solDAO = new SolicitacaoDAO();
+        return solDAO.listarSolicitacoesAceitas();
+    }
+    
      private void carregarTabelaSol() throws SQLException, IOException{
-         lista = FXCollections.observableArrayList(listarSol());
+         
          if(!lista.isEmpty()){
              tvNotificacoes.getColumns().clear();
              
@@ -204,29 +234,14 @@ public class NotificacoesController {
             colunaAceitacao.setPrefWidth(250);
             
             tvNotificacoes.getColumns().addAll(colunaIDSol, colunaDescricao, colunaAceitacao);
-            
-            
-//            FilteredList<Solicitacao> listaFiltrada = new FilteredList<>(lista, p -> true);
-//            tfPesquisa.textProperty().addListener((obs, oldVal, newVal) -> {
-//                listaFiltrada.setPredicate( adm -> {
-//                    if(newVal == null || newVal.isEmpty()){
-//                        return true;
-//                    }
-//                    String filtro = newVal.toLowerCase();
-//                    return adm.getIdSolicitacao().toLowerCase().contains(filtro);
-//                           
-//                            
-//                });
-//            });
-//            SortedList<Solicitacao> listaOrdenada = new SortedList<>(listaFiltrada);
-//            listaOrdenada.comparatorProperty().bind(tvNotificacoes.comparatorProperty());
-//                tvNotificacoes.setItems(listaOrdenada);
+           
 
             tvNotificacoes.setItems(lista);
          }
      }
      
     void ajustarElementosJanela() throws SQLException, IOException {
+        lista = FXCollections.observableArrayList(listarSol());
         carregarTabelaSol();
     }
     
@@ -418,7 +433,9 @@ public class NotificacoesController {
                 stageSol.show();
                 stc.setOnSolAceitacao(() -> {
                     try {
+                        lista = FXCollections.observableArrayList(listarSol());
                         carregarTabelaSol();
+                        
                     } catch (SQLException ex) {
                         Logger.getLogger(NotificacoesController.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (IOException ex) {
