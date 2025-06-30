@@ -2,6 +2,7 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -11,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
@@ -44,6 +46,9 @@ public class CadastrarPostagemController {
 
     @FXML
     private ImageView btnMaisFotos;
+    
+    @FXML
+    private ImageView imagem;
 
     @FXML
     private Button btnPostar;
@@ -58,19 +63,22 @@ public class CadastrarPostagemController {
     private TextArea txtLegenda;
 
     @FXML
-    void onClickImagem(MouseEvent event) {
+    void onClickImagem(MouseEvent event) throws MalformedURLException {
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Selecionar Imagem");
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Arquivos de Imagem", "*.png", "*.jpg", "*.jpeg", "*.gif"));
-        arquivoSelecionado = fileChooser.showOpenDialog(lblImagem.getScene().getWindow());
+        arquivoSelecionado = fileChooser.showOpenDialog(imagem.getScene().getWindow());
 
         if (arquivoSelecionado != null) {
-            //lblCaminhoArquivo.setText(arquivoSelecionado.getAbsolutePath());
+        String urlImagem = arquivoSelecionado.toURI().toURL().toString();
+            Image fotoEscolhida = new Image(urlImagem);
+            imagem.setImage(fotoEscolhida);
         } else {
             //lblCaminhoArquivo.setText("Nenhum arquivo foi selecionado");
         }
     }
+    
 
     @FXML
     void onClickMaisFotos(MouseEvent event) {

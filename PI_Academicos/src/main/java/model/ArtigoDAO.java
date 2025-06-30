@@ -53,23 +53,17 @@ public class ArtigoDAO extends GenericDAO {
         
         
         String sqlArtigo = "DELETE FROM artigos WHERE idArtigo = ?;";
-        String sqlFoto = "DELETE FROM fotos_postagens WHERE idPostagem = ?;";
-        
+
         try {
-            //PreparedStatement stmtPostagem = con.prepareStatement(sqlPostagem);
-  
-            //stmtPostagem.setInt(1, postagem.getId());
-            //stmtPostagem.executeUpdate();
-            
-            PreparedStatement stmtFoto = con.prepareStatement(sqlFoto);
-            
-            //stmtFoto.setInt(1, postagem.getId());
-            stmtFoto.executeUpdate();
-            
-            System.out.println("A postagem foi excluída");
-            
-        }catch (SQLException e) {
-            System.err.println("Erro ao excluir postagem do banco de dados: " + e.getMessage());
+            PreparedStatement stmtPostagem = con.prepareStatement(sqlArtigo);
+
+            stmtPostagem.setInt(1, artigo.getId());
+            stmtPostagem.executeUpdate();
+
+            System.out.println("O artigo foi excluído");
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao excluir artigo do banco de dados: " + e.getMessage());
             // Adicione aqui tratamento de erro mais robusto (ex: log, exceção customizada)
         }
         

@@ -23,8 +23,6 @@ public class AtualizarPostagemController {
     private Postagem postagem;
     private Image image;
 
-    @FXML
-    private Button btnAtualizar;
 
     @FXML
     private Button btnExcluir;
@@ -38,10 +36,6 @@ public class AtualizarPostagemController {
     @FXML
     private TextArea txtLegenda;
 
-    @FXML
-    void onClickAtualizar(ActionEvent event) {
-
-    }
 
     @FXML
     void onClickExcluir(ActionEvent event) throws SQLException {

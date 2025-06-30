@@ -4,6 +4,7 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,7 +12,9 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Artigo;
+import model.ArtigoDAO;
 import model.Projeto;
+import static util.AlertaUtil.mostrarConfirmacao;
 
 public class AtualizarArtigoController {
 
@@ -67,8 +70,12 @@ public class AtualizarArtigoController {
     }
 
     @FXML
-    void onClickExcluir(ActionEvent event) {
+    void onClickExcluir(ActionEvent event) throws SQLException {
 
+        ArtigoDAO artigoDAO = new ArtigoDAO();
+        artigoDAO.deletarArtigo(artigo);
+        mostrarConfirmacao("Artigo excluído", "O artigo foi excluído.");
+        stageAtualizarArtigo.close();
     }
 
     @FXML

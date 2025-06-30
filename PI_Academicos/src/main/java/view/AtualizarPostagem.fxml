@@ -29,17 +29,9 @@
                </font>
             </Label>
             <TextArea fx:id="txtLegenda" prefHeight="200.0" prefWidth="200.0" promptText="Legenda" VBox.vgrow="ALWAYS" />
-            <HBox prefHeight="28.0" prefWidth="394.0">
+            <HBox alignment="TOP_RIGHT" prefHeight="28.0" prefWidth="394.0">
                <children>
-                  <Button fx:id="btnExcluir" alignment="BOTTOM_RIGHT" mnemonicParsing="false" onAction="#onClickExcluir" style="-fx-background-color: #840d0b;" text="EXCLUIR" textFill="WHITE">
-                     <font>
-                        <Font name="Courier New Bold" size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="220.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="btnAtualizar" alignment="BOTTOM_RIGHT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onClickAtualizar" style="-fx-background-color: #840d0b;" text="ATUALIZAR" textFill="WHITE">
+                  <Button fx:id="btnExcluir" alignment="BOTTOM_RIGHT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onClickExcluir" style="-fx-background-color: #840d0b;" text="EXCLUIR" textFill="WHITE">
                      <font>
                         <Font name="Courier New Bold" size="14.0" />
                      </font>
