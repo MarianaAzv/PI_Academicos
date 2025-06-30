@@ -47,7 +47,7 @@
                   <Font name="Courier New Bold" size="24.0" />
                </font>
             </Label>
-            <TableView fx:id="tvNotificacoes" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+            <TableView fx:id="tvNotificacoes" onMouseClicked="#TableViewClick" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
             <Button fx:id="btnValidados" mnemonicParsing="false" style="-fx-background-color: #840d0b;" text="Validados" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
                <font>
                   <Font name="Courier New Bold" size="14.0" />

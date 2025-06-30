@@ -35,6 +35,7 @@ public class NotificacoesController {
     
     private Stage stageNotificacoes;
     private Administrador adm;
+    private Solicitacao sol;
     ObservableList<Solicitacao> lista;
     
      
@@ -189,26 +190,22 @@ public class NotificacoesController {
             TableColumn<Solicitacao, Number> colunaIDSol = new TableColumn<>("ID solicitação");
             colunaIDSol.setCellValueFactory(u -> u.getValue().idPropertyS());
             colunaIDSol.setStyle("-fx-alignment: CENTER;");
-            colunaIDSol.setPrefWidth(100);
+            colunaIDSol.setPrefWidth(200);
             
-            TableColumn<Solicitacao, Number> colunaIDUsu = new TableColumn<>("ID usuário"); 
-            colunaIDUsu.setCellValueFactory(u -> u.getValue().idPropertyU);
-            colunaIDUsu.setStyle("-fx-alignment: CENTER;");
-            colunaIDUsu.setPrefWidth(250);
             
             TableColumn<Solicitacao, String> colunaDescricao = new TableColumn<>("Descrição");
             colunaDescricao.setCellValueFactory(u -> u.getValue().descricaoProperty());
             colunaDescricao.setStyle("-fx-alignment: CENTER;");
-            colunaDescricao.setPrefWidth(500);
+            colunaDescricao.setPrefWidth(750);
             
             TableColumn<Solicitacao, Boolean> colunaAceitacao = new TableColumn<>("Aceitação");
             colunaAceitacao.setCellValueFactory(u-> u.getValue().aceitacaoProperty());
             colunaAceitacao.setStyle("-fx-alignment: CENTER;");
             colunaAceitacao.setPrefWidth(250);
             
-            tvNotificacoes.getColumns().addAll(colunaIDSol, colunaIDUsu, colunaDescricao, colunaAceitacao);
-//            
-//            
+            tvNotificacoes.getColumns().addAll(colunaIDSol, colunaDescricao, colunaAceitacao);
+            
+            
 //            FilteredList<Solicitacao> listaFiltrada = new FilteredList<>(lista, p -> true);
 //            tfPesquisa.textProperty().addListener((obs, oldVal, newVal) -> {
 //                listaFiltrada.setPredicate( adm -> {
@@ -217,8 +214,7 @@ public class NotificacoesController {
 //                    }
 //                    String filtro = newVal.toLowerCase();
 //                    return adm.getIdSolicitacao().toLowerCase().contains(filtro);
-//                            //|| adm.getCpf().toLowerCase().contains(filtro)
-//                            //|| adm.getEmail().toLowerCase().contains(filtro);
+//                           
 //                            
 //                });
 //            });
@@ -391,6 +387,48 @@ public class NotificacoesController {
             
             stagePrincipal.show();
             stageNotificacoes.close();
+    }
+    
+    @FXML
+    void TableViewClick(MouseEvent event) throws IOException {
+        if (event.getClickCount() == 1) {
+            sol = tvNotificacoes.getSelectionModel().getSelectedItem();
+            if (this.sol != null) {
+                URL url = new File("src/main/java/view/SolicitacaoTela.fxml").toURI().toURL();
+                FXMLLoader loader = new FXMLLoader(url);
+                Parent root = loader.load();
+
+                Stage stageSol = new Stage();
+
+                SolicitacaoTelaController stc = loader.getController();
+
+                stc.setStage(stageSol);
+                stc.setSolicitacao(sol);
+
+//                stageSol.setOnShown(evento -> {
+//                    stc.ajustarElementosJanela(this.adm);
+//                });
+                
+                
+
+                Scene scene = new Scene(root);
+
+                stageSol.setTitle("Solicitaçao selecionada");
+                stageSol.setScene(scene);
+                stageSol.show();
+                stc.setOnSolAceitacao(() -> {
+                    try {
+                        carregarTabelaSol();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(NotificacoesController.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                        Logger.getLogger(NotificacoesController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                        
+                    
+                });
+            }
+        }
     }
 
     

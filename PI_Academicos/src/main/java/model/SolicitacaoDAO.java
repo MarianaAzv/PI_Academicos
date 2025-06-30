@@ -118,6 +118,19 @@ public class SolicitacaoDAO extends GenericDAO{
         
         return lista;
 }
+    public void ativarSolicitacao(Solicitacao solicitacao) throws SQLException{
+        
+        Connection con = conectarDAO();
+        
+        String querySolicitacoes = "UPDATE USUARIOS SET aceitacao = 1 WHERE idSolicitacao = ?";
+        
+        try (con) {
+    // Inserir em Solicitacoes
+    PreparedStatement stmtSolicitacoes = con.prepareStatement(querySolicitacoes, PreparedStatement.RETURN_GENERATED_KEYS);
+    stmtSolicitacoes.setInt(1, solicitacao.getIdSolicitacao()); 
+    stmtSolicitacoes.executeUpdate();
+    }
+   }
     
      
        
