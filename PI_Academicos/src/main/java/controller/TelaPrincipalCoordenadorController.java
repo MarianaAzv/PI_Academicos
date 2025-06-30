@@ -120,9 +120,6 @@ public class TelaPrincipalCoordenadorController {
     private Label lblNomeBolsista;
 
     @FXML
-    private Label lblNomeCocoordenador;
-
-    @FXML
     private Label lblNomeCoordenador;
 
     @FXML
@@ -148,9 +145,6 @@ public class TelaPrincipalCoordenadorController {
 
     @FXML
     private Text txtNomeBolsitas;
-
-    @FXML
-    private Text txtNomeCocoordenador;
 
     @FXML
     private Text txtNomeCoordenador;

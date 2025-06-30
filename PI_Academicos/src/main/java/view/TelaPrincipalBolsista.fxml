@@ -122,17 +122,6 @@
                                 <rowConstraints>
                                     <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
-                                 <children>
-                                    <Label fx:id="lblNomeCocoordenador" prefHeight="23.0" prefWidth="164.0" text="Cocoordenador:" textFill="#840d0b">
-                                       <font>
-                                          <Font name="Courier New Bold" size="18.0" />
-                                       </font>
-                                    </Label>
-                                    <Text fx:id="txtNomeCocoordenador" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="534.0" GridPane.columnIndex="1">
-                                       <font>
-                                          <Font name="Courier New" size="18.0" />
-                                       </font></Text>
-                                 </children>
                               </GridPane>
                            </children>
                         </GridPane>
@@ -267,7 +256,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label fx:id="txtResumo" prefHeight="68.0" prefWidth="830.0" textAlignment="JUSTIFY">
+                        <Label fx:id="txtResumo" prefHeight="68.0" prefWidth="830.0" textAlignment="JUSTIFY" wrapText="true">
                            <font>
                               <Font name="Courier New" size="14.0" />
                            </font>

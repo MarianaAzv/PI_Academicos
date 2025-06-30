@@ -30,9 +30,9 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label fx:id="lblMsg" prefHeight="23.0" prefWidth="410.0" text="coisa" wrapText="true" GridPane.columnIndex="1">
+                  <Label fx:id="lblMsg" prefHeight="82.0" prefWidth="406.0" text="coisa" wrapText="true" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
                      <font>
-                        <Font name="Courier New Bold" size="18.0" />
+                        <Font name="Courier New Bold" size="16.0" />
                      </font>
                      <GridPane.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

@@ -158,9 +158,6 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert {
     private Label lblNomeBolsista;
 
     @FXML
-    private Label lblNomeCocoordenador;
-
-    @FXML
     private Label lblNomeCoordenador;
 
     @FXML
@@ -177,9 +174,6 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert {
 
     @FXML
     private Text txtNomeBolsita;
-
-    @FXML
-    private Text txtNomeCocoordenador;
 
     @FXML
     private Text txtNomeCoordenador;
