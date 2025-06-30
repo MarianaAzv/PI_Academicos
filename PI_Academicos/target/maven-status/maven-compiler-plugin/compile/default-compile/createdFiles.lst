@@ -9,11 +9,13 @@ util\Apenasletras.class
 controller\INotificacaoAlert.class
 controller\TeladefundoController.class
 controller\TelaPrincipalBolsistaController.class
+util\ApenasNumeros.class
 controller\ADMController.class
 controller\CadastrarPostagemController.class
 controller\RecuperarSenhaController$1.class
 model\Coordenador.class
 util\Origem.class
+model\UsuarioDAO.class
 controller\AtualizarPerfilCoordenadorController.class
 model\Artigo.class
 controller\AtualizarPerfilAdministradorController.class
@@ -51,6 +53,7 @@ model\GenericDAO.class
 model\Campus.class
 controller\TelaLoginController.class
 model\LoginDAO.class
+controller\AtualizarArtigoController.class
 module-info.class
 controller\NotificacoesController.class
 model\BolsistaDAO.class
@@ -64,6 +67,7 @@ principal\App.class
 dal\ConexaoBD.class
 model\NoticiaDAO.class
 model\Administrador.class
+util\CPFDuplicado.class
 controller\TelaPrincipalAdministradorController.class
 controller\BolsistaDesativarCoordenadorController.class
 controller\CadastrarAdministradorController.class

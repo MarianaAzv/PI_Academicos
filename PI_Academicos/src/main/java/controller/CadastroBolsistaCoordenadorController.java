@@ -386,6 +386,7 @@ public class CadastroBolsistaCoordenadorController implements INotificacaoAlert 
         e.printStackTrace();
         return null;
     }
+    }
 
     public void alerta(String msg, int tipo, String titulo) throws IOException {
         URL url = new File("src/main/java/view/AlertGenerico.fxml").toURI().toURL();
@@ -414,3 +415,4 @@ public class CadastroBolsistaCoordenadorController implements INotificacaoAlert 
     }
 }
 }
+

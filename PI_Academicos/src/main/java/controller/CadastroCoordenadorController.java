@@ -4,8 +4,8 @@ import java.awt.Desktop;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.io.InputStream;
+import java.net.URL;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import javafx.event.ActionEvent;
@@ -222,7 +222,7 @@ public class CadastroCoordenadorController implements INotificacaoAlert {
         this.stageCadastroCoordenador = telaCadastroCoordenador;
     }
 
-    void incluir(String cpf, String nome, String apelido, String email, String senha, int siape, String formacao) throws SQLException {
+    void incluir(String cpf, String nome, String apelido, String email, String senha, int siape, String formacao) throws SQLException, IOException {
         
         Foto fotoPerfil = new Foto(carregarImagemPadrao());
         usuario = new Usuario(cpf, nome, apelido, email, senha);
@@ -280,6 +280,7 @@ public class CadastroCoordenadorController implements INotificacaoAlert {
         e.printStackTrace();
         return null;
     }
+    }
     public void alerta(String msg, int tipo, String titulo) throws IOException {
         URL url = new File("src/main/java/view/AlertGenerico.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
@@ -308,5 +309,3 @@ public class CadastroCoordenadorController implements INotificacaoAlert {
 
 }
 
-
-}
