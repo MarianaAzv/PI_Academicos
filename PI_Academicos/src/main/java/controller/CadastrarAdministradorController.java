@@ -30,6 +30,7 @@ import model.Foto;
 import model.Usuario;
 import static util.AlertaUtil.mostrarAviso;
 import static util.AlertaUtil.mostrarConfirmacao;
+import util.ApenasNumeros;
 import util.Apenasletras;
 import util.CPF;
 import util.CPFDuplicado;
@@ -87,16 +88,18 @@ public class CadastrarAdministradorController implements INotificacaoAlert {
             alerta("CPF inválido", 2, "ERRO");
             return;
         }
-        if (!CPFDuplicado.cpfDuplicado(txtCPF.getText())==false) {
+        if (!CPFDuplicado.cpfDuplicado(txtCPF.getText()) == false) {
             alerta("Já existe um usuario com esse CPF cadastrado no sistema", 1, "ERRO");
             return;
+        }
+        if (!ApenasNumeros.isNumeros(txtCPF.getText())) {
+            alerta("Somente números no CPF", 1, "ERRO");
         }
         if (!Apenasletras.isLetras(txtNome.getText())) {
             alerta("Nome inválido", 2, "ERRO");
             return;
         }
 
-        
         if (!Email.isValidEmail(txtEmail.getText())) {
             alerta("Email inválido", 2, "ERRO");
             return;
@@ -105,17 +108,21 @@ public class CadastrarAdministradorController implements INotificacaoAlert {
             alerta("A senha esta muito fraca, para uma senha forte é necessario ter 6 caracters,ter pelo menos 1 letra Maiuscula e 1 Letra minuscula, um numero e um simbulo especial", 2, "ERRO");
             return;
         }
+        if (arquivoSelecionado == null) {
+            alerta("Por favor, selecione uma foto de perfil.", 2, "Foto obrigatória");
+            return;
+        }
 
         try {
-            if (txtCPF.getText().isEmpty() || txtNome.getText().isEmpty() || txtUsuario.getText().isEmpty() || txtEmail.getText().isEmpty() || txtSenha.getText().isEmpty()) {
+            if (!txtCPF.getText().isEmpty() || !txtNome.getText().isEmpty() || !txtUsuario.getText().isEmpty() || !txtEmail.getText().isEmpty() || !txtSenha.getText().isEmpty()) {
 
                 incluir(txtCPF.getText(), txtNome.getText(), txtUsuario.getText(), txtEmail.getText(), txtSenha.getText());
 
             } else {
-                alerta("Por favor inserir todos os dados",2,"ERRO");
+                alerta("Por favor inserir todos os dados", 2, "ERRO");
             }
         } catch (NumberFormatException n) {
-            alerta("O valor inserido para CPF deve ser apenas números",2,"CPF inválido");
+            alerta("O valor inserido para CPF deve ser apenas números", 2, "CPF inválido");
         }
         if (onADMCadastrado != null) {
             onADMCadastrado.run();
@@ -154,20 +161,20 @@ public class CadastrarAdministradorController implements INotificacaoAlert {
         Administrador administrador = new Administrador();
 
         if (arquivoSelecionado == null) {
-            mostrarAviso("Arquivo para foto de perfil não escolhido", " É ne cessário escolher uma foto de perfil para o administrador");
+            alerta(" É ne cessário escolher uma foto de perfil para o administrador", 2, "Arquivo para foto de perfil não escolhido");
         } else {
             byte[] conteudoImagem = Files.readAllBytes(arquivoSelecionado.toPath());
             Foto fotoPerfil = new Foto(conteudoImagem);
 
             int repetido = new AdministradorDAO().validarApelido(apelido, 0);
             if (repetido > 0) {
-                alerta("Este nome de usuário já está sendo usado",1,"Nome de usuário indisponível");
+                alerta("Este nome de usuário já está sendo usado", 1, "Nome de usuário indisponível");
 
             } else if (nome.isEmpty() || apelido.isEmpty() || email.isEmpty() || senha.isEmpty()) {
-                alerta("Todos os campos de cadastro devem ser preenchidos.",2,"Campos de preenchimento obrigatórios");
+                alerta("Todos os campos de cadastro devem ser preenchidos.", 2, "Campos de preenchimento obrigatórios");
             } else {
                 new AdministradorDAO().cadastrarUsuarioAdministrador(usuario, administrador, fotoPerfil);
-               alerta("O usuário foi registrado no sistema com sucesso!",3,"Usuário cadastrado");
+                alerta("O usuário foi registrado no sistema com sucesso!", 3, "Usuário cadastrado");
                 stage.close();
             }
         }
