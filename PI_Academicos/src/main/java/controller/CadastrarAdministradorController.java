@@ -3,11 +3,15 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -26,13 +30,16 @@ import model.Foto;
 import model.Usuario;
 import static util.AlertaUtil.mostrarAviso;
 import static util.AlertaUtil.mostrarConfirmacao;
+import util.Apenasletras;
 import util.CPF;
+import util.CPFDuplicado;
 import util.Email;
+import util.Senha;
 
-public class CadastrarAdministradorController {
+public class CadastrarAdministradorController implements INotificacaoAlert {
 
     private Stage stage;
-    private File arquivoSelecionado=null;
+    private File arquivoSelecionado = null;
     private Runnable onADMCadastrado;// callback
 
     @FXML
@@ -74,40 +81,55 @@ public class CadastrarAdministradorController {
     @FXML
     private TextField txtUsuario;
 
-   
-
     @FXML
     void onClickCadastrar(ActionEvent event) throws SQLException, IOException {
+        if (!CPF.isValid(txtCPF.getText())) {
+            alerta("CPF inválido", 2, "ERRO");
+            return;
+        }
+        if (!CPFDuplicado.cpfDuplicado(txtCPF.getText())) {
+            alerta("Já existe um usuario com esse CPF cadastrado no sistema", 1, "ERRO");
+            return;
+        }
+        if (!Apenasletras.isLetras(txtNome.getText())) {
+            alerta("Nome inválido", 2, "ERRO");
+            return;
+        }
+
+        if (!Apenasletras.isLetras(txtUsuario.getText())) {
+            alerta("Usuario inválido", 2, "ERRO");
+            return;
+        }
+        if (!Email.isValidEmail(txtEmail.getText())) {
+            alerta("Email inválido", 2, "ERRO");
+            return;
+        }
+        if (!Senha.senhaForte(txtSenha.getText())) {
+            alerta("A senha esta muito fraca, para uma senha forte é necessario ter 6 caracters,ter pelo menos 1 letra Maiuscula e 1 Letra minuscula, um numero e um simbulo especial", 2, "ERRO");
+            return;
+        }
 
         try {
             if (txtCPF.getText().isEmpty() || txtNome.getText().isEmpty() || txtUsuario.getText().isEmpty() || txtEmail.getText().isEmpty() || txtSenha.getText().isEmpty()) {
-                if (CPF.isValid(txtCPF.getText())) {
-                    System.out.print("CPF válido");
-                    if (Email.isValidEmail(txtEmail.getText())) {
 
-                        incluir(txtCPF.getText(), txtNome.getText(), txtUsuario.getText(), txtEmail.getText(), txtSenha.getText());
+                incluir(txtCPF.getText(), txtNome.getText(), txtUsuario.getText(), txtEmail.getText(), txtSenha.getText());
 
-                    } else {
-                        mostrarAviso("ERRO", "Email inválido");
-                    }
-                } else {
-                    mostrarAviso("ERRO", "CPF inválido");
-                }
             } else {
-                mostrarAviso("ERRO", "Por favor inserir todos os dados");
+                alerta("Por favor inserir todos os dados",2,"ERRO");
             }
         } catch (NumberFormatException n) {
-            mostrarAviso("CPF inválido", "O valor inserido para CPF deve ser apenas números");
+            alerta("O valor inserido para CPF deve ser apenas números",2,"CPF inválido");
         }
-        if(onADMCadastrado != null){
+        if (onADMCadastrado != null) {
             onADMCadastrado.run();
         }
-        
+
     }
-    public void setOnADMCadastrado(Runnable callback){
+
+    public void setOnADMCadastrado(Runnable callback) {
         this.onADMCadastrado = callback;
     }
-    
+
     @FXML
     void onClickAdicionarFoto(MouseEvent event) throws MalformedURLException {
 
@@ -142,24 +164,43 @@ public class CadastrarAdministradorController {
 
             int repetido = new AdministradorDAO().validarApelido(apelido, 0);
             if (repetido > 0) {
-                mostrarAviso("Nome de usuário indisponível", "Este nome de usuário já está sendo usado");
+                alerta("Este nome de usuário já está sendo usado",1,"Nome de usuário indisponível");
 
             } else if (nome.isEmpty() || apelido.isEmpty() || email.isEmpty() || senha.isEmpty()) {
-                mostrarAviso("Campos de preenchimento obrigatórios", "Todos os campos de cadastro devem ser preenchidos.");
+                alerta("Todos os campos de cadastro devem ser preenchidos.",2,"Campos de preenchimento obrigatórios");
             } else {
                 new AdministradorDAO().cadastrarUsuarioAdministrador(usuario, administrador, fotoPerfil);
-                mostrarConfirmacao("Usuário cadastrado", "O usuário foi registrado no sistema com sucesso!");
+               alerta("O usuário foi registrado no sistema com sucesso!",3,"Usuário cadastrado");
                 stage.close();
             }
         }
 
     }
-        
-        
-        
+
+    public void alerta(String msg, int tipo, String titulo) throws IOException {
+        URL url = new File("src/main/java/view/AlertGenerico.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stageAlerta = new Stage();
+
+        AlertGenericoController vpb = loader.getController();
+        vpb.setMsg(msg);
+        vpb.setTipo(tipo);
+        vpb.setStage(stageAlerta);
+        vpb.setControllerResposta(this);
+
+        Scene cena = new Scene(root);
+        stageAlerta.setTitle(titulo);
+        stageAlerta.setScene(cena);
+
+        stageAlerta.show();
+
     }
-    
-    
-    
 
+    @Override
+    public void btnOk() {
 
+    }
+
+}

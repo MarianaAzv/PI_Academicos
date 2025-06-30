@@ -30,9 +30,10 @@ import model.Projeto;
 import model.ProjetoDAO;
 import static util.AlertaUtil.mostrarAviso;
 import static util.AlertaUtil.mostrarConfirmacao;
+import util.Apenasletras;
 import util.Origem;
 
-public class AtualizarProjetoController {
+public class AtualizarProjetoController implements INotificacaoAlert {
 
     private Stage stageAtualizarProjeto;
     Projeto projeto;
@@ -129,7 +130,14 @@ public class AtualizarProjetoController {
     void OnClickAtualizar(ActionEvent event) throws IOException {
 
         try {
-
+            if (txtNomedoProjeto.getText().isEmpty() || txtResumo.getText().isEmpty() || CBcategoria.getValue() == null || txtDatadeInicio.getText().isEmpty() || txtDatadeFim.getText().isEmpty() || CBcampus.getValue() == null || txtResumo.getText().isEmpty() || txtEdital.getText().isEmpty()) {
+                alerta("Por favor inserir todos os campus", 1, "Erro");
+                return;
+            }
+//            if (arquivoPDF == null) {
+//                alerta("Você deve selecionar um arquivo PDF antes de submeter.",2,"PDF obrigatório");
+//                return;
+//            }
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate dI = LocalDate.parse(txtDatadeInicio.getText(), formatter);
             LocalDate dF = LocalDate.parse(txtDatadeFim.getText(), formatter);
@@ -142,18 +150,34 @@ public class AtualizarProjetoController {
             if (!txtProrrogacao.getText().isEmpty()) {
                 prorrogacao = LocalDate.parse(txtProrrogacao.getText(), formatter);
                 if (!prorrogacao.isAfter(dF)) {
-                    mostrarAviso("Data inválida", "A data de prorrogação deve ser posterior à data de fim.");
+                    alerta("A data de prorrogação deve ser posterior à data de fim.", 2, "Data inválida");
                     return;
                 }
+
+            }
+
+            if (!dF.isAfter(dI)) {
+                alerta("A data de fim deve ser posterior á data de inicio", 2, "Data inválida");
+                return;
+            }
+            if (!Apenasletras.isLetras(txtNomedoProjeto.getText())) {
+                alerta("O nome do projeto deve conter somente letras", 2, "Nome inválido");
+                return;
+            }
+            ProjetoDAO dao = new ProjetoDAO();
+            if (dao.projetoComMesmoTitulo(txtNomedoProjeto.getText(), projeto.getIdProjeto())) {
+                alerta("Já existe outro projeto com esse nome. Escolha um nome diferente.", 2, "Título duplicado");
+
+                return;
             }
 //       
             System.out.print("Coordenador no atualizar" + coordenador);
             atualizarProjeto(projeto.getIdProjeto(), txtNomedoProjeto.getText(), txtResumo.getText(), campusnomeSelecionado, txtEdital.getText(), dI, dF, prorrogacao, areaconhecimento);
 //            } 
         } catch (SQLException e) {
-            mostrarAviso("Falha", "A falha em atuaizar esse projeto");
+            alerta("A falha em atualizar esse projeto", 2, "Falha");
         } catch (DateTimeParseException e) {
-            mostrarAviso("Falha", "O formato das datas nao esta como o esperado");
+            alerta("O formato das datas nao esta como o esperado", 2, "Falha");
         }
         //Depois que as coisas tiverem setads na tela do coordenador, testar se esta atualizando
         voltarapaginainicial();
@@ -165,8 +189,8 @@ public class AtualizarProjetoController {
     }
 
     @FXML
-    void OnClickDesativarCocoordenador(ActionEvent event) {
-        mostrarAviso("Erro", "Esse botão não abre!");
+    void OnClickDesativarCocoordenador(ActionEvent event) throws IOException {
+        alerta("Esse botão não abre!", 1, "Erro");
     }
 
     //----------------------------*Sets*----------------------------------//
@@ -207,7 +231,7 @@ public class AtualizarProjetoController {
     }
 
     //---------------------------*Metodos*------------------------------------//
-    void atualizarProjeto(int idProjeto, String titulo, String resumo, Campus campus, String edital, LocalDate dataInicio, LocalDate dataFim, LocalDate prorrogacao, AreasConhecimento areaconhecimento) throws SQLException {
+    void atualizarProjeto(int idProjeto, String titulo, String resumo, Campus campus, String edital, LocalDate dataInicio, LocalDate dataFim, LocalDate prorrogacao, AreasConhecimento areaconhecimento) throws SQLException, IOException {
 
         ProjetoDAO pdao = new ProjetoDAO();
 
@@ -222,12 +246,12 @@ public class AtualizarProjetoController {
 
         pdao.atualizarProjeto(projeto);
 
-        mostrarConfirmacao("Projeto alterado", "O projeto foi alterado com sucesso!");
+        alerta("O projeto foi alterado com sucesso!", 3, "Projeto alterado");
         System.out.print("O projeto de atualizando");
 
     }
 
-    public void ajustarElementosJanela() {
+    public void ajustarElementosJanela() throws IOException {
         //ArrayList para set dos nomes dos campus no combo box de campus
         try {
             CampusDAO cdao = new CampusDAO();
@@ -252,7 +276,7 @@ public class AtualizarProjetoController {
 
         } catch (SQLException e) {
 
-            mostrarAviso("Banco de Dados", "A falha de comunicação entre o sistema e o Banco");
+            alerta("A falha de comunicação entre o sistema e o Banco", 1, "Banco de Dados");
         }
     }
 
@@ -322,6 +346,32 @@ public class AtualizarProjetoController {
         stageBolsistaDesativar.setScene(cena);
 
         stageBolsistaDesativar.show();
+
+    }
+
+    public void alerta(String msg, int tipo, String titulo) throws IOException {
+        URL url = new File("src/main/java/view/AlertGenerico.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stageAlerta = new Stage();
+
+        AlertGenericoController vpb = loader.getController();
+        vpb.setMsg(msg);
+        vpb.setTipo(tipo);
+        vpb.setStage(stageAlerta);
+        vpb.setControllerResposta(this);
+
+        Scene cena = new Scene(root);
+        stageAlerta.setTitle(titulo);
+        stageAlerta.setScene(cena);
+
+        stageAlerta.show();
+
+    }
+
+    @Override
+    public void btnOk() {
 
     }
 }

@@ -226,4 +226,21 @@ public class BolsistaDAO extends GenericDAO {
         }
         return false;
     }
+
+    public boolean existeMatriculaNoCampus(Long matricula, int idCampus) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM bolsista b JOIN bolsista_projeto bp ON bp.id_bolsista = b.id_bolsista JOIN projeto p ON p.id_projeto = bp.id_projeto WHERE b.matricula = ? AND p.id_campus = ?";
+
+        try (Connection con = conectarDAO(); PreparedStatement stmt = con.prepareStatement(sql)) {
+
+            stmt.setLong(1, matricula);
+            stmt.setInt(2, idCampus);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        }
+        return false;
+    }
 }
