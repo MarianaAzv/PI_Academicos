@@ -45,20 +45,12 @@ public class SolicitacaoTelaController {
     @FXML
     void onClickDesativar(ActionEvent event) throws SQLException {
         
-//        if(sol.isAceitacao()==true){
-//            Optional<ButtonType> result = mostrarConfirmacao("O seu perfil está prestes a ser DESATIVADO", "Têm certeza que deseja desativar o perfil?");
-//        if (result.isPresent() && result.get() == ButtonType.OK) {
-//            System.out.println("Usuário desativado.");
             new SolicitacaoDAO().ativarSolicitacao(sol);
-//        } else {
-//            System.out.println("Usuário cancelou a ação.");
-//        }
-//        } 
-//
-//        if(onSolAceitacao != null){
-//           onSolAceitacao.run();
-//        }
-//       
+
+        if(onSolAceitacao != null){
+           onSolAceitacao.run();
+        }
+       
         stageSol.close();
 
     }

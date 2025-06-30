@@ -122,7 +122,7 @@ public class SolicitacaoDAO extends GenericDAO{
         
         Connection con = conectarDAO();
         
-        String querySolicitacoes = "UPDATE USUARIOS SET aceitacao = 1 WHERE idSolicitacao = ?";
+        String querySolicitacoes = "UPDATE SOLICITACOES SET aceitacao = 1 WHERE idSolicitacao = ?";
         
         try (con) {
     // Inserir em Solicitacoes
