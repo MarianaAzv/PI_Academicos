@@ -75,7 +75,11 @@ public class EscolherProjetoController {
                 tpc.setCoordenador(coordenador);
                 System.out.print("O coordenador é teste" + coordenador);
                 telaCriarProjeto.setOnShown(evento -> {
-                    tpc.ajustarElementosJanela();
+                    try {
+                        tpc.ajustarElementosJanela();
+                    } catch (IOException ex) {
+                        Logger.getLogger(EscolherProjetoController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 });
 
                 Scene cena = new Scene(root);

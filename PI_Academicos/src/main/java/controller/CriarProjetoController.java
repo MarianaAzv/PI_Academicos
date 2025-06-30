@@ -53,7 +53,7 @@ import static util.AlertaUtil.mostrarConfirmacao;
 import util.Apenasletras;
 import util.Origem;
 
-public class CriarProjetoController {
+public class CriarProjetoController implements INotificacaoAlert {
 
     private Stage stageCriarProjeto;
     Coordenador coordenador;
@@ -160,12 +160,17 @@ public class CriarProjetoController {
         try {
 //Verificar se esse nome de projeto ja existe no sistema 
             if (txtNomedoProjeto.getText().isEmpty() || txtResumo.getText().isEmpty() || txtEdital.getText().isEmpty() || txtDatadeInicio.getText().isEmpty() || txtDatadeFim.getText().isEmpty() || CBcampus.getValue() == null || CBcategoria.getValue() == null) {
-                mostrarAviso("Falta informacao", "Por favor inserir todos os dados corretamente");
+                alerta("Por favor inserir todos os dados corretamente", 2, "Falta informacao");
 
                 return;
             } else {
                 if (arquivoPDF == null) {
-                    mostrarAviso("PDF obrigatório", "Você deve selecionar um arquivo PDF antes de submeter.");
+                    alerta("Você deve selecionar um arquivo PDF antes de submeter.", 2, "PDF obrigatório");
+                    return;
+                }
+                ProjetoDAO dao = new ProjetoDAO();
+                if (dao.projetoComMesmoTitulo(txtNomedoProjeto.getText(), projeto.getIdProjeto())) {
+                    alerta("Já existe outro projeto com esse nome. Escolha um nome diferente.", 2, "Título duplicado");
                     return;
                 }
 
@@ -176,7 +181,7 @@ public class CriarProjetoController {
                     LocalDate dF = LocalDate.parse(txtDatadeFim.getText(), formatter);
 
                     if (dI.isAfter(dF)) {
-                        mostrarAviso("Datas", "A data do final do projeto esta menor que a data de inicio do projeto");
+                        alerta("A data do final do projeto esta menor que a data de inicio do projeto", 2, "Erro");
                         return;
                     } else {
                         Campus campusnomeSelecionado = CBcampus.getValue();
@@ -186,14 +191,14 @@ public class CriarProjetoController {
                         incluir(txtNomedoProjeto.getText(), txtResumo.getText(), campusnomeSelecionado, txtEdital.getText(), dI, dF, null, true, coordenador.getId());
                     }
                 } else {
-                    mostrarAviso("ERRO", "O nome do projeto tem caracters não esperados");
+                    alerta("O nome do projeto tem caracters não esperados", 2, "ERRO");
                 }
             }
 
         } catch (SQLException e) {
-            mostrarAviso("Falha", "A falha em cadastrar esse projeto");
+            alerta("A falha em cadastrar esse projeto", 2, "Falha");
         } catch (DateTimeParseException e) {
-            mostrarAviso("Falha", "O formato das datas nao esta como o esperado");
+            alerta("O formato das datas nao esta como o esperado", 2, "Falha");
         }
 
         enviarSolicitacao();
@@ -244,7 +249,7 @@ public class CriarProjetoController {
     }
 
     //------------*Metodos*-------------
-    public void ajustarElementosJanela() {
+    public void ajustarElementosJanela() throws IOException {
         //ArrayList para set dos nomes dos campus no combo box de campus
         try {
             CampusDAO cdao = new CampusDAO();
@@ -259,7 +264,7 @@ public class CriarProjetoController {
 
         } catch (SQLException e) {
 
-            mostrarAviso("Banco de Dados", "A falha de comunicação entre o sistema e o Banco");
+            alerta("A falha de comunicação entre o sistema e o Banco", 1, "Banco de Dados");
         }
     }
 
@@ -278,7 +283,7 @@ public class CriarProjetoController {
         pdao.cadastraprojeto(projeto, id, fotoPerfil);
         pdao.AreaProjeto(projeto, areasconhecimento);
 
-        mostrarConfirmacao("Projeto cadastrado", "O projeto foi registrado no sistema com sucesso!");
+        alerta("O projeto foi registrado no sistema com sucesso!", 3, "Projeto cadastrado");
 
     }
 
@@ -348,6 +353,32 @@ public class CriarProjetoController {
         e.printStackTrace();
         return null;
     }
+    public void alerta(String msg, int tipo, String titulo) throws IOException {
+        URL url = new File("src/main/java/view/AlertGenerico.fxml").toURI().toURL();
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        Stage stageAlerta = new Stage();
+
+        AlertGenericoController vpb = loader.getController();
+        vpb.setMsg(msg);
+        vpb.setTipo(tipo);
+        vpb.setStage(stageAlerta);
+        vpb.setControllerResposta(this);
+
+        Scene cena = new Scene(root);
+        stageAlerta.setTitle(titulo);
+        stageAlerta.setScene(cena);
+
+        stageAlerta.show();
+
+    }
+
+    @Override
+    public void btnOk() {
+
+    }
+
 }
 
 }

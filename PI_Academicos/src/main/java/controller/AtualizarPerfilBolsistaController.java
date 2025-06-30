@@ -32,6 +32,11 @@ import model.Projeto;
 import util.AlertaUtil;
 import static util.AlertaUtil.mostrarAviso;
 import static util.AlertaUtil.mostrarConfirmacao;
+import util.ApenasNumeros;
+import util.Apenasletras;
+import util.CPF;
+import util.Email;
+import util.Senha;
 
 public class AtualizarPerfilBolsistaController implements INotificacaoAlert {
 
@@ -212,6 +217,32 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert {
 
     @FXML
     void onClickAtualizar(ActionEvent event) throws SQLException, IOException {
+        if (!CPF.isValid(txtCPF.getText())) {
+            alerta("CPF inválido", 2, "ERRO");
+            return;
+        }
+        if (!Email.isValidEmail(txtEmail.getText())) {
+            alerta("Email inválido", 2, "ERRO");
+            return;
+        }
+        if (!Apenasletras.isLetras(txtNome.getText())) {
+            alerta("Nome inválido", 2, "ERRO");
+            return;
+        }
+       
+        if (!Senha.senhaForte(txtSenha.getText())) {
+            alerta("A senha esta muito fraca, para uma senha forte é necessario ter 6 caracters,ter pelo menos 1 letra Maiuscula e 1 Letra minuscula, um numero e um simbulo especial", 2, "ERRO");
+            return;
+        }
+        if (!Apenasletras.isLetras(txtCurso.getText())) {
+            alerta("Curso inválido", 2, "ERRO");
+            return;
+        }
+        if (!ApenasNumeros.isNumeros(txtMatricula.getText())) {
+            alerta("Matricula inválida(Somente números", 2, "ERRO");
+            return;
+        }
+
         try {
 
             Long matricula = Long.parseLong(txtMatricula.getText());
@@ -221,6 +252,29 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert {
             //  Tratar valores NULL antes de converter para LocalDate
             LocalDate dataInicio = txtDataInicio.getText().isEmpty() ? null : LocalDate.parse(txtDataInicio.getText(), formatter);
             LocalDate dataFim = txtDataFim.getText().isEmpty() ? null : LocalDate.parse(txtDataFim.getText(), formatter);
+
+            if (dataFim.isAfter(projeto.getDataFim())) {
+                alerta("A data de fim do bolsista não pode ser maior que a do projeto.", 2, "Data inválida");
+                return;
+            }
+            if (dataInicio.isAfter(dataFim)) {
+                alerta("A data de inicio não pode ser posterior a data de fim", 2, "Data inválida");
+                return;
+            }
+            if (dataInicio.isBefore(projeto.getDataInicio())) {
+                alerta("A data de inicio do bolsista não pode seer menor que a data de inicio do projeto", 2, "Data inválida");
+                return;
+            }
+            if (dataFim.isBefore(projeto.getDataFim())) {
+                alerta("A data de fim do bolsista não pode ser menor que a data de inicio do projeto", 2, "Data inválida");
+                return;
+            }
+            int idCampus = projeto.getCampus().getIdCampus();
+            BolsistaDAO dao = new BolsistaDAO();
+            if (dao.existeMatriculaNoCampus(matricula, idCampus)) {
+                alerta("Já existe um bolsista com essa matrícula neste campus.", 2, "Matrícula duplicada");
+                return;
+            }
 
             atualizarBolsista(bolsista.getId(), txtCPF.getText(), txtNome.getText(), txtUsuario.getText(), txtEmail.getText(),
                     txtSenha.getText(), ativa, matricula, txtCurso.getText(), dataInicio, dataFim);
@@ -518,5 +572,5 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert {
     public void btnOk() {
 
     }
-     
+
 }
