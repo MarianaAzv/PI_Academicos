@@ -257,10 +257,7 @@ public class AtualizarPerfilCoordenadorController implements INotificacaoAlert {
             alerta("Nome inválido", 2, "ERRO");
             return;
         }
-        if (!Apenasletras.isLetras(txtUsuario.getText())) {
-            alerta("Nome inválido", 2, "ERRO");
-            return;
-        }
+       
         if (!Apenasletras.isLetras(txtFormacao.getText())) {
             alerta("Nome inválido", 2, "ERRO");
             return;

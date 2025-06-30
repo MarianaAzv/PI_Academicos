@@ -87,7 +87,7 @@ public class CadastrarAdministradorController implements INotificacaoAlert {
             alerta("CPF inválido", 2, "ERRO");
             return;
         }
-        if (!CPFDuplicado.cpfDuplicado(txtCPF.getText())) {
+        if (!CPFDuplicado.cpfDuplicado(txtCPF.getText())==false) {
             alerta("Já existe um usuario com esse CPF cadastrado no sistema", 1, "ERRO");
             return;
         }
@@ -96,10 +96,7 @@ public class CadastrarAdministradorController implements INotificacaoAlert {
             return;
         }
 
-        if (!Apenasletras.isLetras(txtUsuario.getText())) {
-            alerta("Usuario inválido", 2, "ERRO");
-            return;
-        }
+        
         if (!Email.isValidEmail(txtEmail.getText())) {
             alerta("Email inválido", 2, "ERRO");
             return;

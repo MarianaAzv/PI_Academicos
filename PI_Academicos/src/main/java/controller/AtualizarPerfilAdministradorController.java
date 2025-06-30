@@ -123,10 +123,7 @@ public class AtualizarPerfilAdministradorController implements INotificacaoAlert
             alerta("Nome inválido", 2, "ERRO");
             return;
         }
-        if (!Apenasletras.isLetras(txtUsuario.getText())) {
-            alerta("Usuario inválido", 2, "ERRO");
-            return;
-        }
+       
         if (!Email.isValidEmail(txtEmail.getText())) {
             alerta("Email inválido", 2, "ERRO");
             return;

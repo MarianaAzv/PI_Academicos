@@ -113,7 +113,10 @@ public class CadastroCoordenadorController implements INotificacaoAlert {
 
     @FXML
     void OnClickSubmeter(ActionEvent event) throws SQLException, IOException {
-
+//        if (!CPFDuplicado.cpfDuplicado(txtCPF.getText())) {
+//            alerta("Esse CPF já esta cadastrado no sistema", 1, "ERRO");
+//            return;
+//        }
         try {
 
             if (arquivoPDF == null) {
@@ -129,31 +132,34 @@ public class CadastroCoordenadorController implements INotificacaoAlert {
                 if (Senha.senhaForte(txtSenha.getText())) {
                     if (CPF.isValid(txtCPF.getText())) {
                         System.out.print("CPF valido");
-                        if (Email.isValidEmail(txtEmail.getText())) {
-                            System.out.print("O Email esta valido");
-                            if (Apenasletras.isLetras(txtNomeCompleto.getText())) {
-                                if (Apenasletras.isLetras(txtFormacao.getText())) {
-                                    if (ApenasNumeros.isNumeros(txtSIAPE.getText())) {
-                                        if (!CPFDuplicado.cpfDuplicado(txtCPF.getText())) {
-                                            alerta("Esse CPF já esta cadastrado no sistema", 1, "ERRO");
+                        if (CPFDuplicado.cpfDuplicado(txtCPF.getText())==false) {
+                            if (Email.isValidEmail(txtEmail.getText())) {
+                                System.out.print("O Email esta valido");
+                                if (Apenasletras.isLetras(txtNomeCompleto.getText())) {
+                                    if (Apenasletras.isLetras(txtFormacao.getText())) {
+                                        if (ApenasNumeros.isNumeros(txtSIAPE.getText())) {
+
+                                            int siape = Integer.parseInt(txtSIAPE.getText());
+
+                                            incluir(txtCPF.getText(), txtNomeCompleto.getText(), txtUsuario.getText(), txtEmail.getText(), txtSenha.getText(), siape, txtFormacao.getText());
+                                            enviarSolicitacao();
+
+                                        } else {
+                                            alerta("SIAPE inválido(Por favor inserir somente números", 2, "Erro");
                                         }
-
-                                        int siape = Integer.parseInt(txtSIAPE.getText());
-
-                                        incluir(txtCPF.getText(), txtNomeCompleto.getText(), txtUsuario.getText(), txtEmail.getText(), txtSenha.getText(), siape, txtFormacao.getText());
-
                                     } else {
-                                        alerta("SIAPE inválido(Por favor inserir somente números", 2, "Erro");
+                                        alerta("Por favor inserir a sua formação corretamente", 2, "ERRO");
                                     }
                                 } else {
-                                    alerta("Por favor inserir a sua formação corretamente", 2, "ERRO");
+                                    alerta("Por favor inserir o nome corretamente", 2, "ERRO");
                                 }
                             } else {
-                                alerta("Por favor inserir o nome corretamente", 2, "ERRO");
+                                System.out.print("O Email invalido");
+                                alerta("O Email não esta no formato esperado", 2, "ERRO");
                             }
                         } else {
-                            System.out.print("O Email invalido");
-                            alerta("O Email não esta no formato esperado", 2, "ERRO");
+                            alerta("Esse CPF já esta cadastrado no sistema", 1, "ERRO");
+
                         }
                     } else {
                         System.out.print("CPF invalido");
@@ -166,8 +172,6 @@ public class CadastroCoordenadorController implements INotificacaoAlert {
         } catch (NumberFormatException n) {
             alerta("Os valores inseridos para CPF e SIAPE devem ser apenas números", 2, "CPF ou SIAPE inválidos");
         }
-
-        enviarSolicitacao();
 
     }
 
