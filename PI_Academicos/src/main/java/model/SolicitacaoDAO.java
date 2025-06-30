@@ -239,47 +239,5 @@ public class SolicitacaoDAO extends GenericDAO {
     stmtSolicitacoes.executeUpdate();
     }
    }
-    
-     
-       
-    
-}
-
-            while (rs.next()) {
-                Solicitacao solicitacao = new Solicitacao();
-                solicitacao.setIdSolicitacao(rs.getInt("idSolicitacao"));
-                solicitacao.setIdUsuario(rs.getInt("idUsuario"));
-                solicitacao.setDescricao(rs.getString("descricao"));
-                solicitacao.setAceitacao(rs.getBoolean("aceitacao"));
-                byte[] anexoByte = rs.getBytes("anexo");
-
-                String filePath = "C:/Users/Aluno/Downloads/arquivo.pdf";
-                File file = new File(filePath);
-                try {
-                    FileOutputStream fos = new FileOutputStream(file);
-                    fos.write(anexoByte);
-                    solicitacao.setAnexo(file);
-                    fos.close();
-
-                } catch (IOException e) {
-                    System.out.println("arquivo não foi criado");
-                    e.printStackTrace();
-                }
-
-                lista.add(solicitacao);
-
-            }
-
-            rs.close();
-            stmt.close();
-            conectarDAO().close();
-
-        } catch (SQLException s) {
-            System.out.println("tabela sql não acessada (solicitacao)");
-            s.printStackTrace();
-        }
-
-        return lista;
-    }
 
 }

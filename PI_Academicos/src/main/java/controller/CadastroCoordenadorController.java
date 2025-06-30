@@ -222,7 +222,7 @@ public class CadastroCoordenadorController implements INotificacaoAlert {
         this.stageCadastroCoordenador = telaCadastroCoordenador;
     }
 
-    void incluir(String cpf, String nome, String apelido, String email, String senha, int siape, String formacao) throws SQLException {
+    void incluir(String cpf, String nome, String apelido, String email, String senha, int siape, String formacao) throws SQLException, IOException {
         
         Foto fotoPerfil = new Foto(carregarImagemPadrao());
         usuario = new Usuario(cpf, nome, apelido, email, senha);
@@ -234,7 +234,7 @@ public class CadastroCoordenadorController implements INotificacaoAlert {
         } else if (nome.isEmpty() || apelido.isEmpty() || email.isEmpty() || senha.isEmpty()) {
             alerta("Todos os campos de cadastro devem ser preenchidos.", 2, "Campos de preenchimento obrigatórios");
         } else {
-            new CoordenadorDAO().cadastrarUsuarioCoordenador(usuario, coordenador);
+            new CoordenadorDAO().cadastrarUsuarioCoordenador(usuario, coordenador, fotoPerfil);
             alerta("O usuário foi registrado no sistema com sucesso!", 3, "Usuário cadastrado");
             stageCadastroCoordenador.close();
         }
@@ -280,6 +280,7 @@ public class CadastroCoordenadorController implements INotificacaoAlert {
         e.printStackTrace();
         return null;
     }
+    }
     public void alerta(String msg, int tipo, String titulo) throws IOException {
         URL url = new File("src/main/java/view/AlertGenerico.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
@@ -308,5 +309,3 @@ public class CadastroCoordenadorController implements INotificacaoAlert {
 
 }
 
-
-}

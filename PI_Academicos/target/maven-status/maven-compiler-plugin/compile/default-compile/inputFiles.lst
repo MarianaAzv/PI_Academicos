@@ -1,5 +1,6 @@
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\principal\App.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarPerfilBolsistaController.java
+C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\util\CPFDuplicado.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarPerfilCoordenadorController.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\TelaLoginController.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\dal\ConexaoBD.java
@@ -30,6 +31,7 @@ C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\Admi
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\LoginDAO.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\INotificacaoAlert.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Foto.java
+C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\util\ApenasNumeros.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\CadastrarPostagemController.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\ArtigoDAO.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\Noticia.java
@@ -68,3 +70,5 @@ C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\BolsistaD
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\TelaPrincipalAdministradorController.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\ProjetoDAO.java
 C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\TelaPrincipalCoordenadorController.java
+C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\model\UsuarioDAO.java
+C:\Users\aluno\Desktop\PI_Academicos\PI_Academicos\src\main\java\controller\AtualizarArtigoController.java

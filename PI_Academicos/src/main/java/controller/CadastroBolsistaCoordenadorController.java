@@ -312,7 +312,7 @@ public class CadastroBolsistaCoordenadorController implements INotificacaoAlert 
             return;
         }
 
-        dao.cadastrarUsuarioBolsista(usuario, bolsista, projeto);
+        dao.cadastrarUsuarioBolsista(usuario, bolsista, projeto, fotoPerfil);
         alerta("O bolsista foi registrado com sucesso!", 3, "Cadastro realizado");
 
         if (origem == Origem.atualizar_projeto) {
@@ -386,6 +386,7 @@ public class CadastroBolsistaCoordenadorController implements INotificacaoAlert 
         e.printStackTrace();
         return null;
     }
+    }
 
     public void alerta(String msg, int tipo, String titulo) throws IOException {
         URL url = new File("src/main/java/view/AlertGenerico.fxml").toURI().toURL();
@@ -413,4 +414,4 @@ public class CadastroBolsistaCoordenadorController implements INotificacaoAlert 
 
     }
 }
-}
+

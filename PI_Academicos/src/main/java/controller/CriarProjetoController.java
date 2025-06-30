@@ -268,7 +268,7 @@ public class CriarProjetoController implements INotificacaoAlert {
         }
     }
 
-    public void incluir(String titulo, String resumo, Campus campus, String edital, LocalDate dataInicio, LocalDate dataFim, LocalDate prorrogacao, boolean emAndamento, int id) throws SQLException {
+    public void incluir(String titulo, String resumo, Campus campus, String edital, LocalDate dataInicio, LocalDate dataFim, LocalDate prorrogacao, boolean emAndamento, int id) throws SQLException, IOException {
         
         Foto fotoPerfil = new Foto(carregarImagemPadrao());
         
@@ -352,6 +352,8 @@ public class CriarProjetoController implements INotificacaoAlert {
     } catch (IOException | NullPointerException e) {
         e.printStackTrace();
         return null;
+ 
+    }
     }
     public void alerta(String msg, int tipo, String titulo) throws IOException {
         URL url = new File("src/main/java/view/AlertGenerico.fxml").toURI().toURL();
@@ -381,4 +383,4 @@ public class CriarProjetoController implements INotificacaoAlert {
 
 }
 
-}
+
