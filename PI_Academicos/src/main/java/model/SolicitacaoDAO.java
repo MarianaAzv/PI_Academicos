@@ -74,8 +74,176 @@ public class SolicitacaoDAO extends GenericDAO {
         String sql = "SELECT * FROM solicitacoes";
 
         try {
-            PreparedStatement stmt = con.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery();
+             PreparedStatement stmt = con.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery();
+             
+             while(rs.next()){
+                 Solicitacao solicitacao = new Solicitacao();
+                 solicitacao.setIdSolicitacao(rs.getInt("idSolicitacao"));
+                 solicitacao.setIdUsuario(rs.getInt("idUsuario"));
+                 solicitacao.setDescricao(rs.getString("descricao"));
+                 solicitacao.setAceitacao(rs.getBoolean("aceitacao"));
+                 byte[] anexoByte = rs.getBytes("anexo");
+                 
+                 String filePath = "C:/Users/Aluno/Downloads/arquivo.pdf";
+                 File file = new File(filePath);
+                    try {
+                        FileOutputStream fos = new FileOutputStream(file);
+                        fos.write(anexoByte);
+                        solicitacao.setAnexo(file);
+                        fos.close();
+                        
+                    }catch(IOException e) {
+                        System.out.println("arquivo não foi criado");
+                         e.printStackTrace();
+                    }
+                    
+                    lista.add(solicitacao);
+                    
+                 }
+                 
+            rs.close();
+            stmt.close();
+            conectarDAO().close();
+        
+             }catch(SQLException s){
+                 System.out.println("tabela sql não acessada (solicitacao)");
+                  s.printStackTrace();
+        }
+        
+        
+        
+        
+        return lista;
+}
+    public ObservableList<Solicitacao> listarSolicitacoesAceitas() throws SQLException, FileNotFoundException, IOException{
+        
+        Connection con = conectarDAO();
+        
+        ObservableList<Solicitacao> lista = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM solicitacoes WHERE aceitacao = 1";
+        
+        try {
+             PreparedStatement stmt = con.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery();
+             
+             while(rs.next()){
+                 Solicitacao solicitacao = new Solicitacao();
+                 solicitacao.setIdSolicitacao(rs.getInt("idSolicitacao"));
+                 solicitacao.setIdUsuario(rs.getInt("idUsuario"));
+                 solicitacao.setDescricao(rs.getString("descricao"));
+                 solicitacao.setAceitacao(rs.getBoolean("aceitacao"));
+                 byte[] anexoByte = rs.getBytes("anexo");
+                 
+                 String filePath = "C:/Users/Aluno/Downloads/arquivo.pdf";
+                 File file = new File(filePath);
+                    try {
+                        FileOutputStream fos = new FileOutputStream(file);
+                        fos.write(anexoByte);
+                        solicitacao.setAnexo(file);
+                        fos.close();
+                        
+                    }catch(IOException e) {
+                        System.out.println("arquivo não foi criado");
+                         e.printStackTrace();
+                    }
+                    
+                    lista.add(solicitacao);
+                    
+                 }
+                 
+            rs.close();
+            stmt.close();
+            conectarDAO().close();
+        
+             }catch(SQLException s){
+                 System.out.println("tabela sql não acessada (solicitacao)");
+                  s.printStackTrace();
+        }
+        return lista;
+    }
+    
+    public ObservableList<Solicitacao> listarSolicitacoesAbertas() throws SQLException, FileNotFoundException, IOException{
+        
+        Connection con = conectarDAO();
+        
+        ObservableList<Solicitacao> lista = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM solicitacoes WHERE aceitacao = 0";
+        
+        try {
+             PreparedStatement stmt = con.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery();
+             
+             while(rs.next()){
+                 Solicitacao solicitacao = new Solicitacao();
+                 solicitacao.setIdSolicitacao(rs.getInt("idSolicitacao"));
+                 solicitacao.setIdUsuario(rs.getInt("idUsuario"));
+                 solicitacao.setDescricao(rs.getString("descricao"));
+                 solicitacao.setAceitacao(rs.getBoolean("aceitacao"));
+                 byte[] anexoByte = rs.getBytes("anexo");
+                 
+                 String filePath = "C:/Users/Aluno/Downloads/arquivo.pdf";
+                 File file = new File(filePath);
+                    try {
+                        FileOutputStream fos = new FileOutputStream(file);
+                        fos.write(anexoByte);
+                        solicitacao.setAnexo(file);
+                        fos.close();
+                        
+                    }catch(IOException e) {
+                        System.out.println("arquivo não foi criado");
+                         e.printStackTrace();
+                    }
+                    
+                    lista.add(solicitacao);
+                    
+                 }
+                 
+            rs.close();
+            stmt.close();
+            conectarDAO().close();
+        
+             }catch(SQLException s){
+                 System.out.println("tabela sql não acessada (solicitacao)");
+                  s.printStackTrace();
+        }
+        return lista;
+    }
+
+        
+        
+    public void ativarSolicitacao(Solicitacao solicitacao) throws SQLException{
+        
+        Connection con = conectarDAO();
+        
+        String querySolicitacoes = "UPDATE SOLICITACOES SET aceitacao = 1 WHERE idSolicitacao = ?";
+        
+        try (con) {
+    // Inserir em Solicitacoes
+    PreparedStatement stmtSolicitacoes = con.prepareStatement(querySolicitacoes, PreparedStatement.RETURN_GENERATED_KEYS);
+    stmtSolicitacoes.setInt(1, solicitacao.getIdSolicitacao()); 
+    stmtSolicitacoes.executeUpdate();
+    }
+   }
+    
+     public void deletarSolicitacao(Solicitacao solicitacao) throws SQLException{
+        
+        Connection con = conectarDAO();
+        
+        String querySolicitacoes = "DELETE FROM SOLICITACOES WHERE idSolicitacao = ?";
+        
+        try (con) {
+    // Inserir em Solicitacoes
+    PreparedStatement stmtSolicitacoes = con.prepareStatement(querySolicitacoes, PreparedStatement.RETURN_GENERATED_KEYS);
+    stmtSolicitacoes.setInt(1, solicitacao.getIdSolicitacao()); 
+    stmtSolicitacoes.executeUpdate();
+    }
+   }
+    
+     
+       
+    
+}
 
             while (rs.next()) {
                 Solicitacao solicitacao = new Solicitacao();

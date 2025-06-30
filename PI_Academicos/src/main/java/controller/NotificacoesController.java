@@ -8,6 +8,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,17 +18,29 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Administrador;
+import javafx.scene.control.TableView;
+import javafx.collections.FXCollections;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.scene.control.TableColumn;
+import model.AdministradorDAO;
+import model.Solicitacao;
+import model.SolicitacaoDAO;
 
 public class NotificacoesController {
 
     private Stage stageNotificacoes;
     private Administrador adm;
-
+    private Solicitacao sol;
+    ObservableList<Solicitacao> lista;
+    
+     
     public void setAdministrador(Administrador adm) {
         this.adm = adm;
         lblNomeAdm.setText(adm.getNome());
@@ -49,6 +62,7 @@ public class NotificacoesController {
         this.stageNotificacoes = stageNotificacoes;
     }
 
+  
     @FXML
     private Text TxtNomeUsuario;
 
@@ -59,13 +73,22 @@ public class NotificacoesController {
     private Button btnAtualizarPerfil;
 
     @FXML
+    private Button btnNaoValidados;
+
+    @FXML
     private Button btnNotificacoes;
+    
+    @FXML
+    private Button btnTodos;
 
     @FXML
     private Button btnPublicacao;
 
     @FXML
     private Button btnSair;
+
+    @FXML
+    private Button btnValidados;
 
     @FXML
     private Button btnVerPerfil;
@@ -79,8 +102,10 @@ public class NotificacoesController {
     @FXML
     private Label lblNotificacoes;
 
+   
+
     @FXML
-    private ListView<?> lvNotificacoes;
+    private TableView<Solicitacao> tvNotificacoes;
 
     @FXML
     void onClickAtualizarPerfil(ActionEvent event) throws IOException {
@@ -169,28 +194,97 @@ public class NotificacoesController {
     void onClickBtnNotificacoes(ActionEvent event) throws IOException {
 
     }
+   
+    
+//********************************** 
+    
+    @FXML
+    void onClickNaoValidados(ActionEvent event) throws SQLException, IOException {
+        lista = FXCollections.observableArrayList(listarSolAbertas());
+        carregarTabelaSol();
+    }
 
-//**********************************    
-    private void abrirTelaVerPerfil() throws MalformedURLException, IOException {
+     @FXML
+    void onClickValidados(ActionEvent event) throws SQLException, IOException {
+        lista = FXCollections.observableArrayList(listarSolAceitas());
+        carregarTabelaSol();
+    }
+    
+    @FXML
+    void onClickTodos(ActionEvent event) throws SQLException, IOException {
+        lista = FXCollections.observableArrayList(listarSol());
+        carregarTabelaSol();
+    }
+    
+    
+    private ObservableList<Solicitacao> listarSol() throws SQLException, IOException {
+        SolicitacaoDAO solDAO = new SolicitacaoDAO();
+        return solDAO.listarSolicitacoes();
+    }
+    
+    private ObservableList<Solicitacao> listarSolAbertas() throws SQLException, IOException {
+        SolicitacaoDAO solDAO = new SolicitacaoDAO();
+        return solDAO.listarSolicitacoesAbertas();
+    }
+    
+    private ObservableList<Solicitacao> listarSolAceitas() throws SQLException, IOException {
+        SolicitacaoDAO solDAO = new SolicitacaoDAO();
+        return solDAO.listarSolicitacoesAceitas();
+    }
+    
+     private void carregarTabelaSol() throws SQLException, IOException{
+         
+         if(!lista.isEmpty()){
+             tvNotificacoes.getColumns().clear();
+             
+            TableColumn<Solicitacao, Number> colunaIDSol = new TableColumn<>("ID solicitação");
+            colunaIDSol.setCellValueFactory(u -> u.getValue().idPropertyS());
+            colunaIDSol.setStyle("-fx-alignment: CENTER;");
+            colunaIDSol.setPrefWidth(200);
+            
+            
+            TableColumn<Solicitacao, String> colunaDescricao = new TableColumn<>("Descrição");
+            colunaDescricao.setCellValueFactory(u -> u.getValue().descricaoProperty());
+            colunaDescricao.setStyle("-fx-alignment: CENTER;");
+            colunaDescricao.setPrefWidth(750);
+            
+            TableColumn<Solicitacao, Boolean> colunaAceitacao = new TableColumn<>("Aceitação");
+            colunaAceitacao.setCellValueFactory(u-> u.getValue().aceitacaoProperty());
+            colunaAceitacao.setStyle("-fx-alignment: CENTER;");
+            colunaAceitacao.setPrefWidth(250);
+            
+            tvNotificacoes.getColumns().addAll(colunaIDSol, colunaDescricao, colunaAceitacao);
+           
 
-        URL url = new File("src/main/java/view/VerPerfilAdministrador.fxml").toURI().toURL();
-        FXMLLoader loader = new FXMLLoader(url);
-        Parent root = loader.load();
-
-        Stage stageVerPerfil = new Stage();
-
-        VerPerfilAdministradorController vpac = loader.getController();
-        vpac.setStage(stageVerPerfil);
-        vpac.setAdministrador(adm);
-        stageVerPerfil.setMaximized(true);
-
-        Scene cena = new Scene(root);
-        stageVerPerfil.setTitle("Perfil administrador");
-        stageVerPerfil.setScene(cena);
-
-        stageVerPerfil.show();
-        stageNotificacoes.close();
-
+            tvNotificacoes.setItems(lista);
+         }
+     }
+     
+    void ajustarElementosJanela() throws SQLException, IOException {
+        lista = FXCollections.observableArrayList(listarSol());
+        carregarTabelaSol();
+    }
+    
+     private void abrirTelaVerPerfil() throws MalformedURLException, IOException{
+        
+         URL url = new File("src/main/java/view/VerPerfilAdministrador.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage stageVerPerfil = new Stage();
+        
+            VerPerfilAdministradorController vpac = loader.getController();    
+            vpac.setStage(stageVerPerfil);
+            vpac.setAdministrador(adm);
+            stageVerPerfil.setMaximized(true);
+        
+            Scene cena = new Scene(root);
+            stageVerPerfil.setTitle("Perfil administrador");
+            stageVerPerfil.setScene(cena);
+            
+            stageVerPerfil.show();
+            stageNotificacoes.close();
+            
     }
 
     private void abrirTelaNoticia() throws MalformedURLException, IOException {
@@ -306,29 +400,74 @@ public class NotificacoesController {
         stageLogin.show();
         stageNotificacoes.close();
     }
-
-    private void abrirTelaPrincipal() throws IOException {
-        URL url = new File("src/main/java/view/TelaPrincipalAdministradorTeste.fxml").toURI().toURL();
-        FXMLLoader loader = new FXMLLoader(url);
-        Parent root = loader.load();
-
-        Stage stagePrincipal = new Stage();
-
-        TelaPrincipalAdministradorController tpa = loader.getController();
-        tpa.setStage(stagePrincipal);
-        tpa.setAdministrador(adm);
-        stagePrincipal.setOnShown(evento -> {
-            tpa.ajustarElementosJanela(adm);
-        });
-
-        Scene cena = new Scene(root);
-        stagePrincipal.setTitle("Tela principal Administrador");
-        stagePrincipal.setScene(cena);
-        //deixa a tela maximizada
-        stagePrincipal.setMaximized(true);
-
-        stagePrincipal.show();
-        stageNotificacoes.close();
+    private void abrirTelaPrincipal() throws IOException{
+     URL url = new File("src/main/java/view/TelaPrincipalAdministrador.fxml").toURI().toURL();
+            FXMLLoader loader = new FXMLLoader(url);
+            Parent root = loader.load();
+        
+            Stage stagePrincipal = new Stage();
+        
+            TelaPrincipalAdministradorController tpa = loader.getController();    
+            tpa.setStage(stagePrincipal);
+            tpa.setAdministrador(adm);
+           stagePrincipal.setOnShown(evento -> {
+            tpa.ajustarElementosJanela(adm);});
+           
+        
+            Scene cena = new Scene(root);
+            stagePrincipal.setTitle("Tela principal");
+            stagePrincipal.setScene(cena);
+            //deixa a tela maximizada
+            stagePrincipal.setMaximized(true);
+            
+            stagePrincipal.show();
+            stageNotificacoes.close();
     }
+    
+    @FXML
+    void TableViewClick(MouseEvent event) throws IOException {
+        if (event.getClickCount() == 1) {
+            sol = tvNotificacoes.getSelectionModel().getSelectedItem();
+            if (this.sol != null) {
+                URL url = new File("src/main/java/view/SolicitacaoTela.fxml").toURI().toURL();
+                FXMLLoader loader = new FXMLLoader(url);
+                Parent root = loader.load();
+
+                Stage stageSol = new Stage();
+
+                SolicitacaoTelaController stc = loader.getController();
+
+                stc.setStage(stageSol);
+                stc.setSolicitacao(sol);
+
+//                stageSol.setOnShown(evento -> {
+//                    stc.ajustarElementosJanela(this.adm);
+//                });
+                
+                
+
+                Scene scene = new Scene(root);
+
+                stageSol.setTitle("Solicitaçao selecionada");
+                stageSol.setScene(scene);
+                stageSol.show();
+                stc.setOnSolAceitacao(() -> {
+                    try {
+                        lista = FXCollections.observableArrayList(listarSol());
+                        carregarTabelaSol();
+                        
+                    } catch (SQLException ex) {
+                        Logger.getLogger(NotificacoesController.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                        Logger.getLogger(NotificacoesController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                        
+                    
+                });
+            }
+        }
+    }
+
+    
 
 }

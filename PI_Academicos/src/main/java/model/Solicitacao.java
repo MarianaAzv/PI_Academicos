@@ -1,14 +1,25 @@
 package model;
 
 import java.io.File;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Solicitacao {
 
     private int idSolicitacao;
     private Usuario usuario;
     private int idUsuario;
-
     private LocalDateTime data;
     private String descricao;
     private boolean aceitacao;
@@ -116,5 +127,54 @@ public class Solicitacao {
     public File getAnexo() {
         return anexo;
     }
+    
+    private transient IntegerProperty idPropertyS;
 
+    public IntegerProperty idPropertyS() {
+        if (idPropertyS == null) {
+            idPropertyS = new SimpleIntegerProperty(idSolicitacao);
+        }
+        return idPropertyS;
+    }
+    
+    public transient IntegerProperty idPropertyU;
+
+    public IntegerProperty idPropertyU() {
+        if (idPropertyU == null) {
+            idPropertyU = new SimpleIntegerProperty(idUsuario);
+        }
+        return idPropertyU;
+    }
+    
+     private transient StringProperty descricaoProperty;
+
+    public StringProperty descricaoProperty() {
+        if (descricaoProperty == null) {
+            descricaoProperty = new SimpleStringProperty(descricao);
+        }
+        return descricaoProperty;
+    }
+    
+    private transient BooleanProperty aceitacaoProperty;
+    
+    public BooleanProperty aceitacaoProperty() {
+        if (aceitacaoProperty == null) {
+            aceitacaoProperty = new SimpleBooleanProperty(aceitacao);
+        }
+        return aceitacaoProperty;
+    }
+    
+    private transient StringProperty dataProperty;
+    public StringProperty dataProperty() {
+        if (dataProperty == null) {
+            dataProperty = new SimpleStringProperty(data.toString());
+        }
+        return dataProperty;
+    }
+    
+    
+
+    private Connection conectarDAO() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

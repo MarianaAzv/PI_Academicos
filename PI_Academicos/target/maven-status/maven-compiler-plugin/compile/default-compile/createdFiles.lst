@@ -7,6 +7,7 @@ model\SolicitacaoDAO.class
 controller\TelaNoticiaController.class
 util\Apenasletras.class
 controller\INotificacaoAlert.class
+controller\SolicitacaoTelaController.class
 controller\TeladefundoController.class
 controller\TelaPrincipalBolsistaController.class
 controller\ADMController.class
