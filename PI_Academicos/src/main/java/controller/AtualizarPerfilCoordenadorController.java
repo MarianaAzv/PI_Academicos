@@ -1,9 +1,11 @@
 package controller;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -19,13 +21,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Coordenador;
 import model.CoordenadorDAO;
+import model.Foto;
 import model.Projeto;
 import model.Usuario;
 import static util.AlertaUtil.mostrarAviso;
@@ -36,6 +41,7 @@ public class AtualizarPerfilCoordenadorController {
     private Stage stageAtualizarCoordenador;
     Coordenador coordenador;
     Projeto projeto;
+    private File arquivoSelecionado = null;
 
     public void setStage(Stage stage) {
         this.stageAtualizarCoordenador = stage;
@@ -144,6 +150,23 @@ public class AtualizarPerfilCoordenadorController {
     }
 
     //******************************************************************
+    @FXML
+    void onClickFotoPerfil(MouseEvent event) throws MalformedURLException {
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Selecionar Imagem");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Arquivos de Imagem", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+        arquivoSelecionado = fileChooser.showOpenDialog(imgFotoCoordenador.getScene().getWindow());
+
+        if (arquivoSelecionado != null) {
+            String urlImagem = arquivoSelecionado.toURI().toURL().toString();
+            Image fotoEscolhida = new Image(urlImagem);
+            imgFotoCoordenador.setImage(fotoEscolhida);
+        } else {
+            System.out.println("Nenhum arquivo foi selecionado");
+        }
+
+    }
     @FXML
     void onClickAtualizarPerfil(ActionEvent event) throws IOException {
         //AbrirTelaAtualizarPerfil();
@@ -433,6 +456,18 @@ public class AtualizarPerfilCoordenadorController {
     public void setProjeto(Projeto projeto) {
         this.projeto = projeto;
         txtNomeProjeto.setText(projeto.getTitulo());
+        
+        Image image = null;
+        byte[] conteudoFoto = projeto.getFotoPerfil().getDadosImagem();
+        if (conteudoFoto != null) {
+            try (ByteArrayInputStream bis = new ByteArrayInputStream(conteudoFoto)) {
+                image = new Image(bis); // Converte byte[] para Image AQUI
+            } catch (Exception e) {
+                System.err.println("Erro ao converter bytes para Image: " + e.getMessage());
+                // precisa definir uma imagem padrao de erro
+            }
+        }
+        imgProjeto.setImage(image);
     }
 
     public void desativar() throws IOException, SQLException {
@@ -469,12 +504,34 @@ public class AtualizarPerfilCoordenadorController {
         String siape = String.valueOf(coordenador.getSiape());
         txtSIAPE.setText(siape);
         TxtNomeUsuario.setText(coordenador.getNome());
+        
+        Image image = null;
+        byte[] conteudoFoto = coordenador.getFotoPerfil().getDadosImagem();
+        if (conteudoFoto != null) {
+            try (ByteArrayInputStream bis = new ByteArrayInputStream(conteudoFoto)) {
+                image = new Image(bis); // Converte byte[] para Image AQUI
+            } catch (Exception e) {
+                System.err.println("Erro ao converter bytes para Image: " + e.getMessage());
+                // precisa definir uma imagem padrao de erro
+            }
+        }
+        imgPerfil.setImage(image);
+        imgFotoCoordenador.setImage(image);
+        
 
     }
 
-    void atualizarCoordenador(int id, String cpf, String nome, String apelido, String email, String senha, int siape, String formacao) throws SQLException {
+    void atualizarCoordenador(int id, String cpf, String nome, String apelido, String email, String senha, int siape, String formacao) throws SQLException, IOException {
 
-        Coordenador coordenador = new Coordenador(id, cpf, nome, apelido, email, senha, siape, formacao);
+        Foto fotoPerfil = new Foto();
+        if (arquivoSelecionado == null) {// caso o adm não queira alterar foto
+            fotoPerfil.setDadosImagem(coordenador.getFotoPerfil().getDadosImagem());
+        } else {
+            byte[] conteudoImagem = Files.readAllBytes(arquivoSelecionado.toPath());
+            fotoPerfil.setDadosImagem(conteudoImagem);
+        }
+        
+        Coordenador coordenador = new Coordenador(id, cpf, nome, apelido, email, senha, siape, formacao, fotoPerfil);
         int repetido = new CoordenadorDAO().validarApelido(apelido, id);
         if (repetido > 0) {
             mostrarAviso("Nome de usuário indisponível", "Este nome de usuário já está sendo usado");
@@ -482,6 +539,7 @@ public class AtualizarPerfilCoordenadorController {
         } else {
             new CoordenadorDAO().atualizarCoordenador(coordenador);
             mostrarConfirmacao("Usuário alterado", "O usuário foi alterado com sucesso!");
+            setCoordenador(coordenador);
         }
     }
 

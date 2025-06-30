@@ -453,6 +453,8 @@ public class AtualizarPerfilAdministradorController {
             }
         }
         imgFotoAdministrador.setImage(image);
+        imgPerfil.setImage(image);
+        
 
     }
 

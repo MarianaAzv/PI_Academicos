@@ -74,7 +74,7 @@ public class AtualizarArtigoController {
     @FXML
     void onEnterArquivo(MouseEvent event) {
 
-         lblAbrirArquivo.setStyle("-fx-text-fill: blue" );
+         lblAbrirArquivo.setStyle("-fx-text-fill: #840d0b" );
     }
 
     @FXML  

@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -15,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
@@ -30,6 +32,18 @@ public class VerPerfilBolsistaController {
     Projeto projeto;
     void setProjeto(Projeto projeto) {
        this.projeto = projeto;
+       
+       Image image = null;
+        byte[] conteudoFoto = projeto.getFotoPerfil().getDadosImagem();
+        if (conteudoFoto != null) {
+            try (ByteArrayInputStream bis = new ByteArrayInputStream(conteudoFoto)) {
+                image = new Image(bis); // Converte byte[] para Image AQUI
+            } catch (Exception e) {
+                System.err.println("Erro ao converter bytes para Image: " + e.getMessage());
+                // precisa definir uma imagem padrao de erro
+            }
+        }
+        imgProjetoBarra.setImage(image);
     }
 
     @FXML
@@ -135,21 +149,26 @@ public class VerPerfilBolsistaController {
             lblSenhaBolsista.setText(bolsista.getSenha());
             lblEmailBolsista.setText(bolsista.getEmail());
             lblMatriculaBols.setText(String.valueOf(bolsista.getMatricula()));
-            
-           //  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    // String DataInicio = bolsista.getDataInicio().format(formatter);
-    // lblDataInicioBols.setText(DataInicio);
-     
-
-    //   String DataFim = bolsista.getDataFim().format(formatter);
-    //  lblDataFimBols.setText(DataFim);
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-              System.out.println(bolsista.getDataInicio());
+            System.out.println(bolsista.getDataInicio());
             lblDataInicioBols.setText(bolsista.getDataInicio() != null ? bolsista.getDataInicio().format(formatter) : "Data não disponível");
-             System.out.println(bolsista.getDataInicio().format(formatter));
-           lblDataFimBols.setText(bolsista.getDataFim() != null ? bolsista.getDataFim().format(formatter) : "Data não disponível");
+            System.out.println(bolsista.getDataInicio().format(formatter));
+            lblDataFimBols.setText(bolsista.getDataFim() != null ? bolsista.getDataFim().format(formatter) : "Data não disponível");
+            
+        Image image = null;
+        byte[] conteudoFoto = bolsista.getFotoPerfil().getDadosImagem();
+        if (conteudoFoto != null) {
+            try (ByteArrayInputStream bis = new ByteArrayInputStream(conteudoFoto)) {
+                image = new Image(bis); // Converte byte[] para Image AQUI
+            } catch (Exception e) {
+                System.err.println("Erro ao converter bytes para Image: " + e.getMessage());
+                // precisa definir uma imagem padrao de erro
+            }
+        }
+        imgFotoBolsista.setImage(image);
+        imgPerfil.setImage(image);
             
         }
     }

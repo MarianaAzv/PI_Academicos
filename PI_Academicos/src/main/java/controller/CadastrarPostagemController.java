@@ -26,6 +26,7 @@ public class CadastrarPostagemController {
     Stage stagePostagem;
     private File arquivoSelecionado = null;
     PostagemDAO postagemDAO;
+    Projeto projeto;
 
     public CadastrarPostagemController() {
         postagemDAO = new PostagemDAO();
@@ -34,7 +35,7 @@ public class CadastrarPostagemController {
     void setStage(Stage stagePostagem) {
         this.stagePostagem = stagePostagem;
     }
-    Projeto projeto;
+    
 
     public void setProjeto(Projeto projeto) {
         this.projeto = projeto;

@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -15,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
@@ -29,6 +31,18 @@ public class NotificacoesController {
     public void setAdministrador(Administrador adm) {
         this.adm = adm;
         lblNomeAdm.setText(adm.getNome());
+        
+        Image image = null;
+        byte[] conteudoFoto = adm.getFotoPerfil().getDadosImagem();
+        if (conteudoFoto != null) {
+            try (ByteArrayInputStream bis = new ByteArrayInputStream(conteudoFoto)) {
+                image = new Image(bis); // Converte byte[] para Image AQUI
+            } catch (Exception e) {
+                System.err.println("Erro ao converter bytes para Image: " + e.getMessage());
+                // precisa definir uma imagem padrao de erro
+            }
+        }
+        imgPerfil.setImage(image);
     }
 
     public void setStage(Stage stageNotificacoes) {
