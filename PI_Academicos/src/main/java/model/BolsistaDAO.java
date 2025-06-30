@@ -28,6 +28,7 @@ public class BolsistaDAO extends GenericDAO {
             stmtUsuario.setString(3, usuario.getApelido());
             stmtUsuario.setString(4, usuario.getSenha());
             stmtUsuario.setString(5, usuario.getEmail());
+            System.out.print(stmtUsuario);
             stmtUsuario.executeUpdate();
 
             ResultSet keys = stmtUsuario.getGeneratedKeys();
@@ -247,7 +248,7 @@ public class BolsistaDAO extends GenericDAO {
     }
 
     public boolean existeMatriculaNoCampus(Long matricula, int idCampus) throws SQLException {
-        String sql = "SELECT COUNT(*) FROM bolsista b JOIN bolsista_projeto bp ON bp.id_bolsista = b.id_bolsista JOIN projeto p ON p.id_projeto = bp.id_projeto WHERE b.matricula = ? AND p.id_campus = ?";
+        String sql = "SELECT COUNT(*) FROM bolsistas b JOIN bolsistas_projetos bp ON bp.idUsuario = b.idUsuario JOIN projetos p ON p.idProjeto = bp.idProjeto inner join campus c on c.idCampus=p.idCampus WHERE b.matricula = ? AND p.idCampus =?";
 
         try (Connection con = conectarDAO(); PreparedStatement stmt = con.prepareStatement(sql)) {
 

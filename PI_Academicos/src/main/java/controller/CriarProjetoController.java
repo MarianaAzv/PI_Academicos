@@ -168,11 +168,7 @@ public class CriarProjetoController implements INotificacaoAlert {
                     alerta("Você deve selecionar um arquivo PDF antes de submeter.", 2, "PDF obrigatório");
                     return;
                 }
-                ProjetoDAO dao = new ProjetoDAO();
-                if (dao.projetoComMesmoTitulo(txtNomedoProjeto.getText(), projeto.getIdProjeto())) {
-                    alerta("Já existe outro projeto com esse nome. Escolha um nome diferente.", 2, "Título duplicado");
-                    return;
-                }
+               
 
                 if (Apenasletras.isLetras(txtNomedoProjeto.getText())) {
                     System.out.print("O nome do projeto valido");
@@ -355,7 +351,8 @@ public class CriarProjetoController implements INotificacaoAlert {
  
     }
     }
-    public void alerta(String msg, int tipo, String titulo) throws IOException {
+    }
+       public void alerta(String msg, int tipo, String titulo) throws IOException {
         URL url = new File("src/main/java/view/AlertGenerico.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
