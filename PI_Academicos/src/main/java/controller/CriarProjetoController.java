@@ -274,6 +274,7 @@ public class CriarProjetoController implements INotificacaoAlert {
         AreasConhecimento areacnhecimentoselecionado = CBcategoria.getValue();
         this.areasconhecimento = areacnhecimentoselecionado;
         projeto.setEmAndamento(true);
+        projeto.setFotoPerfil(fotoPerfil);
 
         ProjetoDAO pdao = new ProjetoDAO();
         pdao.cadastraprojeto(projeto, id, fotoPerfil);
