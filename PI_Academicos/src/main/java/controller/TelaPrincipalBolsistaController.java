@@ -24,15 +24,18 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Artigo;
 import model.ArtigoDAO;
 import model.Bolsista;
+import model.BolsistaDAO;
 import model.Postagem;
 import model.PostagemDAO;
 import model.Projeto;
 import model.Usuario;
+import static util.AlertaUtil.mostrarAviso;
 
 public class TelaPrincipalBolsistaController implements INotificacaoAlert {
 
@@ -160,6 +163,9 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert {
     private Label lblNomeBolsista;
 
     @FXML
+    private Label lblNomeCocoordenador;
+
+    @FXML
     private Label lblNomeCoordenador;
 
     @FXML
@@ -176,6 +182,9 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert {
 
     @FXML
     private Text txtNomeBolsita;
+
+    @FXML
+    private Text txtNomeCocoordenador;
 
     @FXML
     private Text txtNomeCoordenador;
@@ -196,6 +205,8 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert {
     
     @FXML
     private TilePane tilePaneGaleria;
+       @FXML
+    private VBox vbox;
 
     //******************* OnClicks ***************************************
     @FXML
@@ -264,7 +275,7 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert {
 
     @FXML
     void onClickSair(ActionEvent event) throws IOException {
-        alerta("Você tem certeza mana", 2, "Verificação de saida");
+       AbrirTelaLogin();
     }
 
     @FXML
@@ -556,6 +567,7 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert {
     public void ajustarElementosJanela(Bolsista bolsista, Projeto projeto) {
         this.bolsista = bolsista;
         this.projeto = projeto;
+         carregarBolsista(projeto);
 
         System.out.println("Aqui chegam os parâmetros do login " + bolsista.getNome() + " - " + bolsista.getMatricula() + " ATIVA: " + bolsista.getAtiva());
 
@@ -718,5 +730,25 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert {
     public void btnOk() {
     
             resp = 2;   
+    }
+     public void carregarBolsista(Projeto projeto) {
+        try {
+            BolsistaDAO dao = new BolsistaDAO();
+            List<Bolsista> bolsistas = dao.selecionarBolsistasPorProjeto(projeto);
+
+            vbox.getChildren().clear();
+
+            if (bolsistas.isEmpty()) {
+                System.out.println("Nenhum bolsista encontrado para o projeto: " + projeto.getTitulo());
+            }
+
+            for (Bolsista b : bolsistas) {
+                Label lbl = new Label(b.getNome());
+                vbox.getChildren().add(lbl);
+            }
+        } catch (SQLException e) {
+            mostrarAviso("Erro", "Erro ao carregar bolsistas do projeto");
+
+        }
     }
 }
