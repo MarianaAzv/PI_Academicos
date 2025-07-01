@@ -116,6 +116,8 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert {
         }
         imgProjetoBarra.setImage(image);
         imgPerfilProjeto.setImage(image);
+        
+        carregarBolsista(projeto);
     }
 
     @FXML

@@ -31,6 +31,7 @@ import model.AdministradorDAO;
 import model.Foto;
 import static util.AlertaUtil.mostrarAviso;
 import static util.AlertaUtil.mostrarConfirmacao;
+import util.ApenasNumeros;
 import util.Apenasletras;
 import util.CPF;
 import util.CPFDuplicado;
@@ -118,6 +119,10 @@ public class AtualizarPerfilAdministradorController implements INotificacaoAlert
             alerta("CPF inválido", 2, "Data inválida");
             return;
         }
+        if(!ApenasNumeros.isNumeros(txtCPF.getText())){
+            alerta("Somente números no CPF",1,"ERRO");
+            return;
+        }
 
         if (!Apenasletras.isLetras(txtNome.getText())) {
             alerta("Nome inválido", 2, "ERRO");
@@ -131,6 +136,9 @@ public class AtualizarPerfilAdministradorController implements INotificacaoAlert
         if (!Senha.senhaForte(txtSenha.getText())) {
             alerta("A senha esta muito fraca, para uma senha forte é necessario ter 6 caracters,ter pelo menos 1 letra Maiuscula e 1 Letra minuscula, um numero e um simbulo especial", 2, "ERRO");
             return;
+        }
+        if(arquivoSelecionado != null){
+            alerta("Por favor escolher uma foto",2,"Erro");
         }
 
         try {

@@ -129,6 +129,9 @@ public class CadastroBolsistaCoordenadorController implements INotificacaoAlert 
             alerta("CPF inválido.", 2, "Erro");
             return;
         }
+        if (!ApenasNumeros.isNumeros(txtCPF.getText())) {
+            alerta("Somente números no CPF", 1, "ERRO");
+        }
 
         if (!Email.isValidEmail(txtEmail.getText())) {
             alerta("Email inválido.", 2, "Erro");
@@ -301,7 +304,7 @@ public class CadastroBolsistaCoordenadorController implements INotificacaoAlert 
     // ---------- Métodos ----------
     void incluir(String cpf, String nome, String apelido, String email, String senha,
             Long matricula, String curso, LocalDate dataInicio, LocalDate dataFim) throws SQLException, IOException {
-        
+
         Foto fotoPerfil = new Foto(carregarImagemPadrao());
         usuario = new Usuario(cpf, nome, apelido, email, senha);
         bolsista = new Bolsista(matricula, curso, dataInicio, dataFim);
@@ -369,23 +372,22 @@ public class CadastroBolsistaCoordenadorController implements INotificacaoAlert 
         criarprojetocontrtoller.Close();
         stageCadastrarBolsistaCoordenador.close();
     }
-    
+
     public byte[] carregarImagemPadrao() {
-    try (InputStream is = getClass().getResourceAsStream("/imagens/FotoPerfilUsuarioDefault.png");
-         ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+        try (InputStream is = getClass().getResourceAsStream("/imagens/FotoPerfilUsuarioDefault.png"); ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
 
-        byte[] buffer = new byte[1024];
-        int bytesRead;
-        while ((bytesRead = is.read(buffer)) != -1) {
-            baos.write(buffer, 0, bytesRead);
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = is.read(buffer)) != -1) {
+                baos.write(buffer, 0, bytesRead);
+            }
+
+            return baos.toByteArray();
+
+        } catch (IOException | NullPointerException e) {
+            e.printStackTrace();
+            return null;
         }
-
-        return baos.toByteArray();
-
-    } catch (IOException | NullPointerException e) {
-        e.printStackTrace();
-        return null;
-    }
     }
 
     public void alerta(String msg, int tipo, String titulo) throws IOException {
@@ -414,4 +416,3 @@ public class CadastroBolsistaCoordenadorController implements INotificacaoAlert 
 
     }
 }
-

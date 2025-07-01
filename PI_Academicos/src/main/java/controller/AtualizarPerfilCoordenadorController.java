@@ -289,6 +289,10 @@ public class AtualizarPerfilCoordenadorController implements INotificacaoAlert {
             alerta("CPF invalido", 2, "ERRO");
             return;
         }
+        if(!ApenasNumeros.isNumeros(txtCPF.getText())){
+            alerta("Somente números no CPF",1,"ERRO");
+            return;
+        }
 
         if (!Email.isValidEmail(txtEmail.getText())) {
             alerta("Email inválido", 2, "ERRO");
@@ -303,6 +307,9 @@ public class AtualizarPerfilCoordenadorController implements INotificacaoAlert {
             alerta("Somente números no campus SIAPE", 2, "ERRO");
             return;
         }
+               if (arquivoSelecionado != null){
+                  alerta("Por favor escolher uma foto",2,"Erro");
+               }
         try {
 
             int siape = Integer.parseInt(txtSIAPE.getText());
