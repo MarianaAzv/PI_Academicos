@@ -186,9 +186,9 @@ public class CriarProjetoController implements INotificacaoAlert {
 
                         incluir(txtNomedoProjeto.getText(), txtResumo.getText(), campusnomeSelecionado, txtEdital.getText(), dI, dF, null, true, coordenador.getId());
                     }
-                } else {
-                    alerta("O nome do projeto tem caracters não esperados", 2, "ERRO");
-                }
+                } //else {
+                    //alerta("O nome do projeto tem caracters não esperados", 2, "ERRO");
+                //}
             }
 
         } catch (SQLException e) {

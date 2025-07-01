@@ -1,7 +1,10 @@
 package controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.sql.SQLException;
@@ -36,6 +39,19 @@ public class CadastrarPostagemController {
 
     void setStage(Stage stagePostagem) {
         this.stagePostagem = stagePostagem;
+        //carregarImagemPadrao();
+        Image image = null;
+        byte[] conteudoFoto = carregarImagemPadrao();
+        if (conteudoFoto != null) {
+            try (ByteArrayInputStream bis = new ByteArrayInputStream(conteudoFoto)) {
+                image = new Image(bis); // Converte byte[] para Image AQUI
+            } catch (Exception e) {
+                System.err.println("Erro ao converter bytes para Image: " + e.getMessage());
+                // precisa definir uma imagem padrao de erro
+            }
+        }
+        
+        imagem.setImage(image);
     }
     
 
@@ -98,6 +114,23 @@ public class CadastrarPostagemController {
             Logger.getLogger(TelaNoticiaController.class.getName()).log(Level.SEVERE, null, ex);
         }
         stagePostagem.close();
+    }
+    
+    public byte[] carregarImagemPadrao() {
+        try (InputStream is = getClass().getResourceAsStream("/imagens/ImagemPost.png"); ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = is.read(buffer)) != -1) {
+                baos.write(buffer, 0, bytesRead);
+            }
+
+            return baos.toByteArray();
+
+        } catch (IOException | NullPointerException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }
