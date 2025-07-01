@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
@@ -14,7 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="886.0" style="-fx-background-color: ECECEC;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AtualizarNoticiaController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="886.0" style="-fx-background-color: ECECEC;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AtualizarNoticiaController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -31,23 +37,11 @@
                </font>
             </TextField>
             <TextArea fx:id="txtLegenda" prefHeight="200.0" prefWidth="200.0" promptText="Legenda" VBox.vgrow="ALWAYS" />
-            <HBox prefHeight="26.0" prefWidth="394.0">
-               <children>
-                  <Button fx:id="btnExcluir" alignment="BOTTOM_RIGHT" mnemonicParsing="false" onAction="#onClickExcluir" prefHeight="27.0" prefWidth="78.0" style="-fx-background-color: #840d0b;" text="EXCLUIR" textFill="WHITE">
-                     <font>
-                        <Font name="Courier New Bold" size="14.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="220.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="btnAtualizar" alignment="BOTTOM_RIGHT" mnemonicParsing="false" onAction="#onClickAtualizar" prefHeight="27.0" prefWidth="96.0" style="-fx-background-color: #840d0b;" text="ATUALIZAR" textFill="WHITE">
-                     <font>
-                        <Font name="Courier New Bold" size="14.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
+            <Button fx:id="btnExcluir" alignment="BOTTOM_RIGHT" mnemonicParsing="false" onAction="#onClickExcluir" prefHeight="27.0" prefWidth="78.0" style="-fx-background-color: #840d0b;" text="EXCLUIR" textFill="WHITE">
+               <font>
+                  <Font name="Courier New Bold" size="14.0" />
+               </font>
+            </Button>
          </children>
          <GridPane.margin>
             <Insets left="20.0" right="20.0" />
@@ -64,9 +58,6 @@
                      <viewport>
                         <Rectangle2D />
                      </viewport>
-                     <image>
-                        <Image url="@../../../../../../../../Imágenes/bill%20gravata.jpg" />
-                     </image>
                   </ImageView>
                </children>
             </HBox>
