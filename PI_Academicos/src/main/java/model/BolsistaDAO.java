@@ -154,18 +154,15 @@ public class BolsistaDAO extends GenericDAO {
 
         while (rs.next()) {
 
-            Usuario u = new Usuario();
-            u.setId(rs.getInt("idUsuario"));
-            u.setNome(rs.getString("nome"));
-            u.setCpf(rs.getString("cpf"));
-            u.setApelido(rs.getString("apelido"));
-            u.setEmail(rs.getString("email"));
-            u.setAtiva(rs.getBoolean("ativa"));
-
-            Bolsista b = new Bolsista();
-            b.setId(rs.getInt("idUsuario"));
-            b.setMatricula(rs.getInt("matricula"));
-            b.setCurso(rs.getString("curso"));
+              Bolsista b = new Bolsista();
+        b.setId(rs.getInt("idUsuario"));
+        b.setNome(rs.getString("nome"));
+        b.setCpf(rs.getString("cpf"));
+        b.setApelido(rs.getString("apelido"));
+        b.setEmail(rs.getString("email"));
+        b.setAtiva(rs.getBoolean("ativa"));
+        b.setMatricula(rs.getInt("matricula"));
+        b.setCurso(rs.getString("curso"));
 
             bolsistas.add(b);
         }

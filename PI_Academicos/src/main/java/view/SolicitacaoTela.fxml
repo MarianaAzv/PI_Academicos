@@ -31,7 +31,7 @@
       <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: ECECEC;" GridPane.columnIndex="2" GridPane.rowIndex="1">
     
 </AnchorPane>
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="28.0" prefWidth="534.0" style="-fx-background-color: DBA5A5;" text="Solicitão" textFill="#840d0b" textOverrun="CENTER_WORD_ELLIPSIS" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="28.0" prefWidth="534.0" style="-fx-background-color: DBA5A5;" text="Solicitação" textFill="#840d0b" textOverrun="CENTER_WORD_ELLIPSIS" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
          <font>
             <Font name="Courier New Bold" size="24.0" />
          </font>

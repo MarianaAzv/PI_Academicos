@@ -173,6 +173,7 @@ public class AtualizarPerfilCoordenadorController implements INotificacaoAlert {
         }
 
     }
+
     @FXML
     void onClickAtualizarPerfil(ActionEvent event) throws IOException {
         //AbrirTelaAtualizarPerfil();
@@ -280,13 +281,17 @@ public class AtualizarPerfilCoordenadorController implements INotificacaoAlert {
             alerta("Nome inválido", 2, "ERRO");
             return;
         }
-       
+
         if (!Apenasletras.isLetras(txtFormacao.getText())) {
             alerta("Nome inválido", 2, "ERRO");
             return;
         }
         if (!CPF.isValid(txtCPF.getText())) {
             alerta("CPF invalido", 2, "ERRO");
+            return;
+        }
+        if (!ApenasNumeros.isNumeros(txtCPF.getText())) {
+            alerta("Somente números no CPF", 1, "ERRO");
             return;
         }
 
@@ -301,6 +306,10 @@ public class AtualizarPerfilCoordenadorController implements INotificacaoAlert {
         }
         if (!ApenasNumeros.isNumeros(txtSIAPE.getText())) {
             alerta("Somente números no campus SIAPE", 2, "ERRO");
+            return;
+        }
+        if (arquivoSelecionado == null) {
+            alerta("Por favor escolher uma foto", 2, "Erro");
             return;
         }
         try {
@@ -497,7 +506,7 @@ public class AtualizarPerfilCoordenadorController implements INotificacaoAlert {
     public void setProjeto(Projeto projeto) {
         this.projeto = projeto;
         txtNomeProjeto.setText(projeto.getTitulo());
-        
+
         Image image = null;
         byte[] conteudoFoto = projeto.getFotoPerfil().getDadosImagem();
         if (conteudoFoto != null) {
@@ -545,7 +554,7 @@ public class AtualizarPerfilCoordenadorController implements INotificacaoAlert {
         String siape = String.valueOf(coordenador.getSiape());
         txtSIAPE.setText(siape);
         TxtNomeUsuario.setText(coordenador.getNome());
-        
+
         Image image = null;
         byte[] conteudoFoto = coordenador.getFotoPerfil().getDadosImagem();
         if (conteudoFoto != null) {
@@ -558,7 +567,6 @@ public class AtualizarPerfilCoordenadorController implements INotificacaoAlert {
         }
         imgPerfil.setImage(image);
         imgFotoCoordenador.setImage(image);
-        
 
     }
 
@@ -571,7 +579,7 @@ public class AtualizarPerfilCoordenadorController implements INotificacaoAlert {
             byte[] conteudoImagem = Files.readAllBytes(arquivoSelecionado.toPath());
             fotoPerfil.setDadosImagem(conteudoImagem);
         }
-        
+
         Coordenador coordenador = new Coordenador(id, cpf, nome, apelido, email, senha, siape, formacao, fotoPerfil);
         int repetido = new CoordenadorDAO().validarApelido(apelido, id);
         if (repetido > 0) {

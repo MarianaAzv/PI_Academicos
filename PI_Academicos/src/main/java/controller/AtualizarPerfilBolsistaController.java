@@ -49,7 +49,7 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert {
 
     void setProjeto(Projeto projeto) {
         this.projeto = projeto;
-        
+
         Image image = null;
         byte[] conteudoFoto = projeto.getFotoPerfil().getDadosImagem();
         if (conteudoFoto != null) {
@@ -195,20 +195,20 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert {
             txtDataInicio.setText(bolsista.getDataInicio() != null ? bolsista.getDataInicio().format(formatter) : "Data não disponível");
             System.out.println(bolsista.getDataInicio().format(formatter));
             txtDataFim.setText(bolsista.getDataFim() != null ? bolsista.getDataFim().format(formatter) : "Data não disponível");
-            
+
             Image image = null;
-        byte[] conteudoFoto = bolsista.getFotoPerfil().getDadosImagem();
-        if (conteudoFoto != null) {
-            try (ByteArrayInputStream bis = new ByteArrayInputStream(conteudoFoto)) {
-                image = new Image(bis); // Converte byte[] para Image AQUI
-            } catch (Exception e) {
-                System.err.println("Erro ao converter bytes para Image: " + e.getMessage());
-                // precisa definir uma imagem padrao de erro
+            byte[] conteudoFoto = bolsista.getFotoPerfil().getDadosImagem();
+            if (conteudoFoto != null) {
+                try (ByteArrayInputStream bis = new ByteArrayInputStream(conteudoFoto)) {
+                    image = new Image(bis); // Converte byte[] para Image AQUI
+                } catch (Exception e) {
+                    System.err.println("Erro ao converter bytes para Image: " + e.getMessage());
+                    // precisa definir uma imagem padrao de erro
+                }
             }
-        }
-        imgFotoBolsista.setImage(image);
-        imgPerfil.setImage(image);
-        
+            imgFotoBolsista.setImage(image);
+            imgPerfil.setImage(image);
+
         } else {
             alerta("Bolsista não encontrado.", 1, "Erro");
 
@@ -221,6 +221,10 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert {
             alerta("CPF inválido", 2, "ERRO");
             return;
         }
+        if (!ApenasNumeros.isNumeros(txtCPF.getText())) {
+            alerta("Somente números no CPF", 1, "ERRO");
+            return;
+        }
         if (!Email.isValidEmail(txtEmail.getText())) {
             alerta("Email inválido", 2, "ERRO");
             return;
@@ -229,7 +233,7 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert {
             alerta("Nome inválido", 2, "ERRO");
             return;
         }
-       
+
         if (!Senha.senhaForte(txtSenha.getText())) {
             alerta("A senha esta muito fraca, para uma senha forte é necessario ter 6 caracters,ter pelo menos 1 letra Maiuscula e 1 Letra minuscula, um numero e um simbulo especial", 2, "ERRO");
             return;
@@ -241,6 +245,9 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert {
         if (!ApenasNumeros.isNumeros(txtMatricula.getText())) {
             alerta("Matricula inválida(Somente números", 2, "ERRO");
             return;
+        }
+        if (arquivoSelecionado != null) {
+            alerta("Por favor escolher uma foto", 2, "Erro");
         }
 
         try {
@@ -318,6 +325,7 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert {
         }
 
     }
+
     @FXML
     void onClickAtualizarPerfil(ActionEvent event) throws IOException {
         //abrirAtualizarPerfil();
@@ -400,7 +408,7 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert {
     //******************* MÉTODOS ***************************************
     void atualizarBolsista(int id, String cpf, String nome, String apelido, String email, String senha, boolean ativa,
             long matricula, String curso, LocalDate dataInicio, LocalDate dataFim) throws SQLException, IOException {
-        
+
         Foto fotoPerfil = new Foto();
         if (arquivoSelecionado == null) {// caso o adm não queira alterar foto
             fotoPerfil.setDadosImagem(bolsista.getFotoPerfil().getDadosImagem());

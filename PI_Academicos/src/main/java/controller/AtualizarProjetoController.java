@@ -70,7 +70,7 @@ public class AtualizarProjetoController implements INotificacaoAlert {
 
     @FXML
     private Button btnDesativarCocoordendor;
-    
+
     @FXML
     private ImageView imgFotoProjeto;
 
@@ -138,9 +138,16 @@ public class AtualizarProjetoController implements INotificacaoAlert {
 
     @FXML
     void OnClickAtualizar(ActionEvent event) throws IOException {
-
+        if (arquivoSelecionado == null && projeto.getFotoPerfil() == null) {
+            alerta("Por favor, selecione uma imagem para o projeto.", 2, "Imagem obrigatória");
+            return;
+        }
+        if (!Apenasletras.isLetras(txtNomedoProjeto.getText())) {
+            alerta("Nome do projeto inválido", 2, "Erro");
+            return;
+        }
         try {
-            if (txtNomedoProjeto.getText().isEmpty() || txtResumo.getText().isEmpty() || CBcategoria.getValue() == null || txtDatadeInicio.getText().isEmpty() || txtDatadeFim.getText().isEmpty() || CBcampus.getValue() == null || txtResumo.getText().isEmpty() || txtEdital.getText().isEmpty()) {
+            if (txtNomedoProjeto.getText().isEmpty() || txtResumo.getText().isEmpty() || CBcategoria.getValue() == null || txtDatadeInicio.getText().isEmpty() || txtDatadeFim.getText().isEmpty() || CBcampus.getValue() == null || txtEdital.getText().isEmpty()) {
                 alerta("Por favor inserir todos os campus", 1, "Erro");
                 return;
             }
@@ -156,6 +163,9 @@ public class AtualizarProjetoController implements INotificacaoAlert {
             AreasConhecimento areacnhecimentoselecionado = CBcategoria.getValue();
             this.areaconhecimento = areacnhecimentoselecionado;
 
+            if (projeto.getAreaConhecimento() != null) {
+                CBcategoria.setValue(projeto.getAreaConhecimento());
+            }
             LocalDate prorrogacao = null;
             if (!txtProrrogacao.getText().isEmpty()) {
                 prorrogacao = LocalDate.parse(txtProrrogacao.getText(), formatter);
@@ -183,14 +193,16 @@ public class AtualizarProjetoController implements INotificacaoAlert {
 //       
             System.out.print("Coordenador no atualizar" + coordenador);
             atualizarProjeto(projeto.getIdProjeto(), txtNomedoProjeto.getText(), txtResumo.getText(), campusnomeSelecionado, txtEdital.getText(), dI, dF, prorrogacao, areaconhecimento);
-//            } 
+//            }
+            voltarapaginainicial();
         } catch (SQLException e) {
+            e.printStackTrace();
             alerta("A falha em atualizar esse projeto", 2, "Falha");
         } catch (DateTimeParseException e) {
             alerta("O formato das datas nao esta como o esperado", 2, "Falha");
         }
         //Depois que as coisas tiverem setads na tela do coordenador, testar se esta atualizando
-        voltarapaginainicial();
+
     }
 
     @FXML
@@ -202,7 +214,7 @@ public class AtualizarProjetoController implements INotificacaoAlert {
     void OnClickDesativarCocoordenador(ActionEvent event) throws IOException {
         alerta("Esse botão não abre!", 1, "Erro");
     }
-    
+
     @FXML
     void onClickFotoProjeto(MouseEvent event) throws MalformedURLException {
 
@@ -278,7 +290,7 @@ public class AtualizarProjetoController implements INotificacaoAlert {
             byte[] conteudoImagem = Files.readAllBytes(arquivoSelecionado.toPath());
             fotoPerfil.setDadosImagem(conteudoImagem);
         }
-        
+
         ProjetoDAO pdao = new ProjetoDAO();
 
         projeto.setTitulo(titulo);
@@ -322,7 +334,7 @@ public class AtualizarProjetoController implements INotificacaoAlert {
             }
 
         } catch (SQLException e) {
-
+ e.printStackTrace(); 
             alerta("A falha de comunicação entre o sistema e o Banco", 1, "Banco de Dados");
         }
     }

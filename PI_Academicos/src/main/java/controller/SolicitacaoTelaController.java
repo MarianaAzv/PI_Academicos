@@ -119,7 +119,7 @@ public class SolicitacaoTelaController {
        String idUsu = String.valueOf(sol.getIdUsuario());
        lblIDUsu.setText(idUsu);
        lblSol.setText(sol.getDescricao());
-       arquivoPDF= sol.getAnexo();
+       arquivoPDF = sol.getAnexo();
        lblLink.setText(arquivoPDF.getName());
        String aceita = String.valueOf(sol.isAceitacao());
        lblAceitacao.setText(aceita);

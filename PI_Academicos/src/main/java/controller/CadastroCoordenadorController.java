@@ -135,30 +135,34 @@ public class CadastroCoordenadorController implements INotificacaoAlert {
                 if (Senha.senhaForte(txtSenha.getText())) {
                     if (CPF.isValid(txtCPF.getText())) {
                         System.out.print("CPF valido");
-                        if (CPFDuplicado.cpfDuplicado(txtCPF.getText())==false) {
-                            if (Email.isValidEmail(txtEmail.getText())) {
-                                System.out.print("O Email esta valido");
-                                if (Apenasletras.isLetras(txtNomeCompleto.getText())) {
-                                    if (Apenasletras.isLetras(txtFormacao.getText())) {
-                                        if (ApenasNumeros.isNumeros(txtSIAPE.getText())) {
+                        if (CPFDuplicado.cpfDuplicado(txtCPF.getText()) == false) {
+                            if (ApenasNumeros.isNumeros(txtCPF.getText())) {
+                                if (Email.isValidEmail(txtEmail.getText())) {
+                                    System.out.print("O Email esta valido");
+                                    if (Apenasletras.isLetras(txtNomeCompleto.getText())) {
+                                        if (Apenasletras.isLetras(txtFormacao.getText())) {
+                                            if (ApenasNumeros.isNumeros(txtSIAPE.getText())) {
 
-                                            int siape = Integer.parseInt(txtSIAPE.getText());
+                                                int siape = Integer.parseInt(txtSIAPE.getText());
 
-                                            incluir(txtCPF.getText(), txtNomeCompleto.getText(), txtUsuario.getText(), txtEmail.getText(), txtSenha.getText(), siape, txtFormacao.getText());
-                                            enviarSolicitacao();
+                                                incluir(txtCPF.getText(), txtNomeCompleto.getText(), txtUsuario.getText(), txtEmail.getText(), txtSenha.getText(), siape, txtFormacao.getText());
+                                                enviarSolicitacao();
 
+                                            } else {
+                                                alerta("SIAPE inválido(Por favor inserir somente números", 2, "Erro");
+                                            }
                                         } else {
-                                            alerta("SIAPE inválido(Por favor inserir somente números", 2, "Erro");
+                                            alerta("Por favor inserir a sua formação corretamente", 2, "ERRO");
                                         }
                                     } else {
-                                        alerta("Por favor inserir a sua formação corretamente", 2, "ERRO");
+                                        alerta("Por favor inserir o nome corretamente", 2, "ERRO");
                                     }
                                 } else {
-                                    alerta("Por favor inserir o nome corretamente", 2, "ERRO");
+                                    System.out.print("O Email invalido");
+                                    alerta("O Email não esta no formato esperado", 2, "ERRO");
                                 }
                             } else {
-                                System.out.print("O Email invalido");
-                                alerta("O Email não esta no formato esperado", 2, "ERRO");
+                                alerta("Somente números no CPF", 1, "ERRO");
                             }
                         } else {
                             alerta("Esse CPF já esta cadastrado no sistema", 1, "ERRO");
@@ -189,15 +193,15 @@ public class CadastroCoordenadorController implements INotificacaoAlert {
         lblAbrirArquivo.setText(arquivoPDF.getName());
 
     }
-    
+
     @FXML
     void onEnterLblArquivo(MouseEvent event) {
-        lblAbrirArquivo.setStyle("-fx-text-fill: #840d0b" );
+        lblAbrirArquivo.setStyle("-fx-text-fill: #840d0b");
     }
 
     @FXML
     void onExitLblArquivo(MouseEvent event) {
-        lblAbrirArquivo.setStyle("-fx-text-fill: black" );
+        lblAbrirArquivo.setStyle("-fx-text-fill: black");
     }
 
     @FXML
@@ -223,7 +227,7 @@ public class CadastroCoordenadorController implements INotificacaoAlert {
     }
 
     void incluir(String cpf, String nome, String apelido, String email, String senha, int siape, String formacao) throws SQLException, IOException {
-        
+
         Foto fotoPerfil = new Foto(carregarImagemPadrao());
         usuario = new Usuario(cpf, nome, apelido, email, senha);
         coordenador = new Coordenador(siape, formacao);
@@ -264,23 +268,24 @@ public class CadastroCoordenadorController implements INotificacaoAlert {
         }
 
     }
+
     public byte[] carregarImagemPadrao() {
-    try (InputStream is = getClass().getResourceAsStream("/imagens/FotoPerfilUsuarioDefault.png");
-         ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+        try (InputStream is = getClass().getResourceAsStream("/imagens/FotoPerfilUsuarioDefault.png"); ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
 
-        byte[] buffer = new byte[1024];
-        int bytesRead;
-        while ((bytesRead = is.read(buffer)) != -1) {
-            baos.write(buffer, 0, bytesRead);
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = is.read(buffer)) != -1) {
+                baos.write(buffer, 0, bytesRead);
+            }
+
+            return baos.toByteArray();
+
+        } catch (IOException | NullPointerException e) {
+            e.printStackTrace();
+            return null;
         }
-
-        return baos.toByteArray();
-
-    } catch (IOException | NullPointerException e) {
-        e.printStackTrace();
-        return null;
     }
-    }
+
     public void alerta(String msg, int tipo, String titulo) throws IOException {
         URL url = new File("src/main/java/view/AlertGenerico.fxml").toURI().toURL();
         FXMLLoader loader = new FXMLLoader(url);
@@ -308,4 +313,3 @@ public class CadastroCoordenadorController implements INotificacaoAlert {
     }
 
 }
-
