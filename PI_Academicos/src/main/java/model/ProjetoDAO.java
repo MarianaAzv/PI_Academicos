@@ -312,7 +312,7 @@ public class ProjetoDAO extends GenericDAO {
     }
 
     public boolean projetoComMesmoTitulo(String tituloProjeto, int idProjeto) throws SQLException {
-        String sql = "SELECT COUNT(*) FROM projeto WHERE titulo = ? AND id_projeto != ?";
+        String sql = "SELECT COUNT(*) FROM projetos WHERE tituloProjeto = ? AND idProjeto != ?";
         try (Connection con = conectarDAO(); PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setString(1, tituloProjeto);
             stmt.setInt(2, idProjeto);

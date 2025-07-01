@@ -196,6 +196,7 @@ public class AtualizarProjetoController implements INotificacaoAlert {
 //            }
             voltarapaginainicial();
         } catch (SQLException e) {
+            e.printStackTrace();
             alerta("A falha em atualizar esse projeto", 2, "Falha");
         } catch (DateTimeParseException e) {
             alerta("O formato das datas nao esta como o esperado", 2, "Falha");

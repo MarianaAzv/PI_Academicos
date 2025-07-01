@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -82,23 +84,24 @@ public class SolicitacaoDAO extends GenericDAO {
                  solicitacao.setIdSolicitacao(rs.getInt("idSolicitacao"));
                  solicitacao.setIdUsuario(rs.getInt("idUsuario"));
                  solicitacao.setDescricao(rs.getString("descricao"));
-                 solicitacao.setAceitacao(rs.getBoolean("aceitacao"));
-                 byte[] anexoByte = rs.getBytes("anexo");
-                 
-                 String filePath = "C:/Users/Aluno/Downloads/arquivo.pdf";
-                 File file = new File(filePath);
-                    try {
-                        FileOutputStream fos = new FileOutputStream(file);
-                        fos.write(anexoByte);
-                        solicitacao.setAnexo(file);
-                        fos.close();
-                        
-                    }catch(IOException e) {
-                        System.out.println("arquivo não foi criado");
-                         e.printStackTrace();
+                 solicitacao.setAceitacao(rs.getBoolean("aceitacao"));    
+                 solicitacao.setData(rs.getTimestamp("data").toLocalDateTime());
+                 byte[] conteudoPDF = rs.getBytes("anexo");
+                 String filePath = solicitacao.getIdUsuario() + ".pdf";  
+                    File anexo = new File(filePath); 
+                    try{
+                    FileOutputStream fos = new FileOutputStream(anexo); 
+                    fos.write(conteudoPDF);
+                    fos.close();
+                    System.out.println("byte convertido para file");
+                    } catch (IOException e) {
+                    System.err.println("Ocorreu um erro ao converter o array de bytes para arquivo: " + e.getMessage());
+                    e.printStackTrace();
                     }
+                    solicitacao.setAnexo(anexo);
                     
                     lista.add(solicitacao);
+                      
                     
                  }
                  
@@ -111,10 +114,8 @@ public class SolicitacaoDAO extends GenericDAO {
                   s.printStackTrace();
         }
         
-        
-        
-        
         return lista;
+        
 }
     public ObservableList<Solicitacao> listarSolicitacoesAceitas() throws SQLException, FileNotFoundException, IOException{
         
@@ -132,21 +133,21 @@ public class SolicitacaoDAO extends GenericDAO {
                  solicitacao.setIdSolicitacao(rs.getInt("idSolicitacao"));
                  solicitacao.setIdUsuario(rs.getInt("idUsuario"));
                  solicitacao.setDescricao(rs.getString("descricao"));
-                 solicitacao.setAceitacao(rs.getBoolean("aceitacao"));
-                 byte[] anexoByte = rs.getBytes("anexo");
-                 
-                 String filePath = "C:/Users/Aluno/Downloads/arquivo.pdf";
-                 File file = new File(filePath);
-                    try {
-                        FileOutputStream fos = new FileOutputStream(file);
-                        fos.write(anexoByte);
-                        solicitacao.setAnexo(file);
-                        fos.close();
-                        
-                    }catch(IOException e) {
-                        System.out.println("arquivo não foi criado");
-                         e.printStackTrace();
+                 solicitacao.setAceitacao(rs.getBoolean("aceitacao"));    
+                 solicitacao.setData(rs.getTimestamp("data").toLocalDateTime());
+                 byte[] conteudoPDF = rs.getBytes("anexo");
+                 String filePath = solicitacao.getIdUsuario() + ".pdf";  
+                    File anexo = new File(filePath); 
+                    try{
+                    FileOutputStream fos = new FileOutputStream(anexo); 
+                    fos.write(conteudoPDF);
+                    fos.close();
+                    System.out.println("byte convertido para file");
+                    } catch (IOException e) {
+                    System.err.println("Ocorreu um erro ao converter o array de bytes para arquivo: " + e.getMessage());
+                    e.printStackTrace();
                     }
+                    solicitacao.setAnexo(anexo);
                     
                     lista.add(solicitacao);
                     
@@ -179,21 +180,21 @@ public class SolicitacaoDAO extends GenericDAO {
                  solicitacao.setIdSolicitacao(rs.getInt("idSolicitacao"));
                  solicitacao.setIdUsuario(rs.getInt("idUsuario"));
                  solicitacao.setDescricao(rs.getString("descricao"));
-                 solicitacao.setAceitacao(rs.getBoolean("aceitacao"));
-                 byte[] anexoByte = rs.getBytes("anexo");
-                 
-                 String filePath = "C:/Users/Aluno/Downloads/arquivo.pdf";
-                 File file = new File(filePath);
-                    try {
-                        FileOutputStream fos = new FileOutputStream(file);
-                        fos.write(anexoByte);
-                        solicitacao.setAnexo(file);
-                        fos.close();
-                        
-                    }catch(IOException e) {
-                        System.out.println("arquivo não foi criado");
-                         e.printStackTrace();
+                 solicitacao.setAceitacao(rs.getBoolean("aceitacao"));    
+                 solicitacao.setData(rs.getTimestamp("data").toLocalDateTime());
+                 byte[] conteudoPDF = rs.getBytes("anexo");
+                 String filePath = solicitacao.getIdUsuario() + ".pdf";  
+                    File anexo = new File(filePath); 
+                    try{
+                    FileOutputStream fos = new FileOutputStream(anexo); 
+                    fos.write(conteudoPDF);
+                    fos.close();
+                    System.out.println("byte convertido para file");
+                    } catch (IOException e) {
+                    System.err.println("Ocorreu um erro ao converter o array de bytes para arquivo: " + e.getMessage());
+                    e.printStackTrace();
                     }
+                    solicitacao.setAnexo(anexo);
                     
                     lista.add(solicitacao);
                     

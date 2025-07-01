@@ -25,6 +25,13 @@ public class Solicitacao {
     private boolean aceitacao;
     private File anexo;
 
+    
+    public Solicitacao(int idSolicitacao, Usuario usuario, LocalDateTime data, String descricao, boolean aceitacao, File anexo) {
+        this.idSolicitacao = idSolicitacao;
+        this.usuario = usuario;
+        this.anexo = anexo;
+
+    }
     public Solicitacao(int idSolicitacao, Usuario usuario, File anexo) {
         this.idSolicitacao = idSolicitacao;
         this.usuario = usuario;
