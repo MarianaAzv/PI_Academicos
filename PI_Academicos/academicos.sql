@@ -1,10 +1,10 @@
-CREATE DATABASE  IF NOT EXISTS `academicos` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE  IF NOT EXISTS `academicos` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `academicos`;
--- MySQL dump 10.13  Distrib 8.0.42, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
 --
--- Host: localhost    Database: academicos
+-- Host: 127.0.0.1    Database: academicos
 -- ------------------------------------------------------
--- Server version	8.0.42
+-- Server version	8.0.39
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -120,32 +120,6 @@ CREATE TABLE `artigos` (
 LOCK TABLES `artigos` WRITE;
 /*!40000 ALTER TABLE `artigos` DISABLE KEYS */;
 /*!40000 ALTER TABLE `artigos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `artigos_palavraschave`
---
-
-DROP TABLE IF EXISTS `artigos_palavraschave`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `artigos_palavraschave` (
-  `idArtigo` int NOT NULL,
-  `idPalavra` int NOT NULL,
-  PRIMARY KEY (`idArtigo`,`idPalavra`),
-  KEY `idPalavra` (`idPalavra`),
-  CONSTRAINT `artigos_palavraschave_ibfk_1` FOREIGN KEY (`idArtigo`) REFERENCES `artigos` (`idArtigo`),
-  CONSTRAINT `artigos_palavraschave_ibfk_2` FOREIGN KEY (`idPalavra`) REFERENCES `palavraschave` (`idPalavra`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `artigos_palavraschave`
---
-
-LOCK TABLES `artigos_palavraschave` WRITE;
-/*!40000 ALTER TABLE `artigos_palavraschave` DISABLE KEYS */;
-/*!40000 ALTER TABLE `artigos_palavraschave` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -412,29 +386,6 @@ INSERT INTO `noticiasgerais` VALUES (31,4,'Floresta','uma paisagem natural','202
 UNLOCK TABLES;
 
 --
--- Table structure for table `palavraschave`
---
-
-DROP TABLE IF EXISTS `palavraschave`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `palavraschave` (
-  `idPalavra` int NOT NULL AUTO_INCREMENT,
-  `palavra` varchar(30) NOT NULL,
-  PRIMARY KEY (`idPalavra`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `palavraschave`
---
-
-LOCK TABLES `palavraschave` WRITE;
-/*!40000 ALTER TABLE `palavraschave` DISABLE KEYS */;
-/*!40000 ALTER TABLE `palavraschave` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `postagens`
 --
 
@@ -536,7 +487,7 @@ CREATE TABLE `solicitacoes` (
   `idUsuario` int DEFAULT NULL,
   `descricao` varchar(500) DEFAULT NULL,
   `aceitacao` tinyint(1) DEFAULT NULL,
-  `anexo` blob,
+  `anexo` longblob,
   `data` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idSolicitacao`),
   KEY `idUsuario` (`idUsuario`),
@@ -592,4 +543,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-06-24 10:17:34
+-- Dump completed on 2025-07-01  1:18:41
