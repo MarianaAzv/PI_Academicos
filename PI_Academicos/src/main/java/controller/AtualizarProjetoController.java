@@ -184,12 +184,7 @@ public class AtualizarProjetoController implements INotificacaoAlert {
                 alerta("O nome do projeto deve conter somente letras", 2, "Nome inválido");
                 return;
             }
-            ProjetoDAO dao = new ProjetoDAO();
-            if (dao.projetoComMesmoTitulo(txtNomedoProjeto.getText(), projeto.getIdProjeto())) {
-                alerta("Já existe outro projeto com esse nome. Escolha um nome diferente.", 2, "Título duplicado");
-
-                return;
-            }
+           
 //       
             System.out.print("Coordenador no atualizar" + coordenador);
             atualizarProjeto(projeto.getIdProjeto(), txtNomedoProjeto.getText(), txtResumo.getText(), campusnomeSelecionado, txtEdital.getText(), dI, dF, prorrogacao, areaconhecimento);
