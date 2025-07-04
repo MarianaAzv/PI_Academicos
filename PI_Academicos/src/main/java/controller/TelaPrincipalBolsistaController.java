@@ -89,6 +89,7 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert {
             }
         }
         imgPerfil.setImage(image);
+        TxtNomeUsuario.setText(bolsista.getNome());
     }
 
     void setProjeto(Projeto projeto) {
@@ -119,6 +120,7 @@ public class TelaPrincipalBolsistaController implements INotificacaoAlert {
         }
         imgProjetoBarra.setImage(image);
         imgPerfilProjeto.setImage(image);
+        TxtNomeProjetoBarra.setText(projeto.getTitulo());
         
         carregarBolsista(projeto);
     }

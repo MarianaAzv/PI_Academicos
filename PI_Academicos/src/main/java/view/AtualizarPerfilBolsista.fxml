@@ -323,9 +323,9 @@
                </rowConstraints>
                <children>
                   <ImageView fx:id="imgProjetoBarra" fitHeight="87.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                  <Text fx:id="TxtNomeProjetoBarra" fill="#840d0b" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="149.19995141029358" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <Text fx:id="TxtNomeProjetoBarra" fill="#840d0b" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="JUSTIFY" wrappingWidth="149.19995141029358" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <font>
-                        <Font name="Courier New Bold" size="18.0" />
+                        <Font name="Courier New Bold" size="14.0" />
                      </font>
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

@@ -61,6 +61,7 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert {
             }
         }
         imgProjetoBarra.setImage(image);
+        TxtNomeProjetoBarra.setText(projeto.getTitulo());
     }
 
     @FXML
@@ -208,6 +209,7 @@ public class AtualizarPerfilBolsistaController implements INotificacaoAlert {
             }
             imgFotoBolsista.setImage(image);
             imgPerfil.setImage(image);
+            TxtNomeUsuario.setText(bolsista.getNome());
 
         } else {
             alerta("Bolsista não encontrado.", 1, "Erro");
