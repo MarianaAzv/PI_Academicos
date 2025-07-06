@@ -193,6 +193,7 @@ public class CadastroBolsistaCoordenadorController implements INotificacaoAlert 
 
             incluir(txtCPF.getText(), txtNomeCompleto.getText(), txtUsuario.getText(), txtEmail.getText(),
                     txtSenha.getText(), matricula, txtCurso.getText(), dataInicio, dataFim);
+            enviarSolicitacao();
         } catch (NumberFormatException e) {
             alerta("Matrícula deve conter apenas números.", 2, "Erro");
         }

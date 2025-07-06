@@ -15,7 +15,7 @@ public class BolsistaDAO extends GenericDAO {
     public void cadastrarUsuarioBolsista(Usuario usuario, Bolsista bolsista, Projeto projeto, Foto fotoPerfil) {
         Connection con = conectarDAO();
 
-        String queryUsuario = "INSERT INTO USUARIOS(cpf, nome, apelido, senha, email, ativa) VALUES(?,?,?,?,?,1)";
+        String queryUsuario = "INSERT INTO USUARIOS(cpf, nome, apelido, senha, email, ativa) VALUES(?,?,?,?,?,0)";
         String queryBolsista = "INSERT INTO BOLSISTAS(idUsuario, matricula, curso) VALUES (?, ?, ?)";
         String queryFotoPerfil = "INSERT INTO fotos_perfil_usuario(idUsuario, arquivoFoto) VALUES(?,?);";
         String queryBolsistaProjetos = "INSERT INTO BOLSISTAS_PROJETOS(idUsuario, idProjeto, dataInicio, dataFim) VALUES (?, ?, ?, ?)";
@@ -136,6 +136,36 @@ public class BolsistaDAO extends GenericDAO {
             System.out.println("Total de linhas retornadas: " + rowCount);
         }
         return rowCount;
+    }
+    
+    //Método para desativar usuário
+    public void desativarBolsista(Bolsista bolsista) throws SQLException {
+
+        Connection con = conectarDAO();
+
+        String queryUsuario = "UPDATE USUARIOS SET ativa = 0 WHERE idUsuario = ?";
+
+        try (con) {
+            // Inserir em Usuario
+            PreparedStatement stmtUsuario = con.prepareStatement(queryUsuario, PreparedStatement.RETURN_GENERATED_KEYS);
+            stmtUsuario.setInt(1, bolsista.getId());
+            stmtUsuario.executeUpdate();
+        }
+    }
+
+    //Método para ativar usuário
+    public void ativarBolsista(Bolsista bolsista) throws SQLException {
+
+        Connection con = conectarDAO();
+
+        String queryUsuario = "UPDATE USUARIOS SET ativa = 1 WHERE idUsuario = ?";
+
+        try (con) {
+            // Inserir em Usuario
+            PreparedStatement stmtUsuario = con.prepareStatement(queryUsuario, PreparedStatement.RETURN_GENERATED_KEYS);
+            stmtUsuario.setInt(1, bolsista.getId());
+            stmtUsuario.executeUpdate();
+        }
     }
 
     public void buscarDados(Bolsista bolsista, Projeto projeto) {
