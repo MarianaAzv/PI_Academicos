@@ -110,7 +110,7 @@ public class CoordenadorDAO extends GenericDAO {
         }
     }
 
-    //Método para desativar usuário
+    //Método para ativar usuário
     public void ativarCoordenador(Coordenador coordenador) throws SQLException {
 
         Connection con = conectarDAO();

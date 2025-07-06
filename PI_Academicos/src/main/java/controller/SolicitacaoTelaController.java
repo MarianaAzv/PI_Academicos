@@ -69,7 +69,9 @@ public class SolicitacaoTelaController {
     @FXML
     void onClickAceitar(ActionEvent event) throws SQLException {
         
+        setSolicitacao(sol);
             new SolicitacaoDAO().ativarSolicitacao(sol);
+            
 
         if(onSolAceitacao != null){
            onSolAceitacao.run();

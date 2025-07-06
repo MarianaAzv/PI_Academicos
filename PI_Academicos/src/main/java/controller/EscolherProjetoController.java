@@ -47,10 +47,6 @@ public class EscolherProjetoController {
 
     @FXML
     private ImageView imgFotoDoProjeto;
-    
-     @FXML
-    private Button btnVoltar;
-     
     @FXML
     private VBox vboxbutton;
 
@@ -101,11 +97,6 @@ public class EscolherProjetoController {
             mostrarAviso("Erro", "Falha ao abrir a tela de criação de projeto");
         }
         System.out.println("Coordenador ao clicar em Criar Projeto: " + coordenador);
-    }
-    
-    @FXML
-    void onClickVoltar(ActionEvent event) throws IOException {
-        AbrirTelaLogin();
     }
 
     //--------------------------*SETs*-------------------------------//
@@ -232,32 +223,6 @@ public class EscolherProjetoController {
             stagetelafundo.close();
         }
         stageEscolherProjeto.close();
-    }
-    
-    private void AbrirTelaLogin() throws IOException {
-
-        URL url = new File("src/main/java/view/TelaLogin.fxml").toURI().toURL();
-        FXMLLoader loader = new FXMLLoader(url);
-        Parent root = loader.load();
-
-        Stage stageLogin = new Stage();
-
-        TelaLoginController tpc = loader.getController();
-        tpc.setStage(stageLogin);
-
-        Scene cena = new Scene(root);
-        stageLogin.setTitle("Tela de Login");
-        stageLogin.setScene(cena);
-        //deixa a tela maximizada
-        stageLogin.setMaximized(true);
-        stageLogin.show();
-        
-        if (stagetelafundo != null) {
-                    stagetelafundo.close();
-                }
-        
-        stageEscolherProjeto.close();
-
     }
 
 }

@@ -217,13 +217,20 @@ public class SolicitacaoDAO extends GenericDAO {
         
         Connection con = conectarDAO();
         
-        String querySolicitacoes = "UPDATE SOLICITACOES SET aceitacao = 1 WHERE idSolicitacao = ?";
+        String querySolicitacoes = "UPDATE solicitacoes SET aceitacao = 1 WHERE idSolicitacao = ?";
+        String queryUsuario = "UPDATE usuarios SET ativa = 1 WHERE idUsuario = ?";
+        System.out.println("id Usuario: " + solicitacao.getUsuario());
         
         try (con) {
     // Inserir em Solicitacoes
-    PreparedStatement stmtSolicitacoes = con.prepareStatement(querySolicitacoes, PreparedStatement.RETURN_GENERATED_KEYS);
+    PreparedStatement stmtSolicitacoes = con.prepareStatement(querySolicitacoes);
     stmtSolicitacoes.setInt(1, solicitacao.getIdSolicitacao()); 
     stmtSolicitacoes.executeUpdate();
+           
+    
+    PreparedStatement stmtUsuario = con.prepareStatement(queryUsuario);
+    stmtUsuario.setInt(1, solicitacao.getIdUsuario()); 
+    stmtUsuario.executeUpdate();
     }
    }
     
