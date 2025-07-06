@@ -44,6 +44,7 @@ public class VerPerfilBolsistaController {
             }
         }
         imgProjetoBarra.setImage(image);
+        TxtNomeProjetoBarra.setText(projeto.getTitulo());
     }
 
     @FXML
@@ -169,6 +170,7 @@ public class VerPerfilBolsistaController {
         }
         imgFotoBolsista.setImage(image);
         imgPerfil.setImage(image);
+        TxtNomeUsuario.setText(bolsista.getNome());
             
         }
     }

@@ -621,6 +621,7 @@ public class TelaPrincipalCoordenadorController {
     public void ajustarElementosJanela(Coordenador coordenador, Projeto projeto) {
         this.coordenador = coordenador;
         this.projeto = projeto;
+        TxtNomeUsuario.setText(coordenador.getNome());
         carregarBolsista(projeto);
 
         System.out.println("Aqui chegam os parâmetros do login "
