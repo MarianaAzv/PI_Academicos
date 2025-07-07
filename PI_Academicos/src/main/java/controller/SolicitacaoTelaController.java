@@ -46,15 +46,6 @@ public class SolicitacaoTelaController {
     private Button btnNegar;
 
     @FXML
-    private Label lblAceitacao;
-
-    @FXML
-    private Label lblIDSol;
-
-    @FXML
-    private Label lblIDUsu;
-
-    @FXML
     private Label lblSol;
     
      @FXML
@@ -69,8 +60,13 @@ public class SolicitacaoTelaController {
     @FXML
     void onClickAceitar(ActionEvent event) throws SQLException {
         
+        System.out.println("id U:" + sol.getIdUsuario());
+        System.out.println("id P:" + sol.getIdProjeto());
+        int idU = sol.getIdUsuario();
+        int idP = sol.getIdProjeto();
         setSolicitacao(sol);
             new SolicitacaoDAO().ativarSolicitacao(sol);
+        
             
 
         if(onSolAceitacao != null){
@@ -116,15 +112,12 @@ public class SolicitacaoTelaController {
     public void setSolicitacao(Solicitacao sol) {
        this.sol = sol;
       
-       String idSol = String.valueOf(sol.getIdSolicitacao());
-       lblIDSol.setText(idSol);
-       String idUsu = String.valueOf(sol.getIdUsuario());
-       lblIDUsu.setText(idUsu);
+
        lblSol.setText(sol.getDescricao());
        arquivoPDF = sol.getAnexo();
        lblLink.setText(arquivoPDF.getName());
-       String aceita = String.valueOf(sol.isAceitacao());
-       lblAceitacao.setText(aceita);
+       
+       
   
        
     }

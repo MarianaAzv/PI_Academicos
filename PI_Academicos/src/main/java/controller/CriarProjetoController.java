@@ -185,6 +185,8 @@ public class CriarProjetoController implements INotificacaoAlert {
                         this.areasconhecimento = areacnhecimentoselecionado;
 
                         incluir(txtNomedoProjeto.getText(), txtResumo.getText(), campusnomeSelecionado, txtEdital.getText(), dI, dF, null, true, coordenador.getId());
+                        System.out.println("id Projeto" + projeto.getIdProjeto());
+                        enviarSolicitacao();
                     }
                 } else {
                     alerta("O nome do projeto tem caracters não esperados", 2, "ERRO");
@@ -197,7 +199,7 @@ public class CriarProjetoController implements INotificacaoAlert {
             alerta("O formato das datas nao esta como o esperado", 2, "Falha");
         }
 
-        enviarSolicitacao();
+        
 
         abrirJanelaMaisBolsista();
     }
@@ -289,16 +291,17 @@ public class CriarProjetoController implements INotificacaoAlert {
         if (arquivoPDF != null) {
             try {
 
-                Usuario usuario = new Usuario();
-                usuario.setId(coordenador.getId());
+                
+                projeto.setIdProjeto(projeto.getIdProjeto());
+                
 
                 String descricao = "Solicitação para cadstro de projeto:"
                         + "\nNome do projeto: " + txtNomedoProjeto.getText()
                         + "\nCoordenador: " + coordenador.getNome()
                         + "\nSIAPE: " + coordenador.getSiape()
                         + "\ne-mail: " + coordenador.getEmail();
-                Solicitacao solicitacao = new Solicitacao(usuario, descricao, arquivoPDF);
-                new SolicitacaoDAO().salvarPDF(solicitacao);
+                Solicitacao solicitacao = new Solicitacao(projeto.getIdProjeto(), descricao, arquivoPDF);
+                new SolicitacaoDAO().enviarProjeto(solicitacao);
                 System.out.println("Arquivo PDF salvo no banco de dados.");
 
             } catch (IOException e) {

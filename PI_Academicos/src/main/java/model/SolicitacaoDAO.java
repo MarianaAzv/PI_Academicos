@@ -46,6 +46,33 @@ public class SolicitacaoDAO extends GenericDAO {
         }
     }
 
+    public void enviarProjeto(Solicitacao solicitacao) throws IOException {
+
+        Connection con = conectarDAO();
+
+        String sql = "INSERT INTO solicitacoes (idProjeto, descricao, aceitacao, anexo) VALUES (?, ?, 0, ?)";
+
+        try {
+            PreparedStatement stmt = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+
+            byte[] conteudoPDF = Files.readAllBytes(solicitacao.getAnexo().toPath());
+
+            stmt.setInt(1, solicitacao.getIdProjeto());
+            stmt.setString(2, solicitacao.getDescricao());
+            stmt.setBytes(3, conteudoPDF);
+            stmt.executeUpdate();
+
+            ResultSet keys = stmt.getGeneratedKeys();
+            if (keys.next()) {
+                int idGerado = keys.getInt(1);
+                solicitacao.setIdSolicitacao(idGerado);
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Erro ao salvar o PDF no banco de dados: " + e.getMessage());
+            // Adicione aqui tratamento de erro mais robusto (ex: log, exceção customizada)
+        }
+    }
     public byte[] carregarConteudoPDF(int idSolicitacao) {
 
         Connection con = conectarDAO();
@@ -83,6 +110,7 @@ public class SolicitacaoDAO extends GenericDAO {
                  Solicitacao solicitacao = new Solicitacao();
                  solicitacao.setIdSolicitacao(rs.getInt("idSolicitacao"));
                  solicitacao.setIdUsuario(rs.getInt("idUsuario"));
+                 solicitacao.setIdProjeto(rs.getInt("idProjeto"));
                  solicitacao.setDescricao(rs.getString("descricao"));
                  solicitacao.setAceitacao(rs.getBoolean("aceitacao"));    
                  solicitacao.setData(rs.getTimestamp("data").toLocalDateTime());
@@ -132,6 +160,7 @@ public class SolicitacaoDAO extends GenericDAO {
                  Solicitacao solicitacao = new Solicitacao();
                  solicitacao.setIdSolicitacao(rs.getInt("idSolicitacao"));
                  solicitacao.setIdUsuario(rs.getInt("idUsuario"));
+                 solicitacao.setIdProjeto(rs.getInt("idProjeto"));
                  solicitacao.setDescricao(rs.getString("descricao"));
                  solicitacao.setAceitacao(rs.getBoolean("aceitacao"));    
                  solicitacao.setData(rs.getTimestamp("data").toLocalDateTime());
@@ -179,6 +208,7 @@ public class SolicitacaoDAO extends GenericDAO {
                  Solicitacao solicitacao = new Solicitacao();
                  solicitacao.setIdSolicitacao(rs.getInt("idSolicitacao"));
                  solicitacao.setIdUsuario(rs.getInt("idUsuario"));
+                 solicitacao.setIdProjeto(rs.getInt("idProjeto"));
                  solicitacao.setDescricao(rs.getString("descricao"));
                  solicitacao.setAceitacao(rs.getBoolean("aceitacao"));    
                  solicitacao.setData(rs.getTimestamp("data").toLocalDateTime());
@@ -219,6 +249,8 @@ public class SolicitacaoDAO extends GenericDAO {
         
         String querySolicitacoes = "UPDATE solicitacoes SET aceitacao = 1 WHERE idSolicitacao = ?";
         String queryUsuario = "UPDATE usuarios SET ativa = 1 WHERE idUsuario = ?";
+        String queryProjeto = "UPDATE projetos SET emAndamento = 1 WHERE idProjeto = ?";
+        
         System.out.println("id Usuario: " + solicitacao.getUsuario());
         
         try (con) {
@@ -231,6 +263,11 @@ public class SolicitacaoDAO extends GenericDAO {
     PreparedStatement stmtUsuario = con.prepareStatement(queryUsuario);
     stmtUsuario.setInt(1, solicitacao.getIdUsuario()); 
     stmtUsuario.executeUpdate();
+
+    PreparedStatement stmtProjeto = con.prepareStatement(queryProjeto);
+    stmtProjeto.setInt(1, solicitacao.getIdProjeto()); 
+    stmtProjeto.executeUpdate();
+
     }
    }
     

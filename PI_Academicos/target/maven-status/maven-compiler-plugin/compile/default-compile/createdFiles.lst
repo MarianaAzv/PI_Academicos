@@ -31,7 +31,6 @@ model\CampusDAO.class
 util\CPF.class
 model\FotoDAO.class
 model\Postagem.class
-controller\CadastroCocoordenadorCoordenadorController.class
 model\ProjetoDAO.class
 model\Bolsista.class
 model\CodigoSenha.class

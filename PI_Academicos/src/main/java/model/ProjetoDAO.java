@@ -15,7 +15,7 @@ public class ProjetoDAO extends GenericDAO {
 
         Connection con = conectarDAO();
 
-        String queryProjeto = "INSERT INTO projetos(tituloProjeto,resumo,idCampus,edital,dataInicio,dataFim,prorrogacao,emAndamento) VALUES(?,?,?,?,?,?,?,?)";
+        String queryProjeto = "INSERT INTO projetos(tituloProjeto,resumo,idCampus,edital,dataInicio,dataFim,prorrogacao,emAndamento) VALUES(?,?,?,?,?,?,?,0)";
         String queryCoordenadorProjeto = "Insert into coordenadores_projetos(idUsuario,idProjeto,dataInicio,dataFim) values(?,?,?,?)";
         String queryFotoPerfil = "INSERT INTO fotos_perfil_projeto(idProjeto, arquivoFoto) VALUES(?,?);";
 
@@ -28,7 +28,6 @@ public class ProjetoDAO extends GenericDAO {
             stmtProjeto.setDate(5, Date.valueOf(projeto.getDataInicio()));
             stmtProjeto.setDate(6, Date.valueOf(projeto.getDataFim()));
             stmtProjeto.setDate(7, projeto.getProrroacao() != null ? java.sql.Date.valueOf(projeto.getProrroacao()) : null);
-            stmtProjeto.setBoolean(8, projeto.isEmAndamento());
 
             int linhasAfetadas = stmtProjeto.executeUpdate();
             if (linhasAfetadas == 0) {
